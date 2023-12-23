@@ -166,6 +166,21 @@
 
         }
 
+
+        .imgpackageForResposiveSmallScreen {
+            /* here img is just use to control td width and height */
+
+            width: 70px;
+            height: 60px;
+            opacity: 0.1;
+        }
+
+        #weEnsureQual {
+            width: 50%;
+            display: inline-block;
+            color: red;
+        }
+
         @media screen and (min-width:1165px) {
 
             /* from min width of 1165px and above */
@@ -191,6 +206,60 @@
             table {
                 width: 500px;
             }
+        }
+
+
+
+
+        @media all and (max-width:768px) {
+
+            .termsandcon,
+            #typedwriter {
+                min-width: 100%;
+
+            }
+
+
+
+            #weEnsureQual {
+                width: 100%;
+            }
+
+            /* resposive table for small screen for our table */
+            table,
+            tr,
+            td,
+            tbody,
+            td p table div,
+            table table {
+                width: 100% !important;
+                float: left;
+                clear: both;
+                display: block;
+                text-align: center;
+            }
+
+            table img {
+                max-width: 100%;
+                height: auto;
+                min-height: 20px;
+
+            }
+
+            .imgpackageForResposiveSmallScreen {
+                /* here img is just use to control td width and height */
+                /* but at this time it will show */
+                width: 200px;
+                height: 150px;
+                opacity: 1;
+                border-color: bisque;
+                border-width: 1px;
+                border-style: solid;
+
+            }
+
+
+
         }
     </style>
 
@@ -364,7 +433,7 @@
 
 
             <br />
-            <span style="width:50%; display: inline-block; color:red">We ensure quality training. All faculty are 99%
+            <span id="weEnsureQual">We ensure quality training. All faculty are 99%
                 ready and available.
                 Our Training support online / Remote Class, Office / Offline / and on-site.
                 Training Days per Package in a week is 3 days. Newly registered student start 7 working days after
@@ -372,10 +441,12 @@
             </span> <br /> <br />
 
             <br />
-            <a href="ListOfItemsToPurchase.html?viewTable=ALL"><button id="allpackage">
+            <a href="ListOfItemsToPurchase.html?viewTable=ALL">
+                <button id="allpackage">
                     All
                     Package
-                </button></a>
+                </button>
+            </a>
 
             <select id="appcartegorySelector">
 
@@ -582,12 +653,12 @@
 
         //  
         tableData = tableData + `${startTrName} 
-                    <td width=70px style='background-image:url(${programPackage.programs[a].image}); background-position:center;
-                    background-position:center; background-repeat: no-repeat;background-size: cover;'>  
-                        <span style='color:white; background-color:black; position:absolute;'> 
+                    <td  style='background-image:url(${programPackage.programs[a].image}); background-position:center;
+                    background-repeat: no-repeat;background-size:cover; position:relative'> 
+                    <span style='color:white; background-color:black; position:absolute;'> 
                             ${a + 1}
                             </span>
-                            <img src=${programPackage.programs[a].image} width="70px" height="60px"  style="opacity:0.1" alt="imageIshere"/> 
+                            <img class="imgpackageForResposiveSmallScreen" src=${programPackage.programs[a].image} alt="imageIshere" /> 
                              ${fireImage}
                         </td> 
                         <td>  ${programPackage.programs[a].name} </td> 

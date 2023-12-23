@@ -1,0 +1,13 @@
+var advert = {
+    "advertdata": [
+        "Pick two programs and get 25% discount.",
+        "Promo is coming up on 25th september 2023.",
+        "Use the hot category to filter the most trading package",
+        "All Packages can be done through onling",
+        "All online support will attract # 25,000",
+        "Each package have Golden Genesis promo",
+        "Our online support Online Live Training",
+        "Library, Materials,Textbook, Video, Guide and Handout will be forwarded to you after your registration, this may take 1 hr-24 hrs after completing registration. ",
+        "Once you tick on the Online checkbox, it means you want your real-time-training to support Online-Live-Training (OLT). The Online is always Live."
+    ]
+}

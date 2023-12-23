@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script src="../database/Localdata.json"></script>
+</head>
+
+<body>
+    <center>
+        <h3>Congratulation !!!</h3>
+        <img src="Congratulation1.png" width="300px" height="200px" />
+
+        <h5>Your payment has being received successfuly.
+
+
+            <h5> The payment reference-id below is very important. Please copy it to safty.
+
+            </h5>
+            <h5 id="refid" style="color:red">Reference-ID = </h5>
+            <h5 id="stampedfor" style="color:red">Stamped for = </h5>
+
+            A message has being sent to your payment email, including your Reference-ID. <br />
+            Check your mail inbox or important folder. It could
+            also be in spam folder, trash folder.
+
+
+
+        </h5>
+
+        <h3 style="color:red; background-color: black;"> We have received your payment details and we will get back to
+            you shortly, as soon as
+            possible.</h3>
+
+
+        <h3>
+            <bold style="color:blue;"> One Last Step: (optional !!!)</bold> <br>
+            You can directly contact our Administrator via <br>
+            Whatsapp or Call <span style="color:blue;"> +2348132329272</span>. <br>
+            OR
+            <br />
+            Email: <span style="color:blue;"> ugomartinsdegreat@gmail.com </span> <br>
+            This will help to speedup your registration process.
+            <br>
+
+        </h3>
+        <a href="../DgcIctWebsite/index.html"> <button style="background-color: black; color: white"> Home</button> </a>
+    </center>
+</body>
+
+<script>
+
+    var electric_email;
+    var Elastic_Password;
+    var electric_user_name;
+    (function () {
+        console.log(data); //loading Localdata.json file that
+        // was added in the head of html
+
+
+        electric_email = data.Electric_Email_Data[0].server_Verified_Email;
+        electric_user_name = data.Electric_Email_Data[0].Electric_Verify_Username;
+        Elastic_Password = data.Electric_Email_Data[0].Elastic_Password_For_Verified_Email;
+
+
+    })();
+
+
+    document.onreadystatechange = function () {
+        if (document.readyState === "interactive") {
+            // when browser has fully loaded
+            var refid = document.getElementById("refid");
+            var stampedfor = document.getElementById("stampedfor");
+            //window.location.search
+            refid.innerHTML = "Reference-ID = " + getUrlData("urlrefid");
+            var Payment_Status = getUrlData("Payment_Status"); //array data: elect_username, elect_paswd, elect_email
+
+            var PhoneDetail = "Country Name : " + localStorage['dgcict_countryName'] + ", Country Index: " + localStorage['dgcict_countryIndexNo'] + ", Phone Number: " + localStorage['dgcict_PhoneNumber'];
+
+
+            stampedfor.innerHTML = "Stamped for =  Name: " + localStorage['dgcict_firstname'] + ' ' + localStorage['dgcict_lastname'] + " <br/> Purpose :" + localStorage['dgcict_purpose'] + " <br/>  Amonth:" + localStorage['dgcict_amountm'];
+
+
+
+            stampedfor.style.color = "blue";
+
+            var adminEmail = 'ugomartinsdegreat@gmail.com';
+            var messageBody = stampedfor.innerHTML + " " + refid.innerHTML + "\n " + PhoneDetail;
+            // messagedetail.innerHTML = "Message Detail = " + getUrlData("purpose");
+            sendEmail(adminEmail, messageBody);
+        }
+    };
+
+
+
+
+    function getUrlData(datakey) {
+        var urlParameters = window.location.search; // get url starting from ?, not the link
+        var searchParams = new URLSearchParams(urlParameters);
+        var value = searchParams.get(datakey);
+        return value;
+
+
+    }
+
+
+
+
+    function sendEmail(destEmail, MessageBody) {
+        // e.preventDefault();
+        Email.send({
+
+
+
+            //Using  elasticemail. webaddress:  https://elasticemail.com/
+            // (1)Start,  verify donmain, verify email (i dont own a domain), 
+            //(2) return to settings, smtp -> create credential, username= email address, create,
+            //(3) COPY THE INFORMATION TO THE CODE BELLOW
+
+            Host: "smtp.elasticemail.com",
+
+            Username: electric_user_name, // electrify verified  user name
+            Password: Elastic_Password, //electrify  password
+            To: destEmail,
+            From: electric_email, // electrify  verified user name
+            Subject: "DegreatCode ICT Payment Notice",
+            Body: MessageBody
+        }).then(
+            // message => alert("mail sent successfully: " + message)
+
+            message => {
+                CustomAlertFrom_sweetalert2_API_Method1("Email Messanger", "Payment-Mail Sent Successfully", "success");
+            }
+        );
+    }
+
+
+
+    function CustomAlertFrom_sweetalert2_API_Method1(title, message, type) {
+        // Make a simple alert 
+        // with the given text 
+        Swal.fire(
+            //'Hey!',
+            title,
+
+            // 'Welcome to GeeksForGeeks',
+            message,
+
+            // 'success'
+            type
+        );
+    }
+
+</script>
+<!--google gmail and Electric ApI for sending message ---->
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
+
+
+
+<!-- Include the  sweetalert2@9 library   for pop alert box-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9">
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+</html>

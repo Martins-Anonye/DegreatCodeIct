@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: brown;
+    }
+
+    div {
+        margin-top: 200px;
+    }
+
+    h5 {
+        color: white;
+    }
+
+    input {
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    img {
+        top: 10px;
+        position: relative;
+    }
+
+    span {
+        margin-top: 20px;
+        color: white;
+    }
+
+    a:before {
+        color: pink;
+    }
+
+    a:visited {
+        color: orange;
+    }
+
+    a:hover {
+        color: black;
+    }
+
+    button:hover {
+        background-color: brown;
+    }
+
+
+    button {
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+
+    }
+</style>
+
+<body>
+    <img src="dgclogo.jpg" width="80" height="50px" />
+    <center>
+        <form>
+
+            <div style="width:400px;">
+                <h5><u>Search Result: </u></h5>
+                <input type="text" style='width:300px; height:30px' placeholder="Enter your id no " />
+                <img src="searchbtn.png" width="30px" height="30px" />
+                <br>
+                <hr>
+            </div>
+
+            <span style="display:block">No Card Number? <a
+                    href="../PaystackAtFrontEndIntegration/paystackInlinePayment.html?extra=0002020000202020020200200022202020002020020202020202020200202&transAmounturl=5000&etra=198828382328388232832838323823&purposeurl=Id card request">
+                    request Id Card </a>
+            </span>
+        </form>
+
+        <button id="homebtn">
+            home
+
+        </button>
+</body>
+
+<script src="../database/DGC price data.json"></script>
+
+
+<script>
+    var homebtn = document.getElementById("homebtn");
+    homebtn.addEventListener("click", visiteHomePage);
+    function visiteHomePage(e) {
+        e.preventDefault();
+        window.location.href = programPackage.PageURL.HomePageURL;
+    }
+</script>
+
+</center>
+
+
+
+
+</html>

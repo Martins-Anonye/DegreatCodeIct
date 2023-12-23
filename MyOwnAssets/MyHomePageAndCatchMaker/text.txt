@@ -1,0 +1,76 @@
+
+        function executeClickEvent() { //arrayData
+
+            // we only get the row  i.e tr, tr  that have  class name called clickabletr
+            var clickabletr = document.getElementsByClassName('clickabletr'); // list of tr
+
+
+            // tablebody.children are the tr
+
+            for (var i = 0, len = clickabletr.length; i < len; i++) {
+                (function (index) {
+                    //
+                    // rows[0] = tr = row
+                    //cells[0]= td = column
+                    //=================>The HTML ELEMENT IN TD.addEventListener(){}
+                    //table.rows[0].cells[0].firstChild.addEventListener
+                    //table.rows[0].cells[0].children[index].addEventListener
+                    //table.rows[0].cells[0].getElementsByTagName('').addEventListener
+                    //the above means //table.tr.td.children[0] then the element in td
+
+                    clickabletr[i].children[5].children[0].addEventListener('click', function () {
+                        var cartcountervalue = document.getElementById("cartcountervalue");
+                        var existingValue = +(cartcountervalue.innerText);
+                        cartcountervalue.innerText = existingValue + 1;
+                        // console.log(document.getElementById("tableItSelf").children[1].rows[i].innerHTML);
+                        //document.getElementById("tableItSelf").rows[i].cells[5].style.pointerEvents = "none";// + button // disable
+                        // clickabletr[i].children[5].children[1].disabled = false; // del button //enable
+                        console.log(clickabletr[i].cells[5].namedItem("button"));
+                        // console.log(clickabletr[i].cells[5].namedItem("button"));
+
+                    });
+
+
+
+                    clickabletr[i].children[5].children[1].addEventListener('click', function () {
+                        var cartcountervalue = document.getElementById("cartcountervalue");
+                        var existingValue = +(cartcountervalue.innerText);
+                        //    cartcountervalue.innerText = existingValue - 1;
+
+                        clickabletr[i].children[5].children[0].disabled = false;// +button  //enable
+                        clickabletr[i].children[5].children[1].disabled = true; // del button // disable
+
+                    });
+
+
+                })(i);
+            }
+
+
+        }
+
+          function removeItemOnce(arr, value) {// remove specific item from array
+            var index = arr.indexOf(value);
+            if (index > -1) {
+                arr.splice(index, 1);
+            }
+            return arr;
+        }
+
+        function removeItemAll(arr, value) {// remove all item from array
+            var i = 0;
+            while (i < arr.length) {
+                if (arr[i] === value) {
+                    arr.splice(i, 1);
+                } else {
+                    ++i;
+                }
+            }
+            return arr;
+        }
+        function removeAllChildFromNode(nodeItem) {
+            while (nodeItem.firstChild) {
+                nodeItem.removeChild(nodeItem.lastChild);
+            }
+
+        }

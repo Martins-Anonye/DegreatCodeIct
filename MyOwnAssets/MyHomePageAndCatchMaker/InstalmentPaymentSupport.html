@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../database/DGC price data.json"></script>
+</head>
+
+<body>
+    <center>
+        <button id="homebtn"> Home </button>
+        <script>
+            var homebtn = document.getElementById("homebtn");
+            homebtn.addEventListener("click", visiteHomePage);
+            function visiteHomePage(e) {
+                e.preventDefault();
+                window.location.href = programPackage.HomePageURL.url;
+            }
+        </script>
+        <a href="ListOfItemsToPurchase.html?viewTable=ALL"><button>
+                All Packages
+            </button></a>
+        <div style="width:350px; background-color: gray; color:white; font-size: 16px; padding:5px;line-height: 25px;">
+            <span style="color:orange; font-weight: bold; text-decoration: underline;">
+                Important Notice
+            </span> <br><br>
+            The Training Fee for office training/Off-line training is the same with Online training/Live stream
+            training.
+
+            There is additional communication fee for online training which is negotiable depending on the package
+            selected.
+
+
+            Payment for any package can be done instalmently, but first pagement is always 40% above.
+
+
+            <span style="color:orange; font-weight: bold; text-decoration: underline;">
+                Payment Notice
+            </span> <br><br>
+            During payment, packages code will be required.
+            Package code represent the program of your choice.
+
+            Every Program/ Package/Training/Course have Package code.
+            Package code starts with dgc... Example: dgc300;
+            Represent Training for basic level in web application development using java ee.
+            Package code also represent promo code (if any).
+
+            If you are paying for multiple packages at a time, use comma to separate respective package code.
+
+            Your phone number is your identification number and means of contacting you. We will contact you within
+            24
+            hours
+            after payment.
+
+            You can make comment (say something) during payment to help us understand you more and serve you better.
+
+            You can contact us via
+            Email: service@degreatcodeict.com,
+            degreatCodeict@gmail.com
+            Call or Whatsapp : +2348132329272
+            <br>
+            <a href="https://paystack.com/pay/degreatcodeict_payment">
+
+                <button style="color: white; background-color:orange;">Start Payment</button>
+            </a>
+        </div>
+
+
+    </center>
+
+</body>
+
+</html>

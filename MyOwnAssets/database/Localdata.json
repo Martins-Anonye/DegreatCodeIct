@@ -1,0 +1,26 @@
+
+var data = {
+    "comment1": "just remove var data =",
+    "commene2": "after removing it, it will turn to full json data",
+    "Paystack_Detail": [
+        {
+            "paystack_test_Key": "pk_test_79ffa7d2ba7c792a9267967dda346c8578d6c5c3",
+            "paystack_Main_Public_Key": "Doe"
+        },
+        {
+            "firstName": "Anna",
+            "lastName": "Smith"
+        },
+        {
+            "firstName": "Peter",
+            "lastName": "Jones"
+        }
+    ],
+    "Electric_Email_Data": [
+        {
+            "server_Verified_Email": "degreatcodeict@gmail.com",
+            "Electric_Verify_Username": "degreatcodeict@gmail.com",
+            "Elastic_Password_For_Verified_Email": "D26E3578D896B5DC14621157F65BE28FE53D"
+        }
+    ]
+};

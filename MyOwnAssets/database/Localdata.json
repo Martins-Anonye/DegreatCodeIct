@@ -4,8 +4,8 @@ var data = {
     "commene2": "after removing it, it will turn to full json data",
     "Paystack_Detail": [
         {
-            "paystack_test_Key": "pk_test_79ffa7d2ba7c792a9267967dda346c8578d6c5c3",
-            "paystack_Main_Public_Key": "Doe"
+            "paystack_test_Key": "pk_live_a0649b2e93a2576f7c72bd8af326758e48ad23ef",
+            "paystack_Main_Public_Key": "pk_live_a0649b2e93a2576f7c72bd8af326758e48ad23ef"
         },
         {
             "firstName": "Anna",

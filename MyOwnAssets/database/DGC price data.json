@@ -1,0 +1,2971 @@
+var programPackage = {
+	"PageURL": {
+		"HomePageURL": "../../index.html",
+		"WebsitePageURL": "../../FullDetailAboutWebsite.html",
+		"AndroidPageURL": "../../FullDetailAboutAndroidApp.html",
+		"IOsPageURL": "../../FullDetailAboutAppleApp.html",
+		"ContactUsURL": "../../contact us.html"
+	},
+	"TermAndCondition": {
+		"termscon": [
+			"No Refund after payment but refunding will based on counter-balancing after your newly selected package. Refund-stamp-fee of #5,000 will be debited during processing.",
+			"Refund process will take 4-7 working days to complete. Additional 40% discount for disclose of libraries and interior cost will be included if category of your newly selected package  is different with category of Refund-Package(old) detail.",
+			"For Refund:Kindly send mail to  degreatcode@gmail.com.  Include Payment Refrence Id in DegreatCode, your Bank detial for refund, Refund-Package details and target(New) Package details",
+			"Clicking on the Register or Pay  button means you have accepted this terms. Signed: Management."
+		]
+	},
+	"superPromoDiscount": {
+		"comment": "Super promo price: select multiple courses  and get 5% discount each.  Minimum of <br/> 3 items  and maximum of 5 items are eligible for super promo.",
+		"percentagDisoucntOnEachItem": 5,
+		"maxNoItems": 5,
+		"minNoItems": 3,
+		"showSuperPromo_true_False": true
+	},
+	"onlineLiveTrainingMonthlyCharge": {
+		"comment": "Online Live Training Monthly Charge",
+		"charge": 25000
+	},
+	"program_Comment_Not_For_Pubic": {
+		"Comment": "package code meaning  are as follows",
+		"one": "/ means, forward slash ,  'OR'",
+		"Two": "_ means, underscore, 'to'",
+		"Three": ". means, dot, 'and'"
+	},
+	"programs": [
+		{
+			"name": "Essential Computer Training",
+			"rowNo": 1,
+			"hot": true,
+			"packagecode": "dgc10008 / dgc0001_0008",
+			"price": 60000,
+			"promoprice": 200000,
+			"duration": "3 Months",
+			"image": "Images/essentialimg.png",
+			"library": {
+				"major": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tools and Knowledge",
+				"Basic Computer",
+				"word processing",
+				"Data"
+			],
+			"description": [
+				"Student will learn the following",
+				"<span class='datadescsec'>SECTION A:</span>",
+				"All Office package Including Excel, Microsoft word, Power Point, Publisher.",
+				"How to use digital white board based on Smart Note Book, Draw patterns, Internet, Google,",
+				"How to use smart phone for digital service (Mobile Intelligency)",
+				"How to use system Machines like Printers and Virtual Printers, Scanners and Virtual Scanners, Photocopier",
+				"<span class='datadescsec'>SECTION B:</span>",
+				"Software Installation and Types, PDF Management,  File Management and File Transfer, e.t.c",
+				"And so much more"
+			]
+		},
+		{
+			"name": "Microsft Word Office for Laptop",
+			"rowNo": 2,
+			"hot": false,
+			"packagecode": "dgc001",
+			"price": 70000,
+			"promoprice": 60000,
+			"duration": "3 Months",
+			"image": "Images/msword.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tool",
+				"Basic Computer",
+				"word processing"
+			],
+			"description": [
+				"Student will learn the following sub-packages",
+				"Microsoft Word",
+				"Microsoft Powerpoint",
+				"Microsoft Excel",
+				"Microsoft Publisher",
+				"Microsoft Access",
+				"Microsoft PDF Editor and Reader"
+			]
+		},
+		{
+			"name": "Microsoft word office for moblie",
+			"rowNo": 3,
+			"hot": false,
+			"packagecode": "dgc008",
+			"price": 40000,
+			"promoprice": 0,
+			"duration": "2 Months",
+			"image": "Images/mswordmob.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tools",
+				"Basic Computer",
+				"word processing"
+			],
+			"description": [
+				"Student will learn the following package",
+				"Microsoft Word ",
+				"Microsoft Powerpoint",
+				"Microsoft Excel",
+				"Microsoft Publisher",
+				"Microsoft Access",
+				"Microsoft PDF Editor and Reader"
+			]
+		},
+		{
+			"name": "Graphics Desgin Using Adode Photoshop, Canvas A.I, CanvasXDraw, Photo Focus, Movavi Photos, Passport Express Pro, Avatary",
+			"rowNo": 4,
+			"hot": true,
+			"packagecode": "dgc011",
+			"price": 40000,
+			"promoprice": 30000,
+			"duration": "2 Months + 1wk ",
+			"image": "Images/adobePhotoShop.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Graphics Design",
+				"Animation",
+				"adobe",
+				"3D design"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A:</span>",
+				"Student will be able to create logos, 3D design, A.I Graphics, Textual Design using mobile phone",
+				"Student will be able to create Fliers, Gif, Design. , Posters",
+				"Student will be able to apply  Effect, Animated Images, Illustrate with images, Sketch",
+				"Internal Image Transfer, Transfering and mixing one Image to anonther image (s)",
+				"Cloning Image and Shapes, ",
+				"Coloring and Mixing, Creating and Editing shapes and curve, Text Management, Image Conversion, Extension Name",
+				"Converting Fake image to real/Original Image",
+				"Student will also learn the Following programs to perfect general graphics skills and knowledge: InPixio Photo Focus, Movavi, Passport Express Pro",
+				"Business Card Maker, AI Logo maker, Image Slide Show",
+				"<span class='datadescsec'>SECTION B (Avatary / Crazy Talk):</span>",
+				"How to make image to talk and move its part using avatary / crazy talk"
+			]
+		},
+		{
+			"name": " Graphics Desgin Using Corel Draw, A.I,  Canvas A.I, CanvasXDraw, Photo Focus, Movavi Photos, Passport Express Pro, Avatary",
+			"rowNo": 5,
+			"hot": true,
+			"packagecode": "dgc010",
+			"price": 40000,
+			"promoprice": 30000,
+			"duration": "2 Months + 1 wk",
+			"image": "Images/coreldraw.png",
+			"library": {
+				"major": {
+					"images": [
+						"pawer.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Graphics Design",
+				"Animation",
+				"Corel Draw",
+				"CanvasXdraw",
+				"3D design",
+				"AI"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A:</span>",
+				"Student will be able to create logos, 3D design, A.I Graphics, Textual Design using mobile phone",
+				"Student will be able to create Fliers, Gif, Design. , Posters",
+				"Student will be able to apply  Effect, Animated Images, Illustrate with images, Sketch",
+				"Internal Image Transfer, Transfering and mixing one Image to anonther image (s)",
+				"Cloning Image and Shapes, Color Quality",
+				"Coloring and Mixing, Creating and Editing shapes and curve, Text Management, Image Conversion, Extension Name",
+				"Converting Fake/Poor/blur image to real/Original/Quality Image",
+				"Student will also learn the Following programs to perfect general graphics skills and knowledge: InPixio Photo Focus, Movavi, Passport Express Pro",
+				"Business Card Maker, AI Logo maker, Image Slide Show",
+				"<span class='datadescsec'>SECTION B (Avatary / Crazy Talk):</span>",
+				"How to make image to talk and move its part using avatary / crazy talk"
+			]
+		},
+		{
+			"name": "Graphics design on moblie device (PicsArt / A.I / Canvas)",
+			"rowNo": 6,
+			"hot": false,
+			"packagecode": "dgc012",
+			"price": 20000,
+			"promoprice": 0,
+			"duration": "3 Weeks",
+			"image": "Images/graphicsDraw.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Graphics Design",
+				"Digital Makerting",
+				"Animation",
+				"Social Marketing / Memo",
+				"Mobile"
+			],
+			"description": [
+				"Student will be able to design using mobile phone/ device.",
+				"Student will be able to create logos, 3D design, A.I Graphics, Textual Design using mobile phone",
+				"Student will be able to create Fliers, Gif, Design. , Posters",
+				"Student will be able to apply  Effect, Animated Images, Illustrate with images, Sketch",
+				"Internal Image Transfer, Transfering and mixing one Image to anonther image (s)",
+				"Cloning Image and Shapes, Color Quality",
+				"Coloring and Mixing, Creating and Editing color, shapes and curve, Text Management, Image Conversion, Extension Name"
+			]
+		},
+		{
+			"name": "Video Editing on  Adobe Premiere, Focusky, Avatary / Crazy Talk",
+			"rowNo": 7,
+			"hot": true,
+			"packagecode": "dgc013",
+			"price": 45000,
+			"promoprice": 35000,
+			"duration": "2 Months",
+			"image": "Images/video.gif",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Video Editing",
+				"Digital Makerting",
+				"Social Marketing / Skit / clip",
+				"Animation"
+			],
+			"description": [
+				"Student will be able to create video, edit video, split, cut, resize.",
+				"Student will also be able to add effect,Changing video background, resize.",
+				"Student will learn how to convert voice to any pitch level with respect to country tune, convert voice to text and text to voice",
+				"Student will be able to animate video and converting video, extions names, Seprating audio and video, e.t.c",
+				"How to make image to talk and move its part using avatary / crazy talk"
+			]
+		},
+		{
+			"name": "Video Editing on Camtasia , Focusky, Avatary / Crazy Talk",
+			"rowNo": 8,
+			"hot": true,
+			"packagecode": "dgc014",
+			"price": 40000,
+			"promoprice": 30000,
+			"duration": "2 Month",
+			"image": "Images/video.gif",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Video Editing",
+				" Digital Makerting",
+				"Social Marketing / Skit / clip",
+				"Animation"
+			],
+			"description": [
+				"Student will be able to create video, edit video, split, cut, resize. e.t.c",
+				"Student will learn how to convert voice to any pitch level with respect to country tune, convert voice to text and text to voice",
+				"Student will also be able to add effect,Changing video background, resize. e.t.c",
+				"Student will be able to animate video and converting video, extions names, Seprating audio and video, e.t.c",
+				"How to make image to talk and move its part using avatary / crazy talk"
+			]
+		},
+		{
+			"name": "Video Editing on Focusky / Avatary / Crazy Talk",
+			"rowNo": 9,
+			"hot": true,
+			"packagecode": "dgc015",
+			"price": 20000,
+			"promoprice": 15000,
+			"duration": "3 Weeks",
+			"image": "Images/Avater.gif",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Video Editing",
+				"Digital Makerting",
+				"Social Marketing / Skit / clip",
+				"Animation"
+			],
+			"description": [
+				"Social galary tool",
+				"SlideShow Maker",
+				"Student will learn how to convert voice to any pitch level with respect to country tune, convert voice to text and text to voice",
+				"How to make image to talk and move its part using avatary / crazy talk"
+			]
+		},
+		{
+			"name": "Video Editing on mobile device",
+			"rowNo": 10,
+			"hot": false,
+			"packagecode": "dgc016",
+			"price": 10000,
+			"promoprice": 0,
+			"duration": "3 Weeks",
+			"image": "Images/videoediting.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Video Editing,",
+				"Digital Makerting,",
+				"Social Marketing / Skit / clip,",
+				"Animation,"
+			],
+			"description": [
+				"Social galary tool",
+				"SlideShow Maker"
+			]
+		},
+		{
+			"name": "Digital Marketing / Affilate Marketing",
+			"rowNo": 11,
+			"hot": true,
+			"packagecode": "dgc017",
+			"price": 70000,
+			"promoprice": 50000,
+			"duration": "2 Months, 3 weeks",
+			"image": "Images/digitalMarketing.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Video Editing,",
+				"Graphics Design,",
+				"Social Marketing / Skit / clip,",
+				"Animation, Sketch and Cartoon Drawing,",
+				"Afflaite website,",
+				"marketing,",
+				"Copy writing,",
+				"Email Marketing."
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A:</span>",
+				"Student will be able to bring image to live.",
+				"Student will work with Crazy Talk, avataly, Camtesia and other digital software. ",
+				"Student will be able to make image to move and pass animation to the  image.",
+				"Social galary tool,Animation, Sketch and Cartoon Drawing.",
+				"SlideShow Maker.",
+				"Creating  3D attractive images",
+				"<span class='datadescsec'>SECTION B:</span>",
+				"Campaign and Advert Manager, Social Media Managment",
+				"Meta Table, Social Medial, Blog page",
+				"Admob and Adsence Intergration, Google management",
+				"Email Marketing and Eletric email",
+				"Copy writing",
+			]
+		},
+		{
+			"name": "Computer hardware only",
+			"rowNo": 12,
+			"hot": false,
+			"packagecode": "dgc10000",
+			"price": 50000,
+			"promoprice": 0,
+			"duration": "6 Months",
+			"image": "Images/hardware.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Hardware.",
+				"Maintanance and Repair.",
+				"Campta A."
+			],
+			"description": [
+				"Student will be abel to troubleshoot, detect fault.",
+				"Solving technical fault, Change windows of Operating system and File system.",
+				"Dead Data Recovery.",
+				"Hard disk drive repair.",
+				"Storage Manaagment.",
+				"Maintanance and Repair, Virus Solution.",
+				"System Command Prompt.",
+				"Software Installation."
+			]
+		},
+		{
+			"name": "Computer hardware and Networking",
+			"rowNo": 13,
+			"hot": false,
+			"packagecode": "dgc10001",
+			"price": 70000,
+			"promoprice": 0,
+			"duration": "6 Months",
+			"image": "Images/hardwareandnetworking.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Hardware",
+				"Maintanance and Repair",
+				"Campta A",
+				"Networking"
+			],
+			"description": [
+				"All Computer Hardware Activities and Network Studies.",
+				"Hardware troubleshooting",
+				"Hard disk recovery",
+				"Windows installation",
+				"Fault Detection",
+				"Networking Including Thin Client Network, Router, Network Cable and Configuration,",
+				"Network Protocols and Troubleshoot e.t.c"
+			]
+		},
+		{
+			"name": "Computer Networking",
+			"rowNo": 14,
+			"packagecode": "dgc10002",
+			"price": 30000,
+			"promoprice": 0,
+			"duration": "3 Months",
+			"image": "Images/computerNetworking.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Networking,",
+				"N+"
+			],
+			"description": [
+				"Student will be able to perform all Computer Hardware Activities and Network Studies.",
+				"Networking including Thin Client Network, Router, Network Cable and Configuration,",
+				"Network Protocols and Troubleshoot.",
+				"IP address"
+			]
+		},
+		{
+			"name": "Cisco Networking",
+			"rowNo": 15,
+			"hot": true,
+			"packagecode": "dgc10003",
+			"price": 900000,
+			"promoprice": 0,
+			"duration": "5 Months",
+			"image": "Images/cisconwetworking.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Networking",
+				"Advance Networking"
+			],
+			"description": [
+				"Student will be able to perform all Network Studies.",
+				"Including Thin Client Network, Router, Network Cable and Configuration.",
+				"Network Protocols, IP/TCP address and Troubleshoot, virtual Stimulation, Package tracking  e.t.c."
+			]
+		},
+		{
+			"name": "Fundamental Knowledge of Website Design : CSS, HTML, Javascript",
+			"rowNo": 16,
+			"hot": true,
+			"packagecode": "dgc100",
+			"price": 50000,
+			"promoprice": 0,
+			"duration": "4 Months",
+			"image": "Images/web.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"website design",
+				"Front End",
+				"Programming",
+				"coding"
+			],
+			"description": [
+				"Learning this user will be able to handle full frontend design and programming",
+				"Computer Language: CSS,HTML,Javascript,",
+				"Front End/ GUI, Raw Coding,",
+				"Drag and Drop,",
+				"Full FrontEnd Training including Json, Ajax, Vanilla Javascript, React JS, ",
+				"Inline Integration of Payment Gateway API, Mailing API using ElasticMail.",
+				"Working with table cell and rows,",
+				"Array, LOOP, Condictional Statment, DOM, e.t.c,",
+				"Email Messaging Integratins."
+			]
+		},
+		{
+			"name": "Website Design, Front End: CSS and HTML",
+			"rowNo": 17,
+			"hot": false,
+			"packagecode": "dgc101",
+			"price": 30000,
+			"promoprice": 0,
+			"duration": "2 Months",
+			"image": "Images/web.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"website design",
+				"Front End",
+				"coding"
+			],
+			"description": [
+				"Undestanding CSS and HTML."
+			]
+		},
+		{
+			"name": "Website Design, Front End Using Only Javascript ",
+			"rowNo": 18,
+			"hot": false,
+			"packagecode": "dgc102",
+			"price": 30000,
+			"promoprice": 0,
+			"duration": "2 Months",
+			"image": "Images/javascript.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"website design",
+				"Front End",
+				"Programing",
+				"coding"
+			],
+			"description": [
+				"Undestanding and Working With Document Object Manipulation (DOM).",
+				"JavaScript Array",
+				"Array().from().forEach(function)",
+				"All Javascript function and Usage"
+			]
+		},
+		{
+			"name": "Front End Tools In both Desktop Computer and in Mobile device for fast web design",
+			"rowNo": 19,
+			"hot": true,
+			"packagecode": "dgc200",
+			"price": 25000,
+			"promoprice": 0,
+			"duration": "1 Month",
+			"image": "Images/webtool.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"website design",
+				"Web tool",
+				"Front End",
+				"Website Template",
+				"coding",
+				"tool"
+			],
+			"description": [
+				"Tools for Drag and Drop,",
+				"Mobrise will be use during this tutorial,",
+				"Editing generated code using vscode,",
+				"Inline Editing, Delta Pi, Vs code Git hub ",
+				"Student will be able create website using Desktop Computer and in Mobile device for fast web design."
+			]
+		},
+		{
+			"name": "Website Design Tools Using Mobrise  on Desktop (Front End Tool)",
+			"rowNo": 20,
+			"hot": false,
+			"package code": "dgc201",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/webtool.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"website design",
+				"Web tool",
+				"Front End",
+				"Website Template",
+				"coding",
+				"tool"
+			],
+			"description": [
+				"Student can be able to create a functional Website within 5 minutes,",
+				"How to make use of Mobrise on desktop only,",
+				"Editing generated code using vscode,",
+				"Inline Editing,",
+				"Student will be able create website using Desktop Computer for fast web design."
+			]
+		},
+		{
+			"name": "Front End Website Design Tool using of Mobrise on mobile phone only (Front End Tool)",
+			"rowNo": 21,
+			"hot": true,
+			"package code": "dgc202",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/webtool.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"website design",
+				"Web tool",
+				"Front End",
+				"Website Template",
+				"coding"
+			],
+			"description": [
+				"Student can be able to create a functional Website within 5 minutes that support responsive layout, mailing, forms, video, Social Site, e.t.c.",
+				"How to make use of Mobrise on mobile phone  only,",
+				"Using Pre-Built in Template Pages,",
+				"Editing generated code using vscode,",
+				"Inline Editing,",
+				"Ability to edit Mobrise generated Code using VS Code Editor, Delta PI extension/ Plogin."
+			]
+		},
+		{
+			"name": "Front End Website Design Tool using Bootstrap Studio",
+			"rowNo": 22,
+			"hot": false,
+			"package code": "dgc203",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/webtool.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website design",
+				"Web tool",
+				"Front End",
+				"Website Template",
+				"coding"
+			],
+			"description": [
+				"Student will be able to create a functional Website using builtin tools from bootstrap including card Layout, Responsive page, badges, Standerd Layout, Builtin Code Editor "
+			]
+		},
+		{
+			"name": "Dreamweaver IDE for website design",
+			"rowNo": 23,
+			"hot": false,
+			"packagecode": "dgc204",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/webtool.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website design",
+				"Web tool",
+				"Front End",
+				"Website Template",
+				"coding"
+			],
+			"description": [
+				"Standerd tool for Website design similar to Bootstrap studio"
+			]
+		},
+		{
+			"name": "Website Design Tool Using WordPress",
+			"rowNo": 24,
+			"hot": false,
+			"packagecode": "dgc205",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/webtool.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website design",
+				"Web tool",
+				"Front End",
+				"Website Template",
+				"coding"
+			],
+			"description": [
+				"Website design Template Maker",
+				"Creating E-commerce Website and other regular website design, Book site, Porfolio Site e.t.c"
+			]
+		},
+		{
+			"name": "Blog: Mini Web Page",
+			"rowNo": 25,
+			"hot": false,
+			"packagecode": "dgc206",
+			"price": 30000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/blog.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website design",
+				"Front End",
+				"blog",
+				"coding"
+			],
+			"description": [
+				"Understanding Blog,Blog Page, Blog Post,",
+				"Understanding Blog threshold Limit for ads,",
+				"Traffic Blog, Social Blog, Internal,",
+				"Wix Bloog, Google Blog, WordPress Blog."
+			]
+		},
+		{
+			"name": "Figma, Full Standard Knowledge ",
+			"rowNo": 26,
+			"hot": false,
+			"packagecode": "dgc207",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/figma.jpeg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website design",
+				"Web tool",
+				"Website Template",
+				"coding"
+			],
+			"description": [
+				"Creating E-commerce Website and other regular website design,",
+				"Book site, Porfolio Site,",
+				" User Friendly,",
+				"Prototype, Wirefram, Drag and Drop support e.t.c."
+			]
+		},
+		{
+			"name": "GIT HUB: (Programing tool)",
+			"rowNo": 27,
+			"hot": false,
+			"packagecode": "dgc208",
+			"price": 15000,
+			"promoprice": 0,
+			"duration": "2 Weeks",
+			"image": "Images/github.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website design",
+				"Website tool",
+				"Hosting Platform",
+				"Storage",
+				"coding"
+			],
+			"description": [
+				"Programming tool, Husting",
+				"Version Control Development,",
+				"Online Collaburation,",
+				"Web hosting.",
+				"Integration of library",
+				"Modification of Library",
+				"Cloning Repository",
+				"Git Command and Git Console"
+			]
+		},
+		{
+			"name": "Web Appliction Development on Backend only (Levels: Basic)",
+			"rowNo": 28,
+			"hot": false,
+			"packagecode": "dgc300",
+			"price": 90000,
+			"promoprice": 0,
+			"duration": "4 Months",
+			"image": "Images/webmobile.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website",
+				"Backend",
+				"frontend",
+				"database",
+				"programming",
+				"database",
+				"coding"
+			],
+			"description": [
+				"Student will learn web hosting  using Github",
+				"HTML Forms with backend",
+				"Middle-end, Backend and A.p.i,",
+				"SQL Database/ Mongo Database and database server manager connection",
+				"Web frame work seasion.",
+				" JSON and SQL connection and working with table,",
+				"Basic Knowledge on frontend,",
+				"Crud Application",
+				"Note: This fee is applicable to either Node.js, or PHP,or  Python.",
+				"Java is not included to this price."
+			]
+		},
+		{
+			"name": "Web Appliction Development on Fullstack (Front-End, Middle-end and  Backend)",
+			"rowNo": 29,
+			"hot": true,
+			"packagecode": "dgc100/305/308/312",
+			"price": 130000,
+			"promoprice": 100000,
+			"duration": "6 Months",
+			"image": "Images/webman.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website Design",
+				"Frontend",
+				"Backend",
+				"Fullstack",
+				"Programming",
+				"PHP",
+				"Python",
+				"Node.js",
+				"database",
+				"coding"
+			],
+			"description": [
+				"These training covers basic and standerd training as fullstack developer.",
+				"Student will learn [dgc100] HTML and HTML5, CSS - CSS3, JAVASCRIPT,SQL,JSON, Payment Gateway, MAILING SERVICES, Including backend,  e.t.c.",
+				"Student will be able to understand Website design and Wesite Application Development.",
+				"Student will develop crud application",
+				"Student will learn web hosting  using Github, HTML Forms with backend,",
+				"Middle-end, Backend and A.p.i,",
+				"SQL Database/ Mongo Database, database server manager,",
+				"Web frame work seasion,",
+				"Note: At backend This package is applicable to the following programming language: Python  with Django [dgc305], Node.js with Javascript [dgc308a], or PHP with Relaval[dgc308b],or ASP.Net [dgc312]  . And Student is allowed to pick one among them.",
+				"Java programing language is not included to this section."
+			]
+		},
+		{
+			"name": "Website Application Development on Backend Using Java ee (Levels: Basic)",
+			"rowNo": 30,
+			"hot": false,
+			"packagecode": "dgc300",
+			"price": 100000,
+			"promoprice": 0,
+			"duration": "3 months, 2 Weeks",
+			"image": "Images/webmobile.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website Design",
+				"Backend",
+				"frontend",
+				"Java",
+				"Programming",
+				"database",
+				"coding"
+			],
+			"description": [
+				"Middle End, Backend and A.p.i,",
+				"Database, database server manager.",
+				"Student will learn basic  HTML, CSS, JAVASCRIPT,SQL,JSON, Payment Gateway, MAILING SERVICES,  e.t.c.",
+				"Student will be able to understand Website design and Wesite Application Development.",
+				"Student will develop CRUD  (Creat, Read, Update and Delete in Database) application using Java.",
+				"Middle-end, Backend and A.p.i,",
+				"Understanding web framework, seasion, page memory, cache.",
+				"Form and Table.",
+				"Dynamic Application."
+			]
+		},
+		{
+			"name": "Website Application Development on Backend Using Java (Levels : Basic to intermediate and JCL tool)",
+			"rowNo": 31,
+			"hot": true,
+			"packagecode": "dgc301",
+			"price": 110000,
+			"promoprice": 0,
+			"duration": "4 months, 2 Weeks",
+			"image": "Images/webmobile.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website Design",
+				"Backend",
+				"frontend",
+				"Java",
+				"Programming",
+				"coding",
+				"database"
+			],
+			"description": [
+				"Middle End, Backend and A.p.i",
+				"Database, database server manager.",
+				"Student will learn basic  HTML, CSS, JAVASCRIPT,SQL,",
+				"Student will be able to understand Website design and Wesite Application Development.",
+				"Student will develop crud  (Creat, read, update and delete in Database) application using Java.",
+				"Middle-end, Backend and A.p.i,",
+				"Web hosting.",
+				"pagination.",
+				"Seasion and Cache.",
+				"Understanding web framework, seasion.",
+				"Dynamic Application"
+			]
+		},
+		{
+			"name": "Website Application Development on Backend (Levels : Basic to intermediate)",
+			"rowNo": 32,
+			"hot": false,
+			"packagecode": "dgc306/309/313",
+			"price": 90000,
+			"promoprice": 0,
+			"duration": "4 months",
+			"image": "Images/webmobile.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website Design",
+				"Backend",
+				"Python",
+				"Programming",
+				"Node.js",
+				"Javascript",
+				"Asp.net",
+				"coding",
+				"database"
+			],
+			"description": [
+				"Middle End, Backend and A.p.i,",
+				"Database, database server manager.",
+				"Student will learn [dgc100] HTML and HTML5, CSS - CSS3, JAVASCRIPT,SQL,JSON, Payment Gateway, MAILING SERVICES, Including backend,  e.t.c.",
+				"Student will be able to understand Website design and Wesite Application Development.",
+				"Student will develop crud  (Creat, Read, Update and delete in Database) application using Java,",
+				"Middle-end, Backend and A.p.i.",
+				"Understanding web framework, seasion.",
+				"Dynamic Application,",
+				"Understanding web framework, Seasion and Cache,",
+				"Note: At backend This package is applicable to the following programming language: Python  with Django [dgc306], Node.js with Javascript [dgc309a], or PHP with Relaval[dgc309b],or ASP.Net [dgc313]  . And Student is allowed to pick one among them.",
+				"Java programing language is not included to this section."
+			]
+		},
+		{
+			"name": "Website Application Development On Backend (level:Basic to Intermidiate to Advance)",
+			"rowNo": 33,
+			"hot": false,
+			"packagecode": "dgc303/307/310/314",
+			"price": 190000,
+			"promoprice": 0,
+			"duration": "7 Months",
+			"image": "Images/webmobile.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website Design",
+				"Frontend",
+				"Backend",
+				"Programming",
+				"Java",
+				"Java ee",
+				"Python",
+				"Node.js",
+				"Javascript",
+				"ASP.net",
+				"PHP",
+				"database",
+				"coding"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A:</span> Student will learn the following: \n",
+				"Middle End, Backend and A.p.i,",
+				"Database, database server manager,",
+				"Student will learn [dgc100] HTML and HTML5, CSS - CSS3, JAVASCRIPT,SQL,JSON, Payment Gateway, MAILING SERVICES, Including backend,  e.t.c.",
+				"Student will be able to understand Website design and Wesite Application Development.",
+				"Student will develop crud  (Creat, Read, Update and delete in Database) application using Java.",
+				"Web frame work seasion,",
+				"Seasion, Cache, Pagination",
+				"Social media a.p.i",
+				"Facebook ApI,",
+				"Google API,",
+				"Payment Gateway,",
+				"Data modeling and Application Api e.t.c.",
+				"Seasion, Cache, Pagination.",
+				"Note: At backend This package is applicable to the following programming language:Java ee with JCL [dgc303],  Python  with Django [dgc307], Node.js with Javascript [dgc310a], or PHP with Relaval[dgc310b],or ASP.Net [dgc314].",
+				"And Student is allowed to pick one among them."
+			]
+		},
+		{
+			"name": "Website Application Development On Backend (level:Basic to Intermidiate to Advance to Professional)",
+			"rowNo": 34,
+			"hot": false,
+			"packagecode": "dgc303/307/310/314",
+			"price": 220000,
+			"promoprice": 0,
+			"duration": "7 Months",
+			"image": "Images/webmobile.png",
+			"library": {
+				"major": {
+					"images": [
+						"pawer.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"pawer.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Website Application Development",
+				"Website Design.",
+				"Frontend.",
+				"Backend.",
+				"Programming.",
+				"Java.",
+				"Java ee.",
+				"Python.",
+				"Node.js.",
+				"Javascript.",
+				"ASP.net.",
+				"PHP.",
+				"Coding",
+				"Database"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A:</span>  Student will learn the following:  \n",
+				"Middle End, Backend and A.p.i,",
+				"Database, database server manager,",
+				"Student will learn [dgc100] HTML and HTML5, CSS - CSS3, JAVASCRIPT,SQL,JSON, Payment Gateway, MAILING SERVICES, Including backend,  e.t.c.",
+				"Student will be able to understand Website design and Wesite Application Development.",
+				"Student will develop crud  (Creat, Read, Update and delete in Database) application using Java.",
+				"Web frame work seasion,",
+				"Seasion, Cache, Pagination",
+				"Social media a.p.i",
+				"Facebook ApI",
+				"Google API,",
+				"Payment Gateway,\n",
+				"<span class = 'datadescsec'>SECTION B:</span>  Student will learn the following: \n",
+				"Virtual Credit Card / Virtual ATM Card,",
+				"Firebase,",
+				"Cloud Function,",
+				"Serverless Server,",
+				"Bit coin Api.",
+				"Note: At backend This package is applicable to the following programming language:Java ee with JCL [dgc303],  Python  with Django [dgc307], Node.js with Javascript [dgc310a], or PHP with Relaval[dgc310b],or ASP.Net [dgc314].",
+				"And Student is allowed to pick one among them."
+			]
+		},
+		{
+			"name": "Android Application Development (Introduction and Basic)",
+			"rowNo": 35,
+			"hot": false,
+			"packagecode": "dgc400/406/411/417/",
+			"price": 120000,
+			"promoprice": 0,
+			"duration": "7 Months",
+			"image": "Images/androiddev.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"Xamarin",
+				"C#",
+				"XML",
+				"Coding",
+				"Database"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language, \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install android studio and Gradle Compiler., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following : \n",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior",
+				"Introduction and layout componets",
+				"Note: The following computer programming languages are supported:",
+				"(a) Android Java and XML, The core programming language for android and XML [dgc400] using Android Studio",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc406] using Android Studio",
+				"(c) Flutter SDK, Dart Programming [dgc 411] using Android Studio",
+				"(d) C#, Xamarin and XML using Virtual Studio [dgc417].",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "Android Application Development (Introduction and Basic  to Standerd)",
+			"rowNo": 36,
+			"hot": true,
+			"packagecode": "dgc401/407/412/417",
+			"price": 150000,
+			"promoprice": 0,
+			"duration": "6 Months",
+			"image": "Images/androiddev.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"Xamarin",
+				"C#",
+				"XML",
+				"Database",
+				"Coding"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language, \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install android studio and Gradle Compiler., \n",
+				"<span class='datadescsec'>SECTION B:</span> : Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql,",
+				"Crud Application: Create, Read, Update, Delete,",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network,",
+				"Android stack tree behavior, \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"Programming Language use: Android Java \n",
+				"Note: The following computer programming languages are supported:",
+				"(a) Android Java and XML, The core programming language for android and XML [dgc401] using Android Studio.",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc407] using Android Studio.",
+				"(c) Flutter SDK, Dart Programming [dgc 411] using Android Studio.",
+				"(d) C#, Xamarin and XML using Virtual Studio [dgc417].",
+				"\n Student is allow to pick one from the list (a-d)."
+			]
+		},
+		{
+			"name": "Android Application Development (Introduction and Basic  to Intermediate (Standard))",
+			"rowNo": 37,
+			"hot": true,
+			"packagecode": "dgc402/408/413/419",
+			"price": 180000,
+			"promoprice": 150000,
+			"duration": "7 Months",
+			"image": "Images/androiddev.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"Xamarin",
+				"C#",
+				"XML",
+				"Backend",
+				"coding",
+				"database",
+				"android",
+				"IOs"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language, \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install android studio and Gradle Compiler., \n",
+				"<span class='datadescsec'>SECTION B:</span> : Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination, \n",
+				"Programming computer Language Note: Android Java been,",
+				"Note: The following programming languages are supported:",
+				"(a) Android Java and XML, The core programming language for android and XML [dgc402] using Android Studio.",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc408] using Android Studio.",
+				"(c) Flutter SDK, Dart Programming [dgc 413] using Android Studio.",
+				"(d) C#, Xamarin and XML using Virtual Studio [dgc419].",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "Android Application Development (Introduction and Basic  to Advance)",
+			"rowNo": 38,
+			"hot": false,
+			"packagecode": "dgc403/409/413/420",
+			"price": 200000,
+			"promoprice": 0,
+			"duration": "9 Months",
+			"image": "Images/androiddev.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"Xamarin",
+				"C#",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language, \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install android studio and Gradle Compiler., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination,",
+				"<span class='datadescsec'>SECTION E:</span>  Student will learn the following: \n",
+				"Social Medial API, Facebook API, Google API,Youtube API, Github API,  Project Management \n",
+				"Note: The following computer programming languages are supported:",
+				"(a) Android Java and XML, The core programming language for android and XML [dgc403] using Android Studio.",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc409] using Android Studio.",
+				"(c) Flutter SDK, Dart Programming [dgc 413] using Android Studio,",
+				"(d) C#, Xamarin and XML using Virtual Studio [dgc420].",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "Android Application Development (Introduction and Basic  to Professional)",
+			"rowNo": 39,
+			"hot": false,
+			"packagecode": "dgc404/410/416/421",
+			"price": 220000,
+			"promoprice": 0,
+			"duration": "9 Months",
+			"image": "Images/androiddev.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"Xamarin",
+				"C#",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language, \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install android studio and Gradle Compiler., \n",
+				"<span class='datadescsec'>SECTION B</span>  Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination,",
+				"<span class='datadescsec'>SECTION E:</span>  Student will learn the following: \n",
+				"Social Medial API, Facebook API, Google API,Youtube API, Github API,  Project Management \n",
+				"<span class='datadescsec'>SECTION F:</span>  Student will learn the following: \n",
+				"Artificial Intelligent,",
+				"Payment Gateway,\n",
+				"Virtual Card, Firebase , Cloud Function,",
+				"Serverless Server ",
+				"Bit coin api",
+				"Javascript Web Scraping and Manipulating Web Application",
+				"Programming Language Note: Android Java been",
+				"Note: The following computer programming languages are supported:",
+				"(a) Android Java and XML, The core programming language for android and XML [dgc404] using Android Studio,",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc410] using Android Studio,",
+				"(c) Flutter SDK, Dart Programming [dgc 416]  and IOS Support using Android Studio,",
+				"(d) C#, Xamarin and XML using Virtual Studio [dgc421].",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "Game Development",
+			"rowNo": 40,
+			"packagecode": "dgc405",
+			"price": 2500000,
+			"promoprice": 0,
+			"duration": "8 Months",
+			"image": "Images/avatergame.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"C#",
+				"game development",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language, \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install android studio and Gradle Compiler., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Apple Play Store",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination,",
+				"<span class='datadescsec'>SECTION E:</span>  Student will learn the following: \n",
+				"Social Medial API, Facebook API, Google API,Youtube API, Github API,  Project Management \n",
+				"<span class='datadescsec'>SECTION F:</span>  Student will learn the following: \n",
+				"Artificial Intelligent,",
+				"Payment Gateway,\n",
+				"Virtual Card, Firebase , Cloud Function,",
+				"Serverless Server ",
+				"Bit coin api",
+				"Javascript Web Scraping and Manipulating Web Application",
+				"Programming Language Note: Android Java been",
+				"Note: The following computer programming languages are supported:",
+				"(a) Android Java and XML, The core programming language for android and XML using Android Studio,",
+				"(c) C#, Xamarin and XML using Virtual Studio .",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "IOs (Apple/Iphone) Application Development (Introduction and Basic)",
+			"rowNo": 41,
+			"hot": false,
+			"packagecode": "dgc400/406/411/417/",
+			"price": 120000,
+			"promoprice": 0,
+			"duration": "7 Months",
+			"image": "Images/apple.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Swift",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Learning  core Swift / Kotline / Dart language, \n",
+				"<span class='datadescsec'>SECTION A2:</span> How to configure and install android studio and Gradle Compiler to support IOs., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following : \n",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Apple Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior",
+				"Introduction and layout componets",
+				"Note: The following computer programming languages are supported:",
+				"(a) Swift, The core programming language for android and XML [dgc400] using Android Studio",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc406] using Android Studio",
+				"(c) Flutter SDK, Dart Programming [dgc 411] using Android Studio",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "IOs (Apple/Iphone) Application Development (Introduction and Basic  to Standerd)",
+			"rowNo": 42,
+			"hot": false,
+			"packagecode": "dgc401/407/412/417",
+			"price": 150000,
+			"promoprice": 0,
+			"duration": "6 Months",
+			"image": "Images/apple.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Swift",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Learning  core Swift / Kotline / Dart language, \n",
+				"<span class='datadescsec'>SECTION A2:</span> How to configure and install android studio and Gradle Compiler to support IOs., \n",
+				"<span class='datadescsec'>SECTION B:</span> : Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql,",
+				"Crud Application: Create, Read, Update, Delete,",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network,",
+				"Android stack tree behavior, \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"Programming Language use: Swift / Dart / Kotlin \n",
+				"Note: The following computer programming languages are supported:",
+				"(a) Swift, The core programming language for IOs and XML [dgc401] using Android Studio.",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc407] using Android Studio.",
+				"(c) Flutter SDK, Dart Programming [dgc 411] using Android Studio.",
+				"(d) C#, Xamarin and XML using Virtual Studio [dgc417].",
+				"\n Student is allow to pick one from the list (a-d)."
+			]
+		},
+		{
+			"name": "IOs (Apple/Iphone) Application Development (Introduction and Basic  to Standerd)",
+			"rowNo": 43,
+			"hot": true,
+			"packagecode": "dgc402/408/413/419",
+			"price": 180000,
+			"promoprice": 0,
+			"duration": "7 Months",
+			"image": "Images/apple.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Swift",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Learning  core Swift / Kotline / Dart language, \n",
+				"<span class='datadescsec'>SECTION A2:</span> How to configure and install android studio and Gradle Compiler to support IOs., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination, \n",
+				"Programming computer Language Note: Android Java been,",
+				"Note: The following programming languages are supported:",
+				"(a) Swift, The core programming language for IOs and XML [dgc402] using Android Studio.",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc408] using Android Studio for IOs.",
+				"(c) Flutter SDK, Dart Programming [dgc 413] using Android Studio for IOs.",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "IOs (Apple/Iphone) Application Development  (Introduction and Basic  to Advance)",
+			"rowNo": 44,
+			"hot": false,
+			"packagecode": "dgc403/409/413/420",
+			"price": 200000,
+			"promoprice": 0,
+			"duration": "9 Months",
+			"image": "Images/apple.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Swift",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"XML",
+				"android",
+				"IOs",
+				"coding",
+				"database",
+				"backend"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Learning  core Swift / Kotline / Dart language, \n",
+				"<span class='datadescsec'>SECTION A2:</span> How to configure and install android studio and Gradle Compiler to support IOs., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span> : Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination,",
+				"<span class='datadescsec'>SECTION E:</span>  Student will learn the following: \n",
+				"Social Medial API, Facebook API, Google API,Youtube API, Github API,  Project Management \n",
+				"Note: The following computer programming languages are supported:",
+				"(a) Swift The core programming language for IOs and XML [dgc403]",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc409] using Android Studio for IOs",
+				"(c) Flutter SDK, Dart Programming [dgc 413] using Android Studio for IOs",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "IOs (Apple/Iphone) Application Development (Introduction and Basic  to Professional)",
+			"rowNo": 45,
+			"hot": false,
+			"packagecode": "dgc404/410/416/421",
+			"price": 220000,
+			"promoprice": 0,
+			"duration": "9 Months",
+			"image": "Images/apple.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Mobile Application Development",
+				"Programming",
+				"Java",
+				"Kotlin,",
+				"Flutter SDK",
+				"Dart",
+				"Xamarin",
+				"C#",
+				"XML"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Learning  core Swift / Kotline / Dart language, \n",
+				"<span class='datadescsec'>SECTION A2:</span> How to configure and install android studio and Gradle Compiler to support IOs., \n",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following :",
+				"Database connection,",
+				"Fragements,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Activities",
+				"Understanding Android Framework,",
+				"Handler between application and Bradcast Listener,",
+				"Keyboard Manager,",
+				"Webview,",
+				"Shared Preference,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Sql",
+				"Crud Application: Create, Read, Update, Delete",
+				"Google Play store,",
+				"Application Distribution",
+				"Webview, Bluetooth,",
+				"Device Network",
+				"Android stack tree behavior \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following: ",
+				"Database Connection,",
+				"Crud Application: Create, Read, Update, Delete ,",
+				"Github Console, Season, Cache, Pagination,",
+				"<span class='datadescsec'>SECTION E:</span>  Student will learn the following: \n",
+				"Social Medial API, Facebook API, Google API,Youtube API, Github API,  Project Management \n",
+				"<span class='datadescsec'>SECTION F:</span>  Student will learn the following: \n",
+				"Artificial Intelligent,",
+				"Payment Gateway,\n",
+				"Virtual Card, Firebase , Cloud Function,",
+				"Serverless Server ",
+				"Bit coin api",
+				"Javascript Web Scraping and Manipulating Web Application",
+				"Programming Language Note: Android Java been",
+				"Note: The following computer programming languages are supported:",
+				"(a) Swift The core programming language for IOs and XML [dgc403]",
+				"(b) Kotlin  with XML and Apple (IOS) Phone Support [dgc409] using Android Studio for IOs",
+				"(c) Flutter SDK, Dart Programming [dgc 413] using Android Studio for IOs",
+				"\n Student is allow to pick one from the list (a-d). "
+			]
+		},
+		{
+			"name": "Data Analysis",
+			"rowNo": 46,
+			"hot": true,
+			"packagecode": "dgc10004",
+			"price": 80000,
+			"promoprice": 0,
+			"duration": "3 Months",
+			"image": "Images/datamangement.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tool",
+				"Finance",
+				"Maths",
+				"Machine Learning",
+				"Data",
+				"Python",
+				"MatLab",
+				"Data Analysis"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Student will learn standerd office tools, Office suite including hood knowledge of Excell and Statistics. \n",
+				"<span class='datadescsec'>SECTION A2:</span> Student will learn Macro, VB in Office, Pivot Table, Power Query (Get)\n",
+				"Spss  and Eview for Analysing Data",
+			]
+		},
+		{
+			"name": "Database Management System ",
+			"rowNo": 47,
+			"hot": true,
+			"packagecode": "dgc10005",
+			"price": 80000,
+			"promoprice": 0,
+			"duration": "3 Months",
+			"image": "Images/datamangement.png",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tool",
+				"Finance",
+				"Data",
+				"Data Analysis",
+				"Data Processing"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Student will learn about structured and unstructure database, Instances, Tablespacing, Blocks, File system, Terminal \n",
+				"<span class='datadescsec'>SECTION A2:</span> Student will learn Oracle / Json / MongoDb / Firebase / MySql / Access"
+			]
+		},
+		{
+			"name": "Data Science and Analysis",
+			"rowNo": 48,
+			"hot": true,
+			"packagecode": "dgc10006",
+			"price": 120000,
+			"promoprice": 90000,
+			"duration": "5 Months",
+			"image": "Images/datascience.png",
+			"library": {
+				"major": {
+					"images": [
+						"power.jpg",
+						"santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tool",
+				"Finance",
+				"Maths",
+				"Machine Learning",
+				"Data",
+				"Python",
+				"MatLab",
+				"Data Analysis",
+				"Data Science"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Student will learn standerd office tools, Office suite including hood knowledge of Excell and Statistics. \n",
+				"<span class='datadescsec'>SECTION A2:</span> Student will learn Macro, VB in Office, Pivot Table, Power Query (Get)\n",
+				"Spss / Eview.",
+				"Student will learn Voice Management (Audio data): how to convert voice to any pitch level with respect to country tune, convert voice to text and text to voice",
+				"<span class='datadescsec'>SECTION B:</span>  Student will learn the following :",
+				"System Command Prompt and Terminal",
+				"Installation and Configuration of Matlab and Vscode for data science",
+				"System Security, Data and file Security, Data and file Permission, Ms dos command, File systems ",
+				"Extension name and manipulation,Data Encrption, Data decryption, Data Management, Data recovery, Data Type and File Type, Binary Data,  Dead Data, Data mining, Graphical Data",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following :",
+				"Database (SQL, Json, Mongos), Structured Database and Unstructured Database, Storage, SSD and HDD Data Recovery, Data transplanting",
+				"System Partitioning, File Management and Document Managment, Data Conversion",
+				"<span class='datadescsec'>SECTION D:</span>  Student will learn the following :",
+				"Graph Ploting, Python Programing Language, Algorithms,  Mathematical Programing, Machine Learning",
+				"<span class='datadescsec'>SECTION E:</span>  Student will learn the following:",
+				"Solving Problems, Virus / Ransom Virus and Solution, "
+			]
+		},
+		{
+			"name": "Project Managemnt and Office Management Tools",
+			"rowNo": 49,
+			"hot": true,
+			"packagecode": "dgc10007",
+			"price": 80000,
+			"promoprice": 70000,
+			"duration": "3 Months",
+			"image": "Images/projectmanagement.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Office Tool",
+				"word processing"
+			],
+			"description": [
+				"Student will learn the following sub-packages",
+				"Project Prototype",
+				"UME Diagram",
+				"Project Modelling",
+				"Project Analysis and Managment",
+				"Microsoft Office Suite",
+				"Smart Chart"
+			]
+		},
+		{
+			"name": "Forex",
+			"rowNo": 50,
+			"hot": true,
+			"packagecode": "dgc10009",
+			"price": 70000,
+			"promoprice": 50000,
+			"duration": "3 Months",
+			"image": "Images/bladerobot.jpg",
+			"library": {
+				"major": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Analysis",
+				"Finance",
+				"Forex"
+			],
+			"description": [
+				"Student will learn the following",
+				"<span class='datadescsec'>SECTION A:</span>",
+				"Full Forex Training",
+				"Understanding Forex Terms: Spreed, Bid, Aks, Long, Short, Volatility, Requdity, Reverage, Lot Sizes, Margin, Buy, Sell",
+				"Take profit,Stop loss, High-High, High-Low, Low-High, Low-Low, Deviation, Blokers",
+				"Forex Order",
+				"Forex Analysis using Candle Stick pattern",
+				"<span class='datadescsec'>SECTION B:</span>",
+				"How to use Indicator Signal and where and When to apply them, Trading without robot support",
+				"<span class='datadescsec'>SECTION C:</span>",
+				"Alligator, Momentum,blaAlligator, Momentum, Stochastic, Envelopes, Moving Average and its Candle Touch, Awosome indicator",
+				"<span class='datadescsec'>SECTION D:</span>",
+				"Combining indicators",
+				"<span class='datadescsec'>SECTION E:</span>",
+				"Trading with Robot and How to Apply Them: Series of Robots among them are using Blade Robot, ..."
+			]
+		},
+		{
+			"name": "Desktop Application Development (Introduction and Basic  to Standerd)",
+			"rowNo": 51,
+			"hot": true,
+			"packagecode": "dgc600, dgc601, dgc602, dgc603, dgc604, dgc605, dgc606 ",
+			"price": 130000,
+			"promoprice": 100000,
+			"duration": "6 Months",
+			"image": "Images/webman.png",
+			"library": {
+				"major": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Programming",
+				"Java",
+				"JavaFx / Java Swing",
+				"Scene Builder",
+				"Python,",
+				"Dart",
+				"Node.Js, Javascript",
+				"C#",
+				"Database",
+				"Coding"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core java language / Javascript / Python / Virtual basic. \n",
+				"<span class='datadescsec'>SECTION A2:</span>  How to configure and install Netbeans / VS Code editor / Node.js  and Ant Compiler., \n",
+				"<span class='datadescsec'>SECTION B:</span> : Student will learn the following :",
+				"JavaFX programing / Virtual Basic",
+				"Layout, Event, Layout component and it Properties,",
+				"Adapters, Layout, Gradual Configuration,",
+				"Library Installation,",
+				"Project crash recovery,",
+				"Link manager,",
+				"Database and it's connection,",
+				"Sql,",
+				"Crud Application: Create, Read, Update, Delete,",
+				"Application Distribution",
+				"Webview, API, Excel Connection, Pdf library integration, e.t.c",
+				"Device Network,",
+				"stackview behavior, \n",
+				"<span class='datadescsec'>SECTION C:</span>  Student will learn the following : \n",
+				"Headless Browser, Login, Logout, Google Authentication \n",
+				"Note: The following computer programming languages are supported:",
+				"\n Student is allow to pick one programming language from the category."
+			]
+		},
+		{
+			"name": "Embadded Programming (Basic  to Standerd)",
+			"rowNo": 52,
+			"hot": false,
+			"packagecode": "dgc1003",
+			"price": 120000,
+			"promoprice": 0,
+			"duration": "6 Months",
+			"image": "Images/embaddedprogramming.png",
+			"library": {
+				"major": {
+					"images": [
+						"power.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				},
+				"minor": {
+					"images": [
+						"paower.jpg",
+						"Santos.jpg"
+					],
+					"links": [
+						"http://www.power.pdf",
+						"http://www.santos.pdf"
+					]
+				}
+			},
+			"category": [
+				"Programming",
+				"Java Ml",
+				"C",
+				"Assembly Language",
+				"Coding"
+			],
+			"description": [
+				"<span class='datadescsec'>SECTION A1:</span>Definition: </span> Embedded systems programming, also known as embedded programming",
+				"facilitates the development of consumer-facing devices that don't use conventional operating systems",
+				"the way that desktop computers and mobile devices do.",
+				"<span class='datadescsec'>SECTION A1:</span>  Learning  core Assembly / C programming. \n",
+				"<span class='datadescsec'>SECTION A2:</span>  Understanding Micro Processor and Micro Controllers,  Compiler, Interpreter, \n",
+				"<span class='datadescsec'>SECTION B:</span> : Bread Bord Setup,Registers,  Flags and Pins:",
+				"Seven Segment Display......",
+				"Traffic Light, Remote Contoller ......."
+			]
+		}
+	]
+}

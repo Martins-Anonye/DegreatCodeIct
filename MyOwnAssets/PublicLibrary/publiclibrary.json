@@ -1,0 +1,205 @@
+var publicLibrary = {
+    "books": [
+        {
+            "rowNo": 1,
+            "name": "HTML",
+            "imageurl": "Images/html.png-246x221.png",
+            "description": [
+                "These are the number one section in website development (Front end).",
+                "HTML  Hyper Text Markup Language,layout for  structural language, ",
+                "CSS : the design / beauty of the layout. ",
+                "JavaScript: for manipulating front end section (GUI), behavior management.",
+                "At same time, it can be use in the backend as node.js.",
+                "Javascript have alot of frameworks among them are anguler script,",
+                "React native, Bootstrap, Json, Typescript, Jquery, Ajax, e.t.c"
+            ]
+        },
+        {
+            "rowNo": 2,
+            "name": "CSS",
+            "imageurl": "Images/html.png-246x221.png",
+            "description": [
+                "These are the number one section in website development (Front end).",
+                " HTML  Hyper Text Markup Language,layout for  structural language, ",
+                "CSS : the design / beauty of the layout.",
+                " JavaScript: for manipulating front end section (GUI), behavior management.",
+                "At same time, it can be use in the backend as node.js. ",
+                "Javascript have alot of frameworks among them are anguler script, React native,",
+                "Bootstrap, Json, Typescript, Jquery, Ajax, e.t.c"
+            ]
+        },
+        {
+            "rowNo": 3,
+            "name": "JavaScript",
+            "imageurl": "Images/html.png-246x221.png",
+            "description": [
+                "These are the number one section in website development (Front end).",
+                " HTML  Hyper Text Markup Language,layout for  structural language,",
+                " CSS : the design / beauty of the layout.",
+                " JavaScript: for manipulating front end section (GUI), behavior management.",
+                "At same time, it can be use in the backend as node.js.",
+                "Javascript have alot of frameworks among them are anguler script,",
+                "React native, Bootstrap, Json, Typescript, Jquery, Ajax, e.t.c"
+            ]
+        },
+        {
+            "rowNo": 4,
+            "name": "Node.js",
+            "imageurl": "Images/node-js.jpg-245x137.png",
+            "description": [
+                "A programming language for backend Development ,",
+                " It support web application development by default and",
+                " also use for servlerless server management.",
+                "It is JavaScript running at a backend."
+            ]
+        },
+        {
+            "rowNo": 5,
+            "name": "Java",
+            "imageurl": "Images/java.png-236x152.png",
+            "description": [
+                "Java is one of the must popular and useful programming language that runs",
+                " in all device including android device, desktop or window or Linux os device,",
+                " web platform.<br> Base on Java types /Tree, java runs in all platform.",
+                "<br>Jsp and JTL for web application development, Similar to Springboot.",
+                " <br> Javafx /Java scene builder for beaultifull GUI on desktop application/Linux/Window.",
+                "<br> It have bindable behavior, data analysis and data science support.",
+                "<br> Java Android for Android mobile application development.",
+                " This is the core language for android development.",
+                "<br> Easy to learn and understand, similar to C-programming.",
+                "<br> Also use for MI and Ai."
+            ]
+        },
+        {
+            "rowNo": 6,
+            "name": "JavaFX",
+            "imageurl": "Images/java.png-236x152.png",
+            "description": [
+                "Java is one of the must popular and useful programming language",
+                "that runs in all device including android device, desktop or window or",
+                "Linux os device, web platform.<br> Base on Java types /Tree,",
+                "java runs in all platform.<br>Jsp and JTL for web application development,",
+                " Similar to Springboot. <br> Javafx /Java scene builder for",
+                "beaultifull GUI on desktop application/Linux/Window.<br>",
+                " It have bindable behavior, data analysis and data science support.",
+                "<br> Java Android for Android mobile application development.",
+                "This is the core language for android development.",
+                "<br> Easy to learn and understand, similar to C-programming.",
+                "<br> Also use for MI and Ai."
+            ]
+        },
+        {
+            "rowNo": 7,
+            "name": "JSP (Java Severlet Page)",
+            "imageurl": "Images/java.png-236x152.png",
+            "description": [
+                "Java is one of the must popular and useful",
+                " programming language that runs in all device including android device,",
+                " desktop or window or Linux os device, web platform.",
+                "<br> Base on Java types /Tree, java runs in all platform.",
+                "<br>Jsp and JTL for web application development, Similar to Springboot.",
+                "<br> Javafx /Java scene builder for beaultifull GUI on desktop application/Linux/Window.",
+                "<br> It have bindable behavior, data analysis and data science support.",
+                "<br> Java Android for Android mobile application development.",
+                "This is the core language for android development.",
+                "<br> Easy to learn and understand, similar to C-programming.",
+                "<br> Also use for MI and Ai."
+            ]
+        },
+        {
+            "rowNo": 8,
+            "name": "Android Java",
+            "imageurl": "Images/java.png-236x152.png",
+            "description": [
+                "Java is one of the must popular and useful programming language that runs",
+                "in all device including android device,",
+                "desktop or window or Linux os device,",
+                "web platform.<br> Base on Java types /Tree,",
+                "java runs in all platform.<br>Jsp and JTL for web",
+                "application development, Similar to Springboot.",
+                "<br> Javafx /Java scene builder for beaultifull GUI",
+                "on desktop application/Linux/Window.<br> It have bindable behavior,",
+                "data analysis and data science support.",
+                "<br> Java Android for Android mobile application development.",
+                "This is the core language for android development.",
+                "<br> Easy to learn and understand, similar to C-programming.",
+                "<br> Also use for MI and Ai."
+            ]
+        },
+        {
+            "rowNo": 9,
+            "name": "Java Gluon",
+            "imageurl": "Images/java.png-236x152.png",
+            "description": [
+                "A programming language for backend Development ,",
+                "It support web application development by default",
+                " and also use for servlerless server management.",
+                "<br>It is JavaScript running at a backend."
+            ]
+        },
+        {
+            "rowNo": 10,
+            "name": "Flutter",
+            "imageurl": "Images/flutter.png-242x114.png",
+            "description": [
+                "Flutter Sdk uses Dart.",
+                "Dart has become an important Programming language due to the ability",
+                "to support multiple platform at a time.",
+                "Flutter reduce expenses during mobile application development.",
+                "Flutter support iOS and Android.",
+                "The cost of looking for Apple laptop for IOS application production, have reduced.",
+                "With other computer manufacturers like hp Laptop, Dell, Toshiba, e.t.c,",
+                "we can create iOS application and Android application at same time.",
+                "Similary, Kotlin programing Language has increased in performance to support both",
+                "android and IOs at a time."
+            ]
+        },
+        {
+            "rowNo": 11,
+            "name": "Python",
+            "imageurl": "Images/python.png-238x241.png",
+            "description": [
+                "Python programming is very easy, flexible and cross platform just as in Java.",
+                "Python is commonly use for data science, data analysis, Machine learning (Ml),",
+                " Artificial intelligence (Al).Not that other languages like Java or C# can't archive it.",
+                "Python is easy because it uses normal English expression, and",
+                "this is what makes it popular to use."
+            ]
+        },
+        {
+            "rowNo": 12,
+            "name": "Oracle",
+            "imageurl": "Images/oracle.png-226x86.png",
+            "description": [
+                "Oracle is the world largest database management system software ",
+                "Oracle have series of version ; 11g, 12g, 13c."
+            ]
+        },
+        {
+            "rowNo": 13,
+            "name": "Swift",
+            "imageurl": "Images/swift.png-237x145.png",
+            "description": [
+                "Swift is a program use for creating native iOS application.",
+                "It is the Number one Programming language for iOS.",
+                "Developers who write Mobile application writes with the use",
+                "of apple laptop (machintuch O.SO.S) and iOS mobile device.",
+                "Developers who create applicaton on this device are called apple developer.",
+                "Development  is archive by the use of machintosh operating system (Apple laptop)."
+            ]
+        },
+        {
+            "rowNo": 13,
+            "name": "Swift",
+            "imageurl": "Images/swift.png-237x145.png",
+            "description": [
+                "Swift is a program use for creating native iOS application.",
+                "It is the Number one Programming language for iOS.",
+                "Developers who write Mobile application writes with the use",
+                "of apple laptop (machintuch O.SO.S) and iOS mobile device.",
+                "Developers who create applicaton on this device are called apple developer.",
+                "Development  is archive by the use of machintosh operating system (Apple laptop)."
+            ]
+        }
+    ]
+}

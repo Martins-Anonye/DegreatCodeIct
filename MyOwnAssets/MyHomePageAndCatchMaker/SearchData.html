@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #backColorMaker {
+        background-color: red;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: -1;
+
+    }
+
+    #backgroundImg {
+        width: 45%;
+        height: 50%;
+    }
+
+    #backgroundHolder {
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    #crystalbackground {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.8;
+        z-index: 1;
+
+    }
+
+    #bgcon {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    #maincon {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        padding-top: 25%;
+    }
+
+    #logo {
+        position: fixed;
+    }
+
+    h3 {
+        color: white;
+    }
+
+    input {
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    img {
+        top: 10px;
+        position: relative;
+    }
+
+    span {
+        margin-top: 20px;
+        color: white;
+    }
+
+    a:before {
+        color: white;
+    }
+
+    a:visited {
+        color: orange;
+    }
+
+    a:hover {
+        color: white;
+    }
+
+    a:link {
+        color: pink;
+    }
+
+    button:hover {
+        background-color: brown;
+    }
+
+
+    button {
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+
+    }
+
+    @media (min-width:1px) and (max-width:300px) {
+        #backgroundImg {
+            width: 100%;
+            height: 90%;
+        }
+
+        #maincon {
+            padding-top: 120%;
+        }
+    }
+
+    @media (min-width:301px) and (max-width:699px) {
+        #backgroundImg {
+            width: 100%;
+            height: 90%;
+        }
+
+        #maincon {
+            padding-top: 60%;
+
+        }
+    }
+
+    @media (min-width:700px) and (max-width:1000px) {
+        #backgroundImg {
+            width: 50%;
+            height: 50%;
+        }
+
+        #maincon {
+            padding-top: 25%;
+
+        }
+    }
+
+    @media (min-width:1001px) and (max-width:1300px) {
+        #backgroundImg {
+            width: 60%;
+            height: 100%;
+        }
+
+        #maincon {
+            padding-top: 30%;
+
+        }
+    }
+
+    @media (min-width:1023px) and (min-height:1300px) {
+        #backgroundImg {
+            width: 60%;
+            height: 80%;
+        }
+
+        #maincon {
+            padding-top: 40%;
+
+        }
+    }
+
+    @media (min-width:1301px) {
+        #backgroundImg {
+            width: 45%;
+            height: 100%;
+        }
+
+        #maincon {
+            padding-top: 20%;
+
+        }
+    }
+</style>
+
+<body>
+    <div id="bgcon">
+        <div id="backColorMaker"></div>
+        <div id="backgroundHolder"> <img id="backgroundImg" src="Images/essentialimg.png"> </div>
+        <div id="crystalbackground"> </div>
+    </div>
+    <div id="maincon">
+        <img id="logo" src="dgclogo.jpg" width="80" height="50px" />
+        <center>
+            <form>
+
+                <div style="width:400px;">
+                    <h3><u>Search Result: </u></h3>
+                    <input type="text" style='width:300px; height:30px' placeholder="Enter your id no " />
+                    <img src="searchbtn.png" width="30px" height="30px" />
+                    <br>
+                    <hr>
+                </div>
+
+                <span style="display:block">No Card Number? <a
+                        href="../PaystackAtFrontEndIntegration/paystackInlinePayment.html?extra=0002020000202020020200200022202020002020020202020202020200202&transAmounturl=5000&etra=198828382328388232832838323823&purposeurl=Id card request">
+                        request Id Card </a>
+                </span>
+            </form>
+
+            <button id="homebtn">
+                home
+
+            </button>
+
+    </div>
+</body>
+
+<script src="../database/DGC price data.json"></script>
+
+
+<script>
+    var homebtn = document.getElementById("homebtn");
+    homebtn.addEventListener("click", visiteHomePage);
+    function visiteHomePage(e) {
+        e.preventDefault();
+        window.location.href = programPackage.PageURL.HomePageURL;
+    }
+</script>
+
+</center>
+
+
+
+
+</html>

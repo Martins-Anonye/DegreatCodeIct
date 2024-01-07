@@ -1,0 +1,18 @@
+.systemrequirement h1 {
+  text-align: center;
+}
+
+.systemrequirement h5 {
+  text-align: center;
+  margin-top: 20px;
+  color: darkred;
+}
+
+.systemrequirement .webreq {
+  text-align: center;
+}
+
+b {
+  margin-top: 12px;
+}
+

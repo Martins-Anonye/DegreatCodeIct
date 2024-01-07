@@ -1,0 +1,26 @@
+.computerlaboratory h1 {
+  text-align: center;
+}
+
+.computerlaboratory .packageimgdiv img {
+  width: 50%;
+  text-align: center;
+}
+
+.computerlaboratory .packageimgdiv {
+  text-align: right;
+}
+
+.computerlaboratory p {
+  padding-left: 20%;
+  text-align: center;
+  padding-right: 20%;
+}
+
+.articlecon {
+}
+
+.computerlaboratorybtn {
+  text-align: center;
+}
+

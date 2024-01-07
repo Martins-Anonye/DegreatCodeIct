@@ -1,0 +1,17 @@
+h4, h3 {
+  text-align: center;
+}
+
+.contacticon {
+  background-color: black;
+}
+
+.bottumsocialcon {
+  background: black;
+  padding-top: 10px;
+}
+
+.bottumsocialcon h5, .bottumsocialcon span {
+  color: white;
+}
+

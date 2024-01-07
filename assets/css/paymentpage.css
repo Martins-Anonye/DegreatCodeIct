@@ -1,0 +1,38 @@
+.paymentpage h1, .paymentpage p {
+  text-align: center;
+}
+
+.paymentnotice {
+  box-shadow: 2px 2px 10px gray, 2px 2px 10px gray;
+  width: 350px;
+  height: auto;
+  padding: 10px;
+  margin-left: 28%;
+}
+
+@media (min-width: 360px) {
+  .paymentnotice {
+    margin-left: 0%;
+  }
+}
+
+@media (min-width: 576px) {
+  .paymentnotice {
+    margin-left: 15%;
+  }
+}
+
+@media (min-width: 768px) {
+  .paymentnotice {
+    margin-left: 25%;
+  }
+}
+
+.paymentbutton {
+  border-radius: 10px;
+  padding: 2px;
+  margin-left: 30%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+

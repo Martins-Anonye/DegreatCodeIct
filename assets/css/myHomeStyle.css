@@ -1,0 +1,340 @@
+.bookbtn {
+  border-radius: 15px;
+  background-color: darkred;
+}
+
+.avdertcontainer {
+  display: none;
+}
+
+.banneradvert {
+  width: 100%;
+  height: 40px;
+}
+
+.myMainNav a:hover {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: darkred;
+}
+
+#navcol-3 button:hover {
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  margin-right: 2px;
+  background-color: blue;
+}
+
+.roundedbutton {
+  border-radius: 10px;
+  background-color: darkred;
+  margin: 5px;
+  font-weight: bold;
+}
+
+.roundedbutton:hover {
+  background-color: #000000;
+}
+
+.myOverLaycontainer.bgImageMaker {
+  background-image: url("../../assets/img/good-414x220.png");
+  /*filter: blur(8px);*/
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#columnNavHolder {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+}
+
+.myOverLaycontainer {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 910px;
+}
+
+@media (min-width: 576px) {
+  .myOverLaycontainer {
+    width: 100%;
+    height: 870px;
+  }
+}
+
+@media (min-width: 760px) {
+  .myOverLaycontainer {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 710px;
+  }
+}
+
+@media (min-width: 992px) {
+  .myOverLaycontainer {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 740px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mycontainer {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .myOverLaycontainer {
+    width: 100%;
+    /*height: 1000px;*/
+    height: 910px;
+  }
+}
+
+@media (min-width:1220px) and (max-width: 2400px) {
+  .myOverLaycontainer {
+    width: 100%;
+    /*height: 900px;*/
+    height: 990px;
+  }
+}
+
+#cardwithoverlay {
+  width: 100%;
+  height: 100%;
+  min-height: 980px;
+}
+
+.myheading {
+  color: rgb(255, 240, 0);
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.myheading.typewriter {
+  margin-top: 1%;
+  height: 50px;
+}
+
+.myOverLaycontainer .crystalGrayBG {
+  background-color: black;
+  opacity: 0.6;
+}
+
+.socialIcons {
+  margin-bottom: 10px;
+}
+
+.myicon {
+  height: 20px;
+  width: 20px;
+}
+
+.centerChildrenDiv {
+  text-align: center;
+}
+
+.imageGifHolder {
+  width: 50%;
+  height: 50%;
+}
+
+@media (min-width: 360px) {
+  .imageGifHolder {
+    width: 100%;
+    height: 80%;
+  }
+}
+
+@media (min-width: 500px) {
+  .imageGifHolder {
+    width: 100%;
+    height: 80%;
+  }
+}
+
+@media (min-width:768px) and (max-width: 992px) {
+  .imageGifHolder {
+    width: 50%;
+    height: 40%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .imageGifHolder {
+    width: 60%;
+    height: 10%;
+  }
+}
+
+.goalimg {
+  width: 40%;
+  height: 50%;
+  display: inline-block;
+  margin-top: 5%;
+}
+
+.goal {
+  display: inline-block;
+  width: 100%;
+  height: 50%;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.texttitleprograms {
+  text-align: center;
+}
+
+.dataprogram {
+  color: darkred;
+}
+
+.secondGallary {
+  width: 80%;
+  height: 100%;
+  margin-top: 5%;
+}
+
+@media (min-width: 300px) {
+  .secondGallary {
+    width: 60%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .secondGallary {
+    width: 70%;
+    height: 80%;
+  }
+}
+
+@media (min-width:100px) and (max-width: 300px) {
+  .secondGallary {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.imageCard {
+  width: 50%;
+  height: 50%;
+  margin-top: 2px;
+  margin-bottom: 2%;
+}
+
+.divimagecardholder {
+  box-shadow: -10px 10px 20px gray, 10px -10px 20px gray, 10px 10px 20px gray,10px -10px 20px gray;
+  margin: 5%;
+}
+
+.cardbutton {
+  background-color: darkred;
+  color: white;
+  font-weight: bold;
+  padding: 2%;
+  border-radius: 10px;
+  margin-bottom: 10%;
+}
+
+.cardbutton:hover {
+  background-color: black;
+}
+
+@media (min-width: 768px) {
+  .imageCard {
+    width: 100%;
+  }
+}
+
+.googlemapArticle, .partnersholder {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.partnersholder img {
+  width: 10%;
+  margin-right: 4%;
+}
+
+.socialIcons img {
+  width: 30px;
+  height: 30px;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+.socialIcons {
+  text-align: center;
+}
+
+.cardbadge {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  top: -20px;
+  padding-top: 20px;
+  padding-right: 5px;
+}
+
+/* this create the scrollbar. Note: scrollbar-width: none and display:none inside -webkit-scrollbar makes horizontal scrollbar to hide */
+
+.hscroll {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.hscroll a:link {
+  color: white;
+}
+
+.hscroll a {
+  text-decoration: none;
+  margin-right: 15px;
+  user-select: none;
+}
+
+.hscroll a:hover {
+  background-color: black;
+}
+
+.hscroll::-webkit-scrollbar {
+  width: 1em;
+  height: 6px;
+  display: none;
+}
+
+.hscroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.hscroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 0.3px solid black;
+}
+
+/* Scrollbar stufs ends here */
+
+.googlemapcon img {
+  width: 60%;
+}
+
+.googlemapcon {
+  text-align: center;
+}
+

@@ -1,0 +1,56 @@
+.FullDetailAboutWebsiteApp h1 {
+  text-align: center;
+  color: darkred;
+  margin-top: 20px;
+}
+
+.FullDetailAboutWebsiteApp h6 {
+  text-align: center;
+}
+
+.FullDetailAboutWebsiteApp p {
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.buttonssection h3 {
+  text-align: left;
+}
+
+.buttonssection h6 {
+  color: darkred;
+}
+
+.buttonssection a {
+  margin-top: 8%;
+}
+
+.buttonssection button {
+  background-color: darkred;
+  padding: 5px;
+}
+
+.buttonssection button:hover {
+  background-color: black;
+  padding: 5px;
+}
+
+.buttonssection .dollarimg {
+  width: 50px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.buttonssection img {
+  width: 60%;
+}
+
+.buttonssection .imagecon {
+  text-align: right;
+}
+
+.frequentAskQTN {
+  padding: 10%;
+}
+

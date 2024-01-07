@@ -1,0 +1,16 @@
+.ourexpert {
+  text-align: center;
+}
+
+.ourexpert p {
+  padding: 25px;
+  color: #000000;
+}
+
+@media (min-width: 1200px) {
+  .ourexpert p {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+

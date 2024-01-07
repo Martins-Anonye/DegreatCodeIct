@@ -1,0 +1,2 @@
+
+  new Accordion('.accordion-container');

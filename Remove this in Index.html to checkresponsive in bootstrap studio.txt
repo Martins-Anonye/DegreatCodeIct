@@ -1,0 +1,11 @@
+<section class="splide" aria->
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide"><img class="secondGallary" src="More/senior-dev-inpixio-320x452.jpg" /></li>
+                <li class="splide__slide"><img class="secondGallary" src="More/billborad-data-inpixio-1999x2829.jpg" /></li>
+                <li class="splide__slide"><img class="secondGallary" src="More/good-1award-inpixio-320x452.jpg" /></li>
+                <li class="splide__slide"><img class="secondGallary" src="More/team-workers-inpixio-316x446.jpg" /></li>
+                <li class="splide__slide"><img class="secondGallary" src="appweb.png" /></li>
+            </ul>
+        </div>
+    </section>

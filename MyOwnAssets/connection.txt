@@ -68,3 +68,73 @@ data analysis===> datamanagement.png
 video editing =====> videoeditingfilm.jpg  , videoediting.jpg, video.gif
 Crazy Talk ====>Avater.gif
 embadded programming ===> embaddedprogramming.png
+
+
+
+
+
+
+
+//in the mainHomePage badges  <span class="badge bg-primary cardbadge onlinelive">42</span> 
+we have class of library, websitedev, mobiledev, onlinelive, desktopapp, embaddedpro, gameVideoDig, projectManagSys,forex
+//use to load price in the mainHomePage  
+<script src="MyOwnAssets/database/DGC price data.json"></script> 
+
+
+
+  <script src="MyOwnAssets/database/advertdata.json"></script>
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/typed.umd.js" type="text/javascript"> </script>
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/changeHomeIndexFile.js"></script>
+
+
+
+
+
+
+
+
+
+/*
+To connect this file: ChangDashboard.js
+add this line of code to dashboard.html
+
+ <!------
+        Statistics Data are added bellow
+        MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/
+        --->
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxchart.core.js"></script>
+
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxdata.js"></script>
+    <link rel="stylesheet" href="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/styles/jqx.base.css"
+        type="text/css" />
+
+
+
+ <!---
+        users statistic div builder
+        -->
+
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/statisticsHTMLDIVMaker.js"></script>
+
+
+    <!---
+        users identity are added bellow
+        -->
+
+<script src="MyOwnAssets/database/Localdata.json"></script>
+
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/FirstTableIdentityData.json"></script>
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/SecondTableIdentityData.json"></script>
+
+    <script type="module" src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/ChangDashboard.js"></script>
+ 
+
+

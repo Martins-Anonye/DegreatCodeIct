@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
 
-    //loading local file has been disable by web browser.
+    //loading local file has been disable by web browser except modules.
     // you must use url attribute to load file. Or using <input> tag from html 
     // I discovered this update was discovered in 2023
     /*
@@ -35,7 +35,7 @@ var json = function () {
     $.ajax({
         'async': false,
         // 'url': "https://api.npoint.io/2d34f45ed824afaaea07", //working
-        // 'url': "Localdata.json", // accessing local data has been disabled by all web browser except <input> tag of HTML
+        // 'url': "Localdata.json", // accessing local data has been disabled by all web browser except <input> tag of HTML and except module javascript
         'success': function (data) {
             jsonTemp = data;
             console.log(data); // this will show the info its in firebug console

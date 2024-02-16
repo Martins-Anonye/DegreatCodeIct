@@ -60,31 +60,40 @@
     <script>
 
         document.onreadystatechange = function () {
-            var img = document.getElementById("img");
-            var titletext = document.getElementById("titletext");
-
-            var paragraphdata = document.getElementById("paragraphdata");
-            var dataRowIndex = (+getUrlData("rowNo")) - 1;
-            console.log(dataRowIndex);
-
-            var name = publicLibrary.books[dataRowIndex].name;
-            var imageurl = publicLibrary.books[dataRowIndex].imageurl;
-            var description = publicLibrary.books[dataRowIndex].description;
-
-
-            var dataDescription = descriptionMaker(description);
-            paragraphdata.innerHTML = dataDescription;
-            titletext.innerHTML = name;
-            img.src = imageurl;
-
-
-
 
             var homebtn = document.getElementById("homebtn");
 
             homebtn.addEventListener("click", e => {
                 window.location.href = programPackage.PageURL.HomePageURL;
             });
+
+
+
+
+
+
+            var img = document.getElementById("img");
+            var titletext = document.getElementById("titletext");
+
+            var paragraphdata = document.getElementById("paragraphdata");
+            var dataRowIndex = (+getUrlData("rowNo")) - 1;
+            if (!isNaN(dataRowIndex)) {
+                console.log(dataRowIndex);
+
+                var name = publicLibrary.books[dataRowIndex].name;
+                var imageurl = publicLibrary.books[dataRowIndex].imageurl;
+                var description = publicLibrary.books[dataRowIndex].description;
+
+
+                var dataDescription = descriptionMaker(description);
+                paragraphdata.innerHTML = dataDescription;
+                titletext.innerHTML = name;
+                img.src = imageurl;
+            }
+
+
+
+
 
         }
 

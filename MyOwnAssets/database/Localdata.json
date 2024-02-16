@@ -1,7 +1,7 @@
 
 var data = {
-    "comment1": "just remove var data =",
-    "commene2": "after removing it, it will turn to full json data",
+    "comment1_Not_Used": "just remove var data =",
+    "commene2_Not_Used": "after removing it, it will turn to full json data",
     "Paystack_Detail": [
         {
             "paystack_test_Key": "pk_live_a0649b2e93a2576f7c72bd8af326758e48ad23ef",

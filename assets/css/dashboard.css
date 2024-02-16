@@ -1,0 +1,13 @@
+.asideholder button {
+  margin: 2%;
+}
+
+.asideholder {
+  position: absolute;
+  width: 20%;
+}
+
+.asideAndMainDatacon {
+  width: 100%;
+}
+

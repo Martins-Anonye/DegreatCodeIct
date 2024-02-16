@@ -14,7 +14,7 @@
 
 .myMainNav a:hover {
   border-radius: 5px;
-  border-width: 1px;
+  border-width: 0px;
   border-style: solid;
   background-color: darkred;
 }
@@ -25,6 +25,10 @@
   border-style: solid;
   margin-right: 2px;
   background-color: blue;
+}
+
+#navcol-3 {
+  border-radius: 10px;
 }
 
 .roundedbutton {
@@ -57,13 +61,13 @@
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  height: 910px;
+  height: 1010px;
 }
 
 @media (min-width: 576px) {
   .myOverLaycontainer {
     width: 100%;
-    height: 870px;
+    height: 930px;
   }
 }
 
@@ -85,10 +89,21 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .myOverLaycontainer {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    margin-bottom: 200px;
+    height: 840px;
+  }
+}
+
 @media (min-width: 1200px) {
   .mycontainer {
     width: 100%;
     height: 100%;
+    margin-bottom: 0px;
   }
 }
 
@@ -97,6 +112,7 @@
     width: 100%;
     /*height: 1000px;*/
     height: 910px;
+    margin-bottom: 0px;
   }
 }
 
@@ -105,13 +121,8 @@
     width: 100%;
     /*height: 900px;*/
     height: 990px;
+    margin-bottom: 0px;
   }
-}
-
-#cardwithoverlay {
-  width: 100%;
-  height: 100%;
-  min-height: 980px;
 }
 
 .myheading {
@@ -125,6 +136,17 @@
 .myheading.typewriter {
   margin-top: 1%;
   height: 50px;
+}
+
+@media (min-width: 100px) and (max-width:700px) {
+  .myheading.typewriter {
+    margin-top: 1%;
+    height: 130px;
+  }
+}
+
+.goalcontainer, .minislideshow {
+  text-align: center;
 }
 
 .myOverLaycontainer .crystalGrayBG {
@@ -336,5 +358,8 @@
 
 .googlemapcon {
   text-align: center;
+}
+
+.mynavbar {
 }
 

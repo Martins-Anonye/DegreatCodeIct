@@ -1,0 +1,153 @@
+.asideholder button {
+  margin: 2%;
+}
+
+.asideholder {
+  position: absolute;
+  width: 20%;
+  height: 300px;
+  overflow: hidden;
+}
+
+#asidecontainer {
+  width: 100%;
+  height: 100%;
+}
+
+.asideAndMainDatacon {
+  width: 100%;
+}
+
+.dotRec {
+  margin-right: 20px;
+  width: 50px;
+  height: 30px;
+  border-radius: 0px;
+}
+
+.syllables {
+  text-align: center;
+}
+
+.dashboard {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 0px;
+}
+
+.dashboard:hover {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 0px;
+}
+
+.mainData {
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+.nameholder {
+  vertical-align: middle;
+}
+
+.nameholder h6 {
+  display: inline-block;
+}
+
+.nameholder img {
+  float: right;
+}
+
+.secmainbutton button {
+  width: 180px;
+  height: 100px;
+  margin-top: 5%;
+  margin-right: 1%;
+}
+
+button {
+  background-color: darkred;
+  color: white;
+}
+
+.mainData .col-md-4 {
+  text-align: center;
+}
+
+.chatstatistic {
+}
+
+.configtable {
+  text-align: center;
+}
+
+.chatstatistic {
+  text-align: center;
+}
+
+#copytd {
+  text-align: center;
+}
+
+#profilelinkentryholder {
+  display: inline-block;
+  width: 70%;
+  height: 80px;
+  margin-right: 2%;
+}
+
+#copyalert {
+  display: inline-block;
+  width: 100%;
+}
+
+#profile_link {
+  display: inline-block;
+  width: 100%;
+  margin-right: 2%;
+}
+
+#identitycopy {
+  display: inline-block;
+  height: 40%;
+  background-color: #eeeeee;
+  padding-top: 5px;
+}
+
+#identitycopy svg {
+  width: 50%;
+  height: 50%;
+}
+
+#identitycopy span {
+  display: block;
+  margin-top: 30%;
+  color: darkred;
+}
+
+#generateidcard {
+  margin-top: 10px;
+  text-align: center;
+}
+
+#renewidcard {
+  width: 250px;
+}
+
+#downloadIdCard {
+  width: 150px;
+  margin-right: 20px;
+}
+
+#passcodeentry {
+  margin: 20px;
+  text-align: center;
+}
+
+#idcardstarter {
+  margin-top: 20px;
+  text-align: center;
+}
+

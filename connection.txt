@@ -1,0 +1,140 @@
+To connect to the table List of All Data:
+ListOfItemsToPurchase.html?viewTable=ALL
+this is conrolled in  ListOfItemsToPurchase.html
+
+To connect to  a specific row using json row number :
+ListOfItemsToPurchase.html?homePageCard=number
+this is conrolled in  ListOfItemsToPurchase
+
+
+To connect to  a specific row using multiple selected json row number :
+ListOfItemsToPurchase.html?homePageCardArray=,number,number,number,number,....,
+this is conrolled in  ListOfItemsToPurchase.
+Take Note: comma start it and ends it
+e.g
+MyOwnAssets/MyHomePageAndCatchMaker/ListOfItemsToPurchase.html?homePageCardArray=,15,16,17,
+
+
+
+
+To connect to  a specific row using package name :
+ListOfItemsToPurchase.html?categoryDropdownlist=package name
+this is conrolled in  appcartegorymaker.html file,
+
+
+To connect to Hot Packages:
+ListOfItemsToPurchase.html?categoryDropdownlist=hot
+this is conrolled in  appcartegorymaker.html file,
+
+hot package are high value packages.
+
+Package list, TermAndCondition,superPromoDiscount,onlineLiveTrainingMonthlyCharge, HomePageURL are controled by the json file
+/database/ DGC price data.json
+
+Advert is controlled by 
+/database/ advertdata.json
+
+
+
+
+To connect to degreatCode payment system use
+../PaystackAtFrontEndIntegration/paystackInlinePayment.html?transAmounturl=${+priceDataInsideRow}&purposeurl=${data}`;
+
+priceDataInsideRow represent price.
+data represent description
+
+
+
+
+Images use======>>>>>>>>
+
+
+javascript web programming= javascript.jpg
+Mobrise ==>>>> webtool.png
+wordpress==>> webtool.png
+blog Image ==>> blog.png
+figma ===> figma.jpeg,
+ms word for mobile phone====> mswordmob.jpg,
+Web app back end===. webmobile.png ,
+Fulstack ===> webman.png
+videoediting ==> videoediting.jpg,
+android dev ===> androiddev.jpg
+hardwareandnetworking ====hardwareandnetworking.jpg
+hardware ===> 
+cisconwetworking ===> cisconwetworking.png
+project management ===> Images/projectmanagement.jpg,
+data science ====> datascience.png
+data analysis===> datamanagement.png  
+video editing =====> videoeditingfilm.jpg  , videoediting.jpg, video.gif
+Crazy Talk ====>Avater.gif
+embadded programming ===> embaddedprogramming.png
+
+
+
+
+
+
+
+//in the mainHomePage badges  <span class="badge bg-primary cardbadge onlinelive">42</span> 
+we have class of library, websitedev, mobiledev, onlinelive, desktopapp, embaddedpro, gameVideoDig, projectManagSys,forex
+//use to load price in the mainHomePage  
+<script src="MyOwnAssets/database/DGC price data.json"></script> 
+
+
+
+  <script src="MyOwnAssets/database/advertdata.json"></script>
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/typed.umd.js" type="text/javascript"> </script>
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/changeHomeIndexFile.js"></script>
+
+
+
+
+
+
+
+
+
+/*
+To connect this file: ChangDashboard.js
+add this line of code to dashboard.html
+
+ <!------
+        Statistics Data are added bellow
+        MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/
+        --->
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxchart.core.js"></script>
+
+    <script type="text/javascript"
+        src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/jqxdata.js"></script>
+    <link rel="stylesheet" href="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Statistics/jqwidgets/styles/jqx.base.css"
+        type="text/css" />
+
+
+
+ <!---
+        users statistic div builder
+        -->
+
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/statisticsHTMLDIVMaker.js"></script>
+
+
+    <!---
+        users identity are added bellow
+        -->
+
+<script src="MyOwnAssets/database/Localdata.json"></script>
+
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/FirstTableIdentityData.json"></script>
+    <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/SecondTableIdentityData.json"></script>
+
+    <script type="module" src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/ChangDashboard.js"></script>
+ 
+
+

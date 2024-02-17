@@ -57,7 +57,16 @@ document.onreadystatechange = function () {
   digitmark.innerHTML = "<span style=color:blue>" + getAmount(10) + "</span>";
 
 
+  var identity = getUrlData("identity");
+  if (identity != "" && identity != null && identity != " ") {
+    //file:///C:/Users/DEGREATCODE%20ICT%20LTD/Documents/Dgc%20site/DGCBOOTSTRAP/index.html?identity=DGC100.008D0301108N005
+    //alert("loading student url" + identity);
+    var identityPageHTML = `dashboard.html?identity=${identity}`;
 
+    window.location.href = identityPageHTML;
+  }
+
+  embadeYoutubeToWebpage();
 
 }();
 
@@ -66,8 +75,30 @@ function getAmount(index) {
   return amt;
 }
 
+function getUrlData(datakey) {
+  var urlParameters = window.location.search; // get url starting from ?, not the link
+  var searchParams = new URLSearchParams(urlParameters);
+  var value = searchParams.get(datakey);
+  return value;
+}
 
 
+function embadeYoutubeToWebpage() {
+
+
+  var divToHoldYoutube = document.getElementsByClassName('youtube-col')[0];
+
+  var CHANNELNAME = `UCPWbEaPROm9VmZamuN6aN1A`;
+
+  var youtubeChannel = `<div><iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=${CHANNELNAME}" width="480" height="400"></iframe></div>`;
+
+  var subscriptionButton = `<div class="g-ytsubscribe" data-channel="${CHANNELNAME}" data-layout="default" data-count="hidden" ></div >`;
+
+  var content = youtubeChannel + "<br>" + subscriptionButton;
+  divToHoldYoutube.innerHTML = content;
+  // for button to  work add this code inthe head 
+  // <script src="https://apis.google.com/js/platform.js"></script>
+}
 
 
 /* 
@@ -81,9 +112,9 @@ we have class of library, websitedev, mobiledev, onlinelive, desktopapp, embadde
 //use to load price in the mainHomePage  
 <script src="MyOwnAssets/database/DGC price data.json"></script> 
 
-
-
-  <script src="MyOwnAssets/database/advertdata.json"></script>
+ <script src="MyOwnAssets/database/advertdata.json"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
+ 
     <script src="MyOwnAssets/MyHomePageAndCatchMaker/typed.umd.js" type="text/javascript"> </script>
     <script src="MyOwnAssets/MyHomePageAndCatchMaker/changeHomeIndexFile.js"></script>
 

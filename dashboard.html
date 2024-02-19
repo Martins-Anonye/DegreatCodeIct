@@ -208,9 +208,10 @@ Create new ideas, Bring imagination to reality. Excel among many and roll among 
                                                 encounter any issue. </span><br><button id="generateidcard"
                                                 type="submit">Get Passcode TO Generate New ID Card <span
                                                     class="genidcard"></span></button><br><button id="renewidcard"
-                                                type="submit">Get Passcode To Renew ID Card <span class="renIdCard">
-                                                </span></button><input type="text" id="passcodeentry"
-                                                class="form-control" placeholder="Enter Passcode Here"><button
+                                                type="submit">Get Passcode To Renew ID Card <span
+                                                    class="renIdCard"></span></button><input type="text"
+                                                id="passcodeentry" class="form-control"
+                                                placeholder="Enter Passcode Here"><button
                                                 class="btn btn-primary d-block w-100" id="downloadIdCard"
                                                 type="submit">Download ID Card</button>
                                         </div>
@@ -225,6 +226,31 @@ Create new ideas, Bring imagination to reality. Excel among many and roll among 
         <div class="row">
             <div class="col statistics"></div>
         </div>
+        <div class="row">
+            <div class="col personallinkandproject">
+                <hr>
+                <h1>&nbsp;Project Completed</h1>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description, Category and Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectcompleted"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col externalprofile">
+                <h1>&nbsp;External Profile</h1>
+                <h5 id="externalprofiledesc"></h5><button class="btn btn-primary" id="externalprofilebtn"
+                    type="button">Visit</button>
+            </div>
+        </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/accordian%20library/accordion.min.js"></script>
@@ -233,9 +259,6 @@ Create new ideas, Bring imagination to reality. Excel among many and roll among 
     <script src="assets/js/splide_slider/mystartsplide.js"></script>
     <script src="assets/js/splide_slider/splide.min.js"></script>
     <script src="assets/js/startaccordian.js"></script>
-
-
-
 
     <!------
         Statistics Data are added bellow
@@ -274,6 +297,7 @@ Create new ideas, Bring imagination to reality. Excel among many and roll among 
     <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/SecondTableIdentityData.json"></script>
 
     <script type="module" src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/ChangDashboard.js"></script>
+
 
 
 </body>

@@ -26,7 +26,7 @@
 }
 
 .syllables {
-  text-align: center;
+  text-align: left;
 }
 
 .dashboard {
@@ -149,5 +149,25 @@ button {
 #idcardstarter {
   margin-top: 20px;
   text-align: center;
+}
+
+.statistics {
+  text-align: center;
+}
+
+.personallinkandproject {
+  text-align: center;
+}
+
+.externalprofile {
+  text-align: center;
+}
+
+.externalprofile h1 {
+  text-align: center;
+}
+
+#externalprofilebtn {
+  margin-bottom: 30px;
 }
 

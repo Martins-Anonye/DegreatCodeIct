@@ -99,6 +99,11 @@ function identityMaker(userIdentityRootData) {
         var genidcard = document.getElementsByClassName('genidcard')[0];
         var renIdCard = document.getElementsByClassName('renIdCard')[0];
 
+        var projectcompleted = document.getElementById('projectcompleted');
+        var externalprofilebtn = document.getElementById('externalprofilebtn');
+        var externalprofiledesc = document.getElementById('externalprofiledesc');
+
+
         identityCertSN = identityCertSN.toUpperCase();
         var certSerialNum = identity.CertSn.toUpperCase();
         if (identityCertSN == certSerialNum) {
@@ -229,6 +234,21 @@ function identityMaker(userIdentityRootData) {
 
 
                 //var url = "https://firebasestorage.googleapis.com/v0/b/somerandombucketname..."
+
+
+                // try {
+                projectCompletedMaker(projectcompleted, identity);
+                var externalprofilelinkuse = identity.Personal_Website_link;
+                externalprofiledesc.innerText = externalprofilelinkuse.Description;
+                externalprofilebtn.addEventListener("click", () => {
+                    window.location.href = externalprofilelinkuse.Link;
+
+                })
+                /*   }
+                  catch (e) {
+                      console.log("Error :" + e);
+                  } */
+
 
             } else {
                 username.innerHTML = "This user account has expired. Please contact administrator.";
@@ -503,6 +523,28 @@ function generatePassCodeMaker(email, cost, userIdentityData) {
 
 
 }
+
+
+function projectCompletedMaker(tbodypalceholder, identity) {
+    var Project_CompletedData = identity.Project_Completed;
+    var projectrows = "";
+    Array.from(Project_CompletedData).forEach((project) => {
+        var data = project.Desc_Slash_Category_Slash_Status_Slash_StartDateAndEndDate;
+        var dataArray = data.split("/");
+        var desc = dataArray[0];
+        var otherSlashedData = "";
+        for (var a = 0; a < dataArray.length; a++) {
+            if (a > 0) {
+                otherSlashedData = otherSlashedData + "" + dataArray[a];
+            }
+        }
+        projectrows = projectrows + `<tr><td>${project.Name}  </td>   <td>${desc} <br> ${otherSlashedData} . <a href="${project.Link}"> <button> Visit </button> </a>  </td> </tr>`;
+    });
+    tbodypalceholder.innerHTML = projectrows;
+}
+
+
+
 /*
 To connect this file:
 add this line of code to dashboard.html

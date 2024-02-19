@@ -91,66 +91,19 @@ var FirstTableUserIdentity = {
                 "Comment": "Performance Min is 100 and Perform..Max is 360. Work_Efoort min is 2000, max is 4500",
                 "Performance_For_Day1_Day28": "241,211,340,330,200,300,211,220,300,211,238,215,267,280,290,301,300,320,217,239,360,350,341,344,321,270,300,321",
                 "Work_Class_Project_For_Day1_Day28": "2401,2211,2010,2030,2300,3000,4211,3220,3100,3211,2038,2315,4267,3080,2900,3201,2300,2320,3170,2329,3260,3050,2001,3440,3121,3170,3600,3201"
-            }
-        },
-        {
-            "RowNo": 1,
-            "Name": "ONYEDIKACHI OKO",
-            "ActivateThisAccount_Yes_No": "Yes",
-            "Address": "",
-            "Email": "",
-            "PhoneNumber": "",
-            "CertSn": "DGC100.308D03082023N0",
-            "Entry_Date": "03/08/2023",
-            "Grad_Date": "",
-            "IdCardUrl": "",
-            "Totall_NumberOfClasses_Remaining": 90,
-            "Totall_NumberOfProject_Completed": 3,
-            "Totall_NumberOfClasses_Attended": 200,
-            "IdCard_Passport": {
-                "YesToGenerateNewIDCard_NoToRenewIDCard": "No",
-                "DownloadID_PassCode_For_Passport": {
-                    "PassCode": "DFG123",
-                    "PassCode_Expire": "01-Jan-2025"
-                },
-                "Firebase_Storage": {
-                    "IdCard_FolderName_Slash_IdCard_FileNameAndExtensionName": "Onyedikachi_OKO_DGC100.308D03082023N008/onyedikachi oko.pdf",
-                    "ImageUrl_Passport": "https://firebasestorage.googleapis.com/v0/b/degreatcode-ict-ltd.appspot.com/o/Onyedikachi_OKO_DGC100.308D03082023N008%2Fonyedikachi%20oko.png?alt=media&token=b6b81f9a-f3ae-429f-8888-e9b3ea6be298"
-                },
-                "Google_Drive_Storage": {
-                    "IdCard_Url": "https://drive.google.com/uc?export=download&id=1qSbcFycS19CZcu8135AvpmYN_4bOqxHc",
-                    "ImageUrl_Passport": ""
-                }
             },
-            "SkillSet_and_Syllables": [
+            "Personal_Website_link": {
+                "Description": "Data Not available",
+                "Link": "http://www.google.com"
+            },
+            "Project_Completed": [
                 {
-                    "Name_yesCompleted_NoNot": "HTML_Yes",
-                    "Link": "",
-                    "IsLinkActive_Yes_Or_No": "Yes"
-                },
-                {
-                    "Name_yesCompleted_NoNot": "JavaScript_Yes",
-                    "Link": "",
-                    "IsLinkActive_Yes_Or_No": "Yes"
+                    "CommentNotUse": "Status can be completed or pending",
+                    "Name": "Derivery",
+                    "Link": "http://www.google.com",
+                    "Desc_Slash_Category_Slash_Status_Slash_StartDateAndEndDate": "International shiping of goods and services. Derivery Logistics./ Website Category /Completed/08-2023 till 02-2024"
                 }
-            ],
-            "Certficate_Package_Name": [
-                {
-                    "Name": "Website Application Development (Full Stack)",
-                    "Date": "From 03/08/2023 T0------",
-                    "Status_Completed3Not_Complted_But_Active3Stater3Not_Active3Pending": "Not Complted But Active"
-                },
-                {
-                    "Name": "Android Application Development",
-                    "Date": "From-----T0------",
-                    "Status_Completed3Not_Complted_But_Active3Stater3Not_Active3Pending": "Pending"
-                }
-            ],
-            "Last25daysstatistics": {
-                "Comment": "Performance Min is 100 and Perform..Max is 360. Work_Efoort min is 2000, max is 4500",
-                "Performance_For_Day1_Day28": "241,211,340,330,200,300,211,220,300,211,238,215,267,280,290,301,300,320,217,239,360,350,341,344,321,270,300,321",
-                "Work_Class_Project_For_Day1_Day28": "2401,2211,2010,2030,2300,3000,4211,3220,3100,3211,2038,2315,4267,3080,2900,3201,2300,2320,3170,2329,3260,3050,2001,3440,3121,3170,3600,3201"
-            }
+            ]
         }
     ]
 }

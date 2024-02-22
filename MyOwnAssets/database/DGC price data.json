@@ -1,6 +1,7 @@
 var programPackage = {
 	"PageURL": {
 		"HomePageURL": "../../index.html",
+		"HomePageURLForSearchIdentity": "../../../index.html",
 		"WebsitePageURL": "../../FullDetailAboutWebsite.html",
 		"AndroidPageURL": "../../FullDetailAboutAndroidApp.html",
 		"IOsPageURL": "../../FullDetailAboutAppleApp.html",

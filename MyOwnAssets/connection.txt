@@ -77,7 +77,7 @@ embadded programming ===> embaddedprogramming.png
 
 //in the mainHomePage badges  <span class="badge bg-primary cardbadge onlinelive">42</span> 
 we have class of library, websitedev, mobiledev, onlinelive, desktopapp, embaddedpro, gameVideoDig, projectManagSys,forex
-//use to load price in the mainHomePage  
+//use to load price in the mainHomePage  that is index.js 
 <script src="MyOwnAssets/database/DGC price data.json"></script> 
 
 

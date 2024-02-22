@@ -40,21 +40,32 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 
-//const getStorage = app.storage();//getStorage(app);
-/* module.exports = {
-    storage,
-}; */
+
 
 
 $(document).ready(function () {
     identityMaker(FirstTableUserIdentity);
     identityMaker(SecondTableUserIdentity);
 
+    // this file control dashbord.html
+    // and the following link as been added to the file
+    // <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/FirstTableIdentityData.json"></script>
+    // <script src="MyOwnAssets/MyHomePageAndCatchMaker/Identity/Identitydatabase/SecondTableIdentityData.json"></script>
+
+
+    //Remember Any User Data addded should also be updated inside the identity.html file for search operation
+
+    // located at MyOwnAssets\MyHomePageAndCatchMaker\Identity\ Identity.html
+
+    // you can add additional json file  to dashbord.html. Just as we have added this two
+
+
 });
 
 function identityMaker(userIdentityRootData) {
 
     Array.from(userIdentityRootData.Identity).forEach(identity => {
+
 
 
 
@@ -251,7 +262,7 @@ function identityMaker(userIdentityRootData) {
 
 
             } else {
-                username.innerHTML = "This user account has expired. Please contact administrator.";
+                username.innerHTML = `This user's account (${identity.Name} , Identification Number = ${identity.CertSn} ) has expired. Please contact administrator.`;
                 username.style.color = "red";
             }
         }
@@ -272,7 +283,7 @@ function generalIDCardCostMaker(mainCostHolder, reasonForMain, renewalCostHolder
     renewalCostHolder.innerText = " :NGN " + ID_Card_Cost.Renewal_Id_Card_Cost;
     renewalCostHolder.style.color = "red";
 
-    genbtn.innerText = " : NGN " + ID_Card_Cost.Main_Cost_New_Id_Card;
+    genbtn.innerText = ": NGN " + ID_Card_Cost.Main_Cost_New_Id_Card;
     renewbtn.innerText = ": NGN " + ID_Card_Cost.Renewal_Id_Card_Cost;
 
 

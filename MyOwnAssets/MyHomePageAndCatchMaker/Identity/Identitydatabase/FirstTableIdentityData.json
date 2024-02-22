@@ -37,7 +37,7 @@ var FirstTableUserIdentity = {
         {
             "RowNo": 1,
             "Name": "ONYEDIKACHI OKO",
-            "ActivateThisAccount_Yes_No": "Yes",
+            "ActivateThisAccount_Yes_No": "No",
             "Address": "",
             "Email": "",
             "PhoneNumber": "",

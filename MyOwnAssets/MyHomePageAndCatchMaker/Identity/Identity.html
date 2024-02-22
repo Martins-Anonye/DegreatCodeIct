@@ -147,7 +147,7 @@
         }
 
         #maincon {
-            padding-top: 30%;
+            padding-top: 20%;
 
         }
     }
@@ -190,9 +190,10 @@
 
                 <div style="width:400px;">
                     <h3><u>Search Result: </u></h3>
-                    <input type="text" style='width:300px; height:30px' placeholder="Enter your id no " />
+                    <input type="text" style='width:300px; height:30px' placeholder="Enter your id no "
+                        id="userentryhere" />
                     <img src="../searchbtn.png" width="30px" height="30px"
-                        style="background-color: white; border-radius: 10px;" />
+                        style="background-color: white; border-radius: 10px;" id="searchData" />
                     <br>
                     <hr>
                 </div>
@@ -211,16 +212,81 @@
     </div>
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9">
+</script>
+
 <script src="../../database/DGC price data.json"></script>
+
+<script src="Identitydatabase/FirstTableIdentityData.json"></script>
+<script src="Identitydatabase/SecondTableIdentityData.json"></script>
+
 
 
 <script>
+
+    var searchData = document.getElementById("searchData");
+
+
+
+    searchData.addEventListener("click", () => {
+
+
+        SearchDataMaker(FirstTableUserIdentity);
+        SearchDataMaker(SecondTableUserIdentity);
+
+        //Remember Any User Data addded should also be updated inside the identity.html  file for search operation and
+        // added inside ChangDashboard.js that control the
+
+        // located at dashbord.html
+
+        // you can add additional json file to dashbord.html. Just as we have added this two
+
+
+
+
+    });
+
+
+
+
+
+
+    function SearchDataMaker(userIdentityRootData) {
+
+
+        var userentryhere = document.getElementById("userentryhere");
+
+        var userUniqueKeyValue = userentryhere.value.toUpperCase();
+
+        Array.from(userIdentityRootData.Identity).forEach(identity => {
+            var userIdentityFromServer = identity.CertSn.toUpperCase();
+            if (userUniqueKeyValue == userIdentityFromServer) {
+                var identityPageHTML = `${programPackage.PageURL.HomePageURLForSearchIdentity}?identity=${userUniqueKeyValue}`;
+                window.location.href = identityPageHTML;
+            } else {
+                Swal.fire(
+                    //'Hey!',
+                    "Identification Error",
+
+                    // 'Welcome to GeeksForGeeks',
+                    "User can not be identify",
+
+                    // 'success'
+                    "warning"
+                );
+            }
+        });
+    }
+
     var homebtn = document.getElementById("homebtn");
     homebtn.addEventListener("click", visiteHomePage);
     function visiteHomePage(e) {
         e.preventDefault();
-        window.location.href = programPackage.PageURL.HomePageURL;
+        window.location.href = programPackage.PageURL.HomePageURLForSearchIdentity;
     }
+
+
+
 
 
 

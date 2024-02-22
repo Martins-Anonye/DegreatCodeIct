@@ -2110,7 +2110,7 @@ var programPackage = {
 			"name": "Game Development",
 			"rowNo": 40,
 			"packagecode": "dgc405",
-			"price": 2500000,
+			"price": 250000,
 			"promoprice": 0,
 			"duration": "8 Months",
 			"image": "Images/avatergame.jpg",

@@ -85,16 +85,23 @@ function getUrlData(datakey) {
 
 function embadeYoutubeToWebpage() {
 
+  var morevideos = "<a href='https://www.youtube.com/channel/UCPWbEaPROm9VmZamuN6aN1A'><button>More Videos</button> </a>"
+
 
   var divToHoldYoutube = document.getElementsByClassName('youtube-col')[0];
 
-  var CHANNELNAME = `UCPWbEaPROm9VmZamuN6aN1A`;
 
-  var youtubeChannel = `<div><iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=${CHANNELNAME}" width="480" height="400"></iframe></div>`;
+  // To get the iframe code of your youtube video.To do this , Go to your youtube channel, select a video,   click on share , select embad video. 
+  // copy the iframe code and replace the iframe section bellow with the new one.
 
-  var subscriptionButton = `<div class="g-ytsubscribe" data-channel="${CHANNELNAME}" data-layout="default" data-count="hidden" ></div >`;
+  var youtubeChannel = `<div><iframe width="430" height="315" src="https://www.youtube.com/embed/5PoREReTaKQ?si=L_D4fjeCNi08x32c" title="DegreatCode Youtube Chanel Videos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>`;
 
-  var content = youtubeChannel + "<br>" + subscriptionButton;
+  var CHANNELNAME = `UCPWbEaPROm9VmZamuN6aN1A`;  //channel id
+
+  var subscriptionButton = `<div class="g-ytsubscribe" data-channelid="${CHANNELNAME}" ddata-layout="full" data-count="hidden" title="subscribe" ></div >`;
+
+  var content = youtubeChannel + "<br> <button style='cursor:revert;'> <b>  Subscribe -->  </b>" + subscriptionButton + " </button> &nbsp &nbsp &nbsp" + morevideos;
   divToHoldYoutube.innerHTML = content;
   // for button to  work add this code inthe head 
   // <script src="https://apis.google.com/js/platform.js"></script>
@@ -110,10 +117,12 @@ give the image id="homeImg"
 //in the mainHomePage badges  <span class="badge bg-primary cardbadge onlinelive">42</span> 
 we have class of library, websitedev, mobiledev, onlinelive, desktopapp, embaddedpro, gameVideoDig, projectManagSys,forex
 //use to load price in the mainHomePage  
+
+<script src="https://apis.google.com/js/platform.js"></script>
 <script src="MyOwnAssets/database/DGC price data.json"></script> 
 
  <script src="MyOwnAssets/database/advertdata.json"></script>
-<script src="https://apis.google.com/js/platform.js"></script>
+
  
     <script src="MyOwnAssets/MyHomePageAndCatchMaker/typed.umd.js" type="text/javascript"> </script>
     <script src="MyOwnAssets/MyHomePageAndCatchMaker/changeHomeIndexFile.js"></script>

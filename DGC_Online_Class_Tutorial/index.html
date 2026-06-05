@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="icon" type="image/jpeg" sizes="122x80" href="../assets/img/logo.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD Student Home | Bringing the best out from you and code changing the world</title>
+    <meta name="description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future with Degreatcode ICT LTD online class.">
+    <meta name="keywords" content="Degreatcode, ICT, online class, student dashboard, software training, coding, programming, fuel your future, ideas to reality, software production, student training, best coding tutorials">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Degreatcode ICT LTD Student Home">
+    <meta property="og:description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future.">
+    <meta property="og:image" content="images/superflyer.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://degreartcode.com/index.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            color: #111;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #222;
+            font-size: 1.1rem;
+        }
+
+        .welcome-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            color: #222;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-card .icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .menu-card h3 {
+            color: #111;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .menu-card p {
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .menu-card button {
+            padding: 12px 30px;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .menu-card button:hover {
+            background: #d90429;
+            color: #fff;
+        }
+
+        .info-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .info-section h3 {
+            color: #111;
+            margin-bottom: 15px;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #222;
+        }
+
+        .info-section li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section li::before {
+            content: '✓ ';
+            color: #d90429;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .contact-section {
+            background: #fff;
+            border: 1px solid #d90429;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-top: 24px;
+        }
+
+        .contact-section h3 {
+            margin: 0 0 12px;
+            color: #111;
+        }
+
+        .contact-section p {
+            color: #222;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+            background: #111;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+        }
+
+        .contact-link:hover {
+            background: #d90429;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(217,4,41,0.10);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <butto><a href="../index.html">
+            Back to Main Home page
+        </a></butto>
+        <header>
+            <img src="images/logo.jpg" alt="Degreatcode ICT LTD Logo" style="max-width:120px; margin-bottom: 12px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <h1>Degreatcode ICT LTD Student Home</h1>
+            <p style="font-size:1.15rem; color:#222; font-weight:500;">Bringing the best out from you and code changing the world.<br>Training-software production-Ideas to reality. <span style="color:#d90429; font-weight:600;">Fuel your future</span></p>
+            <img src="images/superflyer.png" alt="Hero banner" style="width:100%;max-width:600px;margin:18px auto 0;display:block;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+        </header>
+
+        <div class="welcome-section">
+            <h2>Welcome, Student! 👋</h2>
+            <p>Access video tutorials and download learning tools all in one place.</p>
+            <div style="margin-top:18px; background:#f8f8f8; border-radius:10px; padding:18px; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+                <strong style="color:#d90429; font-size:1.1rem;">Download the official mobile app and software version!</strong><br>
+                <span style="color:#222;">Watch and download your training, tutorials, and resources <b>without app key limitation</b>.<br>
+                Using the browser only gives you access to watch, but <b>downloading is exclusive to the app and software</b>.<br>
+                Enjoy unlimited access to all classes, tutorials, and training—no restrictions, no boundaries.<br>
+                <span style="color:#0f172a; font-weight:500;">Get started now: <a href="./downloader/downloader.html" style="color:#d90429; text-decoration:underline;">Download App & Software</a></span></span>
+                <div style="margin-top:10px; color:#64748b; font-size:0.98rem;">Unlock premium features, offline downloads, and a seamless learning experience. <b>Join thousands of students enjoying full access today!</b></div>
+            </div>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-card tutorials">
+                <div class="icon">🎥</div>
+                <h3>Video Tutorials</h3>
+                <p>Watch educational video tutorials on various subjects and topics.</p>
+                <button onclick="openTutorials()">Watch Tutorials</button>
+            </div>
+
+            <div class="menu-card downloads">
+                <div class="icon">⬇️</div>
+                <h3>Download Tools</h3>
+                <p>Download CBT software, apps, and other learning tools.</p>
+                <button onclick="openDownloads()">Go to Downloads</button>
+            </div>
+
+            <div class="menu-card downloads">
+                <div class="icon">�</div>
+                <h3>Book Shop</h3>
+                <p>Browse books, purchase digital copies, and download directly from your student dashboard.</p>
+                <button onclick="openBookShop()">Open Book Shop</button>
+            </div>
+
+            <div class="menu-card downloads">
+                <div class="icon">💳</div>
+                <h3>Subscriptions</h3>
+                <p>Subscribe to category-based plans to unlock premium tutorial access.</p>
+                <button onclick="openSubscriptions()">Subscribe Now</button>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>📋 Quick Info</h3>
+            <ul>
+                <li>Access video tutorials anytime, anywhere</li>
+                <li>Download software and app to access unlimited classes and tutorial, training without restriction</li>
+                <li>Access 1000+ video tutorials with materials and follow-up messages, practical projects, and examples. You can also access quality books from our book shop.</li>
+                <li>Regularly updated with new content</li>
+            </ul>
+        </div>
+
+        <div class="contact-section">
+            <h3>Need further assistance?</h3>
+            <p>After completion of course/package/subscription, for further assistance, assessment, support, certification awarding, online live class, and physical assessment, contact management:</p>
+            <ul>
+                <li><strong>Phone:</strong> <a id="contactPhoneLink" href="tel:+2348132329272">+234 813 232 9272</a></li>
+                <li><strong>WhatsApp:</strong> <a id="contactWhatsAppLink" href="https://wa.me/2348132329272" target="_blank" rel="noopener">+234 813 232 9272</a></li>
+                <li><strong>General Email:</strong> <a id="contactEmailLink" href="mailto:degreatcodeict@gmail.com">degreatcodeict@gmail.com</a></li>
+                <li><strong>Assessment Email:</strong> <a id="contactAssessmentEmailLink" href="mailto:degreatcodeict@gmail.com">degreatcodeict@gmail.com</a></li>
+                <li><strong>Support Email:</strong> <a id="contactSupportEmailLink" href="mailto:degreatcodeict@gmail.com">degreatcodeict@gmail.com</a></li>
+                <li><strong>Facebook Page:</strong> <a id="contactFacebookPageLink" href="https://www.facebook.com" target="_blank" rel="noopener">Visit</a></li>
+                <li><strong>Facebook Group:</strong> <a id="contactFacebookGroupLink" href="https://www.facebook.com" target="_blank" rel="noopener">Visit</a></li>
+                <li><strong>WhatsApp Group:</strong> <a id="contactWhatsAppGroupLink" href="https://wa.me/2348132329272" target="_blank" rel="noopener">Join</a></li>
+                <li><strong>Certificate Contact:</strong> <a id="contactCertificatePhoneLink" href="tel:+2348132329272">+234 813 232 9272</a></li>
+            </ul>
+            <div class="contact-buttons">
+                <a class="contact-link whatsapp" id="contactWhatsAppButton" href="https://wa.me/2348132329272" target="_blank" rel="noopener">
+                    💬 Chat on WhatsApp
+                </a>
+                <a class="contact-link email" id="contactEmailButton" href="mailto:degreatcodeict@gmail.com?subject=Assistance%20Request&body=Hello%20Degreatcode%20ICT%20LTD,">
+                    ✉️ Send Email
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Open video tutorials page
+        function openTutorials() {
+            window.open('./videoTutorial/watchTutorialLink.html', '_blank');
+        }
+
+        // Open downloads page
+        function openDownloads() {
+            window.open('./downloader/downloader.html', '_blank');
+        }
+
+        // Open book shop page
+        function openBookShop() {
+            window.open('./bookshop/bookshop.html', '_blank');
+        }
+
+        // Open subscription page with login check
+        function openSubscriptions() {
+            window.location.href = './studentManagement/studentLogin.html';
+        }
+    </script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from './FirebaseConnection/FirebaseConfiggFile.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        async function loadContactInfo() {
+            try {
+                const snapshot = await get(ref(db, 'contactInfo'));
+                if (!snapshot.exists()) {
+                    return;
+                }
+
+                const contact = snapshot.val();
+                const phone = contact.phone || '+2348132329272';
+                const whatsapp = contact.whatsapp || '+2348132329272';
+                const email = contact.email || 'degreatcodeict@gmail.com';
+                const assessmentEmail = contact.assessmentEmail || email;
+                const supportEmail = contact.supportEmail || email;
+                const facebookPage = contact.facebookPage || 'https://www.facebook.com';
+                const facebookGroup = contact.facebookGroup || 'https://www.facebook.com';
+                const whatsappGroup = contact.whatsappGroup || `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`;
+                const certificatePhone = contact.certificatePhone || phone;
+
+                const phoneLink = document.getElementById('contactPhoneLink');
+                const whatsappLink = document.getElementById('contactWhatsAppLink');
+                const emailLink = document.getElementById('contactEmailLink');
+                const assessmentLink = document.getElementById('contactAssessmentEmailLink');
+                const supportLink = document.getElementById('contactSupportEmailLink');
+                const facebookPageLink = document.getElementById('contactFacebookPageLink');
+                const facebookGroupLink = document.getElementById('contactFacebookGroupLink');
+                const whatsappGroupLink = document.getElementById('contactWhatsAppGroupLink');
+                const certificatePhoneLink = document.getElementById('contactCertificatePhoneLink');
+                const whatsappButton = document.getElementById('contactWhatsAppButton');
+                const emailButton = document.getElementById('contactEmailButton');
+
+                phoneLink.textContent = phone;
+                phoneLink.href = `tel:${phone.replace(/\s+/g, '')}`;
+                whatsappLink.textContent = whatsapp;
+                whatsappLink.href = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`;
+                emailLink.textContent = email;
+                emailLink.href = `mailto:${email}`;
+                assessmentLink.textContent = assessmentEmail;
+                assessmentLink.href = `mailto:${assessmentEmail}`;
+                supportLink.textContent = supportEmail;
+                supportLink.href = `mailto:${supportEmail}`;
+                facebookPageLink.href = facebookPage;
+                facebookGroupLink.href = facebookGroup;
+                whatsappGroupLink.href = whatsappGroup;
+                certificatePhoneLink.textContent = certificatePhone;
+                certificatePhoneLink.href = `tel:${certificatePhone.replace(/\s+/g, '')}`;
+                whatsappButton.href = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`;
+                emailButton.href = `mailto:${email}?subject=Assistance%20Request&body=Hello%20Degreatcode%20ICT%20LTD,`;
+            } catch (error) {
+                console.error('Error loading contact info:', error);
+            }
+        }
+
+        loadContactInfo();
+    </script>
+</body>
+</html>

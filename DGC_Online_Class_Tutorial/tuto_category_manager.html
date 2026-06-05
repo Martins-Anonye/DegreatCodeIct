@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Manager</title>
+        <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+    <script type="module">
+        // Import Firebase config from single source
+        import { firebaseConfig } from './FirebaseConnection/FirebaseConfiggFile.js';
+
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child, update } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Function to add Top Level Category
+        window.addTopLevelCategory = function() {
+            const topCategory = document.getElementById('topCategoryInput').value.trim();
+            if (topCategory) {
+                set(ref(database, 'categories/' + topCategory), {
+                    name: topCategory
+                }).then(() => {
+                    showSuccessMessage('Top Level Category added successfully!');
+                    document.getElementById('topCategoryInput').value = '';
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error adding top level category: ", error);
+                    showErrorMessage('Error adding category. Please try again.');
+                });
+            } else {
+                showErrorMessage('Please enter a Top Level Category name.');
+            }
+        };
+
+        // Function to add Middle Level Category
+        window.addMiddleLevelCategory = function() {
+            const selectedTop = document.getElementById('topSelect').value;
+            const middleCategory = document.getElementById('middleCategoryInput').value.trim();
+            if (selectedTop && middleCategory) {
+                set(ref(database, 'categories/' + selectedTop + '/' + middleCategory), {
+                    name: middleCategory
+                }).then(() => {
+                    showSuccessMessage('Middle Level Category added successfully!');
+                    document.getElementById('middleCategoryInput').value = '';
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error adding middle level category: ", error);
+                    showErrorMessage('Error adding category. Please try again.');
+                });
+            } else {
+                showErrorMessage('Please select a Top Level Category and enter a Middle Level Category name.');
+            }
+        };
+
+        // Function to add Category
+        window.addCategory = function() {
+            const selectedTop = document.getElementById('topSelectForCategory').value;
+            const selectedMiddle = document.getElementById('middleSelect').value;
+            const category = document.getElementById('categoryInput').value.trim();
+            if (selectedTop && selectedMiddle && category) {
+                set(ref(database, 'categories/' + selectedTop + '/' + selectedMiddle + '/' + category), {
+                    name: category
+                }).then(() => {
+                    showSuccessMessage('Category added successfully!');
+                    document.getElementById('categoryInput').value = '';
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error adding category: ", error);
+                    showErrorMessage('Error adding category. Please try again.');
+                });
+            } else {
+                showErrorMessage('Please select Top Level and Middle Level Categories, and enter a Category name.');
+            }
+        };
+
+        // Function to load categories and populate dropdowns
+        window.loadCategories = function() {
+            const dbRef = ref(database);
+            get(child(dbRef, 'categories/')).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    updateDropdowns(data);
+                    displayCategories(data);
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        };
+
+        // Function to update dropdowns
+        function updateDropdowns(data) {
+            const topSelect = document.getElementById('topSelect');
+            const topSelectForCategory = document.getElementById('topSelectForCategory');
+            const middleSelect = document.getElementById('middleSelect');
+
+            // Clear existing options
+            topSelect.innerHTML = '<option value="">Select Top Level Category</option>';
+            topSelectForCategory.innerHTML = '<option value="">Select Top Level Category</option>';
+            middleSelect.innerHTML = '<option value="">Select Middle Level Category</option>';
+
+            for (const topKey in data) {
+                const option = document.createElement('option');
+                option.value = topKey;
+                option.text = data[topKey].name || topKey;
+                topSelect.appendChild(option.cloneNode(true));
+                topSelectForCategory.appendChild(option);
+            }
+
+            // Update middle select when top is selected for category
+            topSelectForCategory.addEventListener('change', function() {
+                const selectedTop = this.value;
+                middleSelect.innerHTML = '<option value="">Select Middle Level Category</option>';
+                if (selectedTop && data[selectedTop]) {
+                    for (const middleKey in data[selectedTop]) {
+                        if (middleKey !== 'name') {
+                            const option = document.createElement('option');
+                            option.value = middleKey;
+                            option.text = data[selectedTop][middleKey].name || middleKey;
+                            middleSelect.appendChild(option);
+                        }
+                    }
+                }
+            });
+        }
+
+        // Function to update Top Level Category
+        window.updateTopLevelCategory = function(oldKey, newName) {
+            if (newName.trim()) {
+                const updates = {};
+                updates['categories/' + oldKey + '/name'] = newName.trim();
+                update(ref(database), updates).then(() => {
+                    showSuccessMessage('Top Level Category updated successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error updating top level category: ", error);
+                    showErrorMessage('Error updating category. Please try again.');
+                });
+            } else {
+                showErrorMessage('Category name cannot be empty.');
+                loadCategories(); // Reload to revert the change
+            }
+        };
+
+        // Function to update Middle Level Category
+        window.updateMiddleLevelCategory = function(topKey, oldKey, newName) {
+            if (newName.trim()) {
+                const updates = {};
+                updates['categories/' + topKey + '/' + oldKey + '/name'] = newName.trim();
+                update(ref(database), updates).then(() => {
+                    showSuccessMessage('Middle Level Category updated successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error updating middle level category: ", error);
+                    showErrorMessage('Error updating category. Please try again.');
+                });
+            } else {
+                showErrorMessage('Category name cannot be empty.');
+                loadCategories(); // Reload to revert the change
+            }
+        };
+
+        // Function to update Category
+        window.updateCategory = function(topKey, middleKey, oldKey, newName) {
+            if (newName.trim()) {
+                const updates = {};
+                updates['categories/' + topKey + '/' + middleKey + '/' + oldKey + '/name'] = newName.trim();
+                update(ref(database), updates).then(() => {
+                    showSuccessMessage('Category updated successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error updating category: ", error);
+                    showErrorMessage('Error updating category. Please try again.');
+                });
+            } else {
+                showErrorMessage('Category name cannot be empty.');
+                loadCategories(); // Reload to revert the change
+            }
+        };
+
+        // Function to delete Top Level Category
+        window.deleteTopLevelCategory = function(key) {
+            if (confirm('Are you sure you want to delete this Top Level Category and all its subcategories?')) {
+                set(ref(database, 'categories/' + key), null).then(() => {
+                    showSuccessMessage('Top Level Category deleted successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error deleting top level category: ", error);
+                    showErrorMessage('Error deleting category. Please try again.');
+                });
+            }
+        };
+
+        // Function to delete Middle Level Category
+        window.deleteMiddleLevelCategory = function(topKey, key) {
+            if (confirm('Are you sure you want to delete this Middle Level Category and all its subcategories?')) {
+                set(ref(database, 'categories/' + topKey + '/' + key), null).then(() => {
+                    showSuccessMessage('Middle Level Category deleted successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error deleting middle level category: ", error);
+                    showErrorMessage('Error deleting category. Please try again.');
+                });
+            }
+        };
+
+        // Function to delete Category
+        window.deleteCategory = function(topKey, middleKey, key) {
+            if (confirm('Are you sure you want to delete this Category?')) {
+                set(ref(database, 'categories/' + topKey + '/' + middleKey + '/' + key), null).then(() => {
+                    showSuccessMessage('Category deleted successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error deleting category: ", error);
+                    showErrorMessage('Error deleting category. Please try again.');
+                });
+            }
+        };
+
+        // Function to display categories
+        function displayCategories(data) {
+            const displayDiv = document.getElementById('categoriesDisplay');
+            displayDiv.innerHTML = '<h3>Current Categories:</h3>';
+            for (const topKey in data) {
+                const topName = data[topKey].name || topKey;
+                displayDiv.innerHTML += `
+                    <div class="category-item top-level">
+                        <input type="text" value="${topName}" onchange="updateTopLevelCategory('${topKey}', this.value)" class="category-input top-input">
+                        <button onclick="deleteTopLevelCategory('${topKey}')" class="delete-btn">🗑️</button>
+                    </div>
+                `;
+                for (const middleKey in data[topKey]) {
+                    if (middleKey !== 'name') {
+                        const middleName = data[topKey][middleKey].name || middleKey;
+                        displayDiv.innerHTML += `
+                            <div class="category-item middle-level">
+                                <input type="text" value="${middleName}" onchange="updateMiddleLevelCategory('${topKey}', '${middleKey}', this.value)" class="category-input middle-input">
+                                <button onclick="deleteMiddleLevelCategory('${topKey}', '${middleKey}')" class="delete-btn">🗑️</button>
+                            </div>
+                        `;
+                        for (const categoryKey in data[topKey][middleKey]) {
+                            if (categoryKey !== 'name') {
+                                const categoryName = data[topKey][middleKey][categoryKey].name || categoryKey;
+                                displayDiv.innerHTML += `
+                                    <div class="category-item bottom-level">
+                                        <input type="text" value="${categoryName}" onchange="updateCategory('${topKey}', '${middleKey}', '${categoryKey}', this.value)" class="category-input bottom-input">
+                                        <button onclick="deleteCategory('${topKey}', '${middleKey}', '${categoryKey}')" class="delete-btn">🗑️</button>
+                                    </div>
+                                `;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Function to show success message
+        function showSuccessMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Function to show error message
+        function showErrorMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.style.background = '#e74c3c';
+            messageDiv.style.boxShadow = '0 4px 15px rgba(231, 76, 60, 0.3)';
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Load categories on page load
+        window.onload = loadCategories;
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        h2::before {
+            content: '📁';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        select {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #categoriesDisplay {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        #categoriesDisplay h3 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        #categoriesDisplay h3::before {
+            content: '📋';
+            margin-right: 10px;
+        }
+
+        #categoriesDisplay h4 {
+            color: #e74c3c;
+            font-size: 1.4em;
+            margin: 20px 0 10px 0;
+            padding-left: 20px;
+            border-left: 4px solid #e74c3c;
+            background: linear-gradient(90deg, rgba(231, 76, 60, 0.1) 0%, transparent 100%);
+            padding: 10px 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        #categoriesDisplay h5 {
+            color: #f39c12;
+            font-size: 1.2em;
+            margin: 15px 0 8px 40px;
+            padding-left: 20px;
+            border-left: 3px solid #f39c12;
+            background: linear-gradient(90deg, rgba(243, 156, 18, 0.1) 0%, transparent 100%);
+            padding: 8px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        #categoriesDisplay p {
+            color: #27ae60;
+            margin: 8px 0 8px 80px;
+            padding-left: 20px;
+            border-left: 2px solid #27ae60;
+            background: linear-gradient(90deg, rgba(39, 174, 96, 0.1) 0%, transparent 100%);
+            padding: 6px 20px;
+            border-radius: 0 6px 6px 0;
+            font-weight: 500;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateX(5px);
+        }
+
+        .top-level {
+            margin-left: 0;
+            background: linear-gradient(90deg, rgba(231, 76, 60, 0.1) 0%, transparent 100%);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .middle-level {
+            margin-left: 40px;
+            background: linear-gradient(90deg, rgba(243, 156, 18, 0.1) 0%, transparent 100%);
+            border-left: 3px solid #f39c12;
+        }
+
+        .bottom-level {
+            margin-left: 80px;
+            background: linear-gradient(90deg, rgba(39, 174, 96, 0.1) 0%, transparent 100%);
+            border-left: 2px solid #27ae60;
+        }
+
+        .category-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: inherit;
+            font-weight: inherit;
+            color: inherit;
+            outline: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .category-input:focus {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
+        }
+
+        .top-input {
+            color: #e74c3c;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .middle-input {
+            color: #f39c12;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .bottom-input {
+            color: #27ae60;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .delete-btn:hover {
+            opacity: 1;
+            background: rgba(231, 76, 60, 0.2);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            input[type="text"],
+            select {
+                min-width: auto;
+            }
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Category Manager</h1>
+            <div class="subtitle">Organize your tutorial categories with style</div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Add Top Level Category</h2>
+                <div class="form-group">
+                    <input type="text" id="topCategoryInput" placeholder="Enter Top Level Category">
+                    <button onclick="addTopLevelCategory()">Add Top Level Category</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Add Middle Level Category</h2>
+                <div class="form-group">
+                    <select id="topSelect">
+                        <option value="">Select Top Level Category</option>
+                    </select>
+                    <input type="text" id="middleCategoryInput" placeholder="Enter Middle Level Category">
+                    <button onclick="addMiddleLevelCategory()">Add Middle Level Category</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Add Category</h2>
+                <div class="form-group">
+                    <select id="topSelectForCategory">
+                        <option value="">Select Top Level Category</option>
+                    </select>
+                    <select id="middleSelect">
+                        <option value="">Select Middle Level Category</option>
+                    </select>
+                    <input type="text" id="categoryInput" placeholder="Enter Category">
+                    <button onclick="addCategory()">Add Category</button>
+                </div>
+            </div>
+
+            <div id="categoriesDisplay"></div>
+        </div>
+    </div>
+</body>
+</html>

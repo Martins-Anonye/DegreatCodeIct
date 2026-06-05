@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD Student Sign Up | Bringing the best out from you and code changing the world</title>
+    <meta name="description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future with Degreatcode ICT LTD online class student sign up.">
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <meta name="keywords" content="Degreatcode, ICT, online class, student sign up, software training, coding, programming, fuel your future, ideas to reality, software production, student training, best coding tutorials">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Degreatcode ICT LTD Student Sign Up">
+    <meta property="og:description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future.">
+    <meta property="og:image" content="../images/superflyer.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://degreartcode.com/studentManagement/studentSignUp.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+            border-left: 4px solid #dc2626;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+            border-left: 4px solid #16a34a;
+            font-size: 0.9rem;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .spinner-circle {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner-text {
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .password-requirements {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .requirement {
+            margin: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .requirement::before {
+            content: '○ ';
+            position: absolute;
+            left: 0;
+            color: #cbd5e1;
+        }
+
+        .requirement.met {
+            color: #16a34a;
+        }
+
+        .requirement.met::before {
+            content: '✓ ';
+            color: #16a34a;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <img src="../images/logo.jpg" alt="Degreatcode ICT LTD Logo" style="max-width:100px; margin: 0 auto 18px; display:block; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <img src="../images/superflyer.png" alt="Hero banner" style="width:100%;max-width:400px;margin:0 auto 18px;display:block;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+        <div class="logo">📝</div>
+        <h1>Create Account</h1>
+        <p class="subtitle">Join Degreatcode ICT LTD for premium learning</p>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required placeholder="John">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required placeholder="Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="student@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="At least 8 characters">
+                <div class="password-requirements">
+                    <div class="requirement" id="req-length">At least 8 characters</div>
+                    <div class="requirement" id="req-uppercase">One uppercase letter</div>
+                    <div class="requirement" id="req-lowercase">One lowercase letter</div>
+                    <div class="requirement" id="req-number">One number</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required placeholder="Re-enter password">
+            </div>
+
+            <button type="submit" class="submit-btn">Create Account</button>
+            <div class="spinner">
+                <div class="spinner-circle"></div>
+                <p class="spinner-text">Creating your account...</p>
+            </div>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="studentLogin.html">Sign In</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const form = document.getElementById('signupForm');
+        const errorMsg = document.getElementById('errorMessage');
+        const successMsg = document.getElementById('successMessage');
+        const spinner = document.querySelector('.spinner');
+        const passwordInput = document.getElementById('password');
+
+        // Password validation indicators
+        const requirements = {
+            'req-length': (pwd) => pwd.length >= 8,
+            'req-uppercase': (pwd) => /[A-Z]/.test(pwd),
+            'req-lowercase': (pwd) => /[a-z]/.test(pwd),
+            'req-number': (pwd) => /\d/.test(pwd)
+        };
+
+        passwordInput.addEventListener('input', () => {
+            const pwd = passwordInput.value;
+            Object.entries(requirements).forEach(([id, check]) => {
+                const elem = document.getElementById(id);
+                if (check(pwd)) {
+                    elem.classList.add('met');
+                } else {
+                    elem.classList.remove('met');
+                }
+            });
+        });
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+            successMsg.style.display = 'none';
+            spinner.style.display = 'none';
+        }
+
+        function showSpinner() {
+            spinner.style.display = 'block';
+            errorMsg.style.display = 'none';
+        }
+
+        function hideSpinner() {
+            spinner.style.display = 'none';
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (!firstName || !lastName) {
+                showError('⚠️ Please enter your first and last name');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                showError('⚠️ Please enter a valid email');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError('⚠️ Password must be at least 8 characters');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('⚠️ Passwords do not match');
+                return;
+            }
+
+            // Check password requirements
+            for (const [id, check] of Object.entries(requirements)) {
+                if (!check(password)) {
+                    showError('⚠️ Password does not meet all requirements');
+                    return;
+                }
+            }
+
+            showSpinner();
+
+            try {
+                // Create user in Firebase Auth
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Update profile
+                await updateProfile(user, {
+                    displayName: `${firstName} ${lastName}`
+                });
+
+                // Store student info in database
+                await set(ref(db, `students/${user.uid}`), {
+                    firstName,
+                    lastName,
+                    email,
+                    createdAt: new Date().toISOString(),
+                    uid: user.uid
+                });
+
+                hideSpinner();
+                successMsg.textContent = '✅ Account created successfully! Redirecting to login...';
+                successMsg.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = 'studentLogin.html';
+                }, 2000);
+
+            } catch (error) {
+                hideSpinner();
+                let errorText = 'Error creating account';
+                
+                if (error.code === 'auth/email-already-in-use') {
+                    errorText = '⚠️ This email is already registered';
+                } else if (error.code === 'auth/weak-password') {
+                    errorText = '⚠️ Password is too weak';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorText = '⚠️ Invalid email address';
+                } else {
+                    errorText = `⚠️ ${error.message}`;
+                }
+
+                showError(errorText);
+                console.error('Signup error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

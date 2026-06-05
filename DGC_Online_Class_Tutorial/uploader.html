@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD online class Tool Manager - Upload & Manage</title>
+        <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: #1e293b;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .user-email {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            word-break: break-word;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .app-header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .app-header h1 {
+            font-size: 2rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: #f8fafc;
+            padding: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            color: #0f172a;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-footer {
+            padding: 16px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .upload-area {
+            border: 3px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8fafc;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .upload-btn {
+            width: 100%;
+            padding: 12px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .upload-btn:disabled {
+            background: #cbd5e1;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        .tab-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .upload-section {
+            display: none;
+        }
+
+        .upload-section.active {
+            display: block;
+        }
+
+        .auth-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            z-index: 9999;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+
+        .toast {
+            background: #1e293b;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .database-item {
+            padding: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+        }
+
+        .result-item {
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-item.error {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="authStatus" class="auth-status" style="display: block;">
+        <div style="font-weight: 600;">🔄 Checking authentication...</div>
+        <div id="authStatusText">Verifying credentials...</div>
+    </div>
+
+    <!-- Sign In Form (shown when not authenticated) -->
+    <div id="signInForm" class="auth-status" style="display: none;">
+        <div style="font-weight: 600; margin-bottom: 16px;">🔐 Sign In Required</div>
+        <div style="margin-bottom: 16px;">
+            <input type="email" id="emailInput" placeholder="Enter admin email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+        </div>
+        <button id="signInBtn" style="width: 100%; padding: 12px; background: #4285F4; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px;">
+            Sign In with Google
+        </button>
+        <div id="signInMessage" style="margin-top: 12px; color: #ef4444; display: none;"></div>
+    </div>
+
+    <div id="mainContainer" class="main-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">⚙️ Tool Manager</div>
+            </div>
+            <button id="tutorialManagerBtn" class="sidebar-btn" style="width: 100%; padding: 12px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 20px;">🎥 Tutorial Manager</button>
+            <button id="toolsCategoryBtn" class="sidebar-btn" style="width: 100%; padding: 12px; background: #8b5cf6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 20px;">🛠️ Tools Category</button>
+            <button id="tutoCategoryBtn" class="sidebar-btn" style="width: 100%; padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 20px;">📂 Tutorial Category</button>
+            <button id="emailListBtn" class="sidebar-btn" style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 20px;">📧 Email List</button>
+            <div class="sidebar-user">
+                <div class="user-avatar">👤</div>
+                <div class="user-email" id="userEmail"></div>
+            </div>
+            <button id="signOutBtn" class="logout-btn" style="display: none;">Sign Out</button>
+        </nav>
+
+        <div class="main-content">
+            <header class="app-header">
+                <button id="backBtn" style="margin-bottom: 10px; padding: 8px 14px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem;">← Back</button>
+                <button id="homeBtn" style="margin-bottom: 10px; margin-left: 8px; padding: 8px 14px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem;">🏠 Home</button>
+                <h1>📦 Degreatcode ICT LTD online class Tool Manager</h1>
+                <p>Upload and manage tools with Dropbox + Firebase</p>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="left-column">
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div class="card-body">
+                            <div class="tab-selector" id="tabSelector">
+                                <!-- Tabs will be dynamically loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload sections will be dynamically loaded here -->
+                    <div id="uploadSectionsContainer"></div>
+
+
+
+                    <!-- Tools Section -->
+                    <div id="tools-section" class="upload-section" style="display: none;">
+                        <div class="card">
+                            <div class="card-header"><h2>📤 Upload Tools</h2></div>
+                            <div class="card-body">
+                                <div class="upload-area" id="uploadBox-tools">
+                                    <div style="font-size: 3rem;">📁</div>
+                                    <h3>Drop files here</h3>
+                                    <p>or click to browse</p>
+                                    <input type="file" id="fileInput-tools" multiple style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-top: 20px;">
+                            <div class="card-header"><h2>📋 Configuration</h2></div>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <label>� Category</label>
+                                    <select id="toolCategory" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                        <option value="">Loading categories...</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>�📌 Version</label>
+                                    <input type="text" id="toolVersion" placeholder="e.g., 1.0.0">
+                                </div>
+                                <div class="input-group">
+                                    <label>🔐 Password</label>
+                                    <input type="password" id="toolPassword" placeholder="Optional">
+                                </div>
+                                <div class="input-group">
+                                    <label>📝 Release Notes</label>
+                                    <textarea id="toolReleaseNotes" style="height: 80px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="right-column">
+                        <div class="card" style="margin-bottom: 20px;">
+                        <div class="card-header"><h2>🔐 Dropbox Authentication</h2></div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <label>Dropbox Account</label>
+                                <select id="dropboxAccount" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                    <option value="default">default</option>
+                                </select>
+                            </div>
+                            <button id="authDropboxBtn" class="upload-btn" style="background: #667eea; margin-bottom: 10px;">🔐 Authenticate</button>
+                            <button id="clearTokensBtn" class="upload-btn" style="background: #ef4444;">🧹 Clear Dropbox Tokens</button>
+                        </div>
+                        <div class="card-footer" id="dropboxAuthStatus" style="display: block; color: #ef4444; font-weight: 600;">❌ default not authenticated</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><h2>📑 Queue (<span id="queueCount">0</span>)</h2></div>
+                        <div class="card-body">
+                            <div id="fileList" style="max-height: 300px; overflow-y: auto;">
+                                <p style="text-align: center; color: #999;">No files selected</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="upload-btn" id="uploadBtn" disabled>Upload All</button>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 20px;">
+                        <div class="card-header"><h2>✅ Results</h2></div>
+                        <div class="card-body">
+                            <div id="resultsList" style="max-height: 300px; overflow-y: auto;">
+                                <p style="text-align: center; color: #999;">No uploads yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <h2>📊 Database Files</h2>
+                    <button style="padding: 8px 16px; background: #3b82f6; 
+                    color: white; border: none; border-radius: 6px; 
+                    cursor: pointer;" id="viewDatabaseBtn">
+                    View</button>
+                </div>
+                <div class="card-body">
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="databaseSearch" placeholder="🔍 Search files by name, category, or uploader..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px;">
+                    </div>
+                    <div id="databaseContainer" style="display: none;">
+                        <div id="databaseList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+    import { getDatabase, ref, push, set, get, remove } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+    import { firebaseConfig } from './FirebaseConnection/FirebaseConfiggFile.js';
+    import DROPBOX_CONFIG from './dropbox-config.js';
+    import { getValidDropboxToken, initiateOAuthLogin, isAuthenticated, clearDropboxTokens } from './dropbox-oauth-handler.js';
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // Global variables for authorization and file management
+    let AUTHORIZED_EMAIL = 'ugom5658@gmail.com';
+    let selectedFiles = {};
+    let selectedType = {};
+
+    // Function to load tools and software categories from Firebase and create tabs/sections
+    function loadToolCategories() {
+        console.log('[DEBUG] Starting loadToolCategories...');
+        get(ref(db, 'toolsAndSoftware/')).then((snapshot) => {
+            console.log('[DEBUG] Snapshot received. Exists:', snapshot.exists());
+            const tabSelector = document.getElementById('tabSelector');
+            const sectionsContainer = document.getElementById('uploadSectionsContainer');
+            tabSelector.innerHTML = '';
+            sectionsContainer.innerHTML = '';
+            selectedFiles = {};
+            selectedType = {};
+
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                console.log('[DEBUG] Categories data:', data);
+                let isFirst = true;
+                for (const key in data) {
+                    const categoryName = data[key].name || key;
+                    console.log('[DEBUG] Creating tab for:', key, '(' + categoryName + ')');
+                    
+                    // Create tab button
+                    const tabBtn = document.createElement('button');
+                    tabBtn.className = 'tab-btn' + (isFirst ? ' active' : '');
+                    tabBtn.dataset.tab = key;
+                    tabBtn.textContent = categoryName;
+                    tabSelector.appendChild(tabBtn);
+                    
+                    // Create upload section
+                    const section = document.createElement('div');
+                    section.id = `${key}-section`;
+                    section.className = 'upload-section';
+                    section.style.display = isFirst ? 'block' : 'none';
+                    section.innerHTML = `
+                        <div class="card">
+                            <div class="card-header"><h2>📤 Upload ${categoryName}</h2></div>
+                            <div class="card-body">
+                                <div class="upload-area" id="uploadBox-${key}">
+                                    <div style="font-size: 3rem;">📁</div>
+                                    <h3>Drop files here</h3>
+                                    <p>or click to browse</p>
+                                    <input type="file" id="fileInput-${key}" multiple style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-top: 20px;">
+                            <div class="card-header"><h2>📋 Configuration</h2></div>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <label>🎯 Device Type</label>
+                                    <select id="deviceType-${key}" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                        <option value="software">Software</option>
+                                        <option value="android_app">Android App</option>
+                                        <option value="apple_ios_app">Apple iOS App</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>📌 Version</label>
+                                    <input type="text" id="version-${key}" placeholder="e.g., 1.0.0">
+                                </div>
+                                <div class="input-group">
+                                    <label>🔐 Password</label>
+                                    <input type="password" id="password-${key}" placeholder="Optional">
+                                </div>
+                                <div class="input-group">
+                                    <label>📝 Release Notes</label>
+                                    <textarea id="releaseNotes-${key}" style="height: 80px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    sectionsContainer.appendChild(section);
+                    
+                    // Initialize selectedFiles and selectedType
+                    selectedFiles[key] = [];
+                    selectedType[key] = 'software';
+
+                    
+                    isFirst = false;
+                }
+                
+                // Add event listeners for tabs
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const tab = btn.dataset.tab;
+                        document.querySelectorAll('.upload-section').forEach(s => s.style.display = 'none');
+                        const section = document.getElementById(`${tab}-section`);
+                        section.style.display = 'block';
+                    });
+                });
+                
+                // Add file upload handlers for all sections
+                for (const key in selectedFiles) {
+                    const uploadBox = document.getElementById(`uploadBox-${key}`);
+                    const fileInput = document.getElementById(`fileInput-${key}`);
+                    
+                    if (uploadBox && fileInput) {
+                        uploadBox.addEventListener('click', () => fileInput.click());
+                        uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
+                        uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
+                        uploadBox.addEventListener('drop', (e) => {
+                            e.preventDefault();
+                            uploadBox.classList.remove('dragover');
+                            selectedFiles[key] = [...selectedFiles[key], ...Array.from(e.dataTransfer.files)];
+                            updateFileList();
+                        });
+                        fileInput.addEventListener('change', (e) => {
+                            selectedFiles[key] = [...selectedFiles[key], ...Array.from(e.target.files)];
+                            updateFileList();
+                        });
+                    }
+                }
+            } else {
+                console.warn('[DEBUG] No categories found in Firebase at toolsAndSoftware/');
+                tabSelector.innerHTML = '<p style="color: #ef4444; padding: 10px; text-align: center;"><strong>⚠️ No categories found!</strong> <br/> Please add categories in the <strong>Tools Category Manager</strong> first.</p>';
+                sectionsContainer.innerHTML = '';
+            }
+        }).catch((error) => {
+            console.error("Error loading categories: ", error);
+            document.getElementById('tabSelector').innerHTML = '<p style="color: #ef4444; padding: 10px; text-align: center;"><strong>❌ Error loading categories:</strong> ' + error.message + '</p>';
+        });
+    }
+
+    // Load categories on page load
+    document.addEventListener('DOMContentLoaded', loadToolCategories);
+
+    function showToast(message) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => container.removeChild(toast), 3000);
+    }
+
+    function updateFileList() {
+        // combine all file-holding sections into a single array so that
+        // the queue displays everything the admin has selected.
+        const allFiles = [];
+        for (const section in selectedFiles) {
+            if (selectedFiles[section] && selectedFiles[section].length) {
+                allFiles.push(...selectedFiles[section]);
+            }
+        }
+        document.getElementById('queueCount').textContent = allFiles.length;
+        // toggle the main upload button
+        const uploadBtn = document.getElementById('uploadBtn');
+        if (uploadBtn) {
+            uploadBtn.disabled = allFiles.length === 0;
+        }
+        if (allFiles.length === 0) {
+            document.getElementById('fileList').innerHTML = '<p style="text-align: center; color: #999;">No files selected</p>';
+            return;
+        }
+        document.getElementById('fileList').innerHTML = allFiles.map((f, i) => `
+            <div style="padding: 8px; background: #f8fafc; margin-bottom: 8px; border-radius: 4px; display: flex; justify-content: space-between;">
+                <div><strong>${f.name}</strong><br><small>${(f.size / 1024 / 1024).toFixed(2)} MB</small></div>
+                <button onclick="window.removeFile(${i})" style="background: #ef4444; color: white; border: none; padding: 4px 8px; cursor: pointer;">✕</button>
+            </div>
+        `).join('');
+    }
+
+    window.removeFile = (idx) => {
+        let count = 0;
+        for (const section in selectedFiles) {
+            if (idx < count + selectedFiles[section].length) {
+                selectedFiles[section].splice(idx - count, 1);
+                updateFileList();
+                return;
+            }
+            count += selectedFiles[section].length;
+        }
+    };
+
+    // Tab switching is now handled in loadToolCategories function
+
+    // File upload handlers are now handled in loadToolCategories function
+
+    // Auth
+    function showMain(email) {
+        document.getElementById('authStatus').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+        document.getElementById('userEmail').textContent = email;
+        document.getElementById('signOutBtn').style.display = 'inline-block';
+        document.getElementById('signOutBtn').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                localStorage.removeItem('toolmanager_user_email');
+                localStorage.removeItem('toolmanager_auth_time');
+                window.location.href = './auth.html';
+            });
+        });
+
+        // Tutorial Manager Button
+        document.getElementById('tutorialManagerBtn').addEventListener('click', () => {
+            window.open('./videoTutorial/uploadTutorial.html', '_blank');
+        });
+
+        // Tools Category Button
+        document.getElementById('toolsCategoryBtn').addEventListener('click', () => {
+            window.open('./toolsAndSoftwareCat.html', '_blank');
+        });
+
+        // Tutorial Category Button
+        document.getElementById('tutoCategoryBtn').addEventListener('click', () => {
+            window.open('./tuto_category_manager.html', '_blank');
+        });
+
+        // Email List Button
+        document.getElementById('emailListBtn').addEventListener('click', () => {
+            window.open('./emailListForDropBoxStorage.html', '_blank');
+        });
+    }
+
+    (async () => {
+        // dynamically import authorization configuration. the module
+        // exports AUTHORIZED_EMAIL plus an `isAuthorizedAdmin` helper
+        // which allows checking against an array of emails and any active email from Firebase.
+        let isAuthorizedAdmin = async (email) => email === AUTHORIZED_EMAIL;
+        try {
+            const cfg = await import('./auth-config.js');
+            if (cfg.AUTHORIZED_EMAIL) {
+                AUTHORIZED_EMAIL = cfg.AUTHORIZED_EMAIL;
+            }
+            if (cfg.isAuthorizedAdmin) {
+                isAuthorizedAdmin = cfg.isAuthorizedAdmin;
+            }
+        } catch (err) {
+            console.warn('[Auth] could not load auth-config.js', err);
+            // fallback to simple equality check
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const fromAuth = params.get('auth') === 'done';
+        const storedEmail = localStorage.getItem('toolmanager_user_email');
+
+        // Allow email-only sessions without requiring ?auth=done
+        if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+            showMain(storedEmail);
+            return;
+        }
+
+        if (fromAuth && await isAuthorizedAdmin(storedEmail)) {
+            try { 
+                localStorage.removeItem('toolmanager_auth_attempt');
+            } catch(_) {}
+            params.delete('auth');
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+            history.replaceState(null, '', newUrl);
+            showMain(storedEmail);
+            return;
+        }
+        
+        onAuthStateChanged(auth, async (user) => {
+            const authStatus = document.getElementById('authStatus');
+            const authStatusText = document.getElementById('authStatusText');
+            
+            if (user) {
+                console.log('[Auth] User detected:', user.email);
+                if (await isAuthorizedAdmin(user.email)) {
+                    console.log('[Auth] ✓ Authorized email');
+                    localStorage.setItem('toolmanager_user_email', user.email);
+                    showMain(user.email);
+                } else {
+                    console.log('[Auth] ✗ Unauthorized email:', user.email);
+                    if (authStatusText) {
+                        authStatusText.innerHTML = `<span style="color: #ef4444;">⚠️ Unauthorized email: ${user.email}</span><br/>Redirecting to login...`;
+                    }
+                    setTimeout(() => window.location.href = './auth.html', 2000);
+                }
+            } else {
+                console.log('[Auth] No user - redirecting to auth');
+                if (authStatusText) {
+                    authStatusText.innerHTML = `<span style="color: #f97316;">📝 Redirecting to login...</span>`;
+                }
+                setTimeout(() => window.location.href = './auth.html', 1500);
+            }
+        });
+    })();
+
+    // Upload
+    document.getElementById('uploadBtn').addEventListener('click', async () => {
+        // gather files from every file-uploading section
+        const allFiles = [];
+        const activeTab = document.querySelector('.tab-btn.active');
+        if (!activeTab) return;
+        const currentSection = activeTab.dataset.tab;
+        
+        if (selectedFiles[currentSection] && selectedFiles[currentSection].length) {
+            allFiles.push(...selectedFiles[currentSection]);
+        }
+        if (allFiles.length === 0) return;
+
+        document.getElementById('uploadBtn').disabled = true;
+        document.getElementById('resultsList').innerHTML = '';
+
+        // Get valid Dropbox token first (refreshes if needed)
+        let DROPBOX_ACCESS_TOKEN;
+        try {
+            const account = document.getElementById('dropboxAccount')?.value || 'default';
+            DROPBOX_ACCESS_TOKEN = await getValidDropboxToken(account);
+        } catch (err) {
+            console.error('[UPLOAD] Dropbox token error:', err);
+            const account = document.getElementById('dropboxAccount')?.value || 'default';
+            alert(`Failed to get Dropbox access token for account "${account}". Please click the "Authenticate" button first to connect your Dropbox account.`);
+            document.getElementById('uploadBtn').disabled = false;
+            
+            // Highlight the auth button
+            const authBtn = document.getElementById('authDropboxBtn');
+            if (authBtn) {
+                authBtn.style.animation = 'pulse 1s infinite';
+                setTimeout(() => authBtn.style.animation = '', 3000);
+            }
+            
+            return;
+        }
+
+        for (const file of allFiles) {
+            const fileLabel = `${file.name}`;
+            let dbSaveSuccess = false;
+            try {
+                // Use the current active section
+                const section = currentSection;
+                const deviceType = document.getElementById(`deviceType-${section}`).value;
+                const version = document.getElementById(`version-${section}`).value;
+                const password = document.getElementById(`password-${section}`).value;
+                const releaseNotes = document.getElementById(`releaseNotes-${section}`).value;
+                const storedEmail = localStorage.getItem('toolmanager_user_email');
+
+                const type = deviceType;
+                const ref_path = ref(db, `tools/${section}/${type}`);
+                const fileRef = push(ref_path);
+
+                const metadata = {
+                    fileName: file.name,
+                    fileSize: file.size,
+                    fileType: type,
+                    category: section,
+                    deviceType: deviceType,
+                    version: version,
+                    password: password,
+                    releaseNotes: releaseNotes,
+                    uploadedBy: storedEmail || 'unknown',
+                    uploadedAt: new Date().toISOString(),
+                    fileModifiedAt: new Date(file.lastModified).toISOString()
+                };
+
+                // Upload to Dropbox
+                const dropboxPath = DROPBOX_CONFIG.getUploadPath(type, file.name);
+                console.log(`[UPLOAD] Uploading ${fileLabel} to ${dropboxPath}`);
+                metadata.dropboxPath = dropboxPath;
+                document.getElementById('resultsList').innerHTML += `<div class='result-item'><span>${fileLabel}</span> <span style="color:#f59e0b;">⏳ Uploading to Dropbox...</span></div>`;
+
+                const dropboxResponse = await fetch(DROPBOX_CONFIG.api.fileUpload, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${DROPBOX_ACCESS_TOKEN}`,
+                        'Dropbox-API-Arg': JSON.stringify({ path: dropboxPath, mode: 'add', autorename: true, mute: false }),
+                        'Content-Type': 'application/octet-stream'
+                    },
+                    body: file
+                });
+
+                if (!dropboxResponse.ok) {
+                    let text = await dropboxResponse.text();
+                    let parsed = null;
+                    try { parsed = JSON.parse(text); } catch(e) { /* not JSON */ }
+                    const errDetail = parsed ? JSON.stringify(parsed, null, 2) : text;
+                    console.error(`[UPLOAD] Dropbox upload failed for ${fileLabel}:`, dropboxResponse.status, dropboxResponse.statusText, errDetail);
+                    document.getElementById('resultsList').innerHTML += `<div class='result-item error'><span>${fileLabel}</span> <span>Dropbox upload failed (${dropboxResponse.status})</span></div>`;
+                    continue;
+                }
+
+                console.log(`[UPLOAD] ✓ Dropbox upload succeeded for ${fileLabel}`);
+                document.getElementById('resultsList').innerHTML = document.getElementById('resultsList').innerHTML.replace('⏳ Uploading to Dropbox...', '✓ Creating share link...');
+
+                // Small delay to let Dropbox process the uploaded file
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Get or create share link
+                let shareLink = null;
+                try {
+                    // Try simple create_shared_link first
+                    let shareResponse = await fetch(DROPBOX_CONFIG.api.createSharedLink, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${DROPBOX_ACCESS_TOKEN}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ path: dropboxPath })
+                    });
+
+                    if (!shareResponse.ok) {
+                        // Try create_shared_link_with_settings
+                        console.log('[UPLOAD] Simple share link creation failed, trying with settings...');
+                        shareResponse = await fetch(DROPBOX_CONFIG.api.createSharedLinkWithSettings, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${DROPBOX_ACCESS_TOKEN}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ path: dropboxPath, settings: { requested_visibility: 'public' } })
+                        });
+                    }
+
+                    if (shareResponse.ok) {
+                        const shareData = await shareResponse.json();
+                        shareLink = DROPBOX_CONFIG.getShareableUrl(shareData.url);
+                        console.log(`[UPLOAD] ✓ Share link created: ${shareLink}`);
+                    } else {
+                        const shareError = await shareResponse.json().catch(() => ({}));
+                        console.warn('[UPLOAD] Create share link failed:', shareResponse.status, shareError);
+                        
+                        // Try listing existing shared links
+                        try {
+                            const listResp = await fetch(DROPBOX_CONFIG.api.listSharedLinks, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${DROPBOX_ACCESS_TOKEN}`,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ path: dropboxPath })
+                            });
+                            
+                            if (listResp.ok) {
+                                const listData = await listResp.json();
+                                if (listData.links && listData.links.length > 0) {
+                                    shareLink = DROPBOX_CONFIG.getShareableUrl(listData.links[0].url);
+                                    console.log(`[UPLOAD] ✓ Existing share link found: ${shareLink}`);
+                                }
+                            } else {
+                                const listError = await listResp.json().catch(() => ({}));
+                                console.warn('[UPLOAD] List shared links failed:', listResp.status, listError);
+                            }
+                        } catch (listErr) {
+                            console.warn('[UPLOAD] Error listing shared links:', listErr.message);
+                        }
+                    }
+
+                    // If no share link, try to create a temporary download link as fallback
+                    if (!shareLink) {
+                        try {
+                            console.log('[UPLOAD] No share link available, trying temporary download link...');
+                            const tempLinkResponse = await fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${DROPBOX_ACCESS_TOKEN}`,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ path: dropboxPath })
+                            });
+
+                            if (tempLinkResponse.ok) {
+                                const tempData = await tempLinkResponse.json();
+                                shareLink = tempData.link;
+                                console.log(`[UPLOAD] ✓ Temporary download link created: ${shareLink}`);
+                            } else {
+                                console.warn('[UPLOAD] Temporary link creation failed:', tempLinkResponse.status, await tempLinkResponse.text());
+                            }
+                        } catch (tempErr) {
+                            console.warn('[UPLOAD] Error creating temporary link:', tempErr.message);
+                        }
+                    }
+                } catch (e) {
+                    console.warn('[UPLOAD] Error creating/listing share link:', e.message);
+                }
+
+                // Add share link and dropbox path to metadata if available
+                if (shareLink) {
+                    metadata.shareLink = shareLink;
+                }
+                metadata.dropboxPath = dropboxPath;
+
+                // Update UI to show Firebase save in progress
+                const resultItems = document.querySelectorAll('.result-item');
+                const resultItem = Array.from(resultItems).find(item => item.textContent.includes(fileLabel)) || resultItems[resultItems.length - 1];
+                if (resultItem) {
+                    resultItem.innerHTML = `<span>${fileLabel}</span> <span style="color:#f59e0b;">⏳ Saving to Firebase...</span>`;
+                }
+
+                // Save to Firebase (only after Dropbox upload succeeds)
+                try {
+                    const maxAttempts = 3;
+                    const timeoutMs = 15000; // 15s per attempt
+                    let attempt = 0;
+                    let saved = false;
+
+                    while (attempt < maxAttempts && !saved) {
+                        attempt++;
+                        try {
+                            console.log(`[UPLOAD] Firebase save attempt ${attempt} for ${fileLabel}`);
+                            if (resultItem) {
+                                resultItem.innerHTML = `<span>${fileLabel}</span> <span style="color:#f59e0b;">⏳ Saving to Firebase (attempt ${attempt})...</span>`;
+                            }
+
+                            const savePromise = set(fileRef, metadata);
+                            await Promise.race([
+                                savePromise,
+                                new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase save timeout')), timeoutMs))
+                            ]);
+
+                            saved = true;
+                            dbSaveSuccess = true;
+                            console.log(`[UPLOAD] ✓ Firebase save succeeded for ${fileLabel} on attempt ${attempt}`);
+
+                            const successHtml = shareLink 
+                                ? `<span>${fileLabel}</span> <a href='${shareLink}' target='_blank' style="color:#10b981; text-decoration:none; font-weight:bold;">✓ Success - Download</a>`
+                                : `<span>${fileLabel}</span> <span style="color:#10b981;">✓ Uploaded (link will be created when needed)</span>`;
+
+                            if (resultItem) {
+                                resultItem.innerHTML = successHtml;
+                            } else {
+                                document.getElementById('resultsList').innerHTML += `<div class='result-item'>${successHtml}</div>`;
+                            }
+
+                        } catch (innerErr) {
+                            console.warn(`[UPLOAD] Firebase save attempt ${attempt} failed for ${fileLabel}:`, innerErr.message || innerErr);
+                            if (attempt >= maxAttempts) {
+                                throw innerErr;
+                            }
+                            // backoff before retrying
+                            const backoffMs = 1000 * attempt; // 1s, 2s, ...
+                            await new Promise(r => setTimeout(r, backoffMs));
+                        }
+                    }
+
+                } catch (e) {
+                    console.error('[UPLOAD] Failed to save metadata to Firebase for', fileLabel, e);
+                    const msg = e && e.message ? e.message : 'Unknown error';
+                    if (resultItem) {
+                        resultItem.innerHTML = `<span>${fileLabel}</span> <span style="color:#ef4444;">⚠️ Saved to Dropbox, but Firebase save failed (${msg})</span>`;
+                    } else {
+                        document.getElementById('resultsList').innerHTML += `<div class='result-item error'><span>${fileLabel}</span> <span style="color:#ef4444;">⚠️ Saved to Dropbox, but Firebase save failed (${msg})</span></div>`;
+                    }
+                }
+            } catch (err) {
+                console.error('[UPLOAD] Unexpected error for', fileLabel, err);
+                document.getElementById('resultsList').innerHTML += `<div class='result-item error'><span>${fileLabel}</span> <span>Failed (error)</span></div>`;
+            }
+        }
+
+        // clear all sections
+        for (const section in selectedFiles) {
+            selectedFiles[section] = [];
+        }
+        updateFileList();
+        document.getElementById('uploadBtn').disabled = false;
+        showToast('Upload complete');
+    });
+
+
+    // Dropbox Authentication (guarded)
+    const authDropboxBtn = document.getElementById('authDropboxBtn');
+    if (authDropboxBtn) {
+        authDropboxBtn.addEventListener('click', () => {
+            const account = document.getElementById('dropboxAccount').value;
+            initiateOAuthLogin(account);
+        });
+    }
+
+    // Clear tokens for debugging (guarded)
+    const clearTokensBtn = document.getElementById('clearTokensBtn');
+    if (clearTokensBtn) {
+        clearTokensBtn.addEventListener('click', () => {
+            const account = document.getElementById('dropboxAccount').value;
+            if (confirm(`Clear Dropbox tokens for account "${account}"?`)) {
+                clearDropboxTokens(account);
+                updateAuthStatus();
+                showToast('Tokens cleared');
+            }
+        });
+    }
+
+    // Update auth status on account change (guarded)
+    const dropboxAccount = document.getElementById('dropboxAccount');
+    if (dropboxAccount) {
+        dropboxAccount.addEventListener('change', () => {
+            updateAuthStatus();
+        });
+    }
+
+
+    function updateAuthStatus() {
+        const dropboxAccount = document.getElementById('dropboxAccount');
+        const status = document.getElementById('dropboxAuthStatus');
+        const authBtn = document.getElementById('authDropboxBtn');
+        if (!dropboxAccount || !status || !authBtn) return;
+        const account = dropboxAccount.value;
+        if (isAuthenticated(account)) {
+            status.textContent = `✅ ${account} authenticated`;
+            status.style.color = '#10b981';
+            authBtn.textContent = '🔄 Re-authenticate';
+            authBtn.style.background = '#f59e0b';
+        } else {
+            status.textContent = `❌ ${account} not authenticated`;
+            status.style.color = '#ef4444';
+            authBtn.textContent = '🔐 Authenticate';
+            authBtn.style.background = '#667eea';
+        }
+    }
+
+    // Initialize auth status only if elements exist
+    if (document.getElementById('dropboxAccount') && document.getElementById('dropboxAuthStatus') && document.getElementById('authDropboxBtn')) {
+        updateAuthStatus();
+    }
+
+    // Database
+    document.getElementById('viewDatabaseBtn').addEventListener('click', async () => {
+        const container = document.getElementById('databaseContainer');
+        if (container.style.display === 'none') {
+            container.style.display = 'block';
+            try {
+                const snapshot = await get(ref(db, 'tools'));
+                let html = '';
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    for (const [section, types] of Object.entries(data)) {
+                        for (const [type, files] of Object.entries(types || {})) {
+                            for (const [key, file] of Object.entries(files || {})) {
+                                html += `
+                                    <div class="database-item">
+                                        <div>
+                                            <strong>${file.fileName}</strong><br>
+                                            <small>${section}/${type} | v${file.version} | ${(file.fileSize / 1024 / 1024).toFixed(2)} MB${file.deviceType ? ` | ${file.deviceType}` : ''} | ${new Date(file.uploadedAt).toLocaleString()}</small><br>
+                                            <small style="color: #666;">Uploaded by: ${file.uploadedBy || 'unknown'}</small>
+                                        </div>
+                                        <div style="display: flex; gap: 8px;">
+                                            <button type="button" class="btn-small" style="background: #10b981;" onclick="downloadFile('${file.shareLink || ''}', '${section}', '${type}', '${key}')">Download</button>
+                                            <button type="button" class="btn-small" style="background: #3b82f6;" onclick="copyLink('${file.shareLink || ''}', '${section}', '${type}', '${key}')">Copy Link</button>
+                                            <button type="button" class="btn-small" style="background: #f59e0b;" onclick="window.editFile('${section}', '${type}', '${key}')">Edit</button>
+                                            <button type="button" class="btn-small btn-delete" onclick="window.deleteFile('${section}', '${type}', '${key}')">Delete</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        }
+                    }
+                }
+                document.getElementById('databaseList').innerHTML = html || '<p style="text-align: center;">No files</p>';
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            container.style.display = 'none';
+        }
+    });
+    
+    // Search functionality
+    document.getElementById('databaseSearch').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const container = document.getElementById('databaseContainer');
+        if (container.style.display === 'none') return;
+        
+        // Re-run the database view with search filter
+        const originalBtn = document.getElementById('viewDatabaseBtn');
+        const originalClick = originalBtn.onclick;
+        
+        // Temporarily modify the database view to filter results
+        const filteredView = async () => {
+            try {
+                const snapshot = await get(ref(db, 'tools'));
+                let html = '';
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    for (const [section, types] of Object.entries(data)) {
+                        for (const [type, files] of Object.entries(types || {})) {
+                            for (const [key, file] of Object.entries(files || {})) {
+                                // Apply search filter
+                                const matchesSearch = !searchTerm || 
+                                    (file.fileName || '').toLowerCase().includes(searchTerm) ||
+                                    (file.category || '').toLowerCase().includes(searchTerm) ||
+                                    (file.uploadedBy || '').toLowerCase().includes(searchTerm) ||
+                                    (file.deviceType || '').toLowerCase().includes(searchTerm);
+                                
+                                if (matchesSearch) {
+                                    html += `
+                                        <div class="database-item">
+                                            <div>
+                                                <strong>${file.fileName}</strong><br>
+                                                <small>${section}/${type} | v${file.version} | ${(file.fileSize / 1024 / 1024).toFixed(2)} MB${file.deviceType ? ` | ${file.deviceType}` : ''} | ${new Date(file.uploadedAt).toLocaleString()}</small><br>
+                                                <small style="color: #666;">Uploaded by: ${file.uploadedBy || 'unknown'}</small>
+                                            </div>
+                                            <div style="display: flex; gap: 8px;">
+                                                <button type="button" class="btn-small" style="background: #10b981;" onclick="downloadFile('${file.shareLink || ''}', '${section}', '${type}', '${key}')">Download</button>
+                                                <button type="button" class="btn-small" style="background: #3b82f6;" onclick="copyLink('${file.shareLink || ''}', '${section}', '${type}', '${key}')">Copy Link</button>
+                                                <button type="button" class="btn-small" style="background: #f59e0b;" onclick="window.editFile('${section}', '${type}', '${key}')">Edit</button>
+                                                <button type="button" class="btn-small btn-delete" onclick="window.deleteFile('${section}', '${type}', '${key}')">Delete</button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        }
+                    }
+                }
+                document.getElementById('databaseList').innerHTML = html || '<p style="text-align: center;">No files found matching search</p>';
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        
+        filteredView();
+    });
+
+    window.deleteFile = async (section, type, key) => {
+        if (!confirm('Delete this file from database and Dropbox?')) return;
+        try {
+            // Get file data first
+            const fileRef = ref(db, `tools/${section}/${type}/${key}`);
+            const snapshot = await get(fileRef);
+            if (!snapshot.exists()) {
+                showToast('File not found');
+                return;
+            }
+            const fileData = snapshot.val();
+
+            // Delete from Dropbox if path exists
+            if (fileData.dropboxPath) {
+                try {
+                    const account = document.getElementById('dropboxAccount')?.value || 'default';
+                    const token = await getValidDropboxToken(account);
+                    const deleteResponse = await fetch('https://api.dropboxapi.com/2/files/delete_v2', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ path: fileData.dropboxPath })
+                    });
+                    if (deleteResponse.ok) {
+                        console.log('File deleted from Dropbox:', fileData.dropboxPath);
+                    } else {
+                        console.warn('Failed to delete from Dropbox:', await deleteResponse.text());
+                    }
+                } catch (dropboxErr) {
+                    console.warn('Error deleting from Dropbox:', dropboxErr);
+                }
+            }
+
+            // Delete from Firebase
+            await remove(fileRef);
+            showToast('File deleted');
+            document.getElementById('viewDatabaseBtn').click();
+            document.getElementById('viewDatabaseBtn').click();
+        } catch (e) {
+            console.error(e);
+            showToast('Error deleting file');
+        }
+    };
+
+    // Edit file function - allows modifying file metadata
+    window.editFile = async (section, type, key) => {
+        try {
+            const fileRef = ref(db, `tools/${section}/${type}/${key}`);
+            const snapshot = await get(fileRef);
+            if (!snapshot.exists()) {
+                showToast('File not found');
+                return;
+            }
+            const fileData = snapshot.val();
+
+            // Create edit modal
+            const modal = document.createElement('div');
+            modal.id = 'editModal';
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 10000;';
+            modal.innerHTML = `
+                <div style="background: white; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                    <h2 style="margin-bottom: 20px;">✏️ Edit File Details</h2>
+                    <div class="input-group">
+                        <label>📝 File Name</label>
+                        <input type="text" id="editFileName" value="${fileData.fileName || ''}" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    </div>
+                    <div class="input-group">
+                        <label>📌 Version</label>
+                        <input type="text" id="editVersion" value="${fileData.version || ''}" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    </div>
+                    <div class="input-group">
+                        <label>🔐 Password</label>
+                        <input type="text" id="editPassword" value="${fileData.password || ''}" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    </div>
+                    <div class="input-group">
+                        <label>📝 Release Notes</label>
+                        <textarea id="editReleaseNotes" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; height: 80px;">${fileData.releaseNotes || ''}</textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>🎯 Device Type</label>
+                        <select id="editDeviceType" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                            <option value="software" ${fileData.deviceType === 'software' ? 'selected' : ''}>Software</option>
+                            <option value="android_app" ${fileData.deviceType === 'android_app' ? 'selected' : ''}>Android App</option>
+                            <option value="apple_ios_app" ${fileData.deviceType === 'apple_ios_app' ? 'selected' : ''}>Apple iOS App</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button id="saveEditBtn" style="flex: 1; padding: 12px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">💾 Save Changes</button>
+                        <button id="cancelEditBtn" style="flex: 1; padding: 12px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Handle save
+            document.getElementById('saveEditBtn').addEventListener('click', async () => {
+                const updatedData = {
+                    fileName: document.getElementById('editFileName').value,
+                    version: document.getElementById('editVersion').value,
+                    password: document.getElementById('editPassword').value,
+                    releaseNotes: document.getElementById('editReleaseNotes').value,
+                    deviceType: document.getElementById('editDeviceType').value,
+                    updatedAt: Date.now()
+                };
+
+                try {
+                    await set(fileRef, updatedData);
+                    showToast('File updated successfully!');
+                    document.body.removeChild(modal);
+                    // Refresh the database list
+                    document.getElementById('viewDatabaseBtn').click();
+                    document.getElementById('viewDatabaseBtn').click();
+                } catch (err) {
+                    console.error(err);
+                    showToast('Error updating file');
+                }
+            });
+
+            // Handle cancel
+            document.getElementById('cancelEditBtn').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        } catch (e) {
+            console.error(e);
+            showToast('Error loading file for edit');
+        }
+    };
+
+    window.downloadFile = async (url, section, type, key) => {
+        if (url) {
+            window.open(url, '_blank');
+        } else {
+            // Try to create link on-demand
+            showToast('Creating download link...');
+            try {
+                const account = document.getElementById('dropboxAccount')?.value || 'default';
+                const token = await getValidDropboxToken(account);
+                if (!token) {
+                    showToast('Not authenticated. Please authenticate first.');
+                    return;
+                }
+
+                // Get file data from Firebase to get dropboxPath
+                const fileRef = ref(db, `tools/${section}/${type}/${key}`);
+                const snapshot = await get(fileRef);
+                if (!snapshot.exists()) {
+                    showToast('File not found');
+                    return;
+                }
+                const fileData = snapshot.val();
+                const dropboxPath = fileData.dropboxPath;
+
+                if (!dropboxPath) {
+                    showToast('No Dropbox path available');
+                    return;
+                }
+
+                // Try to create temporary download link
+                    const tempLinkResponse = await fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ path: dropboxPath })
+                });
+
+                if (tempLinkResponse.ok) {
+                    const tempData = await tempLinkResponse.json();
+                    const tempLink = tempData.link;
+                    
+                    // Update Firebase with the link
+                    await set(fileRef, { ...fileData, shareLink: tempLink });
+                    
+                    // Open the link
+                    window.open(tempLink, '_blank');
+                    showToast('Download link created and opened');
+                } else {
+                    const errorText = await tempLinkResponse.text();
+                    console.error('Temporary link creation failed:', tempLinkResponse.status, errorText);
+                    showToast(`Failed to create download link (${tempLinkResponse.status})`);
+                }
+            } catch (error) {
+                showToast('Error creating download link');
+                console.error('Error creating on-demand link:', error);
+            }
+        }
+    };
+
+    window.copyLink = async (url, section, type, key) => {
+        if (url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Link copied!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy link');
+            });
+        } else {
+            // Try to create link on-demand
+            showToast('Creating share link...');
+            try {
+                const account = document.getElementById('dropboxAccount')?.value || 'default';
+                const token = await getValidDropboxToken(account);
+                if (!token) {
+                    showToast('Not authenticated. Please authenticate first.');
+                    return;
+                }
+
+                // Get file data from Firebase to get dropboxPath
+                const fileRef = ref(db, `tools/${section}/${type}/${key}`);
+                const snapshot = await get(fileRef);
+                if (!snapshot.exists()) {
+                    showToast('File not found');
+                    return;
+                }
+                const fileData = snapshot.val();
+                const dropboxPath = fileData.dropboxPath;
+
+                if (!dropboxPath) {
+                    showToast('No Dropbox path available');
+                    return;
+                }
+
+                // Try to create temporary download link
+                const tempLinkResponse = await fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ path: dropboxPath })
+                });
+
+                if (tempLinkResponse.ok) {
+                    const tempData = await tempLinkResponse.json();
+                    const tempLink = tempData.link;
+                    
+                    // Update Firebase with the link
+                    await set(fileRef, { ...fileData, shareLink: tempLink });
+                    
+                    // Copy the link
+                    navigator.clipboard.writeText(tempLink).then(() => {
+                        showToast('Link created and copied!');
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                        showToast('Link created but failed to copy');
+                    });
+                } else {
+                    const errorText = await tempLinkResponse.text();
+                    console.error('Temporary link creation failed:', tempLinkResponse.status, errorText);
+                    showToast(`Failed to create share link (${tempLinkResponse.status})`);
+                }
+            } catch (error) {
+                showToast('Error creating share link');
+                console.error('Error creating on-demand link:', error);
+            }
+        }
+    };
+
+    // Back button behavior (return to previous page)
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = './';
+        }
+    });
+    document.getElementById('homeBtn')?.addEventListener('click', () => {
+        window.location.href = './';
+    });
+    </script>
+</body>
+</html>
+

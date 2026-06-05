@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance System - Admin</title>
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; color: #f8fafc; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 30px; margin-bottom: 24px; }
+        header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        header p { color: #cbd5e1; font-size: 1rem; }
+        .top-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 18px; margin-bottom: 24px; }
+        .stat { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 22px; }
+        .stat h2 { font-size: 2rem; margin-bottom: 8px; }
+        .stat p { color: #cbd5e1; }
+        .panel { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .panel h2 { margin-bottom: 18px; color: #f8fafc; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; }
+        label { display: block; margin-bottom: 6px; font-weight: 700; color: #e2e8f0; }
+        input, select { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #f8fafc; }
+        input::placeholder, select { color: #94a3b8; }
+        button { border: none; border-radius: 12px; padding: 14px 18px; font-weight: 700; cursor: pointer; color: #0f172a; background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%); transition: transform 0.16s ease; }
+        button:hover { transform: translateY(-2px); }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 14px 12px; text-align: left; border-bottom: 1px solid rgba(248,250,252,0.08); }
+        th { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.85rem; color: #94a3b8; }
+        td { color: #e2e8f0; }
+        .tag { display: inline-flex; padding: 6px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+        .tag-present { background: #a7f3d0; color: #064e3b; }
+        .tag-absent { background: #fecaca; color: #991b1b; }
+        .button-link { display: inline-flex; align-items: center; gap: 10px; background: #22c55e; color: #fff; padding: 12px 18px; border-radius: 12px; text-decoration: none; margin-top: 12px; }
+        .message { margin-bottom: 18px; padding: 16px 18px; border-radius: 12px; font-weight: 600; }
+        .message.success { background: #164e63; color: #d1fae5; }
+        .message.error { background: #7f1d1d; color: #fee2e2; }
+        .loading { color: #60a5fa; }
+        @media (max-width: 800px) { .top-row, .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Attendance System</h1>
+            <p>Record attendance, review daily attendance registers, and manage student presence records.</p>
+            <a class="button-link" href="studentAttendance.html" target="_blank">Open Student Attendance View</a>
+        </header>
+
+        <div id="messageContainer"></div>
+
+        <div class="top-row">
+            <div class="stat">
+                <h2 id="totalCount">0</h2>
+                <p>Total records for selected date</p>
+            </div>
+            <div class="stat">
+                <h2 id="presentCount">0</h2>
+                <p>Present</p>
+            </div>
+            <div class="stat">
+                <h2 id="absentCount">0</h2>
+                <p>Absent</p>
+            </div>
+            <div class="stat">
+                <h2 id="uniqueStudents">0</h2>
+                <p>Unique students</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Mark Attendance</h2>
+            <div class="grid">
+                <div>
+                    <label for="attendanceDate">Date</label>
+                    <input type="date" id="attendanceDate">
+                </div>
+                <div>
+                    <label for="studentName">Student Name</label>
+                    <input type="text" id="studentName" placeholder="Enter student name">
+                </div>
+                <div>
+                    <label for="studentEmail">Email</label>
+                    <input type="email" id="studentEmail" placeholder="student@example.com">
+                </div>
+                <div>
+                    <label for="attendanceStatus">Status</label>
+                    <select id="attendanceStatus">
+                        <option value="present">Present</option>
+                        <option value="absent">Absent</option>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <button id="markBtn">Mark Attendance</button>
+                <button id="refreshBtn" style="background: #fdba74; color: #0f172a;">Refresh Records</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Attendance Register</h2>
+            <div class="grid">
+                <div>
+                    <label for="viewDate">View Date</label>
+                    <input type="date" id="viewDate">
+                </div>
+                <div>
+                    <label for="searchAttendanceEmail">Search by Email</label>
+                    <input type="text" id="searchAttendanceEmail" placeholder="Filter by student email">
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Marked By</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <tr><td colspan="6" style="text-align:center; color:#94a3b8;">Loading attendance records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set, remove } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isAuthorizedAdmin } from '../auth-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+
+        let attendanceRecords = [];
+
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function showMessage(message, type = 'success') {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="message ${type}">${message}</div>`;
+            setTimeout(() => { container.innerHTML = ''; }, 5000);
+        }
+
+        async function loadRecords(date) {
+            const body = document.getElementById('attendanceTableBody');
+            body.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94a3b8;">Loading attendance records...</td></tr>';
+            const snapshot = await get(ref(db, `attendanceRecords/${date}`));
+            attendanceRecords = [];
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                attendanceRecords = Object.entries(data).map(([id, record]) => ({ id, ...record }));
+            }
+            displayRecords();
+            updateStats();
+        }
+
+        function updateStats() {
+            const total = attendanceRecords.length;
+            const present = attendanceRecords.filter(r => r.status === 'present').length;
+            const absent = attendanceRecords.filter(r => r.status === 'absent').length;
+            const unique = new Set(attendanceRecords.map(r => r.studentEmail)).size;
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('presentCount').textContent = present;
+            document.getElementById('absentCount').textContent = absent;
+            document.getElementById('uniqueStudents').textContent = unique;
+        }
+
+        function displayRecords() {
+            const body = document.getElementById('attendanceTableBody');
+            const filter = document.getElementById('searchAttendanceEmail').value.toLowerCase();
+            const filtered = attendanceRecords.filter(record => !filter || record.studentEmail.toLowerCase().includes(filter));
+            if (filtered.length === 0) {
+                body.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94a3b8;">No records found for this filter.</td></tr>';
+                return;
+            }
+            body.innerHTML = filtered.map(record => {
+                const statusTag = record.status === 'present'
+                    ? '<span class="tag tag-present">Present</span>'
+                    : '<span class="tag tag-absent">Absent</span>';
+                return `
+                    <tr>
+                        <td>${record.studentName || 'Unnamed'}</td>
+                        <td>${record.studentEmail}</td>
+                        <td>${statusTag}</td>
+                        <td>${record.markedBy || 'Admin'}</td>
+                        <td>${new Date(record.updatedAt || record.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                        <td><button style="background:#ef4444;color:#fff;padding:8px 10px;border-radius:10px;" onclick="removeRecord('${record.date}','${record.id}')">Remove</button></td>
+                    </tr>`;
+            }).join('');
+        }
+
+        async function markAttendance() {
+            const date = document.getElementById('attendanceDate').value;
+            const studentName = document.getElementById('studentName').value.trim();
+            const studentEmail = document.getElementById('studentEmail').value.trim();
+            const status = document.getElementById('attendanceStatus').value;
+            const markedBy = localStorage.getItem('toolmanager_user_email') || 'admin';
+            if (!date || !studentEmail || !studentName) {
+                showMessage('Please fill in date, name, and email.', 'error');
+                return;
+            }
+            const id = btoa(`${studentEmail}_${date}`).replace(/[^a-zA-Z0-9]/g, '').substring(0, 28);
+            const record = {
+                id,
+                studentName,
+                studentEmail,
+                status,
+                date,
+                markedBy,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            await set(ref(db, `attendanceRecords/${date}/${id}`), record);
+            showMessage(`Attendance marked for ${studentEmail} as ${status}.`, 'success');
+            await loadRecords(date);
+        }
+
+        async function removeRecord(date, id) {
+            if (!confirm('Remove this attendance record?')) return;
+            await remove(ref(db, `attendanceRecords/${date}/${id}`));
+            showMessage('Attendance record removed.', 'success');
+            await loadRecords(date);
+        }
+
+        async function init() {
+            document.querySelector('.container').style.display = 'none';
+            const storedEmail = localStorage.getItem('toolmanager_user_email');
+            if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+                document.querySelector('.container').style.display = 'block';
+                const today = formatDate(new Date());
+                document.getElementById('attendanceDate').value = today;
+                document.getElementById('viewDate').value = today;
+                await loadRecords(today);
+                return;
+            }
+            onAuthStateChanged(auth, async (user) => {
+                if (user && await isAuthorizedAdmin(user.email)) {
+                    localStorage.setItem('toolmanager_user_email', user.email);
+                    document.querySelector('.container').style.display = 'block';
+                    const today = formatDate(new Date());
+                    document.getElementById('attendanceDate').value = today;
+                    document.getElementById('viewDate').value = today;
+                    await loadRecords(today);
+                } else {
+                    document.body.innerHTML = '<div style="color:#f8fafc; padding:40px; text-align:center;">Admin login required. Redirecting...<br><small>Sign in through the main auth page.</small></div>';
+                    setTimeout(() => window.location.href = '../auth.html', 2500);
+                }
+            });
+        }
+
+        document.getElementById('markBtn').addEventListener('click', markAttendance);
+        document.getElementById('refreshBtn').addEventListener('click', async () => {
+            const date = document.getElementById('viewDate').value;
+            await loadRecords(date);
+        });
+        document.getElementById('viewDate').addEventListener('change', async (e) => await loadRecords(e.target.value));
+        document.getElementById('searchAttendanceEmail').addEventListener('input', displayRecords);
+
+        window.removeRecord = removeRecord;
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | DGC Online Class</title>
+  <style>
+    :root {
+      --bg: #101820;
+      --card: #17212b;
+      --card-alt: #1f2a3b;
+      --accent: #ffd166;
+      --text: #f7f7f7;
+      --muted: #aab2c1;
+      --border: rgba(255, 209, 102, 0.15);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #06131f 0%, #10283b 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 8px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(2rem, 2.8vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 28px 32px;
+      flex: 1 1 100%;
+      display: grid;
+      gap: 18px;
+      min-width: 320px;
+    }
+
+    .hero-card h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+    }
+
+    .hero-card p {
+      margin: 0;
+      line-height: 1.7;
+      color: #c9d1d9;
+      max-width: 770px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(23, 33, 43, 0.95), rgba(16, 24, 32, 0.95));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 209, 102, 0.16);
+      color: #fff;
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .card button,
+    .card a.button {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffd166 0%, #ffaf24 100%);
+      color: #081214;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .card button:hover,
+    .card a.button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(255, 209, 102, 0.22);
+    }
+
+    .grid-intro {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr;
+    }
+
+    .notice {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 22px;
+      border-radius: 18px;
+      color: #d9e3ef;
+      line-height: 1.75;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <p>Admin Dashboard</p>
+        <h1>Manage uploads, categories, and emails</h1>
+      </div>
+      <div class="hero-card">
+        <h2>Control panel for DGC Online Class</h2>
+        <p>Use the cards below to open each admin tool instantly. Categories are listed first so you can organize content before uploading new software or tutorials.</p>
+        <div class="cards">
+          <div class="card">
+            <span class="badge">Step 1</span>
+            <h3>Software Upload Category</h3>
+            <p>Manage the categories for software and tools before adding new uploads. This helps keep the library organized and easy to browse.</p>
+            <a class="button" href="toolsAndSoftwareCat.html" target="_blank">Open Software Category</a>
+          </div>
+          <div class="card">
+            <span class="badge">Step 2</span>
+            <h3>Tutorial Category Manager</h3>
+            <p>Update tutorial categories first so the new video uploads are filed in the correct sections and remain easy to find.</p>
+            <a class="button" href="tuto_category_manager.html" target="_blank">Open Tutorial Category</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid-intro">
+      <div class="notice">
+        <strong>Quick access:</strong> All admin tools open in a new tab so you can keep this dashboard available while working.
+      </div>
+    </section>
+
+    <div class="cards">
+      <div class="card">
+        <span class="badge">Upload</span>
+        <h3>Software & Tools Upload</h3>
+        <p>Open the uploader interface for software and tool files. Prepare your content after setting categories and then upload from this panel.</p>
+        <a class="button" href="uploader.html" target="_blank">Open Software Upload</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Upload</span>
+        <h3>Video Tutorial Upload</h3>
+        <p>Upload new tutorial videos with the dedicated upload page. Keep your learning library fresh and up to date.</p>
+        <a class="button" href="videoTutorial/uploadTutorial.html" target="_blank">Open Video Upload</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Tutorial Sort Manager</h3>
+        <p>Arrange and manage the display order of tutorial videos. Customize the sequence in which tutorials appear to users for better learning flow.</p>
+        <a class="button" href="videoTutorial/sortWatchTutorial.html" target="_blank">Open Tutorial Sort</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Admin Subscription Plans</h3>
+        <p>Create and manage subscription plans that grant students access to tutorial categories for a set duration.</p>
+        <a class="button" href="studentSubscriptionSystem/adminSubscriptionPlans.html" target="_blank">Open Subscription Plans</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Add Student to Subscription</h3>
+        <p>Manually add students to existing subscription plans. Grant access to specific categories and manage individual student subscriptions.</p>
+        <a class="button" href="studentSubscriptionSystem/adminAddStudentInSub.html" target="_blank">Open Student Subscription</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Manage Existing Subscriptions</h3>
+        <p>View, edit, extend, and remove existing student subscriptions. Monitor subscription status and manage access across all students.</p>
+        <a class="button" href="studentSubscriptionSystem/adminManagExistingSubStu.html" target="_blank">Manage Subscriptions</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Contact & Support Settings</h3>
+        <p>Edit the contact details students see for support, assessment, certification, and WhatsApp communication.</p>
+        <a class="button" href="accessibilityNContact/accessibilityNContact.html" target="_blank">Open Contact Settings</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Book Shop Admin</h3>
+        <p>Upload and manage books available for purchase by students. Create digital book listings with pricing and download links.</p>
+        <a class="button" href="bookshop/adminBookshop.html" target="_blank">Open Book Shop Admin</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Login Lock Manager</h3>
+        <p>Release active student login locks when a session is stuck or a user cannot sign in due to an existing active login.</p>
+        <a class="button" href="studentManagement/adminLoginLockManager.html" target="_blank">Open Lock Manager</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Manage</span>
+        <h3>Supported Email List</h3>
+        <p>Review and update the system-supported emails used for active email validation and DropBox storage workflows.</p>
+        <a class="button" href="emailListForDropBoxStorage.html" target="_blank">Open Email List</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Upload</span>
+        <h3>Student Identity Upload</h3>
+        <p>Upload and manage student identities with ID card images stored in Dropbox. Create and edit student records with certificate information.</p>
+        <a class="button" href="../admin.html" target="_blank">Open Identity Upload</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>Admin portal for DGC Online Class Tutorial system.</p>
+    </footer>
+  </div>
+</body>
+</html>

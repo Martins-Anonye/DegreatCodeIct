@@ -1,0 +1,2 @@
+
+in studentSubscription.html, line 450, remove display:none fronm the button 

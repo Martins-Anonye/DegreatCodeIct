@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Degreatcode ICT LTD Bookshop | Bringing the best out from you and code changing the world</title>
+        <meta name="description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future with Degreatcode ICT LTD online class bookshop.">
+        <meta name="keywords" content="Degreatcode, ICT, online class, bookshop, software training, coding, programming, fuel your future, ideas to reality, software production, student training, best coding tutorials">
+        <meta name="robots" content="index, follow">
+        <meta property="og:title" content="Degreatcode ICT LTD Bookshop">
+        <meta property="og:description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future.">
+        <meta property="og:image" content="../images/superflyer.png">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://degreartcode.com/bookshop/bookshop.html">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; color: #111; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        header { background: #fff; padding: 28px; border-radius: 16px; box-shadow: 0 12px 24px rgba(217,4,41,0.08); margin-bottom: 24px; border-bottom: 4px solid #d90429; }
+        header h1 { margin: 0 0 8px; font-size: 2.4rem; color: #d90429; }
+        header p { margin: 0; color: #222; line-height: 1.6; }
+        .top-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+        .btn { padding: 12px 18px; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; color: #fff; background: #d90429; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .btn:hover { background: #b3001b; }
+        .btn-secondary { background: #111; }
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 20px; }
+        .book-card { background: #fff; border-radius: 16px; box-shadow: 0 10px 24px rgba(217,4,41,0.08); overflow: hidden; display: flex; flex-direction: column; border-left: 6px solid #d90429; }
+        .book-cover { width: 100%; min-height: 220px; background: #f8d7da center/cover no-repeat; }
+        .book-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+        .book-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #d90429; }
+        .book-author { margin-bottom: 12px; color: #b0b0b0; }
+        .book-description { color: #222; margin-bottom: 16px; flex: 1; }
+        .book-price { font-size: 1.2rem; font-weight: 700; color: #111; margin-bottom: 16px; }
+        .book-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .book-actions button { flex: 1; min-width: 120px; }
+        .book-actions .btn-download { background: #111; color: #fff; }
+        .book-actions .btn-download:hover { background: #d90429; }
+        .book-actions .btn-purchase { background: #d90429; color: #fff; }
+        .book-actions .btn-purchase:hover { background: #b3001b; }
+        .book-actions .btn-disabled { background: #e5e7eb; color: #9ca3af; cursor: not-allowed; }
+        .status-banner { background: #fff0f0; color: #d90429; padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; border: 1.5px solid #d90429; }
+        .signin-banner { background: #fff; color: #d90429; padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; border: 1.5px solid #d90429; }
+        .loader { text-align: center; padding: 40px; color: #d90429; }
+        @media (max-width: 720px) { .top-actions { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Degreatcode ICT LTD Book Shop</h1>
+            <p>Browse books, purchase digital copies, and download them through your student dashboard.</p>
+            <div class="top-actions">
+                <a href="../studentManagement/studentLogin.html" class="btn">Sign In / Create Account</a>
+                <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </header>
+            <img src="../images/logo.jpg" alt="Degreatcode ICT LTD Logo" style="max-width:100px; margin: 0 auto 18px; display:block; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <img src="../images/superflyer.png" alt="Hero banner" style="width:100%;max-width:400px;margin:0 auto 18px;display:block;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+
+        <div id="userStatus" class="signin-banner">Checking sign-in status...</div>
+        <div id="bookStatus" class="status-banner" style="display:none;"></div>
+
+        <div id="bookContainer" class="book-grid"></div>
+        <div id="loading" class="loader">Loading books...</div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { getDatabase, ref, get, set, child } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const userStatus = document.getElementById('userStatus');
+        const bookStatus = document.getElementById('bookStatus');
+        const bookContainer = document.getElementById('bookContainer');
+        const loading = document.getElementById('loading');
+
+        let currentUser = null;
+        let purchases = {};
+        let downloadCounts = {};
+        let maxBookDownloads = null;
+
+        function showStatus(message) {
+            bookStatus.style.display = 'block';
+            bookStatus.textContent = message;
+        }
+
+        function hideStatus() {
+            bookStatus.style.display = 'none';
+        }
+
+        async function loadDownloadCounts(uid) {
+            if (!uid) return;
+            try {
+                const snapshot = await get(ref(db, `bookShop/downloads/${uid}`));
+                downloadCounts = snapshot.exists() ? snapshot.val() : {};
+            } catch (error) {
+                console.error('Error loading download counts:', error);
+                downloadCounts = {};
+            }
+        }
+
+        function renderBookCards(books) {
+            if (!books || books.length === 0) {
+                bookContainer.innerHTML = '<div class="loader">No books are available right now.</div>';
+                return;
+            }
+
+            bookContainer.innerHTML = books.map(book => {
+                const coverStyle = book.coverImageUrl ? `background-image:url('${book.coverImageUrl}');` : '';
+                const isPurchased = Boolean(purchases[book.key]);
+                const downloadCount = downloadCounts[book.key]?.count || 0;
+                const remainingDownloads = maxBookDownloads ? maxBookDownloads - downloadCount : null;
+                const downloadInfo = isPurchased && maxBookDownloads ? ` (${remainingDownloads} downloads left)` : '';
+                const buttonLabel = isPurchased ? `⬇️ Download${downloadInfo}` : `Buy for ₦${book.price.toLocaleString()}`;
+                const buttonClass = isPurchased ? 'btn-download' : 'btn-purchase';
+                const disabled = currentUser ? '' : 'disabled';
+                const buttonAction = isPurchased ? `downloadBook('${book.key}')` : `purchaseBook('${book.key}')`;
+                const note = currentUser ? '' : 'Sign in to purchase and download books.';
+
+                return `
+                    <div class="book-card">
+                        <div class="book-cover" style="${coverStyle}"></div>
+                        <div class="book-body">
+                            <div class="book-title">${book.title}</div>
+                            <div class="book-author">By ${book.author || 'Unknown Author'}</div>
+                            <div class="book-description">${book.description || 'No description available.'}</div>
+                            <div class="book-price">₦${book.price.toLocaleString()}</div>
+                            <div class="book-actions">
+                                <button class="btn ${buttonClass} ${currentUser ? '' : 'btn-disabled'}" ${disabled} onclick="event.stopPropagation(); ${buttonAction}">${buttonLabel}</button>
+                            </div>
+                            ${note ? `<p style="margin-top: 12px; color: #475569; font-size: 0.95rem;">${note}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function loadPurchases(uid) {
+            if (!uid) {
+                purchases = {};
+                return;
+            }
+            try {
+                const snapshot = await get(ref(db, `bookShop/purchases/${uid}`));
+                purchases = snapshot.exists() ? snapshot.val() : {};
+            } catch (error) {
+                console.error('Error loading book purchases:', error);
+                purchases = {};
+            }
+        }
+
+        async function loadBooks() {
+            try {
+                const snapshot = await get(ref(db, 'bookShop/books'));
+                const books = [];
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    for (const [key, book] of Object.entries(data)) {
+                        books.push({ key, ...book });
+                    }
+                }
+                books.sort((a,b) => (a.title || '').localeCompare(b.title || ''));
+                renderBookCards(books);
+                loading.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading books:', error);
+                bookContainer.innerHTML = '<div class="loader">Unable to load books. Please refresh.</div>';
+                loading.style.display = 'none';
+            }
+        }
+
+        async function purchaseBook(bookKey) {
+            if (!currentUser) {
+                window.location.href = '../studentManagement/studentLogin.html';
+                return;
+            }
+
+            const confirmation = confirm('Purchase this book and gain download access?');
+            if (!confirmation) return;
+
+            try {
+                const snapshot = await get(ref(db, `bookShop/books/${bookKey}`));
+                if (!snapshot.exists()) {
+                    alert('Book not found.');
+                    return;
+                }
+                const purchaseRef = ref(db, `bookShop/purchases/${currentUser.uid}/${bookKey}`);
+                await set(purchaseRef, {
+                    purchasedAt: new Date().toISOString(),
+                    bookKey,
+                    title: snapshot.val().title || '',
+                    price: snapshot.val().price || 0,
+                    userEmail: currentUser.email || ''
+                });
+                await loadPurchases(currentUser.uid);
+                loadBooks();
+                showStatus('Purchase completed! You can now download your book.');
+            } catch (error) {
+                console.error('Error purchasing book:', error);
+                alert('Unable to complete purchase. Please try again later.');
+            }
+        }
+
+        function downloadBook(bookKey) {
+            if (!currentUser) {
+                window.location.href = '../studentManagement/studentLogin.html';
+                return;
+            }
+            if (!purchases[bookKey]) {
+                alert('You must purchase this book before downloading.');
+                return;
+            }
+
+            get(ref(db, `bookShop/books/${bookKey}`)).then(async (snapshot) => {
+                if (!snapshot.exists()) {
+                    alert('Book not found.');
+                    return;
+                }
+                const book = snapshot.val();
+                if (!book.downloadUrl) {
+                    alert('Download link is not available for this book.');
+                    return;
+                }
+
+                // Check download limit
+                if (maxBookDownloads) {
+                    const downloadRef = ref(db, `bookShop/downloads/${currentUser.uid}/${bookKey}`);
+                    const downloadSnapshot = await get(downloadRef);
+                    const downloadCount = downloadSnapshot.exists() ? downloadSnapshot.val().count || 0 : 0;
+
+                    if (downloadCount >= maxBookDownloads) {
+                        alert(`You have reached the maximum download limit (${maxBookDownloads}) for this book.`);
+                        return;
+                    }
+
+                    // Increment download count
+                    await set(downloadRef, {
+                        count: downloadCount + 1,
+                        lastDownload: new Date().toISOString()
+                    });
+                }
+
+                window.open(book.downloadUrl, '_blank');
+                showStatus('Download started! Check your downloads folder.');
+                // Reload download counts and books to update UI
+                await loadDownloadCounts(currentUser.uid);
+                await loadBooks();
+            }).catch(error => {
+                console.error('Error downloading book:', error);
+                alert('Unable to download book. Please try again.');
+            });
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            if (user) {
+                userStatus.textContent = `Signed in as ${user.email}`;
+                userStatus.style.background = '#d1fae5';
+                userStatus.style.color = '#065f46';
+                await loadPurchases(user.uid);
+                await loadDownloadCounts(user.uid);
+            } else {
+                userStatus.textContent = 'You are not signed in. Sign in to purchase books and download them from your dashboard.';
+                userStatus.style.background = '#eef2ff';
+                userStatus.style.color = '#4338ca';
+                purchases = {};
+                downloadCounts = {};
+            }
+            await loadSettings();
+            await loadBooks();
+        });
+    </script>
+</body>
+</html>

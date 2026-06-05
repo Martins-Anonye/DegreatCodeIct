@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessibility & Contact Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            color: #0f172a;
+        }
+        .page-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+            border-radius: 18px;
+        }
+        h1 {
+            margin-top: 0;
+            color: #1d4ed8;
+        }
+        p {
+            color: #475569;
+            line-height: 1.7;
+        }
+        form {
+            display: grid;
+            gap: 16px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #f8fafc;
+            font-size: 1rem;
+            color: #0f172a;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 4px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            height: 32px;
+        }
+        .btn-save {
+            background: #2563eb;
+            color: #ffffff;
+        }
+        .btn-clear {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+        .message {
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .message.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .form-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .form-grid-full {
+            grid-column: span 2;
+        }
+        .app-access-section {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 18px;
+            margin-top: 12px;
+        }
+        .app-access-section h2 {
+            margin-top: 0;
+            color: #1d4ed8;
+        }
+        .app-access-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .app-access-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+        }
+        .app-entry {
+            display: grid;
+            gap: 8px;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: #f8fafc;
+        }
+        .app-entry input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #ffffff;
+        }
+        .app-entry .remove-app-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 10px;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .app-access-section button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .app-access-section button:hover {
+            background: #1d4ed8;
+        }
+        @media (max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .app-access-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <h1>Accessibility & Contact Settings</h1>
+        <p>Update the contact details used across the student portal, including WhatsApp, email, assessment, certification, and social links.</p>
+
+        <div id="message" class="message"></div>
+
+        <form id="contactForm">
+            <div class="form-grid">
+                <div>
+                    <label for="phone">Phone Number</label>
+                    <input id="phone" name="phone" type="tel" placeholder="+234 813 232 9272" />
+                </div>
+                <div>
+                    <label for="whatsapp">WhatsApp Number</label>
+                    <input id="whatsapp" name="whatsapp" type="tel" placeholder="+234 813 232 9272" />
+                </div>
+                <div>
+                    <label for="email">General Email</label>
+                    <input id="email" name="email" type="email" placeholder="support@example.com" />
+                </div>
+                <div>
+                    <label for="assessmentEmail">Assessment Email</label>
+                    <input id="assessmentEmail" name="assessmentEmail" type="email" placeholder="assessment@example.com" />
+                </div>
+                <div>
+                    <label for="supportEmail">Support Email</label>
+                    <input id="supportEmail" name="supportEmail" type="email" placeholder="support@example.com" />
+                </div>
+                <div>
+                    <label for="certificatePhone">Certificate Contact Number</label>
+                    <input id="certificatePhone" name="certificatePhone" type="tel" placeholder="+234 813 232 9272" />
+                </div>
+            </div>
+
+            <div class="form-grid-full">
+                <label for="facebookPage">Facebook Page Link</label>
+                <input id="facebookPage" name="facebookPage" type="url" placeholder="https://www.facebook.com/yourpage" />
+            </div>
+            <div class="form-grid-full">
+                <label for="facebookGroup">Facebook Group Link</label>
+                <input id="facebookGroup" name="facebookGroup" type="url" placeholder="https://www.facebook.com/groups/yourgroup" />
+            </div>
+            <div class="form-grid-full">
+                <label for="whatsappGroup">WhatsApp Group Link</label>
+                <input id="whatsappGroup" name="whatsappGroup" type="url" placeholder="https://chat.whatsapp.com/yourgroup" />
+            </div>
+            <div class="form-grid-full">
+                <label for="maxBookDownloads">Maximum Book Downloads per Purchase</label>
+                <input id="maxBookDownloads" name="maxBookDownloads" type="number" min="1" max="100" placeholder="5" />
+                <small style="color:#64748b;">Set the number of times a student can download a purchased book (default: unlimited if empty)</small>
+            </div>
+
+            <div class="app-access-section">
+                <h2>Download App Access Management</h2>
+                <p>Configure the software and apps that provide download access with a secret app key.</p>
+
+                <div class="app-access-row">
+                    <div>
+                        <h3>Software Apps</h3>
+                        <div id="softwareApps"></div>
+                        <button type="button" class="btn-clear" id="addSoftwareAppBtn">+ Add Software App</button>
+                    </div>
+                    <div>
+                        <h3>Android Apps</h3>
+                        <div id="androidApps"></div>
+                        <button type="button" class="btn-clear" id="addAndroidAppBtn">+ Add Android App</button>
+                    </div>
+                    <div>
+                        <h3>iPhone Apps</h3>
+                        <div id="iphoneApps"></div>
+                        <button type="button" class="btn-clear" id="addIphoneAppBtn">+ Add iPhone App</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-save">Save Contact Settings</button>
+                <button type="button" class="btn-clear" id="clearButton">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isAuthorizedAdmin } from '../auth-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        const pageContainer = document.querySelector('.page-container');
+        pageContainer.style.display = 'none';
+
+        const messageBox = document.getElementById('message');
+
+        function redirectToAuth() {
+            window.location.href = '../auth.html';
+        }
+
+        async function authorizeAdmin() {
+            const storedEmail = localStorage.getItem('toolmanager_user_email');
+            if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+                pageContainer.style.display = 'block';
+                return true;
+            }
+
+            return new Promise((resolve) => {
+                onAuthStateChanged(auth, async (user) => {
+                    if (user && await isAuthorizedAdmin(user.email)) {
+                        localStorage.setItem('toolmanager_user_email', user.email);
+                        pageContainer.style.display = 'block';
+                        resolve(true);
+                        return;
+                    }
+                    redirectToAuth();
+                    resolve(false);
+                });
+            });
+        }
+        const contactForm = document.getElementById('contactForm');
+        const clearButton = document.getElementById('clearButton');
+
+        const fields = {
+            phone: document.getElementById('phone'),
+            whatsapp: document.getElementById('whatsapp'),
+            email: document.getElementById('email'),
+            assessmentEmail: document.getElementById('assessmentEmail'),
+            supportEmail: document.getElementById('supportEmail'),
+            certificatePhone: document.getElementById('certificatePhone'),
+            facebookPage: document.getElementById('facebookPage'),
+            facebookGroup: document.getElementById('facebookGroup'),
+            whatsappGroup: document.getElementById('whatsappGroup'),
+            maxBookDownloads: document.getElementById('maxBookDownloads'),
+        };
+
+        const softwareAppsContainer = document.getElementById('softwareApps');
+        const androidAppsContainer = document.getElementById('androidApps');
+        const iphoneAppsContainer = document.getElementById('iphoneApps');
+        const addSoftwareAppBtn = document.getElementById('addSoftwareAppBtn');
+        const addAndroidAppBtn = document.getElementById('addAndroidAppBtn');
+        const addIphoneAppBtn = document.getElementById('addIphoneAppBtn');
+
+        function createAppEntry(type, app = {}) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'app-entry';
+
+            const nameLabel = document.createElement('label');
+            nameLabel.textContent = 'App Name';
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.value = app.name || '';
+            nameInput.placeholder = 'App name';
+
+            const descriptionLabel = document.createElement('label');
+            descriptionLabel.textContent = 'Description';
+            const descriptionInput = document.createElement('input');
+            descriptionInput.type = 'text';
+            descriptionInput.value = app.description || '';
+            descriptionInput.placeholder = 'Short description';
+
+            const linkLabel = document.createElement('label');
+            linkLabel.textContent = 'Download / App Link';
+            const linkInput = document.createElement('input');
+            linkInput.type = 'url';
+            linkInput.value = app.link || '';
+            linkInput.placeholder = 'https://...';
+
+            const keyLabel = document.createElement('label');
+            keyLabel.textContent = 'Access Key';
+            const keyInput = document.createElement('input');
+            keyInput.type = 'text';
+            keyInput.value = app.accessKey || '';
+            keyInput.placeholder = 'Secret app key';
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-app-btn';
+            removeBtn.textContent = 'Remove';
+            removeBtn.addEventListener('click', () => wrapper.remove());
+
+            wrapper.append(nameLabel, nameInput, descriptionLabel, descriptionInput, linkLabel, linkInput, keyLabel, keyInput, removeBtn);
+            return wrapper;
+        }
+
+        function populateAppAccessLists(downloadApps = {}) {
+            softwareAppsContainer.innerHTML = '';
+            androidAppsContainer.innerHTML = '';
+            iphoneAppsContainer.innerHTML = '';
+
+            const software = Array.isArray(downloadApps.software) ? downloadApps.software : [];
+            const android = Array.isArray(downloadApps.android) ? downloadApps.android : [];
+            const iphone = Array.isArray(downloadApps.iphone) ? downloadApps.iphone : [];
+
+            if (software.length === 0) addAppEntry('software');
+            if (android.length === 0) addAppEntry('android');
+            if (iphone.length === 0) addAppEntry('iphone');
+
+            software.forEach(app => addAppEntry('software', app));
+            android.forEach(app => addAppEntry('android', app));
+            iphone.forEach(app => addAppEntry('iphone', app));
+        }
+
+        function addAppEntry(type, app = {}) {
+            const entry = createAppEntry(type, app);
+            if (type === 'software') softwareAppsContainer.appendChild(entry);
+            if (type === 'android') androidAppsContainer.appendChild(entry);
+            if (type === 'iphone') iphoneAppsContainer.appendChild(entry);
+        }
+
+        function collectAppAccessItems() {
+            const collect = (container) => {
+                return Array.from(container.querySelectorAll('.app-entry')).map(entry => {
+                    const inputs = entry.querySelectorAll('input');
+                    return {
+                        name: inputs[0].value.trim(),
+                        description: inputs[1].value.trim(),
+                        link: inputs[2].value.trim(),
+                        accessKey: inputs[3].value.trim()
+                    };
+                }).filter(app => app.name || app.link || app.accessKey);
+            };
+
+            return {
+                software: collect(softwareAppsContainer),
+                android: collect(androidAppsContainer),
+                iphone: collect(iphoneAppsContainer)
+            };
+        }
+
+        addSoftwareAppBtn.addEventListener('click', () => addAppEntry('software'));
+        addAndroidAppBtn.addEventListener('click', () => addAppEntry('android'));
+        addIphoneAppBtn.addEventListener('click', () => addAppEntry('iphone'));
+
+        function showMessage(text, type) {
+            messageBox.textContent = text;
+            messageBox.className = `message ${type}`;
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000);
+        }
+
+        async function loadContactInfo() {
+            try {
+                const snapshot = await get(ref(db, 'contactInfo'));
+                if (!snapshot.exists()) {
+                    return;
+                }
+                const contact = snapshot.val();
+                Object.keys(fields).forEach(key => {
+                    if (contact[key]) {
+                        fields[key].value = contact[key];
+                    }
+                });
+                populateAppAccessLists(contact.downloadApps || {});
+            } catch (error) {
+                console.error('Failed to load contact settings:', error);
+                showMessage('Could not load saved contact settings.', 'error');
+            }
+        }
+
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const contactSettings = {};
+            Object.keys(fields).forEach(key => {
+                contactSettings[key] = fields[key].value.trim();
+            });
+            contactSettings.downloadApps = collectAppAccessItems();
+
+            try {
+                await set(ref(db, 'contactInfo'), {
+                    ...contactSettings,
+                    updatedAt: new Date().toISOString()
+                });
+                await set(ref(db, 'downloadApps'), contactSettings.downloadApps);
+                showMessage('Contact settings saved successfully.', 'success');
+            } catch (error) {
+                console.error('Error saving contact settings:', error);
+                showMessage('Unable to save settings. Please try again.', 'error');
+            }
+        });
+
+        clearButton.addEventListener('click', () => {
+            contactForm.reset();
+        });
+
+        authorizeAdmin().then((authorized) => {
+            if (authorized) {
+                loadContactInfo();
+            }
+        });
+    </script>
+</body>
+</html>

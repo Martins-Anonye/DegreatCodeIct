@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Student Subscriptions - Admin</title>
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .filters-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+        }
+
+        .filters-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .subscriptions-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .subscriptions-section h2 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .subscriptions-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .subscription-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .subscription-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .subscription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .student-info h3 {
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        .student-email {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .subscription-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-expired {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .subscription-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .category-tag {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .subscription-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-edit {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #2563eb;
+        }
+
+        .btn-extend {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-extend:hover {
+            background: #059669;
+        }
+
+        .btn-remove {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-remove:hover {
+            background: #dc2626;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: #0f172a;
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-body .form-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .modal-body input,
+        .modal-body select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(102, 126, 234, 0.3);
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        @media (max-width: 768px) {
+            .filters-row {
+                grid-template-columns: 1fr;
+            }
+
+            .subscription-details {
+                grid-template-columns: 1fr;
+            }
+
+            .subscription-actions {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👥 Manage Student Subscriptions</h1>
+            <p>View, modify, and manage existing student subscription records</p>
+        </header>
+
+        <div id="messageContainer"></div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalSubscriptions">0</div>
+                <div class="stat-label">Total Subscriptions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeSubscriptions">0</div>
+                <div class="stat-label">Active Subscriptions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="expiredSubscriptions">0</div>
+                <div class="stat-label">Expired Subscriptions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueStudents">0</div>
+                <div class="stat-label">Unique Students</div>
+            </div>
+        </div>
+
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="searchEmail">Search by Email</label>
+                    <input type="text" id="searchEmail" placeholder="Enter student email...">
+                </div>
+                <div class="filter-group">
+                    <label for="filterStatus">Status</label>
+                    <select id="filterStatus">
+                        <option value="all">All Status</option>
+                        <option value="active">Active Only</option>
+                        <option value="expired">Expired Only</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterPlan">Plan</label>
+                    <select id="filterPlan">
+                        <option value="all">All Plans</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button type="button" id="clearFilters" class="action-btn" style="background: #6b7280; color: white; padding: 8px 16px;">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="subscriptions-section">
+            <h2>📋 Student Subscriptions</h2>
+            <div id="subscriptionsGrid" class="subscriptions-grid">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading subscriptions...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Subscription</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="editMessage"></div>
+                <div class="form-group">
+                    <label for="editStudentEmail">Student Email</label>
+                    <input type="email" id="editStudentEmail" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="editPlan">Subscription Plan</label>
+                    <select id="editPlan"></select>
+                </div>
+                <div class="form-group">
+                    <label for="editStartDate">Start Date</label>
+                    <input type="date" id="editStartDate">
+                </div>
+                <div class="form-group">
+                    <label for="editDuration">Duration (days)</label>
+                    <input type="number" id="editDuration" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="editNotes">Notes</label>
+                    <input type="text" id="editNotes" placeholder="Optional notes">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn" style="background: #6b7280;" onclick="closeModal()">Cancel</button>
+                <button class="action-btn btn-edit" onclick="saveSubscriptionEdit()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extend Modal -->
+    <div id="extendModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Extend Subscription</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="extendMessage"></div>
+                <p id="extendStudentInfo"></p>
+                <div class="form-group">
+                    <label for="extendDays">Extend by (days)</label>
+                    <input type="number" id="extendDays" min="1" placeholder="30">
+                </div>
+                <div class="form-group">
+                    <label for="extendNotes">Reason for extension</label>
+                    <input type="text" id="extendNotes" placeholder="Optional reason">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn" style="background: #6b7280;" onclick="closeModal()">Cancel</button>
+                <button class="action-btn btn-extend" onclick="extendSubscription()">Extend Subscription</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set, remove, update } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isAuthorizedAdmin } from '../auth-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+
+        let allSubscriptions = [];
+        let subscriptionPlans = {};
+        let currentEditingSubscription = null;
+        let currentExtendingSubscription = null;
+
+        // Initialize the app
+        async function init() {
+            // Hide content initially
+            document.querySelector('.container').style.display = 'none';
+
+            // Check for stored authentication first
+            const storedEmail = localStorage.getItem('toolmanager_user_email');
+            if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+                document.querySelector('.container').style.display = 'block';
+                console.log('Admin authenticated via localStorage:', storedEmail);
+                await loadData();
+                return;
+            }
+
+            // Check Firebase auth state
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const authorized = await isAuthorizedAdmin(user.email);
+                    if (authorized) {
+                        document.querySelector('.container').style.display = 'block';
+                        console.log('Admin signed in:', user.email);
+                        localStorage.setItem('toolmanager_user_email', user.email);
+                        await loadData();
+                    } else {
+                        showAuthMessage('You are not authorized to access this admin panel.', 'error');
+                        setTimeout(() => {
+                            window.location.href = '../auth.html';
+                        }, 3000);
+                    }
+                } else {
+                    showAuthMessage('Please sign in to access the admin panel.', 'error');
+                    setTimeout(() => {
+                        window.location.href = '../auth.html';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Show authentication message
+        function showAuthMessage(message, type = 'info') {
+            document.body.innerHTML = `
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 100vh;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    text-align: center;
+                    padding: 20px;
+                ">
+                    <h1 style="margin-bottom: 20px;">🔐 Authentication Required</h1>
+                    <div style="
+                        background: rgba(255, 255, 255, 0.1);
+                        padding: 20px;
+                        border-radius: 12px;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        max-width: 500px;
+                    ">
+                        <p style="margin: 0; font-size: 1.1rem;">${message}</p>
+                        <p style="margin: 20px 0 0 0; font-size: 0.9rem; opacity: 0.8;">Redirecting to login page...</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load all data
+        async function loadData() {
+            try {
+                await Promise.all([
+                    loadSubscriptionPlans(),
+                    loadSubscriptions()
+                ]);
+                setupFilters();
+                updateStats();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                showMessage('Error loading data. Please refresh the page.', 'error');
+            }
+        }
+
+        // Load subscription plans
+        async function loadSubscriptionPlans() {
+            try {
+                const plansRef = ref(db, 'subscriptionPlans');
+                const snapshot = await get(plansRef);
+
+                if (snapshot.exists()) {
+                    subscriptionPlans = snapshot.val();
+                }
+            } catch (error) {
+                console.error('Error loading plans:', error);
+            }
+        }
+
+        // Load subscriptions
+        async function loadSubscriptions() {
+            try {
+                const subscriptionsRef = ref(db, 'userSubscriptions');
+                const snapshot = await get(subscriptionsRef);
+
+                allSubscriptions = [];
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+
+                    for (const [userId, userSubscriptions] of Object.entries(data)) {
+                        for (const [planId, subscription] of Object.entries(userSubscriptions)) {
+                            allSubscriptions.push({
+                                userId,
+                                planId,
+                                ...subscription,
+                                id: `${userId}_${planId}`
+                            });
+                        }
+                    }
+                }
+
+                displaySubscriptions(allSubscriptions);
+            } catch (error) {
+                console.error('Error loading subscriptions:', error);
+                showMessage('Error loading subscriptions.', 'error');
+            }
+        }
+
+        // Display subscriptions
+        function displaySubscriptions(subscriptions) {
+            const grid = document.getElementById('subscriptionsGrid');
+
+            if (subscriptions.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No subscriptions found</h3>
+                        <p>No student subscriptions match your current filters.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = subscriptions.map(sub => {
+                const endDate = new Date(sub.endDate);
+                const now = new Date();
+                const isActive = endDate > now;
+
+                const categoriesHtml = sub.categories.map(cat =>
+                    `<span class="category-tag">${cat.name}</span>`
+                ).join('');
+
+                return `
+                    <div class="subscription-card">
+                        <div class="subscription-header">
+                            <div class="student-info">
+                                <h3>${sub.userEmail || 'Unknown Student'}</h3>
+                                <div class="student-email">${sub.planName || 'Unknown Plan'}</div>
+                            </div>
+                            <span class="subscription-status ${isActive ? 'status-active' : 'status-expired'}">
+                                ${isActive ? 'Active' : 'Expired'}
+                            </span>
+                        </div>
+
+                        <div class="subscription-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Start Date</span>
+                                <span class="detail-value">${new Date(sub.startDate).toLocaleDateString()}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">End Date</span>
+                                <span class="detail-value">${endDate.toLocaleDateString()}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Duration</span>
+                                <span class="detail-value">${sub.duration} days</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Amount</span>
+                                <span class="detail-value">₦${sub.amount?.toLocaleString() || 'N/A'}</span>
+                            </div>
+                        </div>
+
+                        <div class="categories-list">
+                            ${categoriesHtml}
+                        </div>
+
+                        <div class="subscription-actions">
+                            <button class="action-btn btn-edit" onclick="editSubscription('${sub.id}')">Edit</button>
+                            <button class="action-btn btn-extend" onclick="extendSubscriptionModal('${sub.id}')">Extend</button>
+                            <button class="action-btn btn-remove" onclick="removeSubscription('${sub.id}')">Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Setup filters
+        function setupFilters() {
+            // Populate plan filter
+            const planFilter = document.getElementById('filterPlan');
+            planFilter.innerHTML = '<option value="all">All Plans</option>';
+
+            for (const [planId, plan] of Object.entries(subscriptionPlans)) {
+                const option = document.createElement('option');
+                option.value = planId;
+                option.textContent = plan.name;
+                planFilter.appendChild(option);
+            }
+
+            // Add event listeners
+            document.getElementById('searchEmail').addEventListener('input', applyFilters);
+            document.getElementById('filterStatus').addEventListener('change', applyFilters);
+            document.getElementById('filterPlan').addEventListener('change', applyFilters);
+            document.getElementById('clearFilters').addEventListener('click', clearFilters);
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const searchEmail = document.getElementById('searchEmail').value.toLowerCase();
+            const filterStatus = document.getElementById('filterStatus').value;
+            const filterPlan = document.getElementById('filterPlan').value;
+
+            let filtered = allSubscriptions;
+
+            // Email search
+            if (searchEmail) {
+                filtered = filtered.filter(sub =>
+                    sub.userEmail?.toLowerCase().includes(searchEmail)
+                );
+            }
+
+            // Status filter
+            if (filterStatus !== 'all') {
+                const now = new Date();
+                filtered = filtered.filter(sub => {
+                    const endDate = new Date(sub.endDate);
+                    const isActive = endDate > now;
+                    return filterStatus === 'active' ? isActive : !isActive;
+                });
+            }
+
+            // Plan filter
+            if (filterPlan !== 'all') {
+                filtered = filtered.filter(sub => sub.planId === filterPlan);
+            }
+
+            displaySubscriptions(filtered);
+        }
+
+        // Clear filters
+        function clearFilters() {
+            document.getElementById('searchEmail').value = '';
+            document.getElementById('filterStatus').value = 'all';
+            document.getElementById('filterPlan').value = 'all';
+            displaySubscriptions(allSubscriptions);
+        }
+
+        // Update statistics
+        function updateStats() {
+            const now = new Date();
+            const stats = {
+                total: allSubscriptions.length,
+                active: 0,
+                expired: 0,
+                uniqueStudents: new Set()
+            };
+
+            allSubscriptions.forEach(sub => {
+                stats.uniqueStudents.add(sub.userId);
+                const endDate = new Date(sub.endDate);
+                if (endDate > now) {
+                    stats.active++;
+                } else {
+                    stats.expired++;
+                }
+            });
+
+            document.getElementById('totalSubscriptions').textContent = stats.total;
+            document.getElementById('activeSubscriptions').textContent = stats.active;
+            document.getElementById('expiredSubscriptions').textContent = stats.expired;
+            document.getElementById('uniqueStudents').textContent = stats.uniqueStudents.size;
+        }
+
+        // Show message
+        function showMessage(message, type = 'info') {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="message ${type}">${message}</div>`;
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 5000);
+            }
+        }
+
+        // Modal functions
+        window.editSubscription = function(subscriptionId) {
+            const subscription = allSubscriptions.find(sub => sub.id === subscriptionId);
+            if (!subscription) return;
+
+            currentEditingSubscription = subscription;
+
+            document.getElementById('editStudentEmail').value = subscription.userEmail || '';
+            document.getElementById('editStartDate').value = subscription.startDate.split('T')[0];
+            document.getElementById('editDuration').value = subscription.duration;
+            document.getElementById('editNotes').value = subscription.notes || '';
+
+            // Populate plan select
+            const planSelect = document.getElementById('editPlan');
+            planSelect.innerHTML = '';
+            for (const [planId, plan] of Object.entries(subscriptionPlans)) {
+                const option = document.createElement('option');
+                option.value = planId;
+                option.textContent = plan.name;
+                if (planId === subscription.planId) {
+                    option.selected = true;
+                }
+                planSelect.appendChild(option);
+            }
+
+            document.getElementById('editModal').style.display = 'block';
+        };
+
+        window.extendSubscriptionModal = function(subscriptionId) {
+            const subscription = allSubscriptions.find(sub => sub.id === subscriptionId);
+            if (!subscription) return;
+
+            currentExtendingSubscription = subscription;
+
+            document.getElementById('extendStudentInfo').textContent =
+                `Extending subscription for ${subscription.userEmail} (${subscription.planName})`;
+            document.getElementById('extendDays').value = '30';
+            document.getElementById('extendNotes').value = '';
+
+            document.getElementById('extendModal').style.display = 'block';
+        };
+
+        window.closeModal = function() {
+            document.getElementById('editModal').style.display = 'none';
+            document.getElementById('extendModal').style.display = 'none';
+            document.getElementById('editMessage').innerHTML = '';
+            document.getElementById('extendMessage').innerHTML = '';
+            currentEditingSubscription = null;
+            currentExtendingSubscription = null;
+        };
+
+        // Save subscription edit
+        window.saveSubscriptionEdit = async function() {
+            if (!currentEditingSubscription) return;
+
+            const editMessage = document.getElementById('editMessage');
+            const planId = document.getElementById('editPlan').value;
+            const startDate = document.getElementById('editStartDate').value;
+            const duration = parseInt(document.getElementById('editDuration').value);
+            const notes = document.getElementById('editNotes').value.trim();
+
+            if (!planId || !startDate || !duration) {
+                editMessage.innerHTML = '<div class="message error">Please fill in all required fields.</div>';
+                return;
+            }
+
+            try {
+                const plan = subscriptionPlans[planId];
+                if (!plan) {
+                    throw new Error('Selected plan not found');
+                }
+
+                const start = new Date(startDate);
+                const end = new Date(start);
+                end.setDate(end.getDate() + duration);
+
+                const updatedSubscription = {
+                    ...currentEditingSubscription,
+                    planId,
+                    planName: plan.name,
+                    categories: plan.categories,
+                    startDate: start.toISOString(),
+                    endDate: end.toISOString(),
+                    duration,
+                    amount: plan.price,
+                    notes: notes || null,
+                    updatedAt: new Date().toISOString(),
+                    updatedBy: localStorage.getItem('toolmanager_user_email') || 'admin'
+                };
+
+                // Update in database
+                const subscriptionRef = ref(db, `userSubscriptions/${currentEditingSubscription.userId}/${planId}`);
+                await set(subscriptionRef, updatedSubscription);
+
+                // Update local data
+                const index = allSubscriptions.findIndex(sub => sub.id === currentEditingSubscription.id);
+                if (index !== -1) {
+                    allSubscriptions[index] = { ...updatedSubscription, id: `${currentEditingSubscription.userId}_${planId}` };
+                }
+
+                showMessage('✅ Subscription updated successfully!', 'success');
+                closeModal();
+                displaySubscriptions(allSubscriptions);
+                updateStats();
+
+            } catch (error) {
+                console.error('Error updating subscription:', error);
+                editMessage.innerHTML = `<div class="message error">Error updating subscription: ${error.message}</div>`;
+            }
+        };
+
+        // Extend subscription
+        window.extendSubscription = async function() {
+            if (!currentExtendingSubscription) return;
+
+            const extendMessage = document.getElementById('extendMessage');
+            const extendDays = parseInt(document.getElementById('extendDays').value);
+            const notes = document.getElementById('extendNotes').value.trim();
+
+            if (!extendDays || extendDays < 1) {
+                extendMessage.innerHTML = '<div class="message error">Please enter a valid number of days.</div>';
+                return;
+            }
+
+            try {
+                const currentEndDate = new Date(currentExtendingSubscription.endDate);
+                const newEndDate = new Date(currentEndDate);
+                newEndDate.setDate(newEndDate.getDate() + extendDays);
+
+                const updatedSubscription = {
+                    ...currentExtendingSubscription,
+                    endDate: newEndDate.toISOString(),
+                    duration: currentExtendingSubscription.duration + extendDays,
+                    notes: notes || currentExtendingSubscription.notes,
+                    updatedAt: new Date().toISOString(),
+                    updatedBy: localStorage.getItem('toolmanager_user_email') || 'admin',
+                    extensionHistory: [
+                        ...(currentExtendingSubscription.extensionHistory || []),
+                        {
+                            extendedBy: extendDays,
+                            extendedAt: new Date().toISOString(),
+                            reason: notes
+                        }
+                    ]
+                };
+
+                // Update in database
+                const subscriptionRef = ref(db, `userSubscriptions/${currentExtendingSubscription.userId}/${currentExtendingSubscription.planId}`);
+                await set(subscriptionRef, updatedSubscription);
+
+                // Update local data
+                const index = allSubscriptions.findIndex(sub => sub.id === currentExtendingSubscription.id);
+                if (index !== -1) {
+                    allSubscriptions[index] = { ...updatedSubscription, id: currentExtendingSubscription.id };
+                }
+
+                showMessage(`✅ Subscription extended by ${extendDays} days! New end date: ${newEndDate.toLocaleDateString()}`, 'success');
+                closeModal();
+                displaySubscriptions(allSubscriptions);
+                updateStats();
+
+            } catch (error) {
+                console.error('Error extending subscription:', error);
+                extendMessage.innerHTML = `<div class="message error">Error extending subscription: ${error.message}</div>`;
+            }
+        };
+
+        // Remove subscription
+        window.removeSubscription = async function(subscriptionId) {
+            const subscription = allSubscriptions.find(sub => sub.id === subscriptionId);
+            if (!subscription) return;
+
+            if (!confirm(`Are you sure you want to remove the subscription for ${subscription.userEmail}? This action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                // Remove from database
+                const subscriptionRef = ref(db, `userSubscriptions/${subscription.userId}/${subscription.planId}`);
+                await remove(subscriptionRef);
+
+                // Remove from local data
+                allSubscriptions = allSubscriptions.filter(sub => sub.id !== subscriptionId);
+
+                showMessage('✅ Subscription removed successfully!', 'success');
+                displaySubscriptions(allSubscriptions);
+                updateStats();
+
+            } catch (error) {
+                console.error('Error removing subscription:', error);
+                showMessage(`❌ Error removing subscription: ${error.message}`, 'error');
+            }
+        };
+
+        // Initialize the application
+        init();
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">c:\Users\User PC\Documents\degreartcode data\DGC_Online_Class_Tutorial\studentSubscriptionSystem\adminManagExistingSubStu.html

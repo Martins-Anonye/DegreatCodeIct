@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Shop Admin</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #0f172a; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        header { background: white; padding: 28px; border-radius: 16px; margin-bottom: 24px; box-shadow: 0 12px 24px rgba(15,23,42,.12); }
+        header h1 { margin: 0 0 10px; font-size: 2.4rem; }
+        header p { margin: 0; color: #475569; line-height: 1.6; }
+        .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 12px 24px rgba(15,23,42,.08); margin-bottom: 24px; }
+        .field-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 18px; }
+        label { display: block; font-weight: 700; margin-bottom: 8px; }
+        input, textarea, select { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 1rem; }
+        textarea { min-height: 110px; resize: vertical; }
+        .btn { padding: 14px 22px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; background: #2563eb; }
+        .btn.secondary { background: #64748b; }
+        .books-grid { display: grid; gap: 18px; }
+        .book-card { padding: 20px; border-radius: 14px; background: #f8fafc; border: 1px solid #e2e8f0; }
+        .book-card h3 { margin: 0 0 6px; }
+        .book-meta { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; color: #475569; }
+        .book-meta span { background: #e2e8f0; padding: 6px 10px; border-radius: 999px; font-size: 0.9rem; }
+        .book-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+        .book-actions button { flex: 1; min-width: 100px; }
+        .book-actions .edit { background: #3b82f6; }
+        .book-actions .delete { background: #ef4444; }
+        .message { padding: 16px; border-radius: 12px; margin-bottom: 20px; display: none; }
+        .message.success { background: #dcfce7; color: #065f46; }
+        .message.error { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Book Shop Admin</h1>
+            <p>Upload and manage books available for purchase by students.</p>
+        </header>
+
+        <div id="message" class="message"></div>
+
+        <div class="card">
+            <h2 id="formTitle">Add New Book</h2>
+            <form id="bookForm">
+                <div class="field-grid">
+                    <div>
+                        <label for="bookTitle">Book Title *</label>
+                        <input id="bookTitle" required placeholder="Enter book title" />
+                    </div>
+                    <div>
+                        <label for="bookAuthor">Author</label>
+                        <input id="bookAuthor" placeholder="Enter author name" />
+                    </div>
+                    <div>
+                        <label for="bookPrice">Price (₦) *</label>
+                        <input id="bookPrice" type="number" min="0" required placeholder="5000" />
+                    </div>
+                    <div>
+                        <label for="bookThumbnail">Thumbnail Image</label>
+                        <input id="bookThumbnail" type="file" accept="image/*" />
+                        <small style="color:#64748b;">Or use URL below</small>
+                    </div>
+                </div>
+
+                <div class="field-grid" style="margin-top:18px;">
+                    <div>
+                        <label for="bookCover">Cover Image URL</label>
+                        <input id="bookCover" type="url" placeholder="https://..." />
+                    </div>
+                    <div>
+                        <label for="bookRawFile">Raw Book File</label>
+                        <input id="bookRawFile" type="file" accept=".pdf,.epub,.mobi,.txt,.doc,.docx" />
+                        <small style="color:#64748b;">Or use download URL below</small>
+                    </div>
+                </div>
+
+                <div class="field-grid" style="margin-top:18px;">
+                    <div>
+                        <label for="bookDownloadUrl">Download URL</label>
+                        <input id="bookDownloadUrl" type="url" placeholder="https://..." />
+                    </div>
+                    <div>
+                        <label for="bookCategory">Category</label>
+                        <input id="bookCategory" placeholder="e.g. Exam Preparation" />
+                    </div>
+                </div>
+
+                <div style="margin-top:18px;">
+                    <label for="bookDescription">Description</label>
+                    <textarea id="bookDescription" placeholder="Enter a short description"></textarea>
+                </div>
+
+                <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+                    <button type="submit" class="btn" id="saveBookBtn">Save Book</button>
+                    <button type="button" class="btn secondary" id="cancelEditBtn" style="display:none;">Cancel Edit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Available Books</h2>
+            <div id="booksContainer" class="books-grid"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { getDatabase, ref, get, set, push, remove } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isAuthorizedAdmin } from '../auth-config.js';
+        import { getValidDropboxToken } from '../dropbox-oauth-handler.js';
+        import { DROPBOX_CONFIG } from '../dropbox-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const messageBox = document.getElementById('message');
+        const bookForm = document.getElementById('bookForm');
+        const booksContainer = document.getElementById('booksContainer');
+        const formTitle = document.getElementById('formTitle');
+        const saveBookBtn = document.getElementById('saveBookBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+
+        let editingBookKey = null;
+        let currentUser = null;
+
+        function showMessage(text, type) {
+            messageBox.textContent = text;
+            messageBox.className = `message ${type}`;
+            messageBox.style.display = 'block';
+            setTimeout(() => messageBox.style.display = 'none', 5000);
+        }
+
+        async function authorizeAdmin() {
+            const storedEmail = localStorage.getItem('toolmanager_user_email');
+            if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+                return true;
+            }
+
+            return new Promise((resolve) => {
+                onAuthStateChanged(auth, async (user) => {
+                    if (user && await isAuthorizedAdmin(user.email)) {
+                        localStorage.setItem('toolmanager_user_email', user.email);
+                        currentUser = user;
+                        resolve(true);
+                        return;
+                    }
+                    window.location.href = '../auth.html';
+                    resolve(false);
+                });
+            });
+        }
+
+        function resetForm() {
+            editingBookKey = null;
+            bookForm.reset();
+            formTitle.textContent = 'Add New Book';
+            saveBookBtn.textContent = 'Save Book';
+            cancelEditBtn.style.display = 'none';
+        }
+
+        async function uploadFileToDropbox(file, fileType) {
+            const token = await getValidDropboxToken();
+            const date = new Date();
+            const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+            const dropboxPath = `/books/${fileType}/${dateStr}/${file.name}`;
+
+            const response = await fetch(DROPBOX_CONFIG.api.fileUpload, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Dropbox-API-Arg': JSON.stringify({ path: dropboxPath, mode: 'add', autorename: true, mute: false }),
+                    'Content-Type': 'application/octet-stream'
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                throw new Error(`Dropbox upload failed: ${response.status}`);
+            }
+
+            // Create share link
+            const shareResponse = await fetch(DROPBOX_CONFIG.api.createSharedLinkWithSettings, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ path: dropboxPath, settings: { requested_visibility: 'public' } })
+            });
+
+            if (!shareResponse.ok) {
+                throw new Error('Failed to create share link');
+            }
+
+            const shareData = await shareResponse.json();
+            return DROPBOX_CONFIG.getShareableUrl(shareData.url);
+        }
+
+        async function loadBooks() {
+            try {
+                const snapshot = await get(ref(db, 'bookShop/books'));
+                const books = [];
+                if (snapshot.exists()) {
+                    for (const [key, book] of Object.entries(snapshot.val())) {
+                        books.push({ key, ...book });
+                    }
+                }
+                booksContainer.innerHTML = books.map(book => `
+                    <div class="book-card">
+                        <h3>${book.title}</h3>
+                        <div class="book-meta">
+                            <span>Author: ${book.author || 'Unknown'}</span>
+                            <span>Price: ₦${book.price?.toLocaleString() || '0'}</span>
+                            <span>Category: ${book.category || 'General'}</span>
+                        </div>
+                        <p>${book.description || 'No description available.'}</p>
+                        <div class="book-actions">
+                            <button class="btn edit" onclick="editBook('${book.key}')">Edit</button>
+                            <button class="btn delete" onclick="deleteBook('${book.key}')">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading books:', error);
+                showMessage('Unable to load books.', 'error');
+            }
+        }
+
+        bookForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            saveBookBtn.disabled = true;
+            saveBookBtn.textContent = 'Saving...';
+
+            try {
+                const thumbnailFile = document.getElementById('bookThumbnail').files[0];
+                const rawBookFile = document.getElementById('bookRawFile').files[0];
+                const downloadUrl = document.getElementById('bookDownloadUrl').value.trim();
+
+                let coverImageUrl = document.getElementById('bookCover').value.trim();
+                let finalDownloadUrl = downloadUrl;
+
+                // Upload thumbnail if provided
+                if (thumbnailFile) {
+                    showMessage('Uploading thumbnail...', 'success');
+                    coverImageUrl = await uploadFileToDropbox(thumbnailFile, 'thumbnails');
+                }
+
+                // Upload raw book file if provided
+                if (rawBookFile) {
+                    showMessage('Uploading book file...', 'success');
+                    finalDownloadUrl = await uploadFileToDropbox(rawBookFile, 'files');
+                }
+
+                const bookData = {
+                    title: document.getElementById('bookTitle').value.trim(),
+                    author: document.getElementById('bookAuthor').value.trim(),
+                    price: Number(document.getElementById('bookPrice').value),
+                    coverImageUrl,
+                    downloadUrl: finalDownloadUrl,
+                    category: document.getElementById('bookCategory').value.trim(),
+                    description: document.getElementById('bookDescription').value.trim(),
+                    uploadedAt: new Date().toISOString()
+                };
+
+                if (!bookData.title || !bookData.price || !bookData.downloadUrl) {
+                    showMessage('Please complete all required book fields.', 'error');
+                    return;
+                }
+
+                if (editingBookKey) {
+                    await set(ref(db, `bookShop/books/${editingBookKey}`), bookData);
+                    showMessage('Book updated successfully.', 'success');
+                } else {
+                    const newBookRef = push(ref(db, 'bookShop/books'));
+                    await set(newBookRef, bookData);
+                    showMessage('Book added successfully.', 'success');
+                }
+                resetForm();
+                loadBooks();
+            } catch (error) {
+                console.error('Error saving book:', error);
+                showMessage('Unable to save book. Please try again.', 'error');
+            } finally {
+                saveBookBtn.disabled = false;
+                saveBookBtn.textContent = editingBookKey ? 'Update Book' : 'Save Book';
+            }
+        });
+
+        cancelEditBtn.addEventListener('click', resetForm);
+
+        window.editBook = async function(key) {
+            try {
+                const snapshot = await get(ref(db, `bookShop/books/${key}`));
+                if (!snapshot.exists()) return;
+                const book = snapshot.val();
+                editingBookKey = key;
+                document.getElementById('bookTitle').value = book.title || '';
+                document.getElementById('bookAuthor').value = book.author || '';
+                document.getElementById('bookPrice').value = book.price || '';
+                document.getElementById('bookCover').value = book.coverImageUrl || '';
+                document.getElementById('bookDownloadUrl').value = book.downloadUrl || '';
+                document.getElementById('bookCategory').value = book.category || '';
+                document.getElementById('bookDescription').value = book.description || '';
+                // Clear file inputs since we can't pre-fill them
+                document.getElementById('bookThumbnail').value = '';
+                document.getElementById('bookRawFile').value = '';
+                formTitle.textContent = 'Edit Book';
+                saveBookBtn.textContent = 'Update Book';
+                cancelEditBtn.style.display = 'inline-flex';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error loading book for edit:', error);
+                showMessage('Unable to edit book.', 'error');
+            }
+        };
+
+        window.deleteBook = async function(key) {
+            if (!confirm('Delete this book permanently?')) return;
+            try {
+                await remove(ref(db, `bookShop/books/${key}`));
+                showMessage('Book deleted.', 'success');
+                loadBooks();
+            } catch (error) {
+                console.error('Error deleting book:', error);
+                showMessage('Unable to delete book.', 'error');
+            }
+        };
+
+        authorizeAdmin().then((authorized) => {
+            if (authorized) loadBooks();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+Perfect! I've added functionality to the downloader.html page that automatically selects the appropriate tab based on a URL parameter. Here's what I implemented:
+
+URL Parameter Detection: The page now checks for a tab parameter in the URL query string.
+
+Tab Mapping:
+
+Numbers 1-6 map to specific tabs:
+?tab=1 → CBT Software
+?tab=2 → CBT Android
+?tab=3 → CDCFIB Software
+?tab=4 → CDCFIB Android
+?tab=5 → Tools
+?tab=6 → Safe Browser
+Direct Tab Names: You can also use the tab names directly, e.g., ?tab=cbt-android
+
+Automatic Activation: When the page loads, it automatically activates the specified tab and loads its content, instead of always defaulting to CBT Software.
+
+Fallback: If no valid tab parameter is provided, it defaults to CBT Software as before.
+
+Now users can bookmark or share direct links to specific tabs, like /softwareAppDownloader?tab=2 to go straight to the CBT Android section. The tab switching functionality remains intact for manual navigation.

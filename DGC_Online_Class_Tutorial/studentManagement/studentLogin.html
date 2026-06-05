@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD Student Login | Bringing the best out from you and code changing the world</title>
+    <meta name="description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future with Degreatcode ICT LTD online class student login.">
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <meta name="keywords" content="Degreatcode, ICT, online class, student login, software training, coding, programming, fuel your future, ideas to reality, software production, student training, best coding tutorials">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Degreatcode ICT LTD Student Login">
+    <meta property="og:description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future.">
+    <meta property="og:image" content="../images/superflyer.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://degreartcode.com/studentManagement/studentLogin.html">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+
+        .btn-google {
+            background: white;
+            color: #0f172a;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-google:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            margin: 20px 0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            display: inline-block;
+            width: 45%;
+            height: 1px;
+            background: #e2e8f0;
+            vertical-align: middle;
+        }
+
+        .divider::before {
+            margin-right: 8px;
+        }
+
+        .divider::after {
+            margin-left: 8px;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+            border-left: 4px solid #dc2626;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+            border-left: 4px solid #16a34a;
+            font-size: 0.9rem;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .spinner-circle {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner-text {
+            margin-top: 12px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <img src="../images/logo.jpg" alt="Degreatcode ICT LTD Logo" style="max-width:100px; margin: 0 auto 18px; display:block; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <img src="../images/superflyer.png" alt="Hero banner" style="width:100%;max-width:400px;margin:0 auto 18px;display:block;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+        <div class="logo">🔐</div>
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to your Degreatcode ICT LTD account</p>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <!-- Google Sign-In Button -->
+        <button id="googleSignInBtn" class="button btn-google">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="1"></circle>
+                <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M1 12h6m6 0h6m-1.78 7.78l-4.24-4.24m-5.08 0l-4.24 4.24"></path>
+            </svg>
+            Sign in with Google
+        </button>
+
+        <div class="divider">or</div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="student@example.com" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter your password" autocomplete="current-password">
+            </div>
+
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Remember me</label>
+            </div>
+
+            <button type="submit" class="button btn-login" id="loginBtn">Sign In</button>
+            <div class="spinner">
+                <div class="spinner-circle"></div>
+                <p class="spinner-text">Signing in...</p>
+            </div>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a href="studentSignUp.html">Create one</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isEmailLocked, registerActiveSession } from './sessionLockHelper.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        const googleSignInBtn = document.getElementById('googleSignInBtn');
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const rememberMe = document.getElementById('rememberMe');
+        const errorMsg = document.getElementById('errorMessage');
+        const successMsg = document.getElementById('successMessage');
+        const spinner = document.querySelector('.spinner');
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+            successMsg.style.display = 'none';
+            spinner.style.display = 'none';
+            loginBtn.disabled = false;
+            googleSignInBtn.disabled = false;
+        }
+
+        function showSpinner() {
+            spinner.style.display = 'block';
+            errorMsg.style.display = 'none';
+            loginBtn.disabled = true;
+            googleSignInBtn.disabled = true;
+        }
+
+        function hideSpinner() {
+            spinner.style.display = 'none';
+            loginBtn.disabled = false;
+            googleSignInBtn.disabled = false;
+        }
+
+
+        function handleLoginSuccess(user) {
+            hideSpinner();
+            successMsg.textContent = `✅ Welcome, ${user.displayName || user.email}!`;
+            successMsg.style.display = 'block';
+
+            // Redirect to subscription page
+            setTimeout(() => {
+                window.location.href = '../studentSubscriptionSystem/studentSubscription.html';
+            }, 1500);
+        }
+
+        // Google Sign-In
+        googleSignInBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            showSpinner();
+
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const email = result.user.email?.trim().toLowerCase();
+
+                if (!email) {
+                    throw new Error('Unable to determine Google account email');
+                }
+
+                if (await isEmailLocked(db, email)) {
+                    await signOut(auth);
+                    throw new Error('This email is already signed in from another session. Please logout elsewhere before retrying.');
+                }
+
+                await registerActiveSession(db, email, result.user.uid);
+                handleLoginSuccess(result.user);
+            } catch (error) {
+                hideSpinner();
+                let errorText = 'Google sign-in failed';
+
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorText = 'Sign-in cancelled';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorText = '⚠️ Network error. Please check your connection';
+                } else if (error.message) {
+                    errorText = `⚠️ ${error.message}`;
+                } else {
+                    errorText = `⚠️ ${error}`;
+                }
+
+                showError(errorText);
+                console.error('Google sign-in error:', error);
+            }
+        });
+
+        // Email/Password Sign-In
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim().toLowerCase();
+            const password = passwordInput.value;
+
+            if (!email) {
+                showError('⚠️ Please enter your email');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                showError('⚠️ Please enter a valid email');
+                return;
+            }
+
+            if (!password) {
+                showError('⚠️ Please enter your password');
+                return;
+            }
+
+            showSpinner();
+
+            try {
+                if (await isEmailLocked(db, email)) {
+                    showError('⚠️ This email is already signed in from another session. Please logout elsewhere before retrying.');
+                    return;
+                }
+
+                const result = await signInWithEmailAndPassword(auth, email, password);
+                
+                await registerActiveSession(db, email, result.user.uid);
+
+                if (rememberMe.checked) {
+                    localStorage.setItem('rememberEmail', email);
+                } else {
+                    localStorage.removeItem('rememberEmail');
+                }
+
+                handleLoginSuccess(result.user);
+
+            } catch (error) {
+                hideSpinner();
+                let errorText = 'Login failed';
+
+                if (error.code === 'auth/user-not-found') {
+                    errorText = '⚠️ No account found with this email';
+                } else if (error.code === 'auth/wrong-password') {
+                    errorText = '⚠️ Incorrect password';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorText = '⚠️ Invalid email address';
+                } else if (error.code === 'auth/user-disabled') {
+                    errorText = '⚠️ This account has been disabled';
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorText = '⚠️ Too many failed attempts. Please try again later';
+                } else {
+                    errorText = `⚠️ ${error.message}`;
+                }
+
+                showError(errorText);
+                console.error('Login error:', error);
+            }
+        });
+
+        // Check if user is already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Redirect to subscription page if already logged in
+                window.location.href = '../studentSubscriptionSystem/studentSubscription.html';
+            }
+        });
+
+        // Load remembered email
+        window.addEventListener('load', () => {
+            const rememberedEmail = localStorage.getItem('rememberEmail');
+            if (rememberedEmail) {
+                emailInput.value = rememberedEmail;
+                rememberMe.checked = true;
+            }
+        });
+    </script>
+</body>
+</html>

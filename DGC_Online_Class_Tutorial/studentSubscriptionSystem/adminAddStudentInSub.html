@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student to Subscription - Admin</title>
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: #10b981;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-submit:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .plans-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .plans-section h2 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .plans-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .plan-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        .plan-card h3 {
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .plan-card p {
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .plan-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .plan-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #059669;
+        }
+
+        .plan-duration {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .category-tag {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .student-search {
+            position: relative;
+        }
+
+        .student-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .student-suggestion {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .student-suggestion:hover {
+            background: #f8fafc;
+        }
+
+        .student-suggestion:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👨‍🎓 Add Student to Subscription</h1>
+            <p>Manually add students to subscription plans and grant access to tutorial categories</p>
+            <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+                <a href="adminManagExistingSubStu.html" target="_blank" style="padding: 12px 18px; border-radius: 10px; background: #3b82f6; color: white; text-decoration: none; font-weight: 700;">Manage Existing Subscriptions</a>
+                <a href="../studentAttendanceSys/adminAttendance.html" target="_blank" style="padding: 12px 18px; border-radius: 10px; background: #10b981; color: white; text-decoration: none; font-weight: 700;">Open Attendance System</a>
+            </div>
+        </header>
+
+        <div id="messageContainer"></div>
+
+        <div class="form-container">
+            <form id="addStudentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentEmail">Student Email *</label>
+                        <div class="student-search">
+                            <input type="email" id="studentEmail" placeholder="Enter student email address" required>
+                            <div id="studentSuggestions" class="student-suggestions"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subscriptionPlan">Subscription Plan *</label>
+                        <select id="subscriptionPlan" required>
+                            <option value="">Select a subscription plan...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">Start Date *</label>
+                        <input type="date" id="startDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customDuration">Custom Duration (days)</label>
+                        <input type="number" id="customDuration" placeholder="Leave empty to use plan default" min="1" style="width: 250px;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes (Optional)</label>
+                    <input type="text" id="notes" placeholder="Additional notes about this subscription">
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span id="btnText">Admin Add Student to Existing Subscription</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="plans-section">
+            <h2>Available Subscription Plans</h2>
+            <div id="plansGrid" class="plans-grid">
+                <div class="message info">
+                    Loading subscription plans...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set, push } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isAuthorizedAdmin } from '../auth-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+
+        let subscriptionPlans = {};
+        let studentEmails = [];
+
+        // Initialize the app
+        async function init() {
+            // Hide content initially
+            document.querySelector('.container').style.display = 'none';
+
+            // Check for stored authentication first (like uploader.html)
+            const storedEmail = localStorage.getItem('toolmanager_user_email');
+            if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+                // User is already authenticated via localStorage
+                document.querySelector('.container').style.display = 'block';
+                console.log('Admin authenticated via localStorage:', storedEmail);
+
+                // Set default start date to today
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('startDate').value = today;
+
+                await loadSubscriptionPlans();
+                await loadStudentEmails();
+                return;
+            }
+
+            // Check Firebase auth state
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // User is signed in, check if authorized
+                    const authorized = await isAuthorizedAdmin(user.email);
+                    if (authorized) {
+                        // Show admin content
+                        document.querySelector('.container').style.display = 'block';
+                        console.log('Admin signed in:', user.email);
+
+                        // Store email for future sessions
+                        localStorage.setItem('toolmanager_user_email', user.email);
+
+                        // Set default start date to today
+                        const today = new Date().toISOString().split('T')[0];
+                        document.getElementById('startDate').value = today;
+
+                        await loadSubscriptionPlans();
+                        await loadStudentEmails();
+                    } else {
+                        // User signed in but not authorized
+                        showAuthMessage('You are not authorized to access this admin panel.', 'error');
+                        setTimeout(() => {
+                            window.location.href = '../auth.html';
+                        }, 3000);
+                    }
+                } else {
+                    // User not signed in
+                    showAuthMessage('Please sign in to access the admin panel.', 'error');
+                    setTimeout(() => {
+                        window.location.href = '../auth.html';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Show authentication message
+        function showAuthMessage(message, type = 'info') {
+            document.body.innerHTML = `
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 100vh;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    text-align: center;
+                    padding: 20px;
+                ">
+                    <h1 style="margin-bottom: 20px;">🔐 Authentication Required</h1>
+                    <div style="
+                        background: rgba(255, 255, 255, 0.1);
+                        padding: 20px;
+                        border-radius: 12px;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        max-width: 500px;
+                    ">
+                        <p style="margin: 0; font-size: 1.1rem;">${message}</p>
+                        <p style="margin: 20px 0 0 0; font-size: 0.9rem; opacity: 0.8;">Redirecting to login page...</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load subscription plans
+        async function loadSubscriptionPlans() {
+            try {
+                const plansRef = ref(db, 'subscriptionPlans');
+                const snapshot = await get(plansRef);
+
+                if (snapshot.exists()) {
+                    subscriptionPlans = snapshot.val();
+                    displayPlans();
+                    populatePlanSelect();
+                } else {
+                    document.getElementById('plansGrid').innerHTML = '<div class="message info">No subscription plans found. Create plans first in the Subscription Plans Manager.</div>';
+                }
+            } catch (error) {
+                console.error('Error loading plans:', error);
+                showMessage('Error loading subscription plans.', 'error');
+            }
+        }
+
+        // Load student emails for search suggestions
+        async function loadStudentEmails() {
+            try {
+                const usersRef = ref(db, 'userSubscriptions');
+                const snapshot = await get(usersRef);
+
+                if (snapshot.exists()) {
+                    const subscriptions = snapshot.val();
+                    const emails = new Set();
+
+                    // Extract unique emails from existing subscriptions
+                    for (const userId in subscriptions) {
+                        for (const planId in subscriptions[userId]) {
+                            const sub = subscriptions[userId][planId];
+                            if (sub.userEmail) {
+                                emails.add(sub.userEmail);
+                            }
+                        }
+                    }
+
+                    studentEmails = Array.from(emails);
+                }
+            } catch (error) {
+                console.error('Error loading student emails:', error);
+            }
+        }
+
+        // Display subscription plans
+        function displayPlans() {
+            const plansGrid = document.getElementById('plansGrid');
+            plansGrid.innerHTML = '';
+
+            for (const [planId, plan] of Object.entries(subscriptionPlans)) {
+                const planCard = document.createElement('div');
+                planCard.className = 'plan-card';
+
+                const categoriesHtml = plan.categories.map(cat =>
+                    `<span class="category-tag">${cat.name}</span>`
+                ).join('');
+
+                planCard.innerHTML = `
+                    <h3>${plan.name}</h3>
+                    <p>${plan.description || 'No description'}</p>
+                    <div class="plan-details">
+                        <span class="plan-price">₦${plan.price.toLocaleString()}</span>
+                        <span class="plan-duration">${plan.duration} days</span>
+                    </div>
+                    <div class="categories-list">
+                        ${categoriesHtml}
+                    </div>
+                `;
+
+                plansGrid.appendChild(planCard);
+            }
+        }
+
+        // Populate plan select dropdown
+        function populatePlanSelect() {
+            const select = document.getElementById('subscriptionPlan');
+            select.innerHTML = '<option value="">Select a subscription plan...</option>';
+
+            for (const [planId, plan] of Object.entries(subscriptionPlans)) {
+                const option = document.createElement('option');
+                option.value = planId;
+                option.textContent = `${plan.name} - ₦${plan.price.toLocaleString()} (${plan.duration} days)`;
+                select.appendChild(option);
+            }
+        }
+
+        // Show email suggestions
+        function showEmailSuggestions(searchTerm) {
+            const suggestionsDiv = document.getElementById('studentSuggestions');
+            suggestionsDiv.innerHTML = '';
+
+            if (searchTerm.length < 2) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+
+            const matches = studentEmails.filter(email =>
+                email.toLowerCase().includes(searchTerm.toLowerCase())
+            ).slice(0, 5);
+
+            if (matches.length > 0) {
+                matches.forEach(email => {
+                    const div = document.createElement('div');
+                    div.className = 'student-suggestion';
+                    div.textContent = email;
+                    div.onclick = () => {
+                        document.getElementById('studentEmail').value = email;
+                        suggestionsDiv.style.display = 'none';
+                    };
+                    suggestionsDiv.appendChild(div);
+                });
+                suggestionsDiv.style.display = 'block';
+            } else {
+                suggestionsDiv.style.display = 'none';
+            }
+        }
+
+        // Show message
+        function showMessage(message, type = 'info') {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="message ${type}">${message}</div>`;
+
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 5000);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('addStudentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+
+            const studentEmail = document.getElementById('studentEmail').value.trim();
+            const planId = document.getElementById('subscriptionPlan').value;
+            const startDate = document.getElementById('startDate').value;
+            const customDuration = document.getElementById('customDuration').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!studentEmail || !planId || !startDate) {
+                showMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="loading"></span>Adding subscription...';
+
+            try {
+                // Get plan details
+                const plan = subscriptionPlans[planId];
+                if (!plan) {
+                    throw new Error('Selected plan not found');
+                }
+
+                // Calculate end date
+                const start = new Date(startDate);
+                const duration = customDuration ? parseInt(customDuration) : plan.duration;
+                const end = new Date(start);
+                end.setDate(end.getDate() + duration);
+
+                // Generate a user ID from email (simplified - in real app, you'd look up actual user ID)
+                const userId = btoa(studentEmail).replace(/[^a-zA-Z0-9]/g, '').substring(0, 20);
+                const assignedDate = new Date().toISOString();
+
+                // Create pending subscription data
+                const subscriptionData = {
+                    userId: userId,
+                    userEmail: studentEmail,
+                    planId: planId,
+                    planName: plan.name,
+                    categories: plan.categories,
+                    startDate: start.toISOString(),
+                    endDate: end.toISOString(),
+                    duration: duration,
+                    amount: plan.price,
+                    status: 'pending',
+                    paymentMethod: 'admin_manual',
+                    transactionId: `ADMIN_${Date.now()}`,
+                    assignedBy: 'admin',
+                    assignedDate: assignedDate,
+                    createdAt: assignedDate,
+                    notes: notes || null
+                };
+
+                // Save to pending subscriptions node
+                const subscriptionRef = ref(db, `pendingStudentSubscriptions/${userId}/${planId}`);
+                await set(subscriptionRef, subscriptionData);
+
+                showMessage(`✅ Successfully assigned ${studentEmail} to "${plan.name}" subscription. The student can now claim it from their portal.`, 'success');
+
+                // Reset form
+                document.getElementById('addStudentForm').reset();
+                document.getElementById('startDate').value = new Date().toISOString().split('T')[0];
+
+            } catch (error) {
+                console.error('Error adding subscription:', error);
+                showMessage(`❌ Error adding subscription: ${error.message}`, 'error');
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                btnText.textContent = 'Add Student to Subscription';
+            }
+        });
+
+        // Email input handler for suggestions
+        document.getElementById('studentEmail').addEventListener('input', (e) => {
+            showEmailSuggestions(e.target.value);
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.student-search')) {
+                document.getElementById('studentSuggestions').style.display = 'none';
+            }
+        });
+
+        // Initialize the application
+        init();
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">c:\Users\User PC\Documents\degreartcode data\DGC_Online_Class_Tutorial\studentSubscriptionSystem\adminAddStudentInSub.html

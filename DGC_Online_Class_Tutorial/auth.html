@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sign In - Degreatcode ICT LTD online class Tool Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 24px;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 12px;
+            padding: 48px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-card h1 {
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+
+        .auth-card .subtitle {
+            color: #64748b;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e293b;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        #submitBtn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #submitBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        #submitBtn:active {
+            transform: translateY(0);
+        }
+        #submitBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner-circle {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner-text {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 16px;
+            display: none;
+            border-left: 4px solid #dc2626;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 16px;
+            display: none;
+            border-left: 4px solid #16a34a;
+        }
+
+        .info-text {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 16px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            text-align: left;
+        }
+
+        .info-text strong {
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-card">
+            <div class="logo">🔐</div>
+            <h1>Tool Manager</h1>
+            <p class="subtitle">Admin Authentication Required</p>
+
+            <div id="signinArea">
+                    <button id="backBtn" style="width: 100%; padding: 12px; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; margin-bottom: 12px;">← Back</button>
+                <button id="homeBtn" style="width: 100%; padding: 12px; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; margin-bottom: 12px;">🏠 Home</button>
+                <div class="input-group">
+                    <label for="emailInput">Email Address</label>
+                    <input type="email" id="emailInput" placeholder="admin@Degreatcode ICT LTD online class.com" autocomplete="email">
+                </div>
+
+                <button id="submitBtn">Sign In with Google</button>
+
+                <div style="margin: 18px 0; font-size: 0.9rem; color: #64748b;">or</div>
+                <button id="emailOnlyBtn" style="width: 100%; padding: 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px;">
+                    Sign In (Email Only)
+                </button>
+
+                <div class="spinner">
+                    <div class="spinner-circle"></div>
+                    <p class="spinner-text" id="spinnerText">Authenticating...</p>
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="info-text">
+                    <strong>ℹ️ Note:</strong> Only authorized administrators can access this tool manager. If you don't have access, contact your system administrator.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+    import { AUTHORIZED_EMAIL, isAuthorizedAdmin, getActiveAuthorizedEmail } from './auth-config.js';
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAyC6UrcaRrHRlXIhA0ZoZJ7O_bqA7qS5s",
+        authDomain: "quadraticeqn-b0021.firebaseapp.com",
+        databaseURL: "https://quadraticeqn-b0021-default-rtdb.firebaseio.com",
+        projectId: "quadraticeqn-b0021",
+        storageBucket: "quadraticeqn-b0021.firebasestorage.app",
+        messagingSenderId: "112828185217",
+        appId: "1:112828185217:web:cd58a762c5720f062d6b80",
+        measurementId: "G-LK4YH1R9W3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const emailInput = document.getElementById('emailInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const spinner = document.querySelector('.spinner');
+    const spinnerText = document.getElementById('spinnerText');
+
+    function showError(msg) {
+        errorMessage.textContent = msg;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+        spinner.style.display = 'none';
+        submitBtn.disabled = false;
+    }
+
+    function showSuccess(msg) {
+        successMessage.textContent = msg;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+    }
+
+    function showSpinner(msg) {
+        spinner.style.display = 'block';
+        spinnerText.textContent = msg || 'Authenticating...';
+        errorMessage.style.display = 'none';
+        submitBtn.disabled = true;
+    }
+
+    submitBtn.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+
+        if (!email) {
+            showError('⚠️ Please enter your email address');
+            return;
+        }
+
+        if (!email.includes('@')) {
+            showError('⚠️ Please enter a valid email address');
+            return;
+        }
+
+        showSpinner('Opening Google Sign-In...');
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            console.log('[Auth] User signed in:', user.email);
+            const activeEmail = await getActiveAuthorizedEmail();
+            const expectedEmail = activeEmail || AUTHORIZED_EMAIL;
+            if (await isAuthorizedAdmin(user.email)) {
+                console.log('[Auth] ✓ Authorized admin detected');
+                showSuccess('✓ Authorized! Redirecting...');
+                localStorage.setItem('toolmanager_user_email', user.email);
+                localStorage.setItem('toolmanager_auth_time', new Date().getTime());
+                
+                setTimeout(() => {
+                    window.location.href = './uploader.html?auth=done';
+                }, 1000);
+            } else {
+                console.log('[Auth] ✗ Unauthorized email:', user.email);
+                showError(`⚠️ Unauthorized email: ${user.email}\nExpected: ${expectedEmail}`);
+                
+                try {
+                    await auth.signOut();
+                } catch(_) {}
+            }
+        } catch (error) {
+            console.error('[Auth Error]', error);
+            
+            if (error.code === 'auth/popup-blocked') {
+                showError('⚠️ Sign-in popup was blocked. Please allow popups for this site.');
+            } else if (error.code === 'auth/popup-closed-by-user') {
+                showError('Sign-in cancelled. Please try again.');
+                submitBtn.disabled = false;
+            } else if (error.code === 'auth/network-request-failed') {
+                showError('⚠️ Network error. Please check your internet connection.');
+            } else {
+                showError(`Authentication failed: ${error.message}`);
+            }
+        }
+    });
+
+    // Email-only login (no Google auth)
+    const emailOnlyBtn = document.getElementById('emailOnlyBtn');
+    emailOnlyBtn.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+        if (!email) {
+            showError('⚠️ Please enter your email address');
+            return;
+        }
+
+        if (!email.includes('@')) {
+            showError('⚠️ Please enter a valid email address');
+            return;
+        }
+
+        if (!await isAuthorizedAdmin(email)) {
+            showError('⚠️ Unauthorized email address');
+            return;
+        }
+
+        showSpinner('Signing in...');
+        localStorage.setItem('toolmanager_user_email', email);
+        localStorage.setItem('toolmanager_auth_time', new Date().getTime());
+        showSuccess('✓ Authorized! Redirecting...');
+        setTimeout(() => {
+            window.location.href = './uploader.html?auth=done';
+        }, 1000);
+    });
+
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = './';
+        }
+    });
+
+    document.getElementById('homeBtn')?.addEventListener('click', () => {
+        window.location.href = './';
+    });
+
+    emailInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            submitBtn.click();
+        }
+    });
+
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = './';
+        }
+    });
+
+    // Auto-fill email if set
+    const savedEmail = localStorage.getItem('toolmanager_user_email');
+    if (savedEmail) {
+        emailInput.value = savedEmail;
+    }
+    </script>
+</body>
+</html>
+

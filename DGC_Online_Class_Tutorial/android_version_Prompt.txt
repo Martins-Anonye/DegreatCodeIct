@@ -1,0 +1,17 @@
+
+✅ Done.
+
+### What I changed
+
+- Added a native status bar to activity_main.xml
+- Updated MainActivity.kt to:
+- show `Fetching app key from Firebase...` while loading
+- display `App key loaded from Firebase.` when successful
+- display `Firebase fetch failed; using fallback app key.` if the network or Firebase call fails
+
+### Validation
+
+- MainActivity.kt has no reported errors.
+
+
+Made changes.

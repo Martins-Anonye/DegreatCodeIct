@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email List Manager</title>
+    <script type="module">
+        // Import Firebase config from single source
+        import { firebaseConfig } from './FirebaseConnection/FirebaseConfiggFile.js';
+
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getDatabase, ref, set, get, remove, update, child } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Store categories globally
+        let categoriesData = {};
+
+        // Function to load categories from Firebase
+        window.loadCategoriesForDropdown = async function() {
+            try {
+                const snapshot = await get(child(ref(database), 'categories/'));
+                if (snapshot.exists()) {
+                    categoriesData = snapshot.val();
+                    populateCategoryDropdowns();
+                }
+            } catch (error) {
+                console.error("Error loading categories: ", error);
+            }
+        };
+
+        // Function to populate category dropdowns
+        function populateCategoryDropdowns() {
+            const topSelect = document.getElementById('topCategorySelect');
+            const middleSelect = document.getElementById('middleCategorySelect');
+            const categorySelect = document.getElementById('categorySelect');
+
+            // Clear existing options
+            topSelect.innerHTML = '<option value="">Select Top Category</option>';
+            middleSelect.innerHTML = '<option value="">Select Middle Category</option>';
+            categorySelect.innerHTML = '<option value="">Select Category</option>';
+
+            // Populate top categories
+            for (const topKey in categoriesData) {
+                if (typeof categoriesData[topKey] === 'object' && categoriesData[topKey] !== null) {
+                    const topOption = document.createElement('option');
+                    topOption.value = topKey;
+                    topOption.textContent = topKey;
+                    topSelect.appendChild(topOption);
+                }
+            }
+        }
+
+        // Function to handle top category change
+        window.onTopCategoryChange = function() {
+            const selectedTop = document.getElementById('topCategorySelect').value;
+            const middleSelect = document.getElementById('middleCategorySelect');
+            const categorySelect = document.getElementById('categorySelect');
+
+            // Clear dependent dropdowns
+            middleSelect.innerHTML = '<option value="">Select Middle Category</option>';
+            categorySelect.innerHTML = '<option value="">Select Category</option>';
+
+            if (selectedTop && categoriesData[selectedTop]) {
+                const middleData = categoriesData[selectedTop];
+                for (const middleKey in middleData) {
+                    if (typeof middleData[middleKey] === 'object' && middleData[middleKey] !== null) {
+                        const option = document.createElement('option');
+                        option.value = middleKey;
+                        option.textContent = middleKey;
+                        middleSelect.appendChild(option);
+                    }
+                }
+            }
+        };
+
+        // Function to handle middle category change
+        window.onMiddleCategoryChange = function() {
+            const selectedTop = document.getElementById('topCategorySelect').value;
+            const selectedMiddle = document.getElementById('middleCategorySelect').value;
+            const categorySelect = document.getElementById('categorySelect');
+
+            // Clear category dropdown
+            categorySelect.innerHTML = '<option value="">Select Category</option>';
+
+            if (selectedTop && selectedMiddle && categoriesData[selectedTop] && categoriesData[selectedTop][selectedMiddle]) {
+                const categoryData = categoriesData[selectedTop][selectedMiddle];
+                for (const catKey in categoryData) {
+                    if (typeof categoryData[catKey] === 'object' && categoryData[catKey] !== null) {
+                        const option = document.createElement('option');
+                        option.value = catKey;
+                        option.textContent = catKey;
+                        categorySelect.appendChild(option);
+                    }
+                }
+            }
+        };
+
+        // Function to add new email entry
+        window.addEmail = async function() {
+            const email = document.getElementById('emailInput').value.trim();
+            const clientId = document.getElementById('clientIdInput').value.trim();
+            const topCategory = document.getElementById('topCategorySelect').value;
+            const middleCategory = document.getElementById('middleCategorySelect').value;
+            const category = document.getElementById('categorySelect').value;
+            const description = document.getElementById('descriptionInput').value.trim();
+            const isActive = document.getElementById('isActiveInput').checked;
+
+            if (!email) {
+                alert('Please enter an email address');
+                return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            if (!clientId) {
+                alert('Please enter a Client ID');
+                return;
+            }
+
+            if (!topCategory || !middleCategory || !category) {
+                alert('Please select Top Category, Middle Category, and Category');
+                return;
+            }
+
+            // Build full category path
+            const fullCategory = `${topCategory} > ${middleCategory} > ${category}`;
+
+            try {
+                // If this entry is being set as active, deactivate all others
+                if (isActive) {
+                    const snapshot = await get(ref(database, 'emailList/'));
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        for (const key in data) {
+                            if (data[key].isActive) {
+                                await update(ref(database, `emailList/${key}`), { isActive: false });
+                            }
+                        }
+                    }
+                }
+
+                // Generate unique key based on email
+                const key = email.replace(/[^a-zA-Z0-9]/g, '_');
+                
+                await set(ref(database, 'emailList/' + key), {
+                    email: email,
+                    clientId: clientId,
+                    category: fullCategory,
+                    topCategory: topCategory,
+                    middleCategory: middleCategory,
+                    subCategory: category,
+                    description: description,
+                    isActive: isActive,
+                    createdAt: Date.now()
+                });
+
+                alert('Email added successfully!');
+                clearForm();
+                loadEmails();
+            } catch (error) {
+                console.error("Error adding email: ", error);
+                alert('Error adding email: ' + error.message);
+            }
+        };
+
+        // Function to clear form
+        function clearForm() {
+            document.getElementById('emailInput').value = '';
+            document.getElementById('clientIdInput').value = '';
+            document.getElementById('topCategorySelect').value = '';
+            document.getElementById('middleCategorySelect').innerHTML = '<option value="">Select Middle Category</option>';
+            document.getElementById('categorySelect').innerHTML = '<option value="">Select Category</option>';
+            document.getElementById('descriptionInput').value = '';
+            document.getElementById('isActiveInput').checked = false;
+        }
+
+        // Function to load emails from Firebase
+        window.loadEmails = async function() {
+            try {
+                const snapshot = await get(ref(database, 'emailList/'));
+                const listContainer = document.getElementById('emailList');
+                listContainer.innerHTML = '';
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    // Sort to show active email first
+                    const sortedData = Object.entries(data).sort((a, b) => {
+                        if (a[1].isActive && !b[1].isActive) return -1;
+                        if (!a[1].isActive && b[1].isActive) return 1;
+                        return (b[1].createdAt || 0) - (a[1].createdAt || 0);
+                    });
+
+                    for (const [key, emailData] of sortedData) {
+                        const div = document.createElement('div');
+                        div.className = 'email-item';
+                        div.style.cssText = 'padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px;';
+                        div.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div style="flex: 1;">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                        <strong style="font-size: 1.1rem;">${emailData.email}</strong>
+                                        ${emailData.isActive ? '<span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">ACTIVE</span>' : ''}
+                                    </div>
+                                    <p style="color: #666; margin: 4px 0;"><strong>Client ID:</strong> ${emailData.clientId || 'N/A'}</p>
+                                    <p style="color: #666; margin: 4px 0;"><strong>Category:</strong> ${emailData.category || 'N/A'}</p>
+                                    <p style="color: #666; margin: 4px 0;">${emailData.description || 'No description'}</p>
+                                    <small style="color: #999;">Created: ${emailData.createdAt ? new Date(emailData.createdAt).toLocaleString() : 'N/A'}</small>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button onclick="setActiveEmail('${key}')" style="padding: 8px 12px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">Set Active</button>
+                                    <button onclick="editEmail('${key}')" style="padding: 8px 12px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
+                                    <button onclick="deleteEmail('${key}')" style="padding: 8px 12px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+                                </div>
+                            </div>
+                        `;
+                        listContainer.appendChild(div);
+                    }
+                } else {
+                    listContainer.innerHTML = '<p style="text-align: center; color: #999;">No emails found. Add your first email above.</p>';
+                }
+            } catch (error) {
+                console.error("Error loading emails: ", error);
+                alert('Error loading emails: ' + error.message);
+            }
+        };
+
+        // Function to set an email as active (only one can be active)
+        window.setActiveEmail = async function(key) {
+            try {
+                // First, deactivate all emails
+                const snapshot = await get(ref(database, 'emailList/'));
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    for (const k in data) {
+                        if (data[k].isActive) {
+                            await update(ref(database, `emailList/${k}`), { isActive: false });
+                        }
+                    }
+                }
+
+                // Then set the selected email as active
+                await update(ref(database, `emailList/${key}`), { isActive: true });
+                
+                alert('Active email updated!');
+                loadEmails();
+            } catch (error) {
+                console.error("Error setting active email: ", error);
+                alert('Error setting active email: ' + error.message);
+            }
+        };
+
+        // Function to edit an email
+        window.editEmail = async function(key) {
+            try {
+                const snapshot = await get(ref(database, `emailList/${key}`));
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    
+                    // Populate the form with existing data
+                    document.getElementById('emailInput').value = data.email || '';
+                    document.getElementById('clientIdInput').value = data.clientId || '';
+                    document.getElementById('descriptionInput').value = data.description || '';
+                    document.getElementById('isActiveInput').checked = data.isActive || false;
+
+                    // Set categories
+                    await loadCategoriesForDropdown();
+                    
+                    if (data.topCategory) {
+                        document.getElementById('topCategorySelect').value = data.topCategory;
+                        await onTopCategoryChange();
+                    }
+                    if (data.middleCategory) {
+                        document.getElementById('middleCategorySelect').value = data.middleCategory;
+                        await onMiddleCategoryChange();
+                    }
+                    if (data.subCategory) {
+                        document.getElementById('categorySelect').value = data.subCategory;
+                    }
+
+                    // Change button text to indicate update mode
+                    document.querySelector('.card button').textContent = 'Update Email';
+                    document.querySelector('.card button').onclick = function() {
+                        updateEmailEntry(key);
+                    };
+                }
+            } catch (error) {
+                console.error("Error loading email for edit: ", error);
+                alert('Error loading email: ' + error.message);
+            }
+        };
+
+        // Function to update email entry
+        async function updateEmailEntry(key) {
+            const email = document.getElementById('emailInput').value.trim();
+            const clientId = document.getElementById('clientIdInput').value.trim();
+            const topCategory = document.getElementById('topCategorySelect').value;
+            const middleCategory = document.getElementById('middleCategorySelect').value;
+            const category = document.getElementById('categorySelect').value;
+            const description = document.getElementById('descriptionInput').value.trim();
+            const isActive = document.getElementById('isActiveInput').checked;
+
+            if (!email) {
+                alert('Please enter an email address');
+                return;
+            }
+
+            if (!clientId) {
+                alert('Please enter a Client ID');
+                return;
+            }
+
+            if (!topCategory || !middleCategory || !category) {
+                alert('Please select Top Category, Middle Category, and Category');
+                return;
+            }
+
+            const fullCategory = `${topCategory} > ${middleCategory} > ${category}`;
+
+            try {
+                if (isActive) {
+                    const snapshot = await get(ref(database, 'emailList/'));
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        for (const k in data) {
+                            if (data[k].isActive && k !== key) {
+                                await update(ref(database, `emailList/${k}`), { isActive: false });
+                            }
+                        }
+                    }
+                }
+
+                await update(ref(database, `emailList/${key}`), {
+                    email: email,
+                    clientId: clientId,
+                    category: fullCategory,
+                    topCategory: topCategory,
+                    middleCategory: middleCategory,
+                    subCategory: category,
+                    description: description,
+                    isActive: isActive,
+                    updatedAt: Date.now()
+                });
+
+                alert('Email updated successfully!');
+                // Reset button
+                document.querySelector('.card button').textContent = 'Add Email';
+                document.querySelector('.card button').onclick = addEmail;
+                clearForm();
+                loadEmails();
+            } catch (error) {
+                console.error("Error updating email: ", error);
+                alert('Error updating email: ' + error.message);
+            }
+        }
+
+        // Function to delete an email
+        window.deleteEmail = async function(key) {
+            if (!confirm('Are you sure you want to delete this email?')) return;
+
+            try {
+                await remove(ref(database, 'emailList/' + key));
+                alert('Email deleted successfully!');
+                loadEmails();
+            } catch (error) {
+                console.error("Error deleting email: ", error);
+                alert('Error deleting email: ' + error.message);
+            }
+        };
+
+        // Load categories and emails on page load
+        window.onload = function() {
+            loadCategoriesForDropdown();
+            loadEmails();
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 16px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .input-group input[type="text"],
+        .input-group input[type="email"],
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .input-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+        }
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        button:hover {
+            background-color: #059669;
+        }
+        #emailList {
+            margin-top: 20px;
+        }
+        .active-badge {
+            background: #10b981;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>📧 Email List Manager</h1>
+
+    <div class="card">
+        <h2>Add New Email</h2>
+        <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="emailInput" placeholder="Enter email address">
+        </div>
+        <div class="input-group">
+            <label>Client ID</label>
+            <input type="text" id="clientIdInput" placeholder="Enter Dropbox Client ID">
+        </div>
+        <div class="input-group">
+            <label>Category (from Category Manager)</label>
+            <select id="topCategorySelect" onchange="onTopCategoryChange()" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; margin-bottom: 12px;">
+                <option value="">Select Top Category</option>
+            </select>
+            <select id="middleCategorySelect" onchange="onMiddleCategoryChange()" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; margin-bottom: 12px;">
+                <option value="">Select Middle Category</option>
+            </select>
+            <select id="categorySelect" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem;">
+                <option value="">Select Category</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Description</label>
+            <textarea id="descriptionInput" placeholder="Enter description (optional)"></textarea>
+        </div>
+        <div class="input-group checkbox-group">
+            <input type="checkbox" id="isActiveInput">
+            <label for="isActiveInput">Set as active email</label>
+        </div>
+        <button onclick="addEmail()">Add Email</button>
+    </div>
+
+    <div class="card">
+        <h2>Email List</h2>
+        <div id="emailList">
+            <p style="text-align: center; color: #999;">Loading emails...</p>
+        </div>
+    </div>
+</body>
+</html>

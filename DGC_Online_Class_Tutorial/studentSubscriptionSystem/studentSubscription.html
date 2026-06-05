@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD Student Subscription | Bringing the best out from you and code changing the world</title>
+    <meta name="description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future with Degreatcode ICT LTD online class student subscription.">
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <meta name="keywords" content="Degreatcode, ICT, online class, student subscription, software training, coding, programming, fuel your future, ideas to reality, software production, student training, best coding tutorials">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Degreatcode ICT LTD Student Subscription">
+    <meta property="og:description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future.">
+    <meta property="og:image" content="../images/superflyer.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://degreartcode.com/studentSubscriptionSystem/studentSubscription.html">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            color: #111;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 4px solid #d90429;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #111;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: #222;
+            font-size: 1.1rem;
+        }
+
+        .user-info {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 6px solid #d90429;
+        }
+
+        .user-email {
+            color: #111;
+            font-weight: 600;
+        }
+
+        .user-email small {
+            display: block;
+            color: #b0b0b0;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .btn-back {
+            background: #d90429;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+            box-shadow: 0 2px 8px rgba(217,4,41,0.08);
+            transition: background 0.2s;
+        }
+        .btn-back:hover {
+            background: #b3001b;
+        }
+
+        .btn-back:hover {
+            background: #4f46e5;
+        }
+
+        .btn-logout {
+            background: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .btn-logout:hover {
+            background: #dc2626;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .plan-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+        }
+
+        .plan-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .plan-price small {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .plan-duration {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .plan-body {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-description {
+            color: #64748b;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .plan-categories {
+            margin: 15px 0;
+        }
+
+        .plan-categories label {
+            display: block;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .category-badge {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .subscription-status {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .subscription-status.active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .subscription-status.expired {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .plan-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .btn-paystack {
+            background: #0096FF;
+            color: white;
+        }
+
+        .btn-paystack:hover {
+            background: #0080D0;
+            transform: translateY(-2px);
+        }
+
+        .btn-flutterwave {
+            background: #F00075;
+            color: white;
+        }
+
+        .btn-flutterwave:hover {
+            background: #D4005A;
+            transform: translateY(-2px);
+        }
+
+        .btn-disabled {
+            background: #cbd5e1;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .user-info {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-actions {
+                flex-direction: column;
+            }
+
+            button {
+                flex: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../images/logo.jpg" alt="Degreatcode ICT LTD Logo" style="max-width:100px; margin: 0 auto 18px; display:block; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <img src="../images/superflyer.png" alt="Hero banner" style="width:100%;max-width:400px;margin:0 auto 18px;display:block;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+        <header>
+            <h1>💳 Subscription Plans</h1>
+            <p>Choose a plan to access premium tutorial content</p>
+        </header>
+
+        <div class="user-info">
+            <div>
+                <div class="user-email">
+                    <span id="userEmail">Not signed in</span>
+                    <small>Your account</small>
+                </div>
+            </div>
+            <div>
+                <button class="btn-back" onclick="goToTutorials()">🎥 Watch Tutorials</button>
+                <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <div id="plansContainer" class="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading subscription plans...</p>
+        </div>
+
+        <div id="pendingClaimsSection" class="empty-state" style="display: none; margin-top: 24px;"></div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📋</div>
+            <div>No subscription plans available yet.</div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Complete Payment</h2>
+                <button class="modal-close" onclick="closePaymentModal()">✕</button>
+            </div>
+            <div class="modal-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="paymentEmail" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="paymentPhone" placeholder="+234...">
+                </div>
+                <div class="form-group">
+                    <label>Amount: ₦<span id="paymentAmount">0</span></label>
+                </div>
+                <button class="btn-paystack" onclick="processPaystackPayment()">Pay with Paystack</button>
+                <button class="btn-flutterwave" onclick="processFlutterwavePayment()" style="display: none;">Pay with Flutterwave</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set, child } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { unregisterActiveSession } from '../studentManagement/sessionLockHelper.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+
+        let currentUser = null;
+        let allPlans = [];
+        let pendingClaims = [];
+        let selectedPlan = null;
+
+        // Check current user
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('userEmail').textContent = user.email;
+                await loadPendingClaims();
+                loadPlans();
+            } else {
+                document.getElementById('userEmail').innerHTML = '<a href="../auth.html" style="color: #667eea; text-decoration: underline;">Not signed in - Click to login</a>';
+                document.getElementById('plansContainer').innerHTML = '<div style="text-align: center; color: white;"><p style="font-size: 1.2rem;">Please sign in to view and subscribe to plans</p></div>';
+            }
+        });
+
+        async function loadPendingClaims() {
+            if (!currentUser || !currentUser.email) {
+                pendingClaims = [];
+                renderPendingClaims();
+                return;
+            }
+
+            try {
+                const pendingUserId = getPendingUserId(currentUser.email);
+                const snapshot = await get(ref(db, `pendingStudentSubscriptions/${pendingUserId}`));
+                pendingClaims = snapshot.exists()
+                    ? Object.entries(snapshot.val()).map(([planId, claim]) => ({ planId, ...claim }))
+                    : [];
+                renderPendingClaims();
+            } catch (error) {
+                console.error('Error loading pending claims:', error);
+                pendingClaims = [];
+                renderPendingClaims();
+            }
+        }
+
+        function renderPendingClaims() {
+            const section = document.getElementById('pendingClaimsSection');
+            if (!pendingClaims.length) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            section.innerHTML = `
+                <h2>🔔 Assigned Subscriptions Ready to Claim</h2>
+                <p>You have been assigned subscription access by the admin. Claim one or more plans below to activate your access.</p>
+                <div class="plans-grid">
+                    ${pendingClaims.map(claim => `
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <div class="plan-name">${claim.planName}</div>
+                                <div class="plan-price">₦${(claim.amount || 0).toLocaleString()} <small>/assigned</small></div>
+                                <div class="plan-duration">📅 ${claim.duration || 0} days</div>
+                            </div>
+                            <div class="plan-body">
+                                <p class="plan-description">Assigned by admin on ${new Date(claim.assignedDate).toLocaleDateString()}</p>
+                                <div class="categories-list">
+                                    ${(claim.categories || []).map(cat => `<span class="category-badge">${cat.name}</span>`).join('')}
+                                </div>
+                                <div class="plan-actions">
+                                    <button class="btn-paystack" onclick="claimPendingSubscription('${claim.planId}')">Claim Subscription</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function getPendingUserId(email) {
+            return btoa(email).replace(/[^a-zA-Z0-9]/g, '').substring(0, 20);
+        }
+
+        async function claimPendingSubscription(planId) {
+            if (!currentUser || !currentUser.email) {
+                alert('Please sign in to claim your assigned subscription.');
+                return;
+            }
+
+            const pendingUserId = getPendingUserId(currentUser.email);
+            const pendingRef = ref(db, `pendingStudentSubscriptions/${pendingUserId}/${planId}`);
+
+            try {
+                const snapshot = await get(pendingRef);
+                if (!snapshot.exists()) {
+                    alert('Assigned subscription not found. Please refresh the page or contact support.');
+                    return;
+                }
+
+                const pending = snapshot.val();
+                const now = new Date();
+                let startDate = new Date(pending.startDate || now.toISOString());
+                if (startDate < now) {
+                    startDate = now;
+                }
+
+                let endDate = pending.endDate ? new Date(pending.endDate) : new Date(startDate);
+                if (endDate <= startDate) {
+                    endDate = new Date(startDate);
+                    endDate.setDate(endDate.getDate() + (pending.duration || 30));
+                }
+
+                const subscriptionData = {
+                    userId: currentUser.uid,
+                    userEmail: currentUser.email,
+                    planId: planId,
+                    planName: pending.planName,
+                    categories: pending.categories || [],
+                    startDate: startDate.toISOString(),
+                    endDate: endDate.toISOString(),
+                    duration: pending.duration || Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)),
+                    amount: pending.amount || 0,
+                    transactionId: pending.transactionId || `ADMIN_CLAIM_${Date.now()}`,
+                    paymentMethod: 'admin_assigned',
+                    status: 'active',
+                    claimedAt: new Date().toISOString(),
+                    assignedBy: pending.assignedBy || 'admin'
+                };
+
+                await set(ref(db, `userSubscriptions/${currentUser.uid}/${planId}`), subscriptionData);
+                await set(pendingRef, null);
+
+                alert(`✅ Subscription claimed successfully! Access expires on ${endDate.toLocaleDateString()}.`);
+                await loadPendingClaims();
+                loadPlans();
+            } catch (error) {
+                console.error('Error claiming subscription:', error);
+                alert('Unable to claim the subscription. Please try again or contact support.');
+            }
+        }
+
+        window.claimPendingSubscription = claimPendingSubscription;
+
+        async function loadPlans() {
+            try {
+                const snapshot = await get(ref(db, 'subscriptionPlans/'));
+                if (snapshot.exists()) {
+                    allPlans = Object.entries(snapshot.val()).map(([key, plan]) => ({ key, ...plan }));
+                    renderPlans();
+                } else {
+                    document.getElementById('plansContainer').style.display = 'none';
+                    document.getElementById('emptyState').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading plans:', error);
+                document.getElementById('plansContainer').innerHTML = '<div style="color: white; text-align: center;"><p>Error loading plans. Please try again.</p></div>';
+            }
+        }
+
+        function renderPlans() {
+            const container = document.getElementById('plansContainer');
+            container.className = 'plans-grid';
+
+            container.innerHTML = allPlans.map(plan => `
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">${plan.name}</div>
+                        <div class="plan-price">₦${plan.price.toLocaleString()} <small>/month</small></div>
+                        <div class="plan-duration">📅 ${plan.duration} days access</div>
+                    </div>
+                    <div class="plan-body">
+                        ${plan.description ? `<p class="plan-description">${plan.description}</p>` : ''}
+                        <div class="plan-categories">
+                            <label>Access to:</label>
+                            <div class="categories-list">
+                                ${plan.categories.map(cat => `<span class="category-badge">${cat.name}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div id="status-${plan.key}"></div>
+                        <div class="plan-actions">
+                            <button class="btn-paystack" onclick="initiateSubscription('${plan.key}', 'paystack')">Subscribe Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Check subscription status for each plan
+            allPlans.forEach(plan => {
+                checkSubscriptionStatus(plan.key);
+            });
+        }
+
+        window.initiateSubscription = function(planKey, paymentMethod) {
+            if (!currentUser) {
+                alert('Please sign in first');
+                window.location.href = '../auth.html';
+                return;
+            }
+
+            const plan = allPlans.find(p => p.key === planKey);
+            selectedPlan = { key: planKey, ...plan, paymentMethod };
+
+            document.getElementById('paymentEmail').value = currentUser.email;
+            document.getElementById('paymentAmount').textContent = plan.price.toLocaleString();
+            document.getElementById('paymentModal').classList.add('active');
+        };
+
+        window.closePaymentModal = function() {
+            document.getElementById('paymentModal').classList.remove('active');
+        };
+
+        window.processPaystackPayment = function() {
+            const phone = document.getElementById('paymentPhone').value;
+            if (!phone) {
+                alert('Please enter your phone number');
+                return;
+            }
+
+            const handler = PaystackPop.setup({
+                key: 'pk_live_a0649b2e93a2576f7c72bd8af326758e48ad23ef', // Replace with your Paystack public key
+                email: currentUser.email,
+                amount: selectedPlan.price * 100,
+                ref: 'REF-' + Math.floor(Math.random() * 1000000000),
+                onClose: function() {
+                    alert('Payment window closed.');
+                },
+                onSuccess: function(response) {
+                    saveSubscription(response.reference, 'paystack');
+                }
+            });
+            handler.openIframe();
+        };
+
+        window.processFlutterwavePayment = function() {
+            const phone = document.getElementById('paymentPhone').value;
+            if (!phone) {
+                alert('Please enter your phone number');
+                return;
+            }
+
+            FlutterwaveCheckout({
+                public_key: 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxx-X', // Replace with your Flutterwave public key
+                tx_ref: 'FLW-' + Math.floor(Math.random() * 1000000000),
+                amount: selectedPlan.price,
+                currency: 'NGN',
+                customer: {
+                    email: currentUser.email,
+                    phonenumber: phone,
+                    name: currentUser.displayName || 'Student'
+                },
+                customizations: {
+                    title: selectedPlan.name,
+                    description: 'Subscribe to ' + selectedPlan.name,
+                    logo: 'https://assets.piedpiper.com/logo.png'
+                },
+                callback: function(data) {
+                    if (data.status === 'successful') {
+                        saveSubscription(data.transaction_id, 'flutterwave');
+                    } else {
+                        alert('Payment failed. Please try again.');
+                    }
+                },
+                onclose: function() {
+                    console.log('Payment modal closed');
+                }
+            });
+        };
+
+        async function saveSubscription(transactionId, paymentMethod) {
+            try {
+                const subscriptionEndDate = new Date();
+                subscriptionEndDate.setDate(subscriptionEndDate.getDate() + selectedPlan.duration);
+
+                const subscriptionData = {
+                    userId: currentUser.uid,
+                    planId: selectedPlan.key,
+                    planName: selectedPlan.name,
+                    categories: selectedPlan.categories,
+                    startDate: new Date().toISOString(),
+                    endDate: subscriptionEndDate.toISOString(),
+                    transactionId: transactionId,
+                    paymentMethod: paymentMethod,
+                    amount: selectedPlan.price,
+                    status: 'active'
+                };
+
+                await set(ref(db, `userSubscriptions/${currentUser.uid}/${selectedPlan.key}`), subscriptionData);
+
+                alert('✅ Subscription successful! You now have access to ' + selectedPlan.name);
+                document.getElementById('paymentModal').classList.remove('active');
+                loadPlans();
+            } catch (error) {
+                console.error('Error saving subscription:', error);
+                alert('Error saving subscription. Please contact support.');
+            }
+        }
+
+        async function checkSubscriptionStatus(planKey) {
+            if (!currentUser) return;
+
+            try {
+                const snapshot = await get(ref(db, `userSubscriptions/${currentUser.uid}/${planKey}`));
+                const statusDiv = document.getElementById(`status-${planKey}`);
+
+                if (snapshot.exists()) {
+                    const sub = snapshot.val();
+                    const endDate = new Date(sub.endDate);
+                    const today = new Date();
+
+                    if (today <= endDate) {
+                        const daysLeft = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+                        statusDiv.innerHTML = `<div class="subscription-status active">✅ Active - ${daysLeft} days remaining</div>`;
+                    } else {
+                        statusDiv.innerHTML = `<div class="subscription-status expired">⏱️ Expired on ${endDate.toLocaleDateString()}</div>`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking subscription status:', error);
+            }
+        }
+
+        window.goToTutorials = function() {
+            window.location.href = '../videoTutorial/watchTutorialLink.html';
+        };
+
+        window.logout = async function() {
+            if (confirm('Are you sure you want to logout?')) {
+                try {
+                    if (currentUser && currentUser.email) {
+                        await unregisterActiveSession(db, currentUser.email);
+                    }
+                    await signOut(auth);
+                    window.location.href = '../studentManagement/studentLogin.html';
+                } catch (error) {
+                    alert('Error logging out: ' + error.message);
+                }
+            }
+        };
+    </script>
+</body>
+</html>

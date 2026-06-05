@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD online class Video Tutorials</title>
+    <link rel="icon" type="image/jpeg" sizes="122x80" href="../../assets/img/logo.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, rgb(82, 78, 78) 0%, black 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .home-link:hover {
+            background: #5568d3;
+        }
+
+        .user-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-email {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .user-email small {
+            display: block;
+            color: #64748b;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .btn-action {
+            background: #6366f1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .btn-action:hover {
+            background: #4f46e5;
+        }
+
+        .app-access-panel {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+        }
+        .app-access-panel h2 {
+            margin: 0 0 10px;
+            color: #0f172a;
+        }
+        .app-access-panel p {
+            color: #475569;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .app-access-input {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .app-access-input input {
+            flex: 1;
+            min-width: 220px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #0f172a;
+        }
+        .app-access-input button {
+            padding: 12px 18px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .app-access-status {
+            color: #475569;
+            margin-bottom: 16px;
+        }
+        .available-apps {
+            display: grid;
+            gap: 12px;
+        }
+        .available-app {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+        .available-app a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .btn-logout {
+            background: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .btn-logout:hover {
+            background: #dc2626;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        #tutorialResults {
+            margin-top: 30px;
+        }
+
+        .player-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .player-panel header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .player-panel h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #0f172a;
+        }
+
+        .player-panel .close-player {
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .player-panel .close-player:hover {
+            background: #dc2626;
+        }
+
+        .player-container {
+            position: relative;
+            width: 100%;
+            min-height: 320px;
+        }
+
+        .player-container iframe,
+        .player-container video {
+            width: 100%;
+            height: 420px;
+            border-radius: 14px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .tutorials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .tutorial-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .tutorial-body {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .tutorial-thumbnail {
+            width: 100%;
+            height: 200px;
+            background-color: #f8fafc;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            pointer-events: none;
+        }
+
+        .tutorial-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .tutorial-body {
+            padding: 20px;
+        }
+
+        .tutorial-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .tutorial-description {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .tutorial-category {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .tutorial-subscription-badge {
+            display: inline-block;
+            margin: 10px 0 0;
+            padding: 6px 12px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .tutorial-subscription-badge.accessible {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .tutorial-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .download-btn {
+            padding: 8px 16px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #059669;
+        }
+
+        .materials-btn {
+            padding: 8px 16px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .materials-btn:hover {
+            background: #0284c7;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            max-height: 600px;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #0f172a;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .materials-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .materials-list li {
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .material-info {
+            flex: 1;
+        }
+
+        .material-name {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .material-size {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .material-download-btn {
+            padding: 6px 12px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .material-download-btn:hover {
+            background: #0284c7;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-body p {
+            color: #64748b;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .app-access-status {
+            color: #475569;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .app-access-status.error {
+            color: #dc2626;
+        }
+
+        .app-access-status.success {
+            color: #059669;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .empty-state-text {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            .tutorials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Degreatcode ICT LTD online class Video Tutorials</h1>
+            <p>Learn with our comprehensive video tutorials</p>
+            <div>
+                <a href="javascript:history.back()" class="home-link">← go back </a>
+                <a href="../downloader/downloader.html" class="home-link">go to Download_Manager</a>
+            </div>
+        </header>
+
+        <div class="user-section">
+            <div>
+                <div class="user-email">
+                    <span id="userEmail">Not signed in</span>
+                    <small>Your account</small>
+                </div>
+            </div>
+            <div>
+                <button class="btn-action" onclick="goToSubscription()">💳 Go to Subscriptions</button>
+                <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <div class="app-access-panel" style="display: none;">
+            <h2>App Access Key</h2>
+            <p>Enter the secret key from your app purchase to enable downloads and materials access.</p>
+            <div class="app-access-input">
+                <input id="appKeyInput" type="text" placeholder="Enter your app access key" />
+                <button id="appKeyValidateBtn" type="button">Validate Key</button>
+            </div>
+            <div id="appKeyStatus" class="app-access-status">A valid app access key is required to download tutorials and materials.</div>
+            <div id="availableApps" class="available-apps"></div>
+        </div>
+
+        <div class="tabs" id="categoryTabs">
+            <button class="tab-btn active" data-category="all">All Tutorials</button>
+            <!-- Dynamic categories will be loaded here -->
+        </div>
+
+        <div id="tutorialResults">
+            <div id="playerPanel" class="player-panel" style="display:none;">
+                <header>
+                    <h2 id="playerTitle">Playing Tutorial</h2>
+                    <button class="close-player" onclick="closePlayer()">Close</button>
+                </header>
+                <div id="playerContainer" class="player-container"></div>
+            </div>
+
+            <div id="tutorials-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="tutorials-grid" class="tutorials-grid"></div>
+            <div id="tutorials-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Tutorials Available</div>
+                <div class="empty-state-text">No video tutorials are currently available. Please check back later.</div>
+            </div>
+        </div>
+
+        <!-- All Tutorials -->
+        <div id="all" class="tab-content">
+            <div id="all-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="all-grid" class="tutorials-grid"></div>
+            <div id="all-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Tutorials Available</div>
+                <div class="empty-state-text">No video tutorials are currently available. Please check back later.</div>
+            </div>
+        </div>
+
+        <!-- Getting Started -->
+        <div id="getting-started" class="tab-content">
+            <div id="getting-started-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="getting-started-grid" class="tutorials-grid"></div>
+            <div id="getting-started-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Getting Started Tutorials</div>
+                <div class="empty-state-text">No getting started tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div id="advanced" class="tab-content">
+            <div id="advanced-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="advanced-grid" class="tutorials-grid"></div>
+            <div id="advanced-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Advanced Tutorials</div>
+                <div class="empty-state-text">No advanced feature tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div id="troubleshooting" class="tab-content">
+            <div id="troubleshooting-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="troubleshooting-grid" class="tutorials-grid"></div>
+            <div id="troubleshooting-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Troubleshooting Tutorials</div>
+                <div class="empty-state-text">No troubleshooting tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Tutorials -->
+        <!-- Other -->
+        <div id="other" class="tab-content">
+            <div id="other-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="other-grid" class="tutorials-grid"></div>
+            <div id="other-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Other Tutorials</div>
+                <div class="empty-state-text">No other tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Tutorial -->
+        <div id="tutorial" class="tab-content">
+            <div id="tutorial-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="tutorial-grid" class="tutorials-grid"></div>
+            <div id="tutorial-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Tutorial Videos</div>
+                <div class="empty-state-text">No tutorial videos are currently available.</div>
+            </div>
+        </div>
+
+        <!-- CBT -->
+        <div id="cbt" class="tab-content">
+            <div id="cbt-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="cbt-grid" class="tutorials-grid"></div>
+            <div id="cbt-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No CBT Tutorials</div>
+                <div class="empty-state-text">No CBT tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- CV -->
+        <div id="cv" class="tab-content">
+            <div id="cv-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="cv-grid" class="tutorials-grid"></div>
+            <div id="cv-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No CV Tutorials</div>
+                <div class="empty-state-text">No CV tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Job -->
+        <div id="job" class="tab-content">
+            <div id="job-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="job-grid" class="tutorials-grid"></div>
+            <div id="job-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Job Tutorials</div>
+                <div class="empty-state-text">No job tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Software Subscription -->
+        <div id="software-subscription" class="tab-content">
+            <div id="software-subscription-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="software-subscription-grid" class="tutorials-grid"></div>
+            <div id="software-subscription-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Software Subscription Tutorials</div>
+                <div class="empty-state-text">No software subscription tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Exam API & Generator -->
+        <div id="exam-api-generator" class="tab-content">
+            <div id="exam-api-generator-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="exam-api-generator-grid" class="tutorials-grid"></div>
+            <div id="exam-api-generator-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Exam API & Generator Tutorials</div>
+                <div class="empty-state-text">No exam API & generator tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Safe Exam Browser -->
+        <div id="safe-exam-browser" class="tab-content">
+            <div id="safe-exam-browser-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="safe-exam-browser-grid" class="tutorials-grid"></div>
+            <div id="safe-exam-browser-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Safe Exam Browser Tutorials</div>
+                <div class="empty-state-text">No safe exam browser tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Visa Application -->
+        <div id="visa-application" class="tab-content">
+            <div id="visa-application-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="visa-application-grid" class="tutorials-grid"></div>
+            <div id="visa-application-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Visa Application Tutorials</div>
+                <div class="empty-state-text">No visa application tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- Tools -->
+        <div id="tools" class="tab-content">
+            <div id="tools-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="tools-grid" class="tutorials-grid"></div>
+            <div id="tools-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No Tools Tutorials</div>
+                <div class="empty-state-text">No tools tutorials are currently available.</div>
+            </div>
+        </div>
+
+        <!-- CDCFIB Software -->
+        <div id="cdcfib-software" class="tab-content">
+            <div id="cdcfib-software-loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <div id="cdcfib-software-grid" class="tutorials-grid"></div>
+            <div id="cdcfib-software-empty" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🎥</div>
+                <div class="empty-state-title">No CDCFIB Software Tutorials</div>
+                <div class="empty-state-text">No CDCFIB software tutorials are currently available.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Materials Modal -->
+    <div id="materialsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📎 Tutorial Materials</h2>
+                <button class="modal-close" onclick="closeMaterialsModal()">✕</button>
+            </div>
+            <ul id="materialsList" class="materials-list"></ul>
+        </div>
+    </div>
+
+    <!-- App Key Modal -->
+    <div id="appKeyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔑 App Access Key Required</h2>
+                <button class="modal-close" onclick="closeAppKeyModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>Enter the secret key from your app purchase to enable downloads and materials access.</p>
+                <div class="app-access-input">
+                    <input id="modalAppKeyInput" type="text" placeholder="Enter your app access key" />
+                    <button id="modalAppKeyValidateBtn" type="button" onclick="validateAppKeyFromModal()">Validate Key</button>
+                </div>
+                <div id="modalAppKeyStatus" class="app-access-status">A valid app access key is required to download tutorials and materials.</div>
+                <div id="modalAvailableApps" class="available-apps"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { checkCategorySubscription, showSubscriptionModal } from '../studentSubscriptionSystem/subscriptionChecker.js';
+        import { unregisterActiveSession } from '../studentManagement/sessionLockHelper.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        let subscriptionCategories = new Set();
+        let appAccessItems = [];
+        let currentAppKey = null;
+        let currentUser = null;
+
+        // Display user email
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+            } else {
+                document.getElementById('userEmail').innerHTML = '<a href="../studentManagement/studentLogin.html" style="color: #667eea; text-decoration: underline;">Not signed in - Click to login</a>';
+            }
+        });
+
+        // Function to load categories from Firebase and create tabs dynamically
+        async function loadCategoriesFromFirebase() {
+            const tabsContainer = document.getElementById('categoryTabs');
+            try {
+                const snapshot = await get(ref(db, 'categories/'));
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    // Clear existing dynamic tabs (keep "All Tutorials" button)
+                    const allButton = tabsContainer.querySelector('[data-category="all"]');
+                    tabsContainer.innerHTML = '';
+                    tabsContainer.appendChild(allButton);
+                    allButton.classList.add('active');
+
+                    // Add categories from Firebase
+                    for (const [key, categoryData] of Object.entries(data)) {
+                        // Get the category name (could be at different levels)
+                        let categoryName = categoryData.name || key;
+                        
+                        // Check for nested categories (middle level)
+                        if (categoryData && typeof categoryData === 'object') {
+                            for (const [subKey, subData] of Object.entries(categoryData)) {
+                                if (subKey !== 'name' && subData && typeof subData === 'object') {
+                                    for (const [subSubKey, subSubData] of Object.entries(subData)) {
+                                        if (subSubKey !== 'name') {
+                                            const btn = document.createElement('button');
+                                            btn.className = 'tab-btn';
+                                            btn.dataset.category = subSubKey;
+                                            btn.textContent = subSubData.name || subSubKey;
+                                            tabsContainer.appendChild(btn);
+                                        }
+                                    }
+                                } else if (subKey !== 'name') {
+                                    const btn = document.createElement('button');
+                                    btn.className = 'tab-btn';
+                                    btn.dataset.category = subKey;
+                                    btn.textContent = subData.name || subKey;
+                                    tabsContainer.appendChild(btn);
+                                }
+                            }
+                        } else {
+                            const btn = document.createElement('button');
+                            btn.className = 'tab-btn';
+                            btn.dataset.category = key;
+                            btn.textContent = categoryName;
+                            tabsContainer.appendChild(btn);
+                        }
+                    }
+
+                    // Add click handlers to new tabs
+                    tabsContainer.querySelectorAll('.tab-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            tabsContainer.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            loadTutorials(btn.dataset.category);
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading categories: ", error);
+            }
+        }
+
+        // Load app access list, subscription category map and categories on page load
+        await loadAppAccessItems();
+        await loadSubscriptionCategories();
+        loadCategoriesFromFirebase();
+
+        // Check for app key in URL or localStorage (for software integration)
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlAppKey = urlParams.get('appkey');
+        const storedAppKey = localStorage.getItem('appkey');
+        if (urlAppKey) {
+            const matched = appAccessItems.find(app => app.accessKey === urlAppKey);
+            if (matched) {
+                currentAppKey = urlAppKey;
+                renderAppKeyStatus(`App key validated for ${matched.name}. Download features are enabled.`, true);
+            } else {
+                renderAppKeyStatus('Invalid app key from URL.', false);
+            }
+        } else if (storedAppKey) {
+            const matched = appAccessItems.find(app => app.accessKey === storedAppKey);
+            if (matched) {
+                currentAppKey = storedAppKey;
+                renderAppKeyStatus(`App key validated for ${matched.name}. Download features are enabled.`, true);
+            }
+        }
+
+        function isAppKeyValid() {
+            return Boolean(currentAppKey);
+        }
+
+        async function loadAppAccessItems() {
+            try {
+                let snapshot = await get(ref(db, 'contactInfo/downloadApps'));
+                if (!snapshot.exists()) {
+                    snapshot = await get(ref(db, 'downloadApps'));
+                }
+                if (!snapshot.exists()) {
+                    document.getElementById('availableApps').innerHTML = '<div>No apps configured yet.</div>';
+                    return;
+                }
+                const data = snapshot.val();
+                appAccessItems = [];
+
+                ['software', 'android', 'iphone'].forEach(type => {
+                    const items = Array.isArray(data[type]) ? data[type] : [];
+                    items.forEach(item => {
+                        if (item && item.name && item.link) {
+                            appAccessItems.push({ type, ...item });
+                        }
+                    });
+                });
+
+                document.getElementById('availableApps').innerHTML = appAccessItems.map(app => `
+                    <div class="available-app">
+                        <div>
+                            <strong>${app.name}</strong> <span style="color:#64748b;">(${app.type})</span>
+                            <div style="font-size:0.9rem; color:#475569;">${app.description || 'No description provided.'}</div>
+                        </div>
+                        <a href="${app.link}" target="_blank" rel="noopener">Open</a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading app access items:', error);
+                document.getElementById('availableApps').innerHTML = '<div>Unable to load app access information.</div>';
+            }
+        }
+
+        function renderAppKeyStatus(message, success = false) {
+            const status = document.getElementById('appKeyStatus');
+            status.textContent = message;
+            status.style.color = success ? '#065f46' : '#b91c1c';
+        }
+
+        async function validateAppKey(key) {
+            if (!key || !key.trim()) {
+                currentAppKey = null;
+                return false;
+            }
+
+            const trimmedKey = key.trim();
+            const matched = appAccessItems.find(app => app.accessKey === trimmedKey);
+            if (matched) {
+                currentAppKey = trimmedKey;
+                return true;
+            } else {
+                currentAppKey = null;
+                return false;
+            }
+        }
+
+        document.getElementById('appKeyValidateBtn').addEventListener('click', async () => {
+            const value = document.getElementById('appKeyInput').value.trim();
+            const isValid = await validateAppKey(value);
+            
+            if (isValid) {
+                const matched = appAccessItems.find(app => app.accessKey === value);
+                renderAppKeyStatus(`App key validated for ${matched.name}. Download features are enabled.`, true);
+            } else {
+                renderAppKeyStatus('Invalid app key. Please check and try again.', false);
+            }
+            loadTutorials(document.querySelector('.tab-btn.active')?.dataset.category || 'all');
+        });
+
+        function openTutorial(category) {
+            return;
+        }
+
+        function getCategoryDisplayName(category) {
+            const names = {
+                'getting-started': 'Getting Started',
+                'advanced': 'Advanced Features',
+                'troubleshooting': 'Troubleshooting',
+                'tutorial': 'Tutorial',
+                'cbt': 'CBT Software & Apps',
+                'cv': 'CV',
+                'job': 'Job',
+                'software-subscription': 'Software Subscription',
+                'exam-api-generator': 'Exam API & Generator',
+                'safe-exam-browser': 'Safe Exam Browser',
+                'visa-application': 'Visa Application',
+                'tools': 'Tools',
+                'cdcfib-software': 'CDCFIB Software',
+                'other': 'Other'
+            };
+            return names[category] || category;
+        }
+
+        async function loadSubscriptionCategories() {
+            try {
+                const snapshot = await get(ref(db, 'subscriptionPlans'));
+                if (!snapshot.exists()) return;
+
+                const plans = snapshot.val();
+                for (const plan of Object.values(plans)) {
+                    if (!plan.categories || !Array.isArray(plan.categories)) continue;
+                    plan.categories.forEach(cat => {
+                        if (cat && cat.id) {
+                            subscriptionCategories.add(cat.id.toString().trim());
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading subscription categories:', error);
+            }
+        }
+
+        async function loadTutorials(category = 'all') {
+            const grid = document.getElementById('tutorials-grid');
+            const loading = document.getElementById('tutorials-loading');
+            const empty = document.getElementById('tutorials-empty');
+
+            loading.style.display = 'block';
+            empty.style.display = 'none';
+            grid.innerHTML = '';
+            closePlayer();
+
+            try {
+                const snapshot = await get(ref(db, 'tutorials'));
+
+                if (!snapshot.exists() || Object.keys(snapshot.val()).length === 0) {
+                    loading.style.display = 'none';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                const data = snapshot.val();
+                let tutorials = [];
+
+                for (const [key, tutorial] of Object.entries(data)) {
+                    const tutorialCategory = (tutorial.category || '').toString().trim();
+                    const filterCategory = (category || '').toString().trim();
+                    console.log(`Checking tutorial ${key}: category="${tutorialCategory}", filtering for category="${filterCategory}"`);
+                    if (filterCategory === 'all' || tutorialCategory === filterCategory) {
+                        console.log(`✓ Including tutorial ${key} in results`);
+                        tutorials.push({
+                            key,
+                            ...tutorial
+                        });
+                    } else {
+                        console.log(`✗ Skipping tutorial ${key} (category mismatch)`);
+                    }
+                }
+
+                if (tutorials.length === 0) {
+                    loading.style.display = 'none';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                // Apply custom sort order from Firebase, then by upload date
+                tutorials.sort((a, b) => {
+                    const sortA = (a.sortOrder !== undefined) ? a.sortOrder : 999999;
+                    const sortB = (b.sortOrder !== undefined) ? b.sortOrder : 999999;
+                    if (sortA !== sortB) {
+                        return sortA - sortB;
+                    }
+                    // Fallback to newest first
+                    return new Date(b.uploadedAt) - new Date(a.uploadedAt);
+                });
+
+                window.loadedTutorials = window.loadedTutorials || {};
+                tutorials.forEach(tutorial => {
+                    window.loadedTutorials[tutorial.key] = tutorial;
+                });
+
+                // Process tutorials sequentially to handle async subscription checks
+                const tutorialCards = [];
+                for (const tutorial of tutorials) {
+                    // Ensure we use whichever thumbnail field exists and safely encode it for CSS
+                    const rawThumbnail = tutorial.thumbnailUrl || tutorial.thumbnail || tutorial.thumbnail_url || '';
+                    let thumbnailUrl = '';
+                    if (rawThumbnail) {
+                        try {
+                            const url = new URL(rawThumbnail);
+                            console.log('[URL Processing] Original:', rawThumbnail);
+                            // Normalize Dropbox share links to direct content URLs
+                            if (url.hostname.includes('dropbox.com')) {
+                                url.hostname = 'dl.dropboxusercontent.com';
+                            }
+                            // Ensure dl=1 for direct download access on all Dropbox URLs
+                            if (url.hostname === 'dl.dropboxusercontent.com') {
+                                url.searchParams.set('dl', '1');
+                                console.log('[URL Processing] Converted to:', url.toString());
+                            }
+                            thumbnailUrl = encodeURI(url.toString());
+                        } catch (err) {
+                            console.log('[URL Processing] Error processing URL:', rawThumbnail, err);
+                            thumbnailUrl = encodeURI(rawThumbnail);
+                        }
+                    }
+                    // Apply background image to thumbnail div
+                    const backgroundStyle = thumbnailUrl
+                        ? `background-image: url('${thumbnailUrl}');`
+                        : '';
+
+                    const canDownload = tutorial.downloadable && isAppKeyValid();
+                    const downloadButton = tutorial.downloadable ?
+                        `<button class="download-btn" onclick="event.stopPropagation(); downloadTutorial('${tutorial.key}')">⬇️ Download</button>` : '';
+
+                    const materialsButton = (tutorial.materials && tutorial.materials.length > 0) ?
+                        `<button class="materials-btn" onclick="event.stopPropagation(); showMaterials('${tutorial.key}')">📎 Materials</button>` : '';
+
+                    // Check subscription status for this tutorial's category
+                    let subscriptionBadge = '';
+                    const requiresSubscription = subscriptionCategories.has((tutorial.category || '').toString().trim());
+                    if (requiresSubscription) {
+                        // Check if user has active subscription for this category
+                        const subscriptionCheck = await checkCategorySubscription(db, auth, tutorial.category);
+                        if (subscriptionCheck.hasAccess) {
+                            subscriptionBadge = `<div class="tutorial-subscription-badge accessible">You have active subscription: accessible</div>`;
+                        } else {
+                            subscriptionBadge = `<div class="tutorial-subscription-badge">Subscription required</div>`;
+                        }
+                    }
+
+                    tutorialCards.push(`
+                        <div class="tutorial-card" onclick="openTutorial('${tutorial.key}')">
+                            <div class="tutorial-thumbnail" style="${backgroundStyle}">
+                                <div class="play-overlay">▶️</div>
+                            </div>
+                            <div class="tutorial-body">
+                                <div class="tutorial-title">${tutorial.title}</div>
+                                ${subscriptionBadge}
+                                <div class="tutorial-description">${tutorial.description || 'No description available'}</div>
+                                <div class="tutorial-meta">
+                                    <span class="tutorial-category">${getCategoryDisplayName(tutorial.category)}</span>
+                                    <span>${new Date(tutorial.uploadedAt).toLocaleDateString()}</span>
+                                </div>
+                                <div class="tutorial-actions">
+                                    ${downloadButton}
+                                    ${materialsButton}
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+
+                grid.innerHTML = tutorialCards.join('');
+
+                loading.style.display = 'none';
+
+            } catch (error) {
+                console.error('Failed to load tutorials:', error);
+                loading.style.display = 'none';
+                empty.style.display = 'block';
+                empty.innerHTML = `
+                    <div class="empty-state-icon">⚠️</div>
+                    <div class="empty-state-title">Error Loading Tutorials</div>
+                    <div class="empty-state-text">Failed to load tutorials. Please try again later.</div>
+                `;
+            }
+        }
+
+        function getPlayableUrl(rawUrl) {
+            if (!rawUrl) return null;
+            try {
+                const url = new URL(rawUrl);
+                if (url.hostname.includes('dropbox.com')) {
+                    url.hostname = 'dl.dropboxusercontent.com';
+                    url.searchParams.set('dl', '1');
+                    return url.toString();
+                }
+                return url.toString();
+            } catch (err) {
+                return rawUrl;
+            }
+        }
+
+        function isYouTubeUrl(url) {
+            return /(?:youtube\.com\/watch\?|youtu\.be\/)/.test(url);
+        }
+
+        function closePlayer() {
+            const playerPanel = document.getElementById('playerPanel');
+            const playerContainer = document.getElementById('playerContainer');
+
+            // Stop any playing HTML5 videos
+            const videos = playerContainer.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+
+            // Stop YouTube iframes by removing them
+            const iframes = playerContainer.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                // Try to stop YouTube video by posting a message
+                if (iframe.src.includes('youtube.com') || iframe.src.includes('youtu.be')) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+                }
+            });
+
+            // Clear the container to ensure everything stops
+            setTimeout(() => {
+                playerContainer.innerHTML = '';
+            }, 100);
+
+            playerPanel.style.display = 'none';
+        }
+
+        window.openTutorial = async (key) => {
+            const tutorial = window.loadedTutorials?.[key];
+            if (!tutorial) {
+                alert('Tutorial information is unavailable. Please refresh the page.');
+                return;
+            }
+
+            const categoryId = tutorial.category?.toString().trim();
+            if (categoryId) {
+                const accessResult = await checkCategorySubscription(db, auth, categoryId);
+                if (!accessResult.hasAccess) {
+                    showSubscriptionModal(
+                        accessResult.message,
+                        accessResult.requiresSignIn ? 'signin' : (accessResult.requiresSubscription ? 'subscribe' : 'expired')
+                    );
+                    return;
+                }
+            }
+
+            const playerPanel = document.getElementById('playerPanel');
+            const playerContainer = document.getElementById('playerContainer');
+            const playerTitle = document.getElementById('playerTitle');
+            playerTitle.textContent = tutorial.title || 'Playing Tutorial';
+            playerContainer.innerHTML = '';
+
+            const source = tutorial.youtubeUrl || tutorial.videoUrl || '';
+            if (!source) {
+                alert('No playable video URL available for this tutorial.');
+                return;
+            }
+
+            if (isYouTubeUrl(source)) {
+                let videoId = null;
+                try {
+                    const url = new URL(source);
+                    if (url.hostname.includes('youtu.be')) {
+                        videoId = url.pathname.slice(1);
+                    } else {
+                        videoId = url.searchParams.get('v');
+                    }
+                } catch (err) {
+                    console.error('Invalid YouTube URL:', source, err);
+                }
+
+                if (videoId) {
+                    playerContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?rel=0&playsinline=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>`;
+                } else {
+                    playerContainer.innerHTML = `<p>Unable to embed this YouTube link. <a href="${source}" target="_blank">Open in new tab</a></p>`;
+                }
+            } else {
+                const playableUrl = getPlayableUrl(source);
+                playerContainer.innerHTML = `<video controls src="${playableUrl}"></video>`;
+            }
+
+            playerPanel.style.display = 'block';
+        };
+
+        // Download tutorial video
+        window.downloadTutorial = async (key) => {
+            if (!isAppKeyValid()) {
+                showAppKeyModal();
+                return;
+            }
+            try {
+                const snapshot = await get(ref(db, `tutorials/${key}`));
+                if (!snapshot.exists()) {
+                    alert('Tutorial not found');
+                    return;
+                }
+                const tutorial = snapshot.val();
+
+                // Get the video URL and open download
+                if (tutorial.youtubeUrl) {
+                    window.open(tutorial.youtubeUrl, '_blank');
+                } else if (tutorial.videoUrl) {
+                    window.open(tutorial.videoUrl, '_blank');
+                } else {
+                    alert('No download URL available for this tutorial');
+                }
+            } catch (error) {
+                console.error('Error downloading tutorial:', error);
+                alert('Failed to download tutorial');
+            }
+        };
+
+        // Materials handling
+        window.showMaterials = async (key) => {
+            if (!isAppKeyValid()) {
+                showAppKeyModal();
+                return;
+            }
+
+            try {
+                const tutorial = window.loadedTutorials?.[key];
+                if (!tutorial || !tutorial.materials || tutorial.materials.length === 0) {
+                    alert('No materials available for this tutorial');
+                    return;
+                }
+
+                const materialsList = document.getElementById('materialsList');
+                materialsList.innerHTML = tutorial.materials.map(material => `
+                    <li>
+                        <div class="material-info">
+                            <div class="material-name">${material.name}</div>
+                            <div class="material-size">${(material.size / 1024 / 1024).toFixed(2)} MB</div>
+                        </div>
+                        <button class="material-download-btn" onclick="downloadMaterial('${material.url}', '${material.name}')">Download</button>
+                    </li>
+                `).join('');
+
+                document.getElementById('materialsModal').classList.add('active');
+            } catch (error) {
+                console.error('Error showing materials:', error);
+                alert('Failed to load materials');
+            }
+        };
+
+        window.closeMaterialsModal = function() {
+            document.getElementById('materialsModal').classList.remove('active');
+        };
+
+        window.showAppKeyModal = function() {
+            document.getElementById('appKeyModal').classList.add('active');
+            document.getElementById('modalAppKeyInput').focus();
+        };
+
+        window.closeAppKeyModal = function() {
+            document.getElementById('appKeyModal').classList.remove('active');
+            document.getElementById('modalAppKeyInput').value = '';
+            document.getElementById('modalAppKeyStatus').textContent = 'A valid app access key is required to download tutorials and materials.';
+            document.getElementById('modalAppKeyStatus').className = 'app-access-status';
+        };
+
+        window.validateAppKeyFromModal = async function() {
+            const key = document.getElementById('modalAppKeyInput').value.trim();
+            const statusDiv = document.getElementById('modalAppKeyStatus');
+            const validateBtn = document.getElementById('modalAppKeyValidateBtn');
+
+            if (!key) {
+                statusDiv.textContent = 'Please enter an app access key.';
+                statusDiv.className = 'app-access-status error';
+                return;
+            }
+
+            validateBtn.disabled = true;
+            validateBtn.textContent = 'Validating...';
+
+            try {
+                const isValid = await validateAppKey(key);
+                if (isValid) {
+                    statusDiv.textContent = '✅ App access key validated successfully!';
+                    statusDiv.className = 'app-access-status success';
+                    setTimeout(() => {
+                        closeAppKeyModal();
+                    }, 1500);
+                } else {
+                    statusDiv.textContent = '❌ Invalid app access key. Please check and try again.';
+                    statusDiv.className = 'app-access-status error';
+                }
+            } catch (error) {
+                console.error('Error validating app key:', error);
+                statusDiv.textContent = '❌ Error validating key. Please try again.';
+                statusDiv.className = 'app-access-status error';
+            } finally {
+                validateBtn.disabled = false;
+                validateBtn.textContent = 'Validate Key';
+            }
+        };
+
+        window.downloadMaterial = function(url, name) {
+            if (!isAppKeyValid()) {
+                showAppKeyModal();
+                return;
+            }
+            if (!url) {
+                alert('Material download URL is not available');
+                return;
+            }
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name || 'material';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+
+        // Close modal when clicking outside
+        document.getElementById('materialsModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'materialsModal') {
+                closeMaterialsModal();
+            }
+        });
+
+        document.getElementById('appKeyModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'appKeyModal') {
+                closeAppKeyModal();
+            }
+        });
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                loadTutorials(btn.dataset.category);
+            });
+        });
+
+        // URL parameter tab activation
+        //const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+        if (tabParam !== null) {
+            const tabIndex = parseInt(tabParam);
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            if (tabIndex >= 0 && tabIndex < tabButtons.length) {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                const targetButton = tabButtons[tabIndex];
+                targetButton.classList.add('active');
+                loadTutorials(targetButton.dataset.category);
+            }
+        }
+
+        // Load all tutorials on page load (only if no tab parameter)
+        if (!urlParams.has('tab')) {
+            loadTutorials('all');
+        }
+
+        // Navigation functions
+        window.goToSubscription = function() {
+            window.location.href = '../studentSubscriptionSystem/studentSubscription.html';
+        };
+
+        window.logout = async function() {
+            if (confirm('Are you sure you want to logout?')) {
+                try {
+                    if (currentUser && currentUser.email) {
+                        await unregisterActiveSession(db, currentUser.email);
+                    }
+                    await signOut(auth);
+                    window.location.href = '../studentManagement/studentLogin.html';
+                } catch (error) {
+                    alert('Error logging out: ' + error.message);
+                }
+            }
+        };
+
+        // Expose core variables and functions to global scope for modal access
+        Object.defineProperty(window, 'currentAppKey', {
+            get() { return currentAppKey; },
+            set(value) { currentAppKey = value; },
+            configurable: true
+        });
+
+        Object.defineProperty(window, 'appAccessItems', {
+            get() { return appAccessItems; },
+            set(value) { appAccessItems = value; },
+            configurable: true
+        });
+
+        window.validateAppKeyImpl = validateAppKey;
+        window.loadAppAccessItems = loadAppAccessItems;
+        window.isAppKeyValidModule = isAppKeyValid;
+        window.downloadTutorialModule = downloadTutorial;
+        window.showMaterialsModule = showMaterials;
+        window.downloadMaterialModule = downloadMaterial;
+    </script>
+
+    <!-- Global Modal Functions Script (non-module) -->
+    <script>
+        // Global reference for app key validation state
+        window.currentAppKey = null;
+        window.appAccessItems = [];
+
+        // Modal control functions
+        function showAppKeyModal() {
+            const modal = document.getElementById('appKeyModal');
+            if (modal) {
+                modal.classList.add('active');
+                const input = document.getElementById('modalAppKeyInput');
+                if (input) input.focus();
+            }
+        }
+
+        function closeAppKeyModal() {
+            const modal = document.getElementById('appKeyModal');
+            if (modal) modal.classList.remove('active');
+            const input = document.getElementById('modalAppKeyInput');
+            if (input) input.value = '';
+            const statusDiv = document.getElementById('modalAppKeyStatus');
+            if (statusDiv) {
+                statusDiv.textContent = 'A valid app access key is required to download tutorials and materials.';
+                statusDiv.className = 'app-access-status';
+            }
+        }
+
+        function closeMaterialsModal() {
+            const modal = document.getElementById('materialsModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        async function validateAppKeyFromModal() {
+            const input = document.getElementById('modalAppKeyInput');
+            const key = input ? input.value.trim() : '';
+            const statusDiv = document.getElementById('modalAppKeyStatus');
+            const validateBtn = document.getElementById('modalAppKeyValidateBtn');
+
+            if (!key) {
+                if (statusDiv) {
+                    statusDiv.textContent = 'Please enter an app access key.';
+                    statusDiv.className = 'app-access-status error';
+                }
+                return;
+            }
+
+            if (validateBtn) {
+                validateBtn.disabled = true;
+                validateBtn.textContent = 'Validating...';
+            }
+
+            try {
+                // Use validateAppKeyLocally for validation
+                const isValid = validateAppKeyLocally(key);
+                
+                if (isValid) {
+                    if (statusDiv) {
+                        statusDiv.textContent = '✅ App access key validated successfully!';
+                        statusDiv.className = 'app-access-status success';
+                    }
+                    // Reload tutorials to show download access
+                    setTimeout(() => {
+                        closeAppKeyModal();
+                        if (typeof window.reloadCurrentTutorials === 'function') {
+                            window.reloadCurrentTutorials();
+                        }
+                    }, 1500);
+                } else {
+                    if (statusDiv) {
+                        statusDiv.textContent = '❌ Invalid app access key. Please check and try again.';
+                        statusDiv.className = 'app-access-status error';
+                    }
+                }
+            } catch (error) {
+                console.error('Error validating app key:', error);
+                if (statusDiv) {
+                    statusDiv.textContent = '❌ Error validating key. Please try again.';
+                    statusDiv.className = 'app-access-status error';
+                }
+            } finally {
+                if (validateBtn) {
+                    validateBtn.disabled = false;
+                    validateBtn.textContent = 'Validate Key';
+                }
+            }
+        }
+
+        function validateAppKeyLocally(key) {
+            if (!key || !key.trim()) {
+                window.currentAppKey = null;
+                return false;
+            }
+
+            const trimmedKey = key.trim();
+            // Check against appAccessItems
+            if (window.appAccessItems && window.appAccessItems.length > 0) {
+                const matched = window.appAccessItems.find(app => app.accessKey === trimmedKey);
+                if (matched) {
+                    window.currentAppKey = trimmedKey;
+                    return true;
+                }
+            }
+            window.currentAppKey = null;
+            return false;
+        }
+
+        function isAppKeyValid() {
+            return Boolean(window.currentAppKey);
+        }
+
+        // Make functions globally accessible
+        window.showAppKeyModal = showAppKeyModal;
+        window.closeAppKeyModal = closeAppKeyModal;
+        window.closeMaterialsModal = closeMaterialsModal;
+        window.validateAppKeyFromModal = validateAppKeyFromModal;
+        window.isAppKeyValid = isAppKeyValid;
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools and Software Category Manager</title>
+        <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+    <script type="module">
+        // Import Firebase config from single source
+        import { firebaseConfig } from './FirebaseConnection/FirebaseConfiggFile.js';
+
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+
+        // Function to add a single-level category
+        window.addCategory = function() {
+            const category = document.getElementById('categoryInput').value.trim();
+            if (category) {
+                set(ref(database, 'toolsAndSoftware/' + category), {
+                    name: category
+                }).then(() => {
+                    alert('Category added successfully!');
+                    document.getElementById('categoryInput').value = '';
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error adding category: ", error);
+                });
+            } else {
+                alert('Please enter a category name.');
+            }
+        };
+
+        // Function to update a category
+        window.updateCategory = function(key, newName) {
+            if (newName.trim()) {
+                set(ref(database, 'toolsAndSoftware/' + key), {
+                    name: newName.trim()
+                }).then(() => {
+                    console.log('Category updated successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error updating category: ", error);
+                });
+            } else {
+                alert('Category name cannot be empty.');
+                loadCategories(); // Reload to revert the change
+            }
+        };
+
+        // Function to delete a category
+        window.deleteCategory = function(key) {
+            if (confirm('Are you sure you want to delete this category?')) {
+                set(ref(database, 'toolsAndSoftware/' + key), null).then(() => {
+                    alert('Category deleted successfully!');
+                    loadCategories();
+                }).catch((error) => {
+                    console.error("Error deleting category: ", error);
+                });
+            }
+        };
+
+        // Function to load and display categories
+        window.loadCategories = function() {
+            const dbRef = ref(database);
+            get(child(dbRef, 'toolsAndSoftware/')).then((snapshot) => {
+                const displayDiv = document.getElementById('categoriesDisplay');
+                displayDiv.innerHTML = '<h3>Current Tools and Software Categories:</h3>';
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    for (const key in data) {
+                        const categoryName = data[key].name || key;
+                        displayDiv.innerHTML += `
+                            <div style="margin: 10px 0;">
+                                <input type="text" value="${categoryName}" onchange="updateCategory('${key}', this.value)" style="padding: 5px; margin-right: 10px;">
+                                <button onclick="deleteCategory('${key}')">Delete</button>
+                            </div>
+                        `;
+                    }
+                } else {
+                    displayDiv.innerHTML += '<p>No categories found.</p>';
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        };
+
+        // Load categories on page load
+        window.onload = loadCategories;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="text"] {
+            width: 250px;
+        }
+        select {
+            width: 270px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #categoriesDisplay {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #categoriesDisplay h4 {
+            color: #2196F3;
+            margin: 15px 0 5px 0;
+        }
+        #categoriesDisplay h5 {
+            color: #FF9800;
+            margin: 10px 0 5px 20px;
+        }
+        #categoriesDisplay p {
+            margin: 5px 0 5px 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tools and Software Category Manager</h1>
+
+    <h2>Add Category</h2>
+    <input type="text" id="categoryInput" placeholder="Enter Category">
+    <button onclick="addCategory()">Add Category</button>
+
+    <div id="categoriesDisplay"></div>
+</body>
+</html>

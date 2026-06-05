@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Plans Manager - Admin</title>
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .category-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-checkbox:hover {
+            background: #f1f5f9;
+            border-color: #667eea;
+        }
+
+        .category-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .selected-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .category-tag {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-tag button {
+            background: none;
+            border: none;
+            color: #4f46e5;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: #10b981;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4f46e5;
+        }
+
+        .plans-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .plans-section h2 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .plans-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .plan-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .plan-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .plan-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .plan-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .plan-duration {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .plan-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .category-badge {
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .plan-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-edit {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-edit:hover {
+            background: #2563eb;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+
+        .message {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+            display: block;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💳 Subscription Plans Manager</h1>
+            <p>Create and manage tutorial subscription plans</p>
+        </header>
+
+        <div class="form-container">
+            <div id="message" class="message"></div>
+
+            <div id="formTitle">
+                <h2 style="color: #0f172a; margin-bottom: 20px;">Create New Plan</h2>
+            </div>
+
+            <form id="planForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="planName">Plan Name *</label>
+                        <input type="text" id="planName" required placeholder="e.g., Basic Learning Pack">
+                    </div>
+                    <div class="form-group">
+                        <label for="planPrice">Price (₦) *</label>
+                        <input type="number" id="planPrice" required placeholder="5000" min="100">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="planDuration">Duration (Days) *</label>
+                        <input type="number" id="planDuration" required placeholder="30" min="1" max="365">
+                    </div>
+                    <div class="form-group">
+                        <label for="planDescription">Description</label>
+                        <input type="text" id="planDescription" placeholder="Brief description of the plan">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Categories *</label>
+                    <div id="categoriesContainer" class="categories-grid" style="display: none;">
+                        <!-- Categories will be loaded here -->
+                    </div>
+                    <div id="loadingCategories" class="loading" style="display: none; background: transparent; padding: 20px; text-align: center; color: #667eea;">
+                        <div class="loading-spinner" style="border-color: rgba(102, 126, 234, 0.3); border-top-color: #667eea;"></div>
+                        <p>Loading categories...</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Selected Categories:</label>
+                    <div id="selectedCategories" class="selected-categories"></div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitPlanBtn">✅ Create Subscription Plan</button>
+                <button type="button" class="btn-secondary" id="cancelEditBtn" style="display: none; margin-top: 12px; width: 100%;">Cancel Edit</button>
+            </form>
+        </div>
+
+        <div class="plans-section">
+            <h2>📋 Active Plans</h2>
+            <div id="plansContainer" style="display: none;">
+                <!-- Plans will be loaded here -->
+            </div>
+            <div id="loadingPlans" class="loading" style="display: none; background: transparent; padding: 40px; text-align: center; color: #667eea;">
+                <div class="loading-spinner" style="border-color: rgba(102, 126, 234, 0.3); border-top-color: #667eea;"></div>
+                <p>Loading plans...</p>
+            </div>
+            <div id="noPlans" style="text-align: center; color: #64748b; padding: 40px;">
+                <p style="font-size: 1.1rem;">No subscription plans created yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, set, push, remove, child } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { isAuthorizedAdmin } from '../auth-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        const pageContainer = document.querySelector('.container');
+        pageContainer.style.display = 'none';
+
+        let allCategories = [];
+        let selectedCategoriesArray = [];
+        let editingPlanKey = null;
+
+        const submitPlanBtn = document.getElementById('submitPlanBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+
+        cancelEditBtn.addEventListener('click', () => {
+            resetFormState();
+        });
+
+        // Load categories from Firebase
+        async function loadCategories() {
+            const container = document.getElementById('categoriesContainer');
+            const loading = document.getElementById('loadingCategories');
+            
+            loading.style.display = 'block';
+
+            try {
+                const snapshot = await get(ref(db, 'categories/'));
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    allCategories = [];
+
+                    // Extract all bottom-level categories
+                    for (const [topKey, topData] of Object.entries(data)) {
+                        if (topKey !== 'name' && topData && typeof topData === 'object') {
+                            for (const [middleKey, middleData] of Object.entries(topData)) {
+                                if (middleKey !== 'name' && middleData && typeof middleData === 'object') {
+                                    for (const [botKey, botData] of Object.entries(middleData)) {
+                                        if (botKey !== 'name') {
+                                            allCategories.push({
+                                                id: botKey,
+                                                name: botData.name || botKey
+                                            });
+                                        }
+                                    }
+                                } else if (middleKey !== 'name') {
+                                    allCategories.push({
+                                        id: middleKey,
+                                        name: middleData.name || middleKey
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    renderCategories();
+                }
+                loading.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                loading.style.display = 'none';
+                showMessage('Error loading categories', 'error');
+            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = allCategories.map(category => `
+                <label class="category-checkbox">
+                    <input type="checkbox" value="${category.id}" data-name="${category.name}">
+                    <span>${category.name}</span>
+                </label>
+            `).join('');
+
+            container.style.display = 'grid';
+
+            // Add event listeners
+            container.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedCategories);
+            });
+        }
+
+        function updateSelectedCategories() {
+            const checkboxes = document.querySelectorAll('#categoriesContainer input[type="checkbox"]:checked');
+            selectedCategoriesArray = Array.from(checkboxes).map(cb => ({
+                id: cb.value,
+                name: cb.dataset.name
+            }));
+
+            const container = document.getElementById('selectedCategories');
+            container.innerHTML = selectedCategoriesArray.map((cat, idx) => `
+                <div class="category-tag">
+                    <span>${cat.name}</span>
+                    <button type="button" onclick="removeCategory(${idx})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        window.removeCategory = function(idx) {
+            const checkbox = document.querySelector(`#categoriesContainer input[value="${selectedCategoriesArray[idx].id}"]`);
+            if (checkbox) {
+                checkbox.checked = false;
+                updateSelectedCategories();
+            }
+        };
+
+        // Handle form submission
+        document.getElementById('planForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (selectedCategoriesArray.length === 0) {
+                showMessage('Please select at least one category', 'error');
+                return;
+            }
+
+            const planData = {
+                name: document.getElementById('planName').value,
+                price: parseInt(document.getElementById('planPrice').value),
+                duration: parseInt(document.getElementById('planDuration').value),
+                description: document.getElementById('planDescription').value,
+                categories: selectedCategoriesArray,
+            };
+
+            try {
+                if (editingPlanKey) {
+                    planData.updatedAt = new Date().toISOString();
+                    await set(ref(db, `subscriptionPlans/${editingPlanKey}`), {
+                        ...planData,
+                        createdAt: document.getElementById('planCreatedAt')?.value || new Date().toISOString()
+                    });
+                    showMessage('Subscription plan updated successfully! ✅', 'success');
+                } else {
+                    planData.createdAt = new Date().toISOString();
+                    const plansRef = ref(db, 'subscriptionPlans');
+                    const newPlanRef = push(plansRef);
+                    await set(newPlanRef, planData);
+                    showMessage('Subscription plan created successfully! ✅', 'success');
+                }
+
+                document.getElementById('planForm').reset();
+                selectedCategoriesArray = [];
+                document.getElementById('selectedCategories').innerHTML = '';
+                document.querySelectorAll('#categoriesContainer input[type="checkbox"]').forEach(cb => cb.checked = false);
+                resetFormState();
+                loadPlans();
+            } catch (error) {
+                console.error('Error saving plan:', error);
+                showMessage('Error saving subscription plan', 'error');
+            }
+        });
+
+        // Load and display existing plans
+        async function loadPlans() {
+            const container = document.getElementById('plansContainer');
+            const loading = document.getElementById('loadingPlans');
+            const noPlans = document.getElementById('noPlans');
+
+            loading.style.display = 'block';
+            container.style.display = 'none';
+            noPlans.style.display = 'none';
+
+            try {
+                const snapshot = await get(ref(db, 'subscriptionPlans/'));
+                if (snapshot.exists()) {
+                    const plans = snapshot.val();
+                    const plansArray = Object.entries(plans).map(([key, plan]) => ({ key, ...plan }));
+
+                    container.innerHTML = plansArray.map(plan => `
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <div>
+                                    <div class="plan-title">${plan.name}</div>
+                                    <div class="plan-duration">${plan.duration} days access</div>
+                                </div>
+                                <div class="plan-price">₦${plan.price.toLocaleString()}</div>
+                            </div>
+                            ${plan.description ? `<p style="color: #64748b; margin: 10px 0;">${plan.description}</p>` : ''}
+                            <div class="plan-categories">
+                                ${Array.isArray(plan.categories) ? plan.categories.map(cat => `<span class="category-badge">${cat.name}</span>`).join('') : ''}
+                            </div>
+                            <div class="plan-actions">
+                                <button class="btn-edit" onclick="editPlan('${plan.key}')">Edit</button>
+                                <button class="btn-delete" onclick="deletePlan('${plan.key}')">Delete</button>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    container.style.display = 'grid';
+                } else {
+                    noPlans.style.display = 'block';
+                }
+                loading.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading plans:', error);
+                loading.style.display = 'none';
+                noPlans.style.display = 'block';
+            }
+        }
+
+        window.deletePlan = async function(planKey) {
+            if (!confirm('Are you sure you want to delete this plan?')) return;
+
+            try {
+                await remove(ref(db, `subscriptionPlans/${planKey}`));
+                showMessage('Plan deleted successfully! ✅', 'success');
+                loadPlans();
+            } catch (error) {
+                console.error('Error deleting plan:', error);
+                showMessage('Error deleting plan', 'error');
+            }
+        };
+
+        window.editPlan = async function(planKey) {
+            try {
+                const snapshot = await get(ref(db, `subscriptionPlans/${planKey}`));
+                if (!snapshot.exists()) {
+                    showMessage('Plan not found for editing', 'error');
+                    return;
+                }
+
+                const plan = snapshot.val();
+                editingPlanKey = planKey;
+                document.getElementById('planName').value = plan.name || '';
+                document.getElementById('planPrice').value = plan.price || '';
+                document.getElementById('planDuration').value = plan.duration || '';
+                document.getElementById('planDescription').value = plan.description || '';
+
+                if (!document.getElementById('planCreatedAt')) {
+                    const createdAtField = document.createElement('input');
+                    createdAtField.type = 'hidden';
+                    createdAtField.id = 'planCreatedAt';
+                    document.getElementById('planForm').appendChild(createdAtField);
+                }
+                document.getElementById('planCreatedAt').value = plan.createdAt || new Date().toISOString();
+
+                selectedCategoriesArray = Array.isArray(plan.categories) ? plan.categories : [];
+                document.querySelectorAll('#categoriesContainer input[type="checkbox"]').forEach(cb => {
+                    const match = selectedCategoriesArray.find(cat => cat.id === cb.value);
+                    cb.checked = Boolean(match);
+                });
+
+                updateSelectedCategories();
+                document.getElementById('formTitle').innerHTML = '<h2 style="color: #0f172a; margin-bottom: 20px;">Edit Subscription Plan</h2>';
+                submitPlanBtn.textContent = '✅ Update Subscription Plan';
+                cancelEditBtn.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error loading plan for edit:', error);
+                showMessage('Error loading plan for edit', 'error');
+            }
+        };
+
+        function resetFormState() {
+            editingPlanKey = null;
+            document.getElementById('planForm').reset();
+            document.getElementById('selectedCategories').innerHTML = '';
+            document.querySelectorAll('#categoriesContainer input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('formTitle').innerHTML = '<h2 style="color: #0f172a; margin-bottom: 20px;">Create New Plan</h2>';
+            submitPlanBtn.textContent = '✅ Create Subscription Plan';
+            cancelEditBtn.style.display = 'none';
+            const createdAtField = document.getElementById('planCreatedAt');
+            if (createdAtField) createdAtField.remove();
+        }
+
+        function showMessage(message, type) {
+            const msgDiv = document.getElementById('message');
+            msgDiv.textContent = message;
+            msgDiv.className = `message ${type}`;
+            setTimeout(() => {
+                msgDiv.className = 'message';
+            }, 5000);
+        }
+
+        function redirectToAuth() {
+            window.location.href = '../auth.html';
+        }
+
+        async function authorizeAdmin() {
+            const storedEmail = localStorage.getItem('toolmanager_user_email');
+            if (storedEmail && await isAuthorizedAdmin(storedEmail)) {
+                pageContainer.style.display = 'block';
+                return true;
+            }
+
+            return new Promise((resolve) => {
+                onAuthStateChanged(auth, async (user) => {
+                    if (user && await isAuthorizedAdmin(user.email)) {
+                        localStorage.setItem('toolmanager_user_email', user.email);
+                        pageContainer.style.display = 'block';
+                        resolve(true);
+                        return;
+                    }
+                    redirectToAuth();
+                    resolve(false);
+                });
+            });
+        }
+
+        // Initialize on page load
+        authorizeAdmin().then((authorized) => {
+            if (authorized) {
+                loadCategories();
+                loadPlans();
+            }
+        });
+    </script>
+</body>
+</html>

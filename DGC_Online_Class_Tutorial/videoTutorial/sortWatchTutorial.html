@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Sort Manager - Admin</title>
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-reset {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .status-text {
+            color: #64748b;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .tutorials-list {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .sortable-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tutorial-item {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            cursor: move;
+            transition: all 0.2s;
+        }
+
+        .tutorial-item:hover {
+            background: #f8fafc;
+        }
+
+        .tutorial-item.dragging {
+            opacity: 0.5;
+            background: #e0e7ff;
+        }
+
+        .drag-handle {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            cursor: grab;
+            flex-shrink: 0;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .tutorial-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tutorial-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+
+        .tutorial-meta {
+            font-size: 0.85rem;
+            color: #64748b;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tutorial-category {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sort-order {
+            background: #667eea;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .controls-group {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-move {
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-move:hover {
+            background: #2563eb;
+        }
+
+        .btn-move:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .error-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .tutorial-item {
+                flex-wrap: wrap;
+            }
+
+            .controls-group {
+                order: 3;
+                width: 100%;
+                margin-top: 8px;
+            }
+
+            .sort-order {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Tutorial Sort Manager</h1>
+            <p>Arrange and manage tutorial display order</p>
+        </header>
+
+        <div class="controls">
+            <button class="btn-save" onclick="saveSortOrder()">💾 Save Sort Order</button>
+            <button class="btn-reset" onclick="resetSortOrder()">🔄 Reset to Default</button>
+            <button class="btn-danger" onclick="goBack()">← Go Back</button>
+            <div class="status-text" id="statusText">Ready</div>
+        </div>
+
+        <div class="tutorials-list">
+            <div id="tutorialsLoading" class="loading" style="display: none; background: white; color: #667eea;">
+                <div class="loading-spinner" style="border-color: rgba(102, 126, 234, 0.3); border-top-color: #667eea;"></div>
+                <p>Loading tutorials...</p>
+            </div>
+            <ul id="tutorialsList" class="sortable-list"></ul>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🎥</div>
+                <div style="font-size: 1.2rem; font-weight: 600;">No tutorials available</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get, update } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let allTutorials = [];
+
+        async function loadTutorials() {
+            const loading = document.getElementById('tutorialsLoading');
+            const list = document.getElementById('tutorialsList');
+            const empty = document.getElementById('emptyState');
+
+            loading.style.display = 'block';
+            list.innerHTML = '';
+            empty.style.display = 'none';
+
+            try {
+                const snapshot = await get(ref(db, 'tutorials'));
+                if (!snapshot.exists()) {
+                    loading.style.display = 'none';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                const data = snapshot.val();
+                allTutorials = Object.entries(data).map(([key, tutorial]) => ({
+                    key,
+                    ...tutorial,
+                    sortOrder: tutorial.sortOrder || 999999
+                }));
+
+                // Sort by current sort order
+                allTutorials.sort((a, b) => a.sortOrder - b.sortOrder);
+
+                renderTutorials();
+                loading.style.display = 'none';
+                updateStatus(`Loaded ${allTutorials.length} tutorials`);
+            } catch (error) {
+                console.error('Error loading tutorials:', error);
+                loading.style.display = 'none';
+                showError('Failed to load tutorials');
+            }
+        }
+
+        function renderTutorials() {
+            const list = document.getElementById('tutorialsList');
+            list.innerHTML = allTutorials.map((tutorial, index) => `
+                <li class="tutorial-item" draggable="true" data-key="${tutorial.key}" data-index="${index}">
+                    <span class="drag-handle">⋮⋮</span>
+                    <div class="tutorial-info">
+                        <div class="tutorial-title">${tutorial.title}</div>
+                        <div class="tutorial-meta">
+                            <span class="tutorial-category">${tutorial.category || 'No Category'}</span>
+                            <span>${new Date(tutorial.uploadedAt).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                    <div class="sort-order">#${index + 1}</div>
+                    <div class="controls-group">
+                        <button class="btn-move" onclick="moveTutorial(${index}, 'up')" ${index === 0 ? 'disabled' : ''}>↑</button>
+                        <button class="btn-move" onclick="moveTutorial(${index}, 'down')" ${index === allTutorials.length - 1 ? 'disabled' : ''}>↓</button>
+                    </div>
+                </li>
+            `).join('');
+
+            addDragListeners();
+        }
+
+        window.moveTutorial = function(index, direction) {
+            if (direction === 'up' && index > 0) {
+                [allTutorials[index], allTutorials[index - 1]] = [allTutorials[index - 1], allTutorials[index]];
+            } else if (direction === 'down' && index < allTutorials.length - 1) {
+                [allTutorials[index], allTutorials[index + 1]] = [allTutorials[index + 1], allTutorials[index]];
+            }
+            renderTutorials();
+        };
+
+        function addDragListeners() {
+            const items = document.querySelectorAll('.tutorial-item');
+            let draggedItem = null;
+
+            items.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedItem = item;
+                    item.classList.add('dragging');
+                });
+
+                item.addEventListener('dragend', (e) => {
+                    item.classList.remove('dragging');
+                    draggedItem = null;
+                });
+
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    if (draggedItem && draggedItem !== item) {
+                        const rect = item.getBoundingClientRect();
+                        const afterElement = rect.top + rect.height / 2 > e.clientY;
+                        
+                        const draggedIndex = parseInt(draggedItem.dataset.index);
+                        const targetIndex = parseInt(item.dataset.index);
+
+                        if (afterElement && draggedIndex > targetIndex) {
+                            item.parentNode.insertBefore(draggedItem, item);
+                        } else if (!afterElement && draggedIndex < targetIndex) {
+                            item.parentNode.insertBefore(draggedItem, item.nextSibling);
+                        }
+
+                        // Update allTutorials array
+                        const items = Array.from(document.querySelectorAll('.tutorial-item'));
+                        allTutorials = items.map(el => allTutorials.find(t => t.key === el.dataset.key));
+                        renderTutorials();
+                    }
+                });
+            });
+        }
+
+        window.saveSortOrder = async function() {
+            const saveBtn = document.querySelector('.btn-save');
+            const status = document.getElementById('statusText');
+            
+            saveBtn.disabled = true;
+            saveBtn.textContent = '💾 Saving...';
+            updateStatus('Saving sort order...');
+
+            try {
+                const updates = {};
+                allTutorials.forEach((tutorial, index) => {
+                    updates[`tutorials/${tutorial.key}/sortOrder`] = index;
+                });
+
+                await update(ref(db), updates);
+                
+                saveBtn.disabled = false;
+                saveBtn.textContent = '💾 Save Sort Order';
+                showSuccess('Sort order saved successfully!');
+                updateStatus('Sort order saved');
+            } catch (error) {
+                console.error('Error saving sort order:', error);
+                saveBtn.disabled = false;
+                saveBtn.textContent = '💾 Save Sort Order';
+                showError('Failed to save sort order');
+            }
+        };
+
+        window.resetSortOrder = async function() {
+            if (!confirm('Are you sure you want to reset the sort order to default (newest first)?')) {
+                return;
+            }
+
+            const status = document.getElementById('statusText');
+            updateStatus('Resetting sort order...');
+
+            try {
+                const updates = {};
+                allTutorials.forEach(tutorial => {
+                    updates[`tutorials/${tutorial.key}/sortOrder`] = null;
+                });
+
+                await update(ref(db), updates);
+                await loadTutorials();
+                showSuccess('Sort order reset to default');
+            } catch (error) {
+                console.error('Error resetting sort order:', error);
+                showError('Failed to reset sort order');
+            }
+        };
+
+        window.goBack = function() {
+            window.history.back();
+        };
+
+        function updateStatus(text) {
+            document.getElementById('statusText').textContent = text;
+        }
+
+        function showSuccess(message) {
+            const div = document.createElement('div');
+            div.className = 'success-message';
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        function showError(message) {
+            const div = document.createElement('div');
+            div.className = 'error-message';
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        // Load tutorials on page load
+        loadTutorials();
+    </script>
+</body>
+</html>

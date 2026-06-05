@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login Lock Manager</title>
+        <link rel="icon" href="../images/logo.jpg" type="image/jpeg">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        .page-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #4b5563;
+            margin: 0;
+        }
+
+        .panel {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+            align-items: center;
+        }
+
+        .toolbar button,
+        .toolbar input {
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-size: 0.95rem;
+        }
+
+        .toolbar button {
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .toolbar button:hover {
+            background: #1d4ed8;
+        }
+
+        .toolbar input {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .message {
+            margin-bottom: 18px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            display: none;
+        }
+
+        .message.success {
+            background: #ecfdf5;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            color: #374151;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            color: #4b5563;
+            vertical-align: middle;
+        }
+
+        .empty-state {
+            color: #6b7280;
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .unlock-button {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 999px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .unlock-button:hover {
+            transform: translateY(-1px);
+            background: #0f766e;
+        }
+
+        .unlock-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <h1>Admin Login Lock Manager</h1>
+            <p>View and release active student login locks. Use this page when a student is stuck by an existing session.</p>
+        </header>
+
+        <div class="panel">
+            <div class="toolbar">
+                <button id="refreshButton" type="button">Refresh lock list</button>
+                <input id="unlockEmailInput" type="email" placeholder="Enter email to unlock manually" />
+                <button id="manualUnlockButton" type="button">Unlock email</button>
+            </div>
+
+            <div id="statusMessage" class="message"></div>
+
+            <div id="lockTableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>UID</th>
+                            <th>Login time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lockTableBody"></tbody>
+                </table>
+            </div>
+
+            <div id="emptyState" class="empty-state">No active login locks found.</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+        import { unregisterActiveSession } from './sessionLockHelper.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const refreshButton = document.getElementById('refreshButton');
+        const manualUnlockButton = document.getElementById('manualUnlockButton');
+        const unlockEmailInput = document.getElementById('unlockEmailInput');
+        const statusMessage = document.getElementById('statusMessage');
+        const lockTableBody = document.getElementById('lockTableBody');
+        const emptyState = document.getElementById('emptyState');
+
+        function showMessage(text, type = 'success') {
+            statusMessage.textContent = text;
+            statusMessage.className = `message ${type}`;
+            statusMessage.style.display = 'block';
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 6000);
+        }
+
+        function formatDateTime(timestamp) {
+            try {
+                return new Date(timestamp).toLocaleString();
+            } catch (error) {
+                return timestamp || '-';
+            }
+        }
+
+        async function loadActiveLocks() {
+            lockTableBody.innerHTML = '';
+            emptyState.style.display = 'none';
+            refreshButton.disabled = true;
+            refreshButton.textContent = 'Refreshing...';
+
+            try {
+                const snapshot = await get(ref(db, 'activeStudentLoginEmails'));
+                const locks = snapshot.val() || {};
+                const keys = Object.keys(locks);
+
+                if (keys.length === 0) {
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                keys.forEach((key) => {
+                    const lock = locks[key] || {};
+                    const email = lock.email || key.replace(/_/g, '@');
+                    const uid = lock.uid || '-';
+                    const loginTime = formatDateTime(lock.loginTime);
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${email}</td>
+                        <td>${uid}</td>
+                        <td>${loginTime}</td>
+                        <td><button type="button" class="unlock-button" data-email="${email}">Unlock</button></td>
+                    `;
+                    lockTableBody.appendChild(row);
+                });
+            } catch (error) {
+                showMessage('Unable to load lock list. Check your connection and Firebase settings.', 'error');
+                console.error(error);
+            } finally {
+                refreshButton.disabled = false;
+                refreshButton.textContent = 'Refresh lock list';
+            }
+        }
+
+        async function unlockEmail(email) {
+            if (!email) {
+                showMessage('Please enter an email address to unlock.', 'error');
+                return;
+            }
+
+            manualUnlockButton.disabled = true;
+            manualUnlockButton.textContent = 'Unlocking...';
+
+            try {
+                await unregisterActiveSession(db, email);
+                showMessage(`Unlocked ${email} successfully.`);
+                unlockEmailInput.value = '';
+                await loadActiveLocks();
+            } catch (error) {
+                showMessage('Failed to unlock the specified email.', 'error');
+                console.error(error);
+            } finally {
+                manualUnlockButton.disabled = false;
+                manualUnlockButton.textContent = 'Unlock email';
+            }
+        }
+
+        lockTableBody.addEventListener('click', async (event) => {
+            const button = event.target.closest('.unlock-button');
+            if (!button) return;
+            const email = button.dataset.email;
+            button.disabled = true;
+            button.textContent = 'Unlocking...';
+
+            try {
+                await unregisterActiveSession(db, email);
+                showMessage(`Unlocked ${email} successfully.`);
+                await loadActiveLocks();
+            } catch (error) {
+                showMessage('Failed to unlock the selected session.', 'error');
+                console.error(error);
+            }
+        });
+
+        refreshButton.addEventListener('click', loadActiveLocks);
+        manualUnlockButton.addEventListener('click', () => unlockEmail(unlockEmailInput.value.trim().toLowerCase()));
+
+        loadActiveLocks();
+    </script>
+</body>
+</html>

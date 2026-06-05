@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degreatcode ICT LTD Student Attendance | Bringing the best out from you and code changing the world</title>
+    <meta name="description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future with Degreatcode ICT LTD online class student attendance.">
+        <link rel="icon" type="image/jpeg" sizes="122x80" href="../../assets/img/logo.jpg">
+    <meta name="keywords" content="Degreatcode, ICT, online class, student attendance, software training, coding, programming, fuel your future, ideas to reality, software production, student training, best coding tutorials">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Degreatcode ICT LTD Student Attendance">
+    <meta property="og:description" content="Bringing the best out from you and code changing the world. Training-software production-Ideas to reality. Fuel your future.">
+    <meta property="og:image" content="../images/superflyer.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://degreartcode.com/studentAttendanceSys/studentAttendance.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #fff; min-height: 100vh; color: #111; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { background: #fff; border: 2px solid #d90429; border-radius: 18px; padding: 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(217,4,41,0.06); }
+        header h1 { font-size: 2rem; margin-bottom: 10px; color: #d90429; }
+        header p { color: #222; }
+        .panel { background: #fff; border: 1.5px solid #d90429; border-radius: 18px; padding: 24px; box-shadow: 0 2px 8px rgba(217,4,41,0.04); }
+        label { display: block; margin-bottom: 8px; font-weight: 700; color: #d90429; }
+        input, button { width: 100%; border-radius: 12px; border: 1.5px solid #d90429; padding: 14px; background: #fafafa; color: #111; }
+        button { margin-top: 16px; cursor: pointer; background: #d90429; color: #fff; border: none; font-weight: 700; transition: background 0.2s; }
+        button:hover { background: #b3001b; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 16px; margin: 24px 0; }
+        .stat-card { background: #fff; border: 1.5px solid #d90429; border-radius: 16px; padding: 22px; box-shadow: 0 2px 8px rgba(217,4,41,0.04); }
+        .stat-card h2 { margin-bottom: 8px; color: #d90429; }
+        .table-wrap { overflow-x: auto; margin-top: 18px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 14px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+        th { text-transform: uppercase; font-size: 0.8rem; color: #d90429; }
+        td { color: #111; }
+        .tag { display: inline-flex; padding: 6px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+        .tag-present { background: #fff0f0; color: #d90429; border: 1px solid #d90429; }
+        .tag-absent { background: #d90429; color: #fff; }
+        .message { margin-bottom: 18px; padding: 16px 18px; border-radius: 14px; }
+        .message.error { background: #d90429; color: #fff; }
+        .message.info { background: #fff; color: #111; border: 1.5px solid #d90429; }
+        .button-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; color: #d90429; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../images/logo.jpg" alt="Degreatcode ICT LTD Logo" style="max-width:100px; margin: 0 auto 18px; display:block; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <img src="../images/superflyer.png" alt="Hero banner" style="width:100%;max-width:400px;margin:0 auto 18px;display:block;border-radius:18px;box-shadow:0 4px 18px rgba(0,0,0,0.10);">
+        <header>
+            <h1>Student Attendance Lookup</h1>
+            <p>Enter your email or select a date range to view attendance records.</p>
+            <a class="button-link" href="adminAttendance.html" target="_blank">Go to Admin Attendance System</a>
+        </header>
+
+        <div id="messageContainer"></div>
+
+        <div class="panel">
+            <label for="searchEmail">Student Email</label>
+            <input type="email" id="searchEmail" placeholder="student@example.com">
+            <label for="fromDate" style="margin-top:16px;">From Date</label>
+            <input type="date" id="fromDate">
+            <label for="toDate" style="margin-top:16px;">To Date</label>
+            <input type="date" id="toDate">
+            <button id="searchBtn">Search Attendance</button>
+        </div>
+
+        <div class="stats" id="statsRow"></div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Marked By</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                    <tr><td colspan="5" style="text-align:center; color:#94a3b8;">Enter your email and search to see attendance.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { firebaseConfig } from '../FirebaseConnection/FirebaseConfiggFile.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        function showMessage(message, type = 'info') {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="message ${type}">${message}</div>`;
+            if (type !== 'error') setTimeout(() => container.innerHTML = '', 5000);
+        }
+
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        async function searchAttendance() {
+            const email = document.getElementById('searchEmail').value.trim().toLowerCase();
+            const fromDate = document.getElementById('fromDate').value;
+            const toDate = document.getElementById('toDate').value;
+
+            if (!email) {
+                showMessage('Please enter your email address.', 'error');
+                return;
+            }
+
+            let start = fromDate ? new Date(fromDate) : null;
+            let end = toDate ? new Date(toDate) : null;
+            if (end) end.setHours(23,59,59,999);
+
+            showMessage('Searching attendance...', 'info');
+            const results = [];
+            const today = new Date();
+            const latestDate = formatDate(today);
+            const snapshot = await get(ref(db, 'attendanceRecords'));
+
+            if (!snapshot.exists()) {
+                showMessage('No attendance data available.', 'error');
+                displayResults([]);
+                return;
+            }
+
+            const data = snapshot.val();
+            for (const dateKey of Object.keys(data)) {
+                const recordDate = new Date(dateKey);
+                if (start && recordDate < start) continue;
+                if (end && recordDate > end) continue;
+
+                const dayRecords = data[dateKey];
+                for (const record of Object.values(dayRecords)) {
+                    if (record.studentEmail && record.studentEmail.toLowerCase() === email) {
+                        results.push({ ...record, date: dateKey });
+                    }
+                }
+            }
+
+            if (results.length === 0) {
+                showMessage('No attendance records found for that email and date range.', 'error');
+            } else {
+                showMessage(`Found ${results.length} attendance record(s).`, 'info');
+            }
+            displayResults(results);
+            updateStats(results);
+        }
+
+        function displayResults(records) {
+            const body = document.getElementById('resultsBody');
+            if (records.length === 0) {
+                body.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No attendance records found.</td></tr>';
+                return;
+            }
+            body.innerHTML = records.map(record => `
+                <tr>
+                    <td>${record.date}</td>
+                    <td>${record.studentName || 'N/A'}</td>
+                    <td>${record.studentEmail}</td>
+                    <td><span class="tag ${record.status === 'present' ? 'tag-present' : 'tag-absent'}">${record.status}</span></td>
+                    <td>${record.markedBy || 'Admin'}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateStats(records) {
+            const stats = document.getElementById('statsRow');
+            if (!records || records.length === 0) {
+                stats.innerHTML = '';
+                return;
+            }
+            const present = records.filter(r => r.status === 'present').length;
+            const absent = records.filter(r => r.status === 'absent').length;
+            stats.innerHTML = `
+                <div class="stat-card"><h2>${records.length}</h2><p>Total days</p></div>
+                <div class="stat-card"><h2>${present}</h2><p>Present</p></div>
+                <div class="stat-card"><h2>${absent}</h2><p>Absent</p></div>
+            `;
+        }
+
+        document.getElementById('searchBtn').addEventListener('click', searchAttendance);
+    </script>
+</body>
+</html>

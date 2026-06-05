@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Course | DegreatCode ICT</title>
+    <meta name="description" content="Learn HTML structure, tags, and web page content design.">
+        <link rel="icon" type="image/jpeg" sizes="122x80" href="../assets/img/logo.jpg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../assets/img/logo.jpg" width="44" height="44" class="me-2 rounded-circle" alt="DegreatCode ICT logo">DegreatCode ICT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pageNav" aria-controls="pageNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pageNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../programming.html">Programming</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="section section-about">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1>HTML</h1>
+                    <p class="text-muted">HTML is the foundation of every website. Learn how to structure content, build pages, and prepare your site for styling and interaction.</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-4">
+                <div class="col-12">
+                    <div class="course-card">
+                        <h4>What you will learn</h4>
+                        <ul class="about-list">
+                            <li>Page structure with headings, paragraphs, and sections</li>
+                            <li>Lists, tables, links, and image embedding</li>
+                            <li>Forms, buttons, and interactive page elements</li>
+                            <li>Semantic HTML for accessibility and good practice</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <a class="btn btn-primary btn-lg" href="../programming.html">Back to Programming</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-section text-center">
+        <div class="container">
+            <p>&copy; <span id="year"></span> DegreatCode ICT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.getElementById('year').textContent = new Date().getFullYear();
+            (function(){
+                if (window.__dgc_nav_fab_loaded) return; window.__dgc_nav_fab_loaded = true;
+                var l=document.createElement('link'); l.rel='stylesheet'; l.href='../assets/css/nav-fab.css'; document.head.appendChild(l);
+                var s=document.createElement('script'); s.src='../assets/js/nav-fab.js'; document.body.appendChild(s);
+            })();
+        </script>
+</body>
+</html>

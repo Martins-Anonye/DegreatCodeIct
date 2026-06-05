@@ -1,0 +1,114 @@
+var packageListPromo = {
+	"promoPackages": [
+		{
+			"name": "Essential Computer Training",
+			"rowNo": 1,
+			"hot": true,
+			"packagecode": "dgc10008 / dgc0001_0008",
+			"price": 70000,
+			"promoprice": 40000,
+			"duration": "3 Months",
+			"image": "../assets/img/essential-613x796.png",
+			"category": [
+				"Office Tools and Knowledge",
+				"Basic Computer",
+				"word processing"
+			],
+			"description": [
+				"Student will learn the following",
+				"All Office package Including Excel, Microsoft word, Power Point, Publisher.",
+				"How to use digital white board based on Smart Note Book, Draw patterns, Internet, Google",
+				"How to use smart phone for digital service (Mobile Intelligence)",
+				"How to use system Machines like Printers and Virtual Printers, Scanners"
+			]
+		},
+		{
+			"name": "Graphics Design Using Adobe Photoshop & Canvas A.I",
+			"rowNo": 4,
+			"hot": true,
+			"packagecode": "dgc011",
+			"price": 60000,
+			"promoprice": 40000,
+			"duration": "2 Months + 1wk",
+			"image": "../assets/img/computer-graphics-624x796.png",
+			"category": [
+				"Graphics Design",
+				"Digital Art",
+				"Creative Tools"
+			],
+			"description": [
+				"Professional graphics design training",
+				"Master Adobe Photoshop from basic to advanced",
+				"Learn Canvas A.I for modern design",
+				"Create stunning visual content",
+				"Real-world project-based training"
+			]
+		},
+		{
+			"name": "Web Development Intensive",
+			"rowNo": 5,
+			"hot": true,
+			"packagecode": "dgc050",
+			"price": 80000,
+			"promoprice": 45000,
+			"duration": "3 Months",
+			"image": "../assets/img/web-development-613x796.png",
+			"category": [
+				"Web Development",
+				"Programming",
+				"Full Stack"
+			],
+			"description": [
+				"Complete web development course",
+				"HTML, CSS, JavaScript fundamentals",
+				"React.js and modern frameworks",
+				"Backend development with Node.js",
+				"Deploy and publish web applications"
+			]
+		},
+		{
+			"name": "Mobile App Development",
+			"rowNo": 6,
+			"hot": true,
+			"packagecode": "dgc051",
+			"price": 90000,
+			"promoprice": 50000,
+			"duration": "4 Months",
+			"image": "../assets/img/mobile-app-dev-613x796.png",
+			"category": [
+				"Mobile Development",
+				"Flutter",
+				"Android & iOS"
+			],
+			"description": [
+				"Learn mobile app development",
+				"Flutter for iOS and Android",
+				"Build cross-platform applications",
+				"Publication on app stores",
+				"Real-world project experience"
+			]
+		},
+		{
+			"name": "Python Programming Bootcamp",
+			"rowNo": 7,
+			"hot": true,
+			"packagecode": "dgc052",
+			"price": 70000,
+			"promoprice": 35000,
+			"duration": "2.5 Months",
+			"image": "../assets/img/python-programming-613x796.png",
+			"category": [
+				"Programming",
+				"Python",
+				"Software Development"
+			],
+			"description": [
+				"Comprehensive Python programming",
+				"From basics to advanced concepts",
+				"Data structures and algorithms",
+				"Web scraping and automation",
+				"Career preparation"
+			]
+		}
+	]
+}

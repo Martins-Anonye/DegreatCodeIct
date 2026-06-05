@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Identity | DegreatCode ICT LTD</title>
+  <meta name="description" content="Public view of student identity and certificate verification.">
+  <link rel="icon" type="image/jpeg" sizes="122x80" href="assets/img/logo.jpg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .identity-card { max-width: 480px; margin: 2rem auto; background: #fff; border-radius: 18px; box-shadow: 0 8px 32px rgba(15,23,42,0.10); padding: 2.5rem 2rem; }
+    .identity-card h2 { color: #d90429; font-weight: 700; margin-bottom: 0.5rem; }
+    .identity-card .info { margin-bottom: 1.2rem; }
+    .identity-card img { max-width: 220px; max-height: 180px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+    .identity-card .notfound { color: #888; font-size: 1.2rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="identity-card" id="identityCard">
+    <div class="notfound">Loading...</div>
+  </div>
+  <script type="module">
+    import { firebaseConfig } from './assets/js/firebase-config.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import { getFirestore, collection, query, where, getDocs, getDatabase, ref, get, child } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+    import { getDatabase as getRealtimeDB, ref as dbRef, get as dbGet } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+    
+    // Get ?id=... from URL
+    function getIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id');
+    }
+    
+    const studentId = getIdFromUrl();
+    const card = document.getElementById('identityCard');
+    
+    if (!studentId) {
+      card.innerHTML = '<div class="notfound">No student ID provided.</div>';
+    } else {
+      const app = initializeApp(firebaseConfig);
+      const firestore = getFirestore(app);
+      const rtdb = getRealtimeDB(app);
+      
+      // Try to find student by studentId in Firestore
+      (async () => {
+        try {
+          const q = query(collection(firestore, 'students'), where('studentId', '==', studentId));
+          const querySnapshot = await getDocs(q);
+          
+          if (querySnapshot.empty) {
+            // Try Realtime Database
+            const snapshot = await dbGet(child(dbRef(rtdb), `students`));
+            let found = false;
+            if (snapshot.exists()) {
+              snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                if (data.studentId === studentId) {
+                  displayStudent(data);
+                  found = true;
+                }
+              });
+            }
+            if (!found) {
+              card.innerHTML = '<div class="notfound">Student identity not found.</div>';
+            }
+          } else {
+            const data = querySnapshot.docs[0].data();
+            displayStudent(data);
+          }
+        } catch (err) {
+          card.innerHTML = `<div class="notfound">Error loading identity.<br>${err.message}</div>`;
+        }
+      })();
+      
+      function displayStudent(data) {
+        card.innerHTML = `
+          <h2>Student Identity</h2>
+          <div class="info"><b>Name:</b> ${data.name || ''}</div>
+          <div class="info"><b>Program:</b> ${data.program || ''}</div>
+          <div class="info"><b>Certificate No:</b> ${data.certificate || ''}</div>
+          <div class="info"><b>Issue Date:</b> ${data.issueDate || ''}</div>
+          <div class="info"><b>Student ID:</b> ${data.studentId || ''}</div>
+          ${data.idCardUrl ? (data.idCardUrl.startsWith('data:')
+            ? `<img src="${data.idCardUrl}" alt="ID Card">`
+            : `<a href="${data.idCardUrl}" target="_blank">View ID Card</a>`)
+          : ''}
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

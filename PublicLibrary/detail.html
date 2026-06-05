@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Details - DegreatCode ICT LTD Public Library</title>
+    <link rel="icon" type="image/jpeg" sizes="122x80" href="../assets/img/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .detail-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+        .detail-nav {
+            margin-bottom: 30px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            color: #764ba2;
+            gap: 12px;
+        }
+        .resource-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .resource-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .resource-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .resource-meta {
+            color: #999;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .resource-content {
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.05rem;
+        }
+        .resource-content p {
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .action-buttons a {
+            flex: 1;
+            min-width: 150px;
+        }
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #2c3e50;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../assets/img/logo.jpg" width="44" height="44" class="me-2 rounded-circle" alt="DegreatCode ICT LTD logo">
+                <span>DegreatCode ICT LTD</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../tutorials.html">Tutorials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Library</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/2348132329272?text=Hello%20DegreatCode%20ICT%2C%20I%20need%20help%20with%20the%20library" target="_blank" title="Contact on WhatsApp" style="position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); z-index: 999; transition: all 0.3s ease; text-decoration: none;" class="whatsapp-btn" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 16px rgba(37, 211, 102, 0.6)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(37, 211, 102, 0.4)'">
+            💬
+        </a>
+
+        <div class="container resource-container">
+            <!-- Back Link -->
+            <div class="detail-nav">
+                <a href="index.html" class="back-link">
+                    <span>←</span>
+                    <span>Back to Library</span>
+                </a>
+            </div>
+
+            <!-- Price Disclaimer -->
+            <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 16px; margin-bottom: 20px; border-radius: 4px;">
+                <small style="color: #856404;"><strong>📌 Note:</strong> Prices shown are subject to change. Please contact us for current pricing and special offers.</small>
+            </div>
+
+            <!-- Resource Detail -->
+            <div id="resourceDetail">
+                <!-- Content loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section text-center mt-5">
+        <div class="container">
+            <div class="social-footer-icons d-flex justify-content-center gap-3 mb-3">
+                <a href="https://wa.me/2348132329272" target="_blank" title="WhatsApp"><img src="../assets/social/whatsapp_large@1.5x.png" alt="WhatsApp" width="28" height="28"></a>
+                <a href="tel:+2348132329272" title="Call"><img src="../assets/social/call@2x.png" alt="Phone" width="28" height="28"></a>
+                <a href="mailto:contact@degreatcode.com" title="Email"><img src="../assets/social/email@2x.png" alt="Email" width="28" height="28"></a>
+                <a href="https://facebook.com/degreatcodeLTD" target="_blank" title="Facebook"><img src="../assets/social/facebook_small@2x.png" alt="Facebook" width="28" height="28"></a>
+                <a href="https://youtube.com/degreatcodeLTD" target="_blank" title="YouTube"><img src="../assets/social/youtube2_small@2x.png" alt="YouTube" width="28" height="28"></a>
+            </div>
+            <p>&copy; <span id="year"></span> DegreatCode ICT LTD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="publiclibrary.json"></script>
+    <script src="DGC price data.json"></script>
+    <script src="packageList_promo.json"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearEl = document.getElementById('year');
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
+            }
+
+            const resourceDetail = document.getElementById('resourceDetail');
+            
+            // Get parameters from URL
+            function getUrlParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            const type = getUrlParameter('type') || 'book';
+            const rowNo = getUrlParameter('rowNo');
+            const rowIndex = rowNo ? parseInt(rowNo) - 1 : null;
+
+            let resource = null;
+            let isProgram = false;
+
+            // Find the resource (book, program, or promo)
+            if (type === 'promo' && typeof packageListPromo !== 'undefined' && packageListPromo.promoPackages && rowIndex !== null) {
+                if (rowIndex >= 0 && rowIndex < packageListPromo.promoPackages.length) {
+                    resource = packageListPromo.promoPackages[rowIndex];
+                    isProgram = true;
+                }
+            } else if (type === 'program' && typeof programPackage !== 'undefined' && programPackage.programs && rowIndex !== null) {
+                if (rowIndex >= 0 && rowIndex < programPackage.programs.length) {
+                    resource = programPackage.programs[rowIndex];
+                    isProgram = true;
+                }
+            } else if (typeof publicLibrary !== 'undefined' && publicLibrary.books && rowIndex !== null) {
+                if (rowIndex >= 0 && rowIndex < publicLibrary.books.length) {
+                    resource = publicLibrary.books[rowIndex];
+                    isProgram = false;
+                }
+            }
+
+            if (resource) {
+                let title = resource.name;
+                let image = isProgram ? resource.image : resource.imageurl;
+                let description = '';
+                
+                if (isProgram) {
+                    // Format program description
+                    if (Array.isArray(resource.description)) {
+                        description = resource.description.join('<br><br>');
+                    } else {
+                        description = resource.description || '';
+                    }
+                } else {
+                    // Format book description
+                    if (Array.isArray(resource.description)) {
+                        description = resource.description.join('<br><br>');
+                    } else {
+                        description = resource.description || '';
+                    }
+                }
+
+                let categoryHtml = '';
+                if (resource.category) {
+                    const categories = Array.isArray(resource.category) ? resource.category : [resource.category];
+                    categoryHtml = categories.map(cat => `<span class="badge bg-info me-2">${cat}</span>`).join('');
+                }
+
+                resourceDetail.innerHTML = `
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <img src="${image}" alt="${title}" class="resource-image">
+                            <h1 class="resource-title">${title}</h1>
+                            <div class="resource-meta">
+                                <span>${isProgram ? '🎓 Training Program' : '📚 Learning Resource'}</span> • <span>DegreatCode ICT LTD</span>
+                                ${isProgram && resource.duration ? ` • <span>⏱️ ${resource.duration}</span>` : ''}
+                            </div>
+                            ${categoryHtml ? `<div style="margin-bottom: 20px;">${categoryHtml}</div>` : ''}
+                            <div class="resource-content">
+                                ${description}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm" style="position: sticky; top: 20px;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${isProgram ? '🎓' : '📖'} ${title}</h5>
+                                    <p class="card-text text-muted">${isProgram ? 'Professional training program' : 'Free learning resource'}</p>
+                                    ${isProgram && resource.duration ? `
+                                        <div style="padding: 12px; background: #f8f9fa; border-radius: 6px; margin-bottom: 15px;">
+                                            <strong>Duration:</strong> ${resource.duration}
+                                        </div>
+                                    ` : ''}
+                                    ${isProgram && resource.promoprice > 0 ? `
+                                        <div style="padding: 12px; background: #fff3cd; border-radius: 6px; margin-bottom: 15px;">
+                                            <strong style="color: #856404;">💰 Price:</strong>
+                                            <div style="font-size: 1.3rem; color: #f5576c; font-weight: bold;">₦${resource.promoprice.toLocaleString()}</div>
+                                            <small style="color: #856404;">*Subject to change</small>
+                                        </div>
+                                    ` : ''}
+                                    <button class="btn btn-primary w-100 mb-2" onclick="contactForDetails('${title}')">>
+                                        📞 Contact for Details
+                                    </button>
+                                    <button class="btn btn-outline-primary w-100" onclick="shareResource('${title}')">
+                                        🔗 Share
+                                    </button>
+                                    <a href="https://wa.me/2348132329272?text=Hello%2C%20I%20have%20a%20question%20about%20DegreatCode%20ICT%20LTD" target="_blank" class="btn btn-success w-100 mt-2">
+                                        💬 Chat on WhatsApp
+                                    </a>
+                                    <hr>
+                                    <p class="small text-muted">
+                                        ${isProgram 
+                                            ? 'Join our professional training program to develop real-world skills with expert instructors.' 
+                                            : 'This resource is part of DegreatCode ICT LTD\'s public learning library, designed to help students and professionals develop real-world skills.'}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="index.html" class="btn btn-outline-primary btn-lg">← Back to Library</a>
+                        <a href="https://wa.me/2348132329272?text=Hello%2C%20I%20need%20help%20from%20DegreatCode%20ICT%20LTD" target="_blank" class="btn btn-success btn-lg">💬 WhatsApp Support</a>
+                        <a href="../index.html" class="btn btn-outline-secondary btn-lg">🏠 Home</a>
+                    </div>
+                `;
+            } else {
+                resourceDetail.innerHTML = `
+                    <div class="error-message">
+                        <h4>⚠️ Resource Not Found</h4>
+                        <p>The resource you're looking for doesn't exist or couldn't be loaded.</p>
+                        <a href="index.html" class="btn btn-primary mt-3">Go Back to Library</a>
+                    </div>
+                `;
+            }
+        });
+
+        function downloadResource(resourceName) {
+            alert(`Downloading: ${resourceName}\n\nPlease contact support for download links.\nWhatsApp: +2348132329272`);
+        }
+
+        function contactForDetails(resourceName) {
+            const message = `I'm interested in learning more about: ${resourceName}`;
+            window.location.href = `https://wa.me/2348132329272?text=${encodeURIComponent(message)}`;
+        }
+
+        function shareResource(resourceName) {
+            const url = window.location.href;
+            const text = `Check out this resource from DegreatCode ICT LTD: ${resourceName}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: resourceName,
+                    text: text,
+                    url: url
+                });
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+    </script>
+</body>
+</html>

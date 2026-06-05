@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | DegreatCode ICT LTD</title>
+    <meta name="description" content="Learn about DegreatCode ICT LTD - comprehensive training in programming, web development, mobile apps, and more.">
+    <link rel="icon" type="image/jpeg" sizes="122x80" href="assets/img/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        .about-hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .about-hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        .about-section {
+            padding: 40px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .about-section h2 {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .course-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .course-card h5 {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .contact-section {
+            background: #f8f9fa;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .contact-card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .contact-card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        .contact-card h5 {
+            color: #667eea;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .contact-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-section">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="assets/img/logo.jpg" width="48" height="48" class="me-2 rounded-circle" alt="DegreatCode ICT LTD logo">
+                    DegreatCode ICT LTD
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="aboutus.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="student-id.html">Student ID</a></li>
+                        <li class="nav-item"><a class="nav-link" href="location.html">Location</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About DegreatCode ICT LTD</h1>
+            <p>Bringing the best out of you. Code changing the world. Create new ideas, bring imagination to reality. Excel among many and roll among the best.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Who We Are -->
+        <section class="about-section">
+            <h2>Who We Are</h2>
+            <p>
+                <strong>DegreatCode ICT LTD (DGC)</strong> is designed to run globally and flexibly. We are a comprehensive ICT training institute that specializes in a wide range of computer packages and technologies. Our mission is to provide practical, hands-on training that prepares students for real-world challenges in the technology industry.
+            </p>
+        </section>
+
+        <!-- What We Offer -->
+        <section class="about-section">
+            <h2>Our Training Programs</h2>
+            <p>We offer training across multiple domains:</p>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <h5>📱 Mobile Development</h5>
+                    <p>iOS (Swift), Android, Flutter, React Native</p>
+                </div>
+                <div class="course-card">
+                    <h5>🌐 Web Development</h5>
+                    <p>HTML, CSS, JavaScript, PHP, Node.js, Laravel, ASP.NET</p>
+                </div>
+                <div class="course-card">
+                    <h5>🐍 Programming Languages</h5>
+                    <p>Java, Python, C++, C#, Go, Solidity</p>
+                </div>
+                <div class="course-card">
+                    <h5>🗄️ Databases</h5>
+                    <p>Oracle, MySQL, SQL, MongoDB, JSON</p>
+                </div>
+                <div class="course-card">
+                    <h5>🖥️ Desktop & Systems</h5>
+                    <p>Windows Development, Assembly Language, Networking</p>
+                </div>
+                <div class="course-card">
+                    <h5>🎨 Design & Multimedia</h5>
+                    <p>Photoshop, Adobe Suite, Camtasia, Video Editing</p>
+                </div>
+                <div class="course-card">
+                    <h5>📊 Data & AI</h5>
+                    <p>Data Science, Analysis, Artificial Intelligence</p>
+                </div>
+                <div class="course-card">
+                    <h5>🔧 Hardware & Networking</h5>
+                    <p>Hardware Repair, Maintenance, N+, Cisco Networking</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flexible Learning -->
+        <section class="about-section">
+            <h2>Flexible Learning Options</h2>
+            <p>We understand that everyone has different schedules and learning preferences. That's why we offer multiple training formats:</p>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li>✓ Part-time classes</li>
+                        <li>✓ Full-time programs</li>
+                        <li>✓ Evening sessions</li>
+                        <li>✓ Customized schedules</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li>✓ Online classes</li>
+                        <li>✓ Offline classes</li>
+                        <li>✓ Home-based training</li>
+                        <li>✓ Monthly intensive programs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certification & Projects -->
+        <section class="about-section">
+            <h2>Certification & Practical Projects</h2>
+            <p>
+                Upon completion of any program with DegreatCode ICT LTD, students receive an official <strong>certificate of completion</strong>. More importantly, every trainee is expected to execute and complete <strong>at least one personal project</strong> during their course. This project serves as proof that you have mastered the skills and demonstrates your practical ability to execute real-world solutions.
+            </p>
+            <p>
+                We ensure that our trainees not only understand the theoretical concepts but can also apply them effectively in real projects, making them job-ready upon graduation.
+            </p>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="about-section">
+            <h2>Why Choose DegreatCode ICT LTD?</h2>
+            <div class="row mt-4">
+                <div class="col-md-6 mb-3">
+                    <h5 class="text-primary">✓ Comprehensive Curriculum</h5>
+                    <p>Wide range of courses covering all major technologies and platforms</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h5 class="text-primary">✓ Flexibility</h5>
+                    <p>Multiple learning formats to fit your schedule and preferences</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h5 class="text-primary">✓ Practical Training</h5>
+                    <p>Hands-on projects and real-world applications</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h5 class="text-primary">✓ Certification</h5>
+                    <p>Official certificates upon course completion</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h5 class="text-primary">✓ Expert Instructors</h5>
+                    <p>Trained professionals with industry experience</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h5 class="text-primary">✓ Global Reach</h5>
+                    <p>Designed to serve students worldwide</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <!-- More About Section -->
+        <section class="about-section">
+            <div class="container">
+                <h2>More About DegreatCode ICT LTD</h2>
+                <p>
+                    DegreatCode ICT LTD helps students and the public access training and tutorials through our mobile app, software tools, and website links. We also create and build apps and software for customers and clients, while offering a separate student verification page for professionalism checks.
+                </p>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="course-card">
+                            <h5>📱 Mobile & Web Access</h5>
+                            <p>Training and tutorials available through mobile app, software, and website links</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="course-card">
+                            <h5>💼 Development Services</h5>
+                            <p>App and software development services for customers and clients</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="course-card">
+                            <h5>✅ Verification Tools</h5>
+                            <p>Separate student verification tool to confirm registered IDs and professionalism</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: #667eea; font-weight: bold; font-size: 2rem;">Get In Touch</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <img src="assets/img/social/email@2x.png" alt="Email icon">
+                        <h5>Email Us</h5>
+                        <p>service@degreatcodeict.com</p>
+                        <p>DegreatCodeict@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <img src="assets/img/social/whatsapp_large@1.5x.png" alt="WhatsApp icon">
+                        <h5>WhatsApp</h5>
+                        <p>+2348132329272</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-card">
+                        <img src="assets/img/social/call@2x.png" alt="Phone icon">
+                        <h5>Call Us</h5>
+                        <p>+2348132329272</p>
+                        <p>+2349125214775</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>&copy; 2026 DegreatCode ICT LTD. All rights reserved.</p>
+            <p>Bringing the best out from you. Code changing the world.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

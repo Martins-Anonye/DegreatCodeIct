@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DegreatCode ICT LTD - Public Library</title>
+    <meta name="description" content="Access free learning resources, books, and educational materials from DegreatCode ICT LTD Public Library.">
+    <link rel="icon" type="image/jpeg" sizes="122x80" href="../assets/img/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .library-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .library-hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .library-hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        .library-card {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+        .library-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+        }
+        .library-card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        }
+        .library-card-body {
+            padding: 20px;
+        }
+        .library-card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .library-card-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .library-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        .back-to-home {
+            margin-bottom: 30px;
+        }
+        .library-search {
+            margin-bottom: 30px;
+        }
+        .library-search input {
+            border-radius: 25px;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .library-search input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            background-color: black;
+            color: white;
+            margin-right: 8px;
+            border-radius: 8px 8px 0 0;
+            padding: 12px 20px;
+        }
+        .nav-tabs .nav-link.active {
+            border-bottom: 3px solid #667eea;
+            background: #667eea;
+            color: white;
+        }
+        .nav-tabs .nav-link:hover {
+            border-bottom: 3px solid rgba(102, 126, 234, 0.5);
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: #2c3e50;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../assets/img/logo.jpg" width="44" height="44" class="me-2 rounded-circle" alt="DegreatCode ICT LTD logo">
+                <span>DegreatCode ICT LTD</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../tutorials.html">Tutorials</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Library</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="library-hero">
+        <div class="container">
+            <h1>📚 Public Library</h1>
+            <p>Free Learning Resources, Programs & Educational Materials</p>
+            <p style="font-size: 0.95rem; margin-top: 15px;">Explore comprehensive learning materials, guides, training programs, and resources for all programming languages and technologies.</p>
+            <div style="margin-top: 25px;">
+                <a href="https://wa.me/2348132329272?text=Hello%20DegreatCode%20ICT%2C%20I%20need%20help%20with%20the%20library" target="_blank" class="btn btn-light" style="background-color: white; color: #25D366; font-weight: bold; border: 2px solid white;">
+                    💬 Contact via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="library-search">
+                <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="🔍 Search resources, programs, and materials...">
+            </div>
+
+            <!-- WhatsApp Floating Button -->
+            <a href="https://wa.me/2348132329272?text=Hello%20DegreatCode%20ICT%2C%20I%20need%20help%20with%20the%20library" target="_blank" title="Contact on WhatsApp" style="position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); z-index: 999; transition: all 0.3s ease; text-decoration: none;" class="whatsapp-btn" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 6px 16px rgba(37, 211, 102, 0.6)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(37, 211, 102, 0.4)'">
+                💬
+            </a>
+
+            <!-- Price Disclaimer -->
+            <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 16px; margin-bottom: 20px; border-radius: 4px;">
+                <small style="color: #856404;"><strong>📌 Note:</strong> Prices shown for training packages are subject to change. Please contact us for current pricing and special offers.</small>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs mb-4" id="libraryTabs" role="tablist" style="border-bottom: 2px solid #667eea;">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true" style="color: #667eea; font-weight: 500;">
+                        📚 All Resources
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="programming-tab" data-bs-toggle="tab" data-bs-target="#programming" type="button" role="tab" aria-controls="programming" aria-selected="false" style="color: #667eea; font-weight: 500;">
+                        💻 Programming Library
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="packages-tab" data-bs-toggle="tab" data-bs-target="#packages" type="button" role="tab" aria-controls="packages" aria-selected="false" style="color: #667eea; font-weight: 500;">
+                        🎓 Training Packages
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="promo-tab" data-bs-toggle="tab" data-bs-target="#promo" type="button" role="tab" aria-controls="promo" aria-selected="false" style="color: #667eea; font-weight: 500;">
+                        🎁 Promo Packages
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="libraryTabContent">
+                <!-- All Resources Tab -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <div class="row g-4 mb-5" id="libraryContainer">
+                        <!-- Books and programs will be loaded here by JavaScript -->
+                    </div>
+                    <div id="noResults" class="text-center py-5" style="display: none;">
+                        <h4>No resources found</h4>
+                        <p class="text-muted">Try searching with different keywords.</p>
+                    </div>
+                </div>
+
+                <!-- Programming Library Tab -->
+                <div class="tab-pane fade" id="programming" role="tabpanel" aria-labelledby="programming-tab">
+                    <div class="row g-4 mb-5" id="programmingContainer">
+                        <!-- Programming books will be loaded here by JavaScript -->
+                    </div>
+                    <div id="noProgrammingResults" class="text-center py-5" style="display: none;">
+                        <h4>No programming resources found</h4>
+                        <p class="text-muted">Try searching with different keywords.</p>
+                    </div>
+                </div>
+
+                <!-- Training Packages Tab -->
+                <div class="tab-pane fade" id="packages" role="tabpanel" aria-labelledby="packages-tab">
+                    <div class="row g-4 mb-5" id="packagesContainer">
+                        <!-- Training packages will be loaded here by JavaScript -->
+                    </div>
+                    <div id="noPackagesResults" class="text-center py-5" style="display: none;">
+                        <h4>No training packages found</h4>
+                        <p class="text-muted">Try searching with different keywords.</p>
+                    </div>
+                </div>
+
+                <!-- Promo Packages Tab -->
+                <div class="tab-pane fade" id="promo" role="tabpanel" aria-labelledby="promo-tab">
+                    <div class="row g-4 mb-5" id="promoContainer">
+                        <!-- Promo packages will be loaded here by JavaScript -->
+                    </div>
+                    <div id="noPromoResults" class="text-center py-5" style="display: none;">
+                        <h4>No promo packages found</h4>
+                        <p class="text-muted">Try searching with different keywords.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section text-center mt-5">
+        <div class="container">
+            <div class="social-footer-icons d-flex justify-content-center gap-3 mb-3">
+                <a href="https://wa.me/2348132329272" target="_blank" title="WhatsApp"><img src="../assets/social/whatsapp_large@1.5x.png" alt="WhatsApp" width="28" height="28"></a>
+                <a href="tel:+2348132329272" title="Call"><img src="../assets/social/call@2x.png" alt="Phone" width="28" height="28"></a>
+                <a href="mailto:contact@degreatcode.com" title="Email"><img src="../assets/social/email@2x.png" alt="Email" width="28" height="28"></a>
+                <a href="https://facebook.com/degreatcodeLTD" target="_blank" title="Facebook"><img src="../assets/social/facebook_small@2x.png" alt="Facebook" width="28" height="28"></a>
+                <a href="https://youtube.com/degreatcodeLTD" target="_blank" title="YouTube"><img src="../assets/social/youtube2_small@2x.png" alt="YouTube" width="28" height="28"></a>
+            </div>
+            <p>&copy; <span id="year"></span> DegreatCode ICT LTD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="publiclibrary.json"></script>
+    <script src="DGC price data.json"></script>
+    <script src="packageList_promo.json"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearEl = document.getElementById('year');
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
+            }
+
+            // Container references
+            const libraryContainer = document.getElementById('libraryContainer');
+            const programmingContainer = document.getElementById('programmingContainer');
+            const packagesContainer = document.getElementById('packagesContainer');
+            const promoContainer = document.getElementById('promoContainer');
+            const searchInput = document.getElementById('searchInput');
+            
+            // No results messages
+            const noAllResults = document.getElementById('noResults');
+            const noProgrammingResults = document.getElementById('noProgrammingResults');
+            const noPackagesResults = document.getElementById('noPackagesResults');
+            const noPromoResults = document.getElementById('noPromoResults');
+            
+            let allBooks = [];
+            let allPrograms = [];
+            let allPromoPackages = [];
+
+            function createCard(resource, isProgram) {
+                let title, description, image, link;
+                
+                if (isProgram) {
+                    title = resource.name;
+                    description = (resource.description && resource.description[0]) || resource.category[0] || 'Click to learn more...';
+                    image = resource.image;
+                    const resourceType = resource.resourceType || 'program';
+                    link = `detail.html?type=${resourceType}&rowNo=${resource.rowNo}`;
+                } else {
+                    title = resource.name;
+                    description = (resource.description && resource.description[0]) || 'Click to learn more...';
+                    image = resource.imageurl;
+                    link = `detail.html?type=book&rowNo=${resource.rowNo}`;
+                }
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4 col-xl-3';
+                card.innerHTML = `
+                    <a href="${link}" class="library-card">
+                        ${image ? `<img src="${image}" alt="${title}" class="library-card-img" onerror="this.style.background='linear-gradient(135deg, #667eea15 0%, #764ba215 100%)'">` : `<div class='library-card-img' style='display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;font-size:2.5rem;'>${title.charAt(0)}</div>`}
+                        <div class="library-card-body">
+                            <div class="library-card-title">${title}</div>
+                            <div class="library-card-desc">${description}</div>
+                            ${resource.duration ? `<div style="font-size: 0.9rem; color: #667eea; margin-top: 8px;">⏱️ ${resource.duration}</div>` : ''}
+                            ${isProgram && resource.price ? `<div style="font-size: 1.1rem; color: #f5576c; margin-top: 8px; font-weight: bold;">💰 ₦${resource.price.toLocaleString()}${resource.promoprice > 0 ? ` <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">₦${resource.promoprice.toLocaleString()}</span>` : ''}</div>` : ''}
+                            <span class="library-badge">${isProgram ? '🎓 ' : '📖 '}View Details →</span>
+                        </div>
+                    </a>
+                `;
+                return card;
+            }
+
+            function renderBooks(containerEl, noResultsEl, booksToDisplay) {
+                containerEl.innerHTML = '';
+                
+                if (booksToDisplay.length === 0) {
+                    noResultsEl.style.display = 'block';
+                    return;
+                }
+                
+                noResultsEl.style.display = 'none';
+                booksToDisplay.forEach(book => {
+                    containerEl.appendChild(createCard(book, false));
+                });
+            }
+
+            function renderPrograms(containerEl, noResultsEl, programsToDisplay) {
+                containerEl.innerHTML = '';
+                
+                if (programsToDisplay.length === 0) {
+                    noResultsEl.style.display = 'block';
+                    return;
+                }
+                
+                noResultsEl.style.display = 'none';
+                programsToDisplay.forEach(program => {
+                    containerEl.appendChild(createCard(program, true));
+                });
+            }
+
+            function renderAll(containerEl, noResultsEl, allResources) {
+                containerEl.innerHTML = '';
+                
+                if (allResources.length === 0) {
+                    noResultsEl.style.display = 'block';
+                    return;
+                }
+                
+                noResultsEl.style.display = 'none';
+                allResources.forEach(resource => {
+                    containerEl.appendChild(createCard(resource, resource.isProgram));
+                });
+            }
+
+            // Load data
+            console.log('Public Library:', publicLibrary);
+            console.log('Program Package:', programPackage);
+            
+            if (typeof publicLibrary !== 'undefined' && publicLibrary.books && Array.isArray(publicLibrary.books)) {
+                console.log('Loading books:', publicLibrary.books.length);
+                allBooks = publicLibrary.books.map(book => ({
+                    ...book,
+                    isProgram: false,
+                    rowNo: book.rowNo
+                }));
+            }
+            
+            if (typeof programPackage !== 'undefined' && programPackage.programs && Array.isArray(programPackage.programs)) {
+                console.log('Loading programs:', programPackage.programs.length);
+                allPrograms = programPackage.programs.map(program => ({
+                    ...program,
+                    isProgram: true,
+                    rowNo: program.rowNo
+                }));
+            }
+
+            if (typeof packageListPromo !== 'undefined' && packageListPromo.promoPackages && Array.isArray(packageListPromo.promoPackages)) {
+                console.log('Loading promo packages:', packageListPromo.promoPackages.length);
+                allPromoPackages = packageListPromo.promoPackages.map(program => ({
+                    ...program,
+                    isProgram: true,
+                    resourceType: 'promo',
+                    rowNo: program.rowNo
+                }));
+            }
+
+            const allResources = [...allBooks, ...allPrograms, ...allPromoPackages];
+            console.log('Total resources:', allResources.length, 'Books:', allBooks.length, 'Programs:', allPrograms.length, 'Promo:', allPromoPackages.length);
+
+            // Initial render
+            renderAll(libraryContainer, noAllResults, allResources);
+            renderBooks(programmingContainer, noProgrammingResults, allBooks);
+            renderPrograms(packagesContainer, noPackagesResults, allPrograms);
+            renderPrograms(promoContainer, noPromoResults, allPromoPackages);
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                
+                // Filter books
+                const filteredBooks = allBooks.filter(book => {
+                    const name = book.name.toLowerCase();
+                    let matchesQuery = name.includes(query);
+                    
+                    if (!matchesQuery && book.description) {
+                        if (Array.isArray(book.description)) {
+                            matchesQuery = book.description.some(desc => 
+                                String(desc).toLowerCase().includes(query)
+                            );
+                        } else {
+                            matchesQuery = String(book.description).toLowerCase().includes(query);
+                        }
+                    }
+                    
+                    return matchesQuery;
+                });
+                
+                // Filter programs
+                const filteredPrograms = allPrograms.filter(program => {
+                    const name = program.name.toLowerCase();
+                    let matchesQuery = name.includes(query);
+                    
+                    if (!matchesQuery && program.description) {
+                        if (Array.isArray(program.description)) {
+                            matchesQuery = program.description.some(desc => 
+                                String(desc).toLowerCase().includes(query)
+                            );
+                        } else {
+                            matchesQuery = String(program.description).toLowerCase().includes(query);
+                        }
+                    }
+                    
+                    if (!matchesQuery && program.category) {
+                        matchesQuery = program.category.some(cat => 
+                            String(cat).toLowerCase().includes(query)
+                        );
+                    }
+                    
+                    return matchesQuery;
+                });
+
+                // Filter promo packages
+                const filteredPromo = allPromoPackages.filter(program => {
+                    const name = program.name.toLowerCase();
+                    let matchesQuery = name.includes(query);
+                    
+                    if (!matchesQuery && program.description) {
+                        if (Array.isArray(program.description)) {
+                            matchesQuery = program.description.some(desc => 
+                                String(desc).toLowerCase().includes(query)
+                            );
+                        } else {
+                            matchesQuery = String(program.description).toLowerCase().includes(query);
+                        }
+                    }
+                    
+                    if (!matchesQuery && program.category) {
+                        matchesQuery = program.category.some(cat => 
+                            String(cat).toLowerCase().includes(query)
+                        );
+                    }
+                    
+                    return matchesQuery;
+                });
+                
+                const filteredAll = [...filteredBooks, ...filteredPrograms, ...filteredPromo];
+                
+                // Render filtered results
+                renderAll(libraryContainer, noAllResults, filteredAll);
+                renderBooks(programmingContainer, noProgrammingResults, filteredBooks);
+                renderPrograms(packagesContainer, noPackagesResults, filteredPrograms);
+                renderPrograms(promoContainer, noPromoResults, filteredPromo);
+            });
+        });
+    </script>
+</body>
+</html>

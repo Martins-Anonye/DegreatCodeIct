@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — Upload Identity | DegreatCode ICT LTD</title>
+  <meta name="description" content="Admin interface to upload student identities to Firebase (Firestore).">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><a class="navbar-brand" href="index.html">DegreatCode ICT LTD</a></div></nav>
+<main class="container py-4">
+  <h1>Admin — Upload Identity</h1>
+  <p class="text-muted">Paste your Firebase config into <strong>assets/js/firebase-config.js</strong> (see example in that file) before using this page.</p>
+
+  <div class="mb-3" style="max-width:720px;">
+    <label class="form-label">Admin password (fallback)</label>
+    <input id="adminPasswordInput" class="form-control" type="password" placeholder="Enter admin password">
+    <div class="form-text">This page uses a simple client-side password (configure in <strong>assets/js/firebase-config.js</strong>). If Firebase Auth is enabled, sign in below instead.</div>
+  </div>
+
+  <div id="authArea" class="mb-3" style="max-width:720px;">
+    <h5>Sign in (Firebase Auth)</h5>
+    <div class="row g-2">
+      <div class="col-md-5">
+        <input id="authEmail" class="form-control" placeholder="Admin email" type="email">
+      </div>
+      <div class="col-md-5">
+        <input id="authPassword" class="form-control" placeholder="Password" type="password">
+      </div>
+      <div class="col-md-2 d-flex gap-2">
+          <button id="signInBtn" class="btn btn-primary">Sign in</button>
+          <button id="signOutBtn" class="btn btn-outline-secondary" style="display:none;">Sign out</button>
+        </div>
+    </div>
+    <div class="form-text">If `enableFirebaseAuth` is true in <strong>assets/js/firebase-config.js</strong>, use Firebase sign-in.</div>
+  </div>
+  
+    <div id="signupArea" style="max-width:720px; display:none;" class="mb-3">
+      <h5>Create admin user</h5>
+      <div class="row g-2">
+        <div class="col-md-5"><input id="signupEmail" class="form-control" placeholder="email" type="email"></div>
+        <div class="col-md-5"><input id="signupPassword" class="form-control" placeholder="password" type="password"></div>
+        <div class="col-md-2 d-flex gap-2"><button id="signupBtn" class="btn btn-warning">Sign up</button></div>
+      </div>
+      <div class="form-text">Only visible when `allowFirebaseSignup` is enabled in config. For production, create admin accounts from the Firebase Console instead.</div>
+    </div>
+
+  <div class="mb-3 d-flex gap-2" style="max-width:720px;">
+    <label class="form-label w-100">Target Database</label>
+    <select id="dbSelect" class="form-select">
+      <option value="realtime">Realtime Database</option>
+      <option value="firestore">Firestore</option>
+    </select>
+  </div>
+
+  <form id="adminForm" class="row g-3" style="max-width:720px;">
+        <div class="col-12 mb-2">
+          <button id="dropboxLoginBtn" type="button" class="btn btn-secondary">Sign in to Dropbox</button>
+          <button id="dropboxLogoutBtn" type="button" class="btn btn-outline-secondary" style="display:none;">Sign out from Dropbox</button>
+          <button id="dropboxResetBtn" type="button" class="btn btn-outline-danger">Reset Dropbox Login</button>
+          <span id="dropboxStatus" class="ms-2"></span>
+        </div>
+    <div class="col-12">
+      <label class="form-label">Student ID Card Image</label>
+      <input id="idCardDropbox" class="form-control mb-2" type="url" placeholder="Paste Dropbox share link (optional)">
+      <input id="idCardFile" class="form-control" type="file" accept="image/*">
+      <div class="form-text">Upload the ID card image to <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> and paste the share link, or select an image file to upload directly. If both are provided, the file will be used.</div>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Student ID</label>
+      <input id="studentId" class="form-control" required>
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label">Full name</label>
+      <input id="fullName" class="form-control" required>
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label">Program / Course</label>
+      <input id="program" class="form-control">
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label">Certificate Number</label>
+      <input id="certificate" class="form-control">
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label">Issue Date</label>
+      <input id="issueDate" class="form-control" type="date">
+    </div>
+    <div class="col-12">
+      <button id="submitBtn" class="btn btn-primary">Upload Identity</button>
+      <span id="status" class="ms-3"></span>
+    </div>
+  </form>
+
+  <div id="result" class="mt-4"></div>
+
+  <hr>
+  <h2>Manage Students / Edit Uploads</h2>
+  <p class="text-muted">View and edit previously uploaded student identities.</p>
+  
+  <div class="mb-3" style="max-width:720px;">
+    <div class="row g-2 mb-3">
+      <div class="col-md-6">
+        <input id="searchInput" class="form-control" placeholder="Search by ID or name...">
+      </div>
+      <div class="col-md-6">
+        <button id="refreshListBtn" class="btn btn-outline-secondary w-100">Refresh List</button>
+      </div>
+    </div>
+    
+    <label class="form-label">Student List</label>
+    <div id="studentListContainer" style="max-height:300px; overflow-y:auto; border:1px solid #ddd; border-radius:4px; padding:8px;">
+      <div id="studentList" class="list-group">
+        <p class="text-muted">Loading...</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="editPanel" style="display:none; max-width:720px; padding:16px; background:#f8f9fa; border-radius:4px; margin-bottom:16px;">
+    <h5>Edit Student</h5>
+    <div class="row g-2 mb-3">
+      <div class="col-12">
+        <label class="form-label">Student ID (read-only)</label>
+        <input id="editStudentId" class="form-control" type="text" readonly>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Full Name</label>
+        <input id="editFullName" class="form-control" type="text">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Program</label>
+        <input id="editProgram" class="form-control" type="text">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Certificate</label>
+        <input id="editCertificate" class="form-control" type="text">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Issue Date</label>
+        <input id="editIssueDate" class="form-control" type="date">
+      </div>
+      <div class="col-12">
+        <label class="form-label">Update ID Card</label>
+        <input id="editIdCardFile" class="form-control" type="file" accept="image/*">
+        <div class="form-text">Leave blank to keep current card</div>
+      </div>
+      <div class="col-12">
+        <div id="currentCardDisplay"></div>
+      </div>
+    </div>
+    <div class="d-flex gap-2">
+      <button id="clearEditBtn" class="btn btn-outline-secondary">Close</button>
+      <button id="updateStudentBtn" class="btn btn-primary">Save Changes</button>
+      <button id="deleteStudentBtn" class="btn btn-outline-danger">Delete</button>
+      <span id="editStatus" class="ms-2"></span>
+    </div>
+  </div>
+
+  <hr>
+  <h2>YouTube IDs (remote)</h2>
+  <p class="text-muted">Optionally save comma-separated YouTube IDs to Firebase so the site can load them remotely.</p>
+  <div class="mb-3" style="max-width:720px;">
+    <input id="youtubeIdsInput" class="form-control" placeholder="e.g. abc123,def456,ghi789">
+    <div class="mt-2">
+      <button id="saveYoutubeBtn" class="btn btn-secondary btn-sm">Save to DB</button>
+      <button id="loadYoutubeBtn" class="btn btn-link btn-sm">Load from DB</button>
+    </div>
+  </div>
+
+  <hr>
+  <h2>Seed students / certificates</h2>
+  <p class="text-muted">Upload a CSV or JSON file to batch-insert student identities. CSV header should include: id,name,program,certificate,issueDate</p>
+  <div class="mb-3" style="max-width:720px;">
+    <input id="seedFile" type="file" accept="text/csv,application/json" class="form-control">
+    <div class="mt-2">
+      <button id="seedBtn" class="btn btn-warning btn-sm">Seed from file</button>
+    </div>
+  </div>
+</main>
+<footer class="text-center py-4">&copy; <span id="year"></span> DegreatCode ICT LTD</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();
+      (function(){
+        if (window.__dgc_nav_fab_loaded) return; window.__dgc_nav_fab_loaded = true;
+        var l=document.createElement('link'); l.rel='stylesheet'; l.href='assets/css/nav-fab.css'; document.head.appendChild(l);
+        var s=document.createElement('script'); s.src='assets/js/nav-fab.js'; document.body.appendChild(s);
+      })();</script>
+
+<script type="module">
+      import { startDropboxOAuth, finishDropboxOAuth, getDropboxAccessToken } from './assets/js/dropbox-oauth.js';
+      // Dropbox OAuth logic
+      const dropboxLoginBtn = document.getElementById('dropboxLoginBtn');
+      const dropboxLogoutBtn = document.getElementById('dropboxLogoutBtn');
+      const dropboxStatus = document.getElementById('dropboxStatus');
+      
+      function updateDropboxStatus() {
+        let dropboxAccessToken = getDropboxAccessToken();
+        if (dropboxAccessToken) {
+          dropboxStatus.textContent = '✓ Connected';
+          dropboxStatus.className = 'ms-2 text-success';
+          dropboxLoginBtn.style.display = 'none';
+          dropboxLogoutBtn.style.display = 'inline-block';
+        } else {
+          dropboxStatus.textContent = '';
+          dropboxStatus.className = 'ms-2';
+          dropboxLoginBtn.style.display = 'inline-block';
+          dropboxLogoutBtn.style.display = 'none';
+        }
+      }
+      
+      // If redirected from Dropbox OAuth, finish and store token
+      (async () => {
+        try {
+          const token = await finishDropboxOAuth();
+          if (token) {
+            updateDropboxStatus();
+          } else {
+            updateDropboxStatus();
+          }
+        } catch (err) {
+          console.error('OAuth error:', err);
+          dropboxStatus.textContent = 'Login failed - check console';
+          dropboxStatus.className = 'ms-2 text-danger';
+          updateDropboxStatus();
+        }
+      })();
+      
+      dropboxLoginBtn.addEventListener('click', () => {
+        startDropboxOAuth();
+      });
+      
+      dropboxLogoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('dropbox_access_token');
+        sessionStorage.removeItem('dropbox_access_token');
+        updateDropboxStatus();
+        dropboxStatus.textContent = 'Signed out';
+        dropboxStatus.className = 'ms-2 text-muted';
+        setTimeout(() => {
+          dropboxStatus.textContent = '';
+          dropboxStatus.className = 'ms-2';
+        }, 2000);
+      });
+      
+      const dropboxResetBtn = document.getElementById('dropboxResetBtn');
+      dropboxResetBtn.addEventListener('click', () => {
+        localStorage.removeItem('dropbox_access_token');
+        sessionStorage.removeItem('dropbox_access_token');
+        updateDropboxStatus();
+        dropboxStatus.textContent = 'Login reset';
+        dropboxStatus.className = 'ms-2 text-info';
+        setTimeout(() => {
+          dropboxStatus.textContent = '';
+          dropboxStatus.className = 'ms-2';
+        }, 2000);
+      });
+      
+      // Update status on page load
+      updateDropboxStatus();
+    import { uploadToDropbox, deleteFromDropbox } from './assets/js/dropbox-upload.js';
+  import { firebaseConfig, adminPassword as configAdminPassword, enableFirebaseAuth, allowFirebaseSignup } from './assets/js/firebase-config.js';
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+  import { getFirestore, doc, setDoc, serverTimestamp, getDoc, deleteDoc, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+  import { getDatabase, ref as dbRef, set as dbSet, get as dbGet, remove, push, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+  import { getAuth, signInWithEmailAndPassword, signOut as fbSignOut, onAuthStateChanged, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+
+  const statusEl = document.getElementById('status');
+  const resultEl = document.getElementById('result');
+  const submitBtn = document.getElementById('submitBtn');
+  const adminPasswordInput = document.getElementById('adminPasswordInput');
+  const dbSelect = document.getElementById('dbSelect');
+  const youtubeIdsInput = document.getElementById('youtubeIdsInput');
+  const saveYoutubeBtn = document.getElementById('saveYoutubeBtn');
+  const loadYoutubeBtn = document.getElementById('loadYoutubeBtn');
+  const seedFile = document.getElementById('seedFile');
+  const seedBtn = document.getElementById('seedBtn');
+  const signInBtn = document.getElementById('signInBtn');
+  const signOutBtn = document.getElementById('signOutBtn');
+  const authEmail = document.getElementById('authEmail');
+  const authPassword = document.getElementById('authPassword');
+
+  if (!firebaseConfig || !firebaseConfig.projectId) {
+    statusEl.innerHTML = '<span class="text-danger">Firebase config missing. Edit assets/js/firebase-config.js</span>';
+  } else {
+    const app = initializeApp(firebaseConfig);
+    const firestore = getFirestore(app);
+    const rtdb = getDatabase(app);
+    const auth = getAuth(app);
+
+    // auth state handling
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        statusEl.innerHTML = `<span class="text-success">Signed in as ${user.email}</span>`;
+        signOutBtn.style.display = 'inline-block';
+        signInBtn.style.display = 'none';
+      } else {
+        statusEl.innerHTML = enableFirebaseAuth ? '<span class="text-warning">Not signed in</span>' : '';
+        signOutBtn.style.display = 'none';
+        signInBtn.style.display = 'inline-block';
+      }
+    });
+
+    signInBtn.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      try{
+        const email = authEmail.value.trim();
+        const pwd = authPassword.value;
+        if (!email || !pwd) { statusEl.innerHTML = '<span class="text-warning">Enter email and password</span>'; return; }
+        await signInWithEmailAndPassword(auth, email, pwd);
+        statusEl.innerHTML = '<span class="text-success">Signed in</span>';
+      }catch(err){ console.error(err); statusEl.innerHTML = '<span class="text-danger">Sign-in failed</span>'; }
+    });
+
+    signOutBtn.addEventListener('click', async (e)=>{ e.preventDefault(); await fbSignOut(auth); statusEl.innerHTML = '<span class="text-muted">Signed out</span>'; });
+
+    if (allowFirebaseSignup) {
+      const signupArea = document.getElementById('signupArea');
+      signupArea.style.display = 'block';
+      const signupBtn = document.getElementById('signupBtn');
+      const signupEmail = document.getElementById('signupEmail');
+      const signupPassword = document.getElementById('signupPassword');
+      signupBtn.addEventListener('click', async (ev)=>{
+        ev.preventDefault();
+        try{
+          const email = signupEmail.value.trim();
+          const pwd = signupPassword.value;
+          if (!email || !pwd){ statusEl.innerHTML = '<span class="text-warning">Enter email and password</span>'; return; }
+          await createUserWithEmailAndPassword(auth, email, pwd);
+          statusEl.innerHTML = '<span class="text-success">Account created. Please sign in.</span>';
+        }catch(err){ console.error(err); statusEl.innerHTML = '<span class="text-danger">Signup failed.</span>'; }
+      });
+    }
+
+    function checkAuth(){
+      if (enableFirebaseAuth){
+        const user = auth.currentUser;
+        return !!user;
+      }
+      const entered = adminPasswordInput.value || '';
+      if (!configAdminPassword || configAdminPassword === 'changeme') {
+        return true;
+      }
+      return entered === configAdminPassword;
+    }
+
+    document.getElementById('adminForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!checkAuth()){ statusEl.innerHTML = '<span class="text-danger">Not authorized.</span>'; return; }
+      statusEl.textContent = 'Uploading...';
+      resultEl.innerHTML = '';
+      const studentId = document.getElementById('studentId').value.trim();
+      const name = document.getElementById('fullName').value.trim();
+      const program = document.getElementById('program').value.trim();
+      const certificate = document.getElementById('certificate').value.trim();
+      const issueDate = document.getElementById('issueDate').value || null;
+      const idCardDropbox = document.getElementById('idCardDropbox').value.trim();
+      const idCardFile = document.getElementById('idCardFile').files[0];
+      if (!studentId || !name) {
+        statusEl.innerHTML = '<span class="text-warning">Please fill required fields (ID and Name).</span>';
+        return;
+      }
+      let idCardUrl = '';
+      let idCardDropboxPath = null;
+      if (idCardFile) {
+        const currentDropboxToken = getDropboxAccessToken();
+        if (!currentDropboxToken) {
+          statusEl.innerHTML = '<span class="text-danger">Please sign in to Dropbox first.</span>';
+          return;
+        }
+        try {
+          // Upload file to Dropbox and get the share link
+          const uploadResult = await uploadToDropbox(idCardFile, `/student-id-cards/${studentId}_${Date.now()}_${idCardFile.name}`, currentDropboxToken);
+          idCardUrl = uploadResult.url;
+          idCardDropboxPath = uploadResult.path;
+        } catch (err) {
+          statusEl.innerHTML = '<span class="text-danger">Dropbox upload failed: ' + (err.message || err) + '</span>';
+          return;
+        }
+      } else if (idCardDropbox && /^https:\/\/(www\.)?dropbox\.com\//.test(idCardDropbox)) {
+        idCardUrl = idCardDropbox;
+        idCardDropboxPath = null;
+      } else {
+        statusEl.innerHTML = '<span class="text-warning">Please provide a Dropbox link or select an image file for the ID card.</span>';
+        return;
+      }
+      try {
+        const target = dbSelect.value;
+        const payload = { studentId, name, program, certificate, issueDate, idCardUrl, idCardDropboxPath };
+        let generatedId = null;
+        
+        if (target === 'firestore'){
+          payload.uploadedAt = serverTimestamp();
+          const docRef = await addDoc(collection(firestore, 'students'), payload);
+          generatedId = docRef.id;
+        } else {
+          payload.uploadedAt = Date.now();
+          const newRef = push(dbRef(rtdb, 'students'));
+          await set(newRef, payload);
+          generatedId = newRef.key;
+        }
+        
+        statusEl.innerHTML = '<span class="text-success">✓ Uploaded</span>';
+        let idCardDisplay = (idCardUrl && idCardUrl.startsWith && idCardUrl.startsWith('data:'))
+          ? `<img src="${idCardUrl}" alt="ID Card" style="max-width:180px;max-height:120px;display:block;margin:8px 0;">`
+          : `<a href="${idCardUrl}" target="_blank">View ID Card</a>`;
+        resultEl.innerHTML = `<div class="alert alert-success">Identity for <strong>${name}</strong> uploaded.<br>Student ID: ${studentId}<br>Database ID: ${generatedId}<br>ID Card: ${idCardDisplay}</div>`;
+        document.getElementById('adminForm').reset();
+        
+        // Refresh student list
+        setTimeout(() => loadStudentList(), 500);
+      } catch (err) {
+        console.error(err);
+        statusEl.innerHTML = '<span class="text-danger">Upload failed (see console).</span>';
+        resultEl.innerHTML = `<div class="alert alert-danger">${err.message || err}</div>`;
+      }
+    });
+
+    // Save YouTube IDs to DB
+    saveYoutubeBtn.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      if (!checkAuth()){ statusEl.innerHTML = '<span class="text-danger">Not authorized.</span>'; return; }
+      const ids = (youtubeIdsInput.value || '').split(',').map(s=>s.trim()).filter(Boolean);
+      if (!ids.length){ statusEl.innerHTML = '<span class="text-warning">Enter at least one ID.</span>'; return; }
+      try{
+        const target = dbSelect.value;
+        if (target === 'firestore'){
+          await setDoc(doc(firestore, 'config', 'youtube'), { ids });
+        } else {
+          await dbSet(dbRef(rtdb, 'config/youtubeIds'), ids.join(','));
+        }
+        statusEl.innerHTML = '<span class="text-success">Saved YouTube IDs to DB.</span>';
+      }catch(err){ console.error(err); statusEl.innerHTML = '<span class="text-danger">Save failed.</span>'; }
+    });
+
+    loadYoutubeBtn.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      if (!checkAuth()){ statusEl.innerHTML = '<span class="text-danger">Not authorized.</span>'; return; }
+      try{
+        const target = dbSelect.value;
+        if (target === 'firestore'){
+          const snap = await getDoc(doc(firestore,'config','youtube'));
+          if (snap && snap.exists()) youtubeIdsInput.value = (snap.data().ids || []).join(',');
+        } else {
+          const dbSnap = await dbGet(dbRef(rtdb, 'config/youtubeIds'));
+          if (dbSnap && dbSnap.exists()) youtubeIdsInput.value = (dbSnap.val() || '').toString();
+        }
+        statusEl.innerHTML = '<span class="text-success">Loaded YouTube IDs.</span>';
+      }catch(err){ console.error(err); statusEl.innerHTML = '<span class="text-danger">Load failed.</span>'; }
+    });
+
+    // Seed from file
+    seedBtn.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      if (!checkAuth()){ statusEl.innerHTML = '<span class="text-danger">Not authorized.</span>'; return; }
+      const file = seedFile.files[0];
+      if (!file){ statusEl.innerHTML = '<span class="text-warning">Select a file first.</span>'; return; }
+      statusEl.textContent = 'Seeding...';
+      try{
+        const text = await file.text();
+        let records = [];
+        if (file.name.toLowerCase().endsWith('.json')){
+          records = JSON.parse(text);
+        } else {
+          const lines = text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+          const header = lines.shift().split(',').map(h=>h.trim());
+          records = lines.map(line=>{
+            const parts = line.split(',');
+            const obj = {};
+            header.forEach((h,i)=> obj[h]= (parts[i] || '').trim());
+            return obj;
+          });
+        }
+        // write records
+        const target = dbSelect.value;
+        for (const r of records){
+          const id = (r.id || r.ID || r.studentId || '').toString().trim();
+          if (!id) continue;
+          const payload = { id, name: r.name || r.Name || '', program: r.program || r.Program || '', certificate: r.certificate || r.Certificate || '', issueDate: r.issueDate || r.IssueDate || null, uploadedAt: serverTimestamp ? serverTimestamp() : new Date().toISOString() };
+          if (target === 'firestore'){
+            await setDoc(doc(firestore, 'students', id), payload);
+          } else {
+            await dbSet(dbRef(rtdb, `students/${id}`), payload);
+          }
+        }
+        statusEl.innerHTML = '<span class="text-success">Seeding complete.</span>';
+      }catch(err){ console.error(err); statusEl.innerHTML = '<span class="text-danger">Seeding failed.</span>'; }
+    });
+
+    // Load and display student list
+    let allStudents = [];
+    async function loadStudentList() {
+      try {
+        const studentList = document.getElementById('studentList');
+        studentList.innerHTML = '';
+        const target = dbSelect.value;
+        allStudents = [];
+        
+        if (target === 'firestore') {
+          const snap = await dbGet(dbRef(rtdb, 'students'));
+          if (snap && snap.exists()) {
+            Object.entries(snap.val()).forEach(([key, s]) => {
+              allStudents.push({ ...s, _docId: key });
+            });
+          }
+        } else {
+          const snap = await dbGet(dbRef(rtdb, 'students'));
+          if (snap && snap.exists()) {
+            Object.entries(snap.val()).forEach(([key, s]) => {
+              allStudents.push({ ...s, _docId: key });
+            });
+          }
+        }
+        
+        if (!allStudents.length) {
+          studentList.innerHTML = '<p class="text-muted">No students found.</p>';
+          return;
+        }
+        
+        displayStudents(allStudents);
+      } catch (err) {
+        console.error('Failed to load student list:', err);
+        document.getElementById('studentList').innerHTML = '<p class="text-danger">Failed to load students.</p>';
+      }
+    }
+
+    function displayStudents(students) {
+      const studentList = document.getElementById('studentList');
+      studentList.innerHTML = '';
+      
+      if (!students.length) {
+        studentList.innerHTML = '<p class="text-muted">No students found.</p>';
+        return;
+      }
+      
+      students.forEach(student => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'list-group-item list-group-item-action text-start';
+        item.innerHTML = `<strong>${student.name || 'N/A'}</strong><br><small class="text-muted">Student ID: ${student.studentId || 'N/A'} | Program: ${student.program || 'N/A'}</small>`;
+        item.addEventListener('click', () => loadStudentToEdit(student));
+        studentList.appendChild(item);
+      });
+    }
+
+    // Search/filter functionality
+    document.getElementById('searchInput').addEventListener('keyup', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allStudents.filter(s => 
+        (s.studentId && s.studentId.toLowerCase().includes(query)) || 
+        (s.name && s.name.toLowerCase().includes(query))
+      );
+      displayStudents(filtered);
+    });
+
+    // Refresh button
+    document.getElementById('refreshListBtn').addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+      loadStudentList();
+    });
+
+    // Load student data into edit form
+    function loadStudentToEdit(student) {
+      const editPanel = document.getElementById('editPanel');
+      editPanel.style.display = 'block';
+      
+      // Store the Firebase document ID for later use in updates/deletes
+      editPanel.dataset.docId = student._docId;
+      
+      document.getElementById('editStudentId').value = student.studentId || 'N/A';
+      document.getElementById('editFullName').value = student.name || '';
+      document.getElementById('editProgram').value = student.program || '';
+      document.getElementById('editCertificate').value = student.certificate || '';
+      document.getElementById('editIssueDate').value = student.issueDate || '';
+      document.getElementById('editIdCardFile').value = '';
+      
+      // Show current ID card
+      const cardDisplay = document.getElementById('currentCardDisplay');
+      if (student.idCardUrl) {
+        let dateStr = '';
+        if (student.uploadedAt) {
+          try {
+            // Handle Firebase Timestamp objects (has toDate method)
+            if (student.uploadedAt.toDate) {
+              dateStr = student.uploadedAt.toDate().toLocaleString();
+            } else if (typeof student.uploadedAt === 'number') {
+              // Unix timestamp in milliseconds
+              dateStr = new Date(student.uploadedAt).toLocaleString();
+            } else {
+              // ISO string or other format
+              dateStr = new Date(student.uploadedAt).toLocaleString();
+            }
+          } catch (err) {
+            console.error('Date formatting error:', err);
+            dateStr = 'Date unavailable';
+          }
+        }
+        cardDisplay.innerHTML = `
+          <div class="alert alert-info small mb-0">
+            <strong>Current ID Card:</strong><br>
+            <a href="${student.idCardUrl}" target="_blank">View Card</a>
+            ${dateStr ? `<br><small>Uploaded: ${dateStr}</small>` : ''}
+          </div>
+        `;
+      } else {
+        cardDisplay.innerHTML = '<div class="alert alert-warning small mb-0">No ID card uploaded yet</div>';
+      }
+      
+      // Scroll to edit panel
+      editPanel.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Clear/Close edit panel
+    document.getElementById('clearEditBtn').addEventListener('click', () => {
+      document.getElementById('editPanel').style.display = 'none';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('editStatus').innerHTML = '';
+      document.getElementById('currentCardDisplay').innerHTML = '';
+    });
+
+    // Update student
+    document.getElementById('updateStudentBtn').addEventListener('click', async () => {
+      const editPanel = document.getElementById('editPanel');
+      const editStatus = document.getElementById('editStatus');
+      const docId = editPanel.dataset.docId;
+      const studentId = document.getElementById('editStudentId').value;
+      const name = document.getElementById('editFullName').value.trim();
+      const program = document.getElementById('editProgram').value.trim();
+      const certificate = document.getElementById('editCertificate').value.trim();
+      const issueDate = document.getElementById('editIssueDate').value || null;
+      const idCardFile = document.getElementById('editIdCardFile').files[0];
+      
+      if (!name) {
+        editStatus.innerHTML = '<span class="text-warning">Name is required.</span>';
+        return;
+      }
+
+      editStatus.innerHTML = '<span class="text-info">Saving...</span>';
+      
+      try {
+        const target = dbSelect.value;
+        const payload = { studentId, name, program, certificate, issueDate, uploadedAt: serverTimestamp() };
+        
+        // If a new file is selected, upload it
+        if (idCardFile) {
+          const currentDropboxToken = getDropboxAccessToken();
+          if (!currentDropboxToken) {
+            editStatus.innerHTML = '<span class="text-danger">Please sign in to Dropbox first.</span>';
+            return;
+          }
+          const uploadResult = await uploadToDropbox(idCardFile, `/student-id-cards/${studentId}_${Date.now()}_${idCardFile.name}`, currentDropboxToken);
+          payload.idCardUrl = uploadResult.url;
+          payload.idCardDropboxPath = uploadResult.path;
+        }
+        
+        if (target === 'firestore') {
+          await setDoc(doc(firestore, 'students', docId), payload, { merge: true });
+        } else {
+          await dbSet(dbRef(rtdb, `students/${docId}`), payload, { merge: false });
+        }
+        
+        editStatus.innerHTML = '<span class="text-success">✓ Saved!</span>';
+        await loadStudentList();
+        setTimeout(() => {
+          document.getElementById('editPanel').style.display = 'none';
+          document.getElementById('editStatus').innerHTML = '';
+        }, 1500);
+      } catch (err) {
+        console.error(err);
+        editStatus.innerHTML = '<span class="text-danger">Save failed: ' + (err.message || err) + '</span>';
+      }
+    });
+
+    // Delete student
+    document.getElementById('deleteStudentBtn').addEventListener('click', async () => {
+      const editPanel = document.getElementById('editPanel');
+      const docId = editPanel.dataset.docId;
+      const studentId = document.getElementById('editStudentId').value;
+      if (!confirm(`Permanently delete student ${studentId}? This will also delete the Dropbox file. This cannot be undone.`)) return;
+      
+      const editStatus = document.getElementById('editStatus');
+      editStatus.innerHTML = '<span class="text-info">Deleting...</span>';
+      
+      try {
+        // Get current student data to get the idCardUrl
+        const target = dbSelect.value;
+        let studentData = null;
+        
+        if (target === 'firestore') {
+          const snap = await getDoc(doc(firestore, 'students', docId));
+          if (snap.exists()) studentData = snap.data();
+        } else {
+          const snap = await dbGet(dbRef(rtdb, `students/${docId}`));
+          if (snap.exists()) studentData = snap.val();
+        }
+        
+        // Delete Dropbox file if path exists
+        if (studentData && studentData.idCardDropboxPath) {
+          const currentDropboxToken = getDropboxAccessToken();
+          if (currentDropboxToken) {
+            try {
+              editStatus.innerHTML = '<span class="text-info">Removing Dropbox file...</span>';
+              const deleteSuccess = await deleteFromDropbox(studentData.idCardDropboxPath, currentDropboxToken);
+              if (deleteSuccess) {
+                console.log('Dropbox file deleted successfully');
+              } else {
+                console.warn('Dropbox file deletion may have failed, but continuing with database deletion');
+              }
+            } catch (dbErr) {
+              console.warn('Could not delete Dropbox file:', dbErr);
+              // Continue with database deletion even if Dropbox deletion fails
+            }
+          }
+        }
+        
+        // Delete from database
+        editStatus.innerHTML = '<span class="text-info">Removing from database...</span>';
+        if (target === 'firestore') {
+          await deleteDoc(doc(firestore, 'students', docId));
+        } else {
+          await remove(dbRef(rtdb, `students/${docId}`));
+        }
+        
+        editStatus.innerHTML = '<span class="text-success">✓ Deleted!</span>';
+        await loadStudentList();
+        setTimeout(() => {
+          document.getElementById('editPanel').style.display = 'none';
+          document.getElementById('editStatus').innerHTML = '';
+          document.getElementById('searchInput').value = '';
+        }, 1500);
+      } catch (err) {
+        console.error(err);
+        editStatus.innerHTML = '<span class="text-danger">Delete failed.</span>';
+      }
+    });
+
+    // Load initial student list and reload when database changes
+    loadStudentList();
+    dbSelect.addEventListener('change', loadStudentList);
+  }
+</script>
+
+</body>
+</html>

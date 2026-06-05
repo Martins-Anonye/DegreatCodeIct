@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DegreatCode ICT YouTube | DegreatCode ICT LTD</title>
+  <meta name="description" content="DegreatCode ICT YouTube channel videos and tutorials.">
+    <link rel="icon" href="DGC_Online_Class_Tutorial/images/logo.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/youtube.css">
+  <link rel="stylesheet" href="assets/css/nav-fab.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><a class="navbar-brand" href="index.html">DegreatCode ICT LTD</a></div></nav>
+<main class="container py-4">
+  <h1>YouTube Videos</h1>
+  <p class="lead">Selected video tutorials from our YouTube channel. Visit our channel for more complete playlists and step-by-step videos.</p>
+
+  <div class="mb-4">
+    <button id="editVideosBtn" class="btn btn-sm btn-outline-secondary">Configure videos</button>
+    <small class="text-muted ms-2">(stores to your browser localStorage)</small>
+    <div id="videoConfig" class="mt-3" style="display:none; max-width:640px;">
+      <label for="videoIdsInput" class="form-label">Comma-separated YouTube IDs</label>
+      <input id="videoIdsInput" class="form-control" placeholder="e.g. abc123,def456,ghi789">
+      <div class="mt-2">
+        <button id="saveVideoIds" class="btn btn-primary btn-sm">Save</button>
+        <button id="resetVideoIds" class="btn btn-link btn-sm">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="videosRow" class="row g-4"></div>
+
+  <script type="module">
+    import { firebaseConfig } from './assets/js/firebase-config.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+
+    const defaultIds = ['REPLACE_WITH_VIDEO_ID_1','REPLACE_WITH_VIDEO_ID_2'];
+    const storageKey = 'dgcyoutubeIds';
+
+    async function fetchFromFirebase(){
+      if (!firebaseConfig || !firebaseConfig.projectId) return null;
+      try{
+        const app = initializeApp(firebaseConfig);
+        // attempt Realtime DB first
+        try{
+          const { getDatabase, ref, get } = await import('https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js');
+          const db = getDatabase(app);
+          const snap = await get(ref(db, 'config/youtubeIds'));
+          if (snap && snap.exists()){
+            const val = snap.val();
+            if (typeof val === 'string') return val.split(',').map(s=>s.trim()).filter(Boolean);
+            if (Array.isArray(val)) return val;
+          }
+        }catch(e){ /* ignore and try firestore next */ }
+
+        // try firestore
+        try{
+          const { getFirestore, doc, getDoc } = await import('https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js');
+          const fs = getFirestore(app);
+          const snap = await getDoc(doc(fs, 'config', 'youtube'));
+          if (snap && snap.exists()){
+            const data = snap.data();
+            if (Array.isArray(data.ids)) return data.ids;
+            if (typeof data.ids === 'string') return data.ids.split(',').map(s=>s.trim()).filter(Boolean);
+          }
+        }catch(e){ /* ignore */ }
+      }catch(err){ console.error('Firebase fetch failed', err); }
+      return null;
+    }
+
+    function getIdsLocal(){
+      const stored = localStorage.getItem(storageKey);
+      if (stored) return stored.split(',').map(s=>s.trim()).filter(Boolean);
+      return defaultIds.slice();
+    }
+
+    function render(ids){
+      const row = document.getElementById('videosRow'); row.innerHTML='';
+      ids.forEach((id, idx)=>{
+        const col = document.createElement('div'); col.className='col-md-6';
+        const box = document.createElement('div'); box.className='note-box p-4';
+        const h4 = document.createElement('h4'); h4.textContent = `Video ${idx+1}`;
+        const ratio = document.createElement('div'); ratio.className='ratio ratio-16x9';
+        const iframe = document.createElement('iframe'); iframe.src = `https://www.youtube.com/embed/${id}`; iframe.title='YouTube video'; iframe.allowFullscreen=true; ratio.appendChild(iframe);
+        box.appendChild(h4); box.appendChild(ratio); col.appendChild(box); row.appendChild(col);
+      });
+    }
+
+    (async function(){
+      const remote = await fetchFromFirebase();
+      if (remote && remote.length) { render(remote); return; }
+      render(getIdsLocal());
+    })();
+  </script>
+</main>
+<footer class="text-center py-4">&copy; <span id="year"></span> DegreatCode ICT LTD</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script src="assets/js/nav-fab.js"></script>
+</body>
+</html>

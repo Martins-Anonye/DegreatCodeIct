@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Pages | DegreatCode ICT</title>
+    <meta name="description" content="Learn more about programming languages with dedicated pages for HTML, CSS, JavaScript, and Python.">
+        <link rel="icon" href="DGC_Online_Class_Tutorial/images/logo.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="assets/img/logo.jpg" width="44" height="44" class="me-2 rounded-circle" alt="DegreatCode ICT logo">DegreatCode ICT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pageNav" aria-controls="pageNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pageNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="programming.html">Programming</a></li>
+                    <li class="nav-item"><a class="nav-link" href="student-id.html">Student ID</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="section section-about">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h1>Programming language pages</h1>
+                    <p class="text-muted">Choose a programming language to see its description, use cases, and course focus.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-xl-3">
+                    <a href="programming/html.html" class="language-card">
+                        <div class="language-icon">🌐</div>
+                        <h4>HTML</h4>
+                        <p>Markup language for web structure and content layout.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <a href="programming/css.html" class="language-card">
+                        <div class="language-icon">🎨</div>
+                        <h4>CSS</h4>
+                        <p>Styling language for responsive, attractive websites.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <a href="programming/javascript.html" class="language-card">
+                        <div class="language-icon">⚡</div>
+                        <h4>JavaScript</h4>
+                        <p>Client-side programming for interactive web applications.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <a href="programming/python.html" class="language-card">
+                        <div class="language-icon">🐍</div>
+                        <h4>Python</h4>
+                        <p>General-purpose language for data, automation, and apps.</p>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a class="btn btn-primary btn-lg" href="index.html">Return to Home</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-section text-center">
+        <div class="container">
+            <p>&copy; <span id="year"></span> DegreatCode ICT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+                document.getElementById('year').textContent = new Date().getFullYear();
+                (function(){
+                    if (window.__dgc_nav_fab_loaded) return; window.__dgc_nav_fab_loaded = true;
+                    var l=document.createElement('link'); l.rel='stylesheet'; l.href='assets/css/nav-fab.css'; document.head.appendChild(l);
+                    var s=document.createElement('script'); s.src='assets/js/nav-fab.js'; document.body.appendChild(s);
+                })();
+    </script>
+</body>
+</html>

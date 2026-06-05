@@ -1,0 +1,26 @@
+/* Floating WhatsApp button styles */
+.whatsapp-fab{
+  position: fixed;
+  right: 24px;
+  bottom: 100px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(37,211,102,0.18);
+  z-index: 3000;
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.whatsapp-fab:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(37,211,102,0.22); }
+.whatsapp-fab:focus{ outline: 3px solid rgba(255,255,255,0.12); outline-offset: 3px; }
+.whatsapp-fab-icon{ width: 28px; height: 28px; }
+
+@media (max-width: 576px){
+  .whatsapp-fab{ right: 16px; bottom: 92px; width: 64px; height: 64px; }
+  .whatsapp-icon{ font-size: 30px; }
+}

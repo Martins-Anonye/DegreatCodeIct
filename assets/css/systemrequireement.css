@@ -1,0 +1,66 @@
+/* Beautiful system requirements page styles */
+body.systemrequirement {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.systemrequirement .container {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.10);
+  padding: 3rem 2rem 2.5rem;
+  margin-top: 2.5rem;
+}
+.systemrequirement h1 {
+  color: #1e293b;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.systemrequirement h5 {
+  color: #0f172a;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.systemrequirement .row {
+  margin-bottom: 2.5rem;
+}
+.systemrequirement .col-md-4, .systemrequirement .col-md-6 {
+  background: #f1f5f9;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(30, 41, 59, 0.06);
+  padding: 1.5rem 1.2rem;
+  margin-bottom: 1.5rem;
+  border-left: 5px solid #6366f1;
+  transition: box-shadow 0.2s;
+}
+.systemrequirement .col-md-4:hover, .systemrequirement .col-md-6:hover {
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.13);
+  border-left: 5px solid #d90429;
+}
+.systemrequirement b, .systemrequirement h4 {
+  color: #d90429;
+}
+.systemrequirement ul {
+  padding-left: 1.2em;
+  margin-bottom: 0.5em;
+}
+.systemrequirement li {
+  margin-bottom: 0.5em;
+  font-size: 1.05em;
+}
+.systemrequirement hr {
+  border-top: 2px dashed #6366f1;
+  margin: 2.5rem 0;
+}
+@media (max-width: 768px) {
+  .systemrequirement .container {
+    padding: 1.2rem 0.5rem;
+  }
+  .systemrequirement h1 {
+    font-size: 1.5rem;
+  }
+}

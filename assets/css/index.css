@@ -1,0 +1,253 @@
+/* Page-specific styles for index.html */
+@import url('style.css');
+
+/* Homepage custom styling */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  min-height: auto;
+  padding: 4rem 0 3rem;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.14), transparent 32%), radial-gradient(circle at bottom right, rgba(209, 0, 0, 0.18), transparent 28%);
+  pointer-events: none;
+}
+
+.hero-image {
+  display: block;
+  margin: 0 auto 2rem;
+  max-width: 1200px; /* larger, centered horizontal image */
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  box-shadow: 0 48px 110px rgba(15, 23, 42, 0.32);
+  display: block;
+  object-fit: cover;
+}
+
+.hero-buttons {
+  justify-content: center;
+}
+
+.hero-contact {
+  justify-content: center;
+}
+
+/* override the global lead max-width for hero paragraphs so they fill horizontally */
+.hero-card .lead {
+  max-width: 100% !important;
+  color: rgba(255,255,255,0.92);
+}
+
+/* Reduce main hero headline size for a sleeker look */
+.hero-card h1 {
+  font-size: clamp(1.6rem, 2.4vw, 2.6rem) !important;
+  line-height: 1.08;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.75rem;
+  backdrop-filter: blur(16px);
+  padding: 1.75rem;
+  color: #ffffff;
+  box-shadow: 0 26px 75px rgba(0, 0, 0, 0.22);
+}
+
+.hero-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.hero-stat {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 1.25rem;
+  padding: 1rem 1.2rem;
+  text-align: center;
+}
+
+.hero-stat h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #ffffff;
+}
+
+.hero-stat p {
+  margin: 0.5rem 0 0;
+  color: rgba(255,255,255,0.76);
+}
+
+.hero-image img {
+  border-radius: 2rem;
+  max-width: 520px;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.28);
+}
+
+.section-verification {
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.verification-badge {
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+}
+
+.section-features {
+  background: #f7f8fb;
+}
+
+.feature-card {
+  min-height: 260px;
+}
+
+.feature-icon {
+  width: 72px;
+  height: 72px;
+  font-size: 2rem;
+  background: linear-gradient(135deg, rgba(209,0,0,0.18), rgba(255,255,255,0.1));
+}
+
+.section-downloads {
+  background: radial-gradient(circle at top left, rgba(209,0,0,0.14), transparent 25%), #ffffff;
+}
+
+.download-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+  border-radius: 1.75rem;
+}
+
+.download-card:hover {
+  background: linear-gradient(180deg, #fff8f8 0%, #faf1f1 100%);
+}
+
+.download-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.download-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-device {
+  width: min(100%, 520px);
+  height: 360px;
+  border-radius: 40px;
+  background: linear-gradient(180deg, #0f172a 0%, #1b1b1b 100%);
+}
+
+.device-screen {
+  width: 86%;
+  height: 72%;
+  border-radius: 30px;
+  background: radial-gradient(circle at top left, #ffffff, #f2f2f2 58%);
+  color: #0f172a;
+}
+
+.section-courses {
+  background: #ffffff;
+}
+
+.course-card {
+  padding: 1.5rem;
+}
+
+.course-card h4 {
+  margin-top: 1rem;
+}
+
+.course-card p {
+  line-height: 1.65;
+}
+
+.section-languages {
+  background: #f7f8fb;
+}
+
+.language-card {
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1.8rem;
+}
+
+.language-card:hover {
+  transform: translateY(-5px);
+}
+
+.language-icon {
+  background: linear-gradient(135deg, rgba(209,0,0,0.16), rgba(255,255,255,0.12));
+}
+
+.section-about {
+  background: #ffffff;
+}
+
+.goal-box {
+  background: linear-gradient(180deg, #ffffff 0%, #faf9f7 100%);
+}
+
+.map-screenshots {
+  flex-wrap: wrap;
+}
+
+.map-screenshots > div {
+  flex: 1 1 320px;
+  max-width: 360px;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.map-screenshots img {
+  border-radius: 20px;
+}
+
+.googlemapArticle {
+  background: #000000;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 28px;
+  margin-bottom: 2rem;
+}
+
+.footer-section {
+  background: #0f172a;
+}
+
+@media (max-width: 991px) {
+  .hero-stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-contact {
+    flex-direction: column;
+  }
+
+  .download-device {
+    height: 280px;
+  }
+}

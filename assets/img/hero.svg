@@ -1,0 +1,19 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111111" />
+      <stop offset="100%" stop-color="#d10000" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="40" fill="#0f172a" />
+  <circle cx="520" cy="220" r="160" fill="url(#grad)" opacity="0.95" />
+  <circle cx="230" cy="180" r="90" fill="#ffffff" opacity="0.12" />
+  <path d="M180 420 C260 340 360 340 440 420 L440 480 C360 400 260 400 180 480 Z" fill="#d10000" opacity="0.85" />
+  <path d="M220 330 L320 230 L410 320 L320 410 Z" fill="#ffffff" opacity="0.18" />
+  <rect x="96" y="100" width="280" height="160" rx="24" fill="#ffffff" opacity="0.08" />
+  <rect x="116" y="120" width="240" height="28" rx="12" fill="#ffffff" opacity="0.2" />
+  <rect x="116" y="162" width="200" height="20" rx="10" fill="#ffffff" opacity="0.15" />
+  <rect x="116" y="196" width="180" height="20" rx="10" fill="#ffffff" opacity="0.15" />
+  <text x="100" y="520" fill="#ffffff" font-family="Inter, sans-serif" font-size="48" font-weight="700">DGC ICT</text>
+  <text x="100" y="570" fill="#ffffff" font-family="Inter, sans-serif" font-size="20" opacity="0.8">Software, Apps, Courses</text>
+</svg>

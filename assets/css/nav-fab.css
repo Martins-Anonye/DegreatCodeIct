@@ -1,0 +1,43 @@
+/* Floating navigation buttons (Home & Back) */
+.nav-fab-container {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2000;
+}
+
+.nav-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff, #f1f1f1);
+  color: #0f172a;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+  border: 1px solid rgba(15,23,42,0.06);
+  text-decoration: none;
+}
+
+.nav-fab--primary {
+  background: linear-gradient(180deg, #d10000, #9b0000);
+  color: #fff;
+}
+
+.nav-fab span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.nav-fab-label {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .nav-fab { width: 60px; height: 60px; }
+  .nav-fab-label { display: inline-block; margin-left: 10px; color: #fff; font-weight:600; }
+}

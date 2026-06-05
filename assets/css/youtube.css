@@ -1,0 +1,3 @@
+@import url('style.css');
+/* YouTube page overrides */
+.note-box iframe{ border-radius:8px; }

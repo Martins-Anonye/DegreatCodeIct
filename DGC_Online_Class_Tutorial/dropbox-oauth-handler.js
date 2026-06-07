@@ -23,10 +23,10 @@ const DROPBOX_OAUTH_CONFIG = {
     clientId: '', // Will be loaded from Firebase active email
     
     // List of redirect URIs configured in your Dropbox app
-    redirectUri: window.location.origin + '/oauth-callback.html',
+    redirectUri: window.location.origin + '/DGC_Online_Class_Tutorial/oauth-callback.html',
     
     // List of redirect URIs configured in your Dropbox app
-    redirectUri: window.location.origin + '/oauth-callback.html',
+    redirectUri: window.location.origin + '/DGC_Online_Class_Tutorial/oauth-callback.html',
     
     // OAuth scopes needed
     scope: 'files.metadata.write files.content.write sharing.write',

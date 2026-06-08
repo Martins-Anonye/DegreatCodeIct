@@ -5,6 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Degreatcode ICT LTD online class Video Tutorials</title>
     <link rel="icon" type="image/jpeg" sizes="122x80" href="../../assets/img/logo.jpg">
+    
+    <!-- Security: Disable Console and Right-Click -->
+    <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        }, false);
+
+        // Disable developer tools keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // F12 - Developer Tools
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I - Developer Tools
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J - Console
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+C - Inspector
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+K - Console (Firefox)
+            if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+                e.preventDefault();
+                return false;
+            }
+        }, false);
+
+        // Disable console methods to prevent usage
+        const noop = function() {};
+        console.log = noop;
+        console.warn = noop;
+        console.error = noop;
+        console.debug = noop;
+        console.info = noop;
+        
+        // Detect if developer tools are open (optional - for additional security)
+        let devtools = { open: false };
+        const threshold = 160;
+        setInterval(function() {
+            if (window.outerHeight - window.innerHeight > threshold || 
+                window.outerWidth - window.innerWidth > threshold) {
+                if (!devtools.open) {
+                    devtools.open = true;
+                    console.clear();
+                }
+            } else {
+                devtools.open = false;
+            }
+        }, 500);
+    </script>
+    
     <style>
         * {
             margin: 0;

@@ -1,7 +1,7 @@
 DegreatCode ICT — New Site (admin & YouTube management)
 
 Overview
-- Static Bootstrap site with an admin UI to upload student identities and manage remote YouTube IDs using Firebase (Realtime DB or Firestore).
+- Static Bootstrap site with an admin UI to upload student_or_staff identities and manage remote YouTube IDs using Firebase (Realtime DB or Firestore).
 
 Quick setup
 1. Copy your Firebase project's web config into `assets/js/firebase-config.js` replacing placeholder values.
@@ -10,8 +10,8 @@ Quick setup
 4. Open `admin.html` in your browser. If Auth enabled, sign in. If not, use the `adminPassword` fallback configured in `assets/js/firebase-config.js`.
 
 Admin actions
-- Upload single student identity via the form (writes to Realtime DB path `students/{id}` or Firestore `students/{id}`).
-- Seed multiple identities using a CSV or JSON file. CSV header should include `id,name,program,certificate,issueDate`.
+- Upload single student_or_staff identity via the form (writes to Realtime DB path `students/{id}` or Firestore `students/{id}`).
+- Seed multiple student_or_staff identities using a CSV or JSON file. CSV header should include `id,name,program,certificate,issueDate`.
 - Save YouTube IDs (comma-separated) to DB under Realtime `config/youtubeIds` or Firestore `config/youtube` doc with field `ids`.
 
 YouTube page

@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student ID Verification | DegreatCode ICT</title>
-    <meta name="description" content="Verify student IDs and professional status with DegreatCode ICT without registration.">
+    <title>Student_or_Staff ID Verification | DegreatCode ICT</title>
+    <meta name="description" content="Verify student_or_staff IDs and professional status with DegreatCode ICT without registration.">
         <link rel="icon" type="image/jpeg" sizes="122x80" href="assets/img/logo.jpg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/student-id.css">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-R08274K20K"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-R08274K20K');
+        </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -21,7 +30,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="programming.html">Programming</a></li>
-                    <li class="nav-item"><a class="nav-link" href="student-id.html">Student ID</a></li>
+                    <li class="nav-item"><a class="nav-link" href="student-id.html">Student_or_Staff ID</a></li>
                 </ul>
             </div>
         </div>
@@ -31,19 +40,19 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h1>Student ID Verification</h1>
-                    <p class="text-muted">Enter your student ID below to verify registered status and confirm professionalism with DegreatCode ICT LTD.</p>
+                    <h1>Student_or_Staff ID Verification</h1>
+                    <p class="text-muted">Enter your student_or_staff ID below to verify registered status and confirm professionalism with DegreatCode ICT LTD.</p>
                     <div class="note-box mb-4 p-4 rounded-4 bg-light text-dark border">
                         <h3>How verification works</h3>
                         <p>This page allows anyone to confirm that a student is registered with DegreatCode ICT LTD and review their program details. Use this tool to verify enrolment, program focus, and professionalism before hiring, collaborating, or inviting someone to training.</p>
                         <ul>
-                            <li>Enter a registered student ID and click Verify.</li>
+                            <li>Enter a registered student_or_staff ID and click Verify.</li>
                             <li>Successful verification shows the student name, program, and status.</li>
                             <li>Unrecognized IDs should be checked with DegreatCode ICT LTD support.</li>
                         </ul>
                     </div>
                     <div class="verification-container mt-4">
-                        <input id="studentIdInput" class="form-control form-control-lg" type="text" placeholder="Enter student ID" aria-label="Student ID">
+                        <input id="studentIdInput" class="form-control form-control-lg" type="text" placeholder="Enter student_or_staff ID" aria-label="Student_or_Staff ID">
                         <button id="verifyButton" class="btn btn-primary btn-lg mt-3">Verify ID</button>
                         <hr class="my-4">
                         <h4>Certificate Verification</h4>
@@ -209,6 +218,7 @@
                         <p><strong>Holder:</strong> ${data.name || data.holder || ''}</p>
                         <p><strong>Certificate:</strong> ${data.certificate || data.cert || ''}</p>
                         <p><strong>Course/Position:</strong> ${programOrPosition}</p>
+                        <p><strong>Description:</strong> ${data.description || ''}</p>
                         <p><strong>Role:</strong> ${role}</p>
                         ${idCardDisplay ? `<p>${idCardDisplay}</p>` : ''}
                     </div>
@@ -221,6 +231,7 @@
                     <p><strong>Name:</strong> ${data.name || ''}</p>
                     <p><strong>ID number:</strong> ${data.studentId || data.id || ''}</p>
                     <p><strong>Program/Position:</strong> ${programOrPosition}</p>
+                    <p><strong>Description:</strong> ${data.description || ''}</p>
                     <p><strong>Role:</strong> ${role}</p>
                     <p><strong>Certificate:</strong> ${data.certificate || ''}</p>
                     ${idCardDisplay ? `<p>${idCardDisplay}</p>` : ''}
@@ -230,13 +241,13 @@
 
         document.getElementById('verifyButton').addEventListener('click', async () => {
             const studentId = (document.getElementById('studentIdInput').value || '').trim();
-            if (!studentId) { resultBox.innerHTML = '<div class="alert alert-warning">Please enter a valid student ID.</div>'; return; }
+            if (!studentId) { resultBox.innerHTML = '<div class="alert alert-warning">Please enter a valid student_or_staff ID.</div>'; return; }
             resultBox.innerHTML = '<div class="alert alert-info">Searching...</div>';
             const student = await findStudentById(studentId);
             if (student) {
                 resultBox.innerHTML = renderResult(student, 'id');
             } else {
-                resultBox.innerHTML = '<div class="alert alert-danger">ID not found. Please check your student ID and try again.</div>';
+                resultBox.innerHTML = '<div class="alert alert-danger">ID not found. Please check your student_or_staff ID and try again.</div>';
             }
         });
 

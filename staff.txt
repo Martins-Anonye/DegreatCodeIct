@@ -1,0 +1,30 @@
+ 
+
+ I can update student-id.html so it reads 
+ from the same database used by admin.html and 
+ verifies uploaded IDs and certificates correctly.
+
+
+
+i want the admin to select either the id is for
+ student or office staff, and reflect during verification or check, 
+it should also show the uploaded file
+
+
+ in admin.html page, if role selected is staff,
+  change program to office_position, 
+  else retain program
+ 
+ change placeholder, label and text that says student id to student_or_staff id, do this in both
+  admin.html page and student-id.html page
+ I can update CSV/seed import to map program 
+ → office_position for staff entries
+
+
+
+
+ in the admin.html page and student-id.html page 
+ add optional entry called : description
+
+
+ 

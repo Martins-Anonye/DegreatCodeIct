@@ -7,6 +7,15 @@
   <meta name="description" content="Admin interface to upload student identities to Firebase (Firestore).">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R08274K20K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-R08274K20K');
+  </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><a class="navbar-brand" href="index.html">DegreatCode ICT LTD</a></div></nav>
@@ -82,14 +91,14 @@
           <span id="dropboxStatus" class="ms-2"></span>
         </div>
     <div class="col-12">
-      <label class="form-label">Student ID Card Image</label>
+      <label class="form-label">Student_or_Staff ID Card Image</label>
       <input id="idCardDropbox" class="form-control mb-2" type="url" placeholder="Paste Dropbox share link (optional)">
       <input id="idCardFile" class="form-control" type="file" accept="image/*">
       <div class="form-text">Upload the ID card image to <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> and paste the share link, or select an image file to upload directly. If both are provided, the file will be used.</div>
     </div>
     <div class="col-12">
-      <label class="form-label">Student ID</label>
-      <input id="studentId" class="form-control" required>
+      <label class="form-label">Student_or_Staff ID</label>
+      <input id="studentId" class="form-control" required placeholder="Enter student_or_staff ID">
     </div>
     <div class="col-12 col-md-6">
       <label class="form-label">Full name</label>
@@ -110,6 +119,10 @@
       <label class="form-label">Certificate Number</label>
       <input id="certificate" class="form-control">
     </div>
+    <div class="col-12">
+      <label class="form-label">Description (optional)</label>
+      <input id="description" class="form-control" placeholder="Short description (optional)">
+    </div>
     <div class="col-12 col-md-6">
       <label class="form-label">Issue Date</label>
       <input id="issueDate" class="form-control" type="date">
@@ -124,7 +137,7 @@
 
   <hr>
   <h2>Manage Students / Edit Uploads</h2>
-  <p class="text-muted">View and edit previously uploaded student identities.</p>
+  <p class="text-muted">View and edit previously uploaded student_or_staff identities.</p>
   
   <div class="mb-3" style="max-width:720px;">
     <div class="row g-2 mb-3">
@@ -148,7 +161,7 @@
     <h5>Edit Student</h5>
     <div class="row g-2 mb-3">
       <div class="col-12">
-        <label class="form-label">Student ID (read-only)</label>
+        <label class="form-label">Student_or_Staff ID (read-only)</label>
         <input id="editStudentId" class="form-control" type="text" readonly>
       </div>
       <div class="col-md-6">
@@ -165,6 +178,10 @@
           <option value="student">Student</option>
           <option value="staff">Office Staff</option>
         </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Description (optional)</label>
+        <input id="editDescription" class="form-control" type="text">
       </div>
       <div class="col-md-6">
         <label class="form-label">Certificate</label>
@@ -498,6 +515,7 @@
       const programValue = document.getElementById('program').value.trim();
       const role = document.getElementById('roleSelect') ? document.getElementById('roleSelect').value : 'student';
       const certificate = document.getElementById('certificate').value.trim();
+      const description = document.getElementById('description') ? document.getElementById('description').value.trim() : '';
       const issueDate = document.getElementById('issueDate').value || null;
       const idCardDropbox = document.getElementById('idCardDropbox').value.trim();
       const idCardFile = document.getElementById('idCardFile').files[0];
@@ -535,6 +553,7 @@
         const payload = { studentId, name, role, certificate, issueDate, idCardUrl, idCardDropboxPath };
         if (role === 'staff') payload.office_position = programValue;
         else payload.program = programValue;
+        if (description) payload.description = description;
         let generatedId = null;
         
         if (target === 'firestore'){
@@ -552,7 +571,7 @@
         let idCardDisplay = (idCardUrl && idCardUrl.startsWith && idCardUrl.startsWith('data:'))
           ? `<img src="${idCardUrl}" alt="ID Card" style="max-width:180px;max-height:120px;display:block;margin:8px 0;">`
           : `<a href="${idCardUrl}" target="_blank">View ID Card</a>`;
-        resultEl.innerHTML = `<div class="alert alert-success">Identity for <strong>${name}</strong> uploaded.<br>Student ID: ${studentId}<br>Database ID: ${generatedId}<br>ID Card: ${idCardDisplay}</div>`;
+        resultEl.innerHTML = `<div class="alert alert-success">Identity for <strong>${name}</strong> uploaded.<br>Student_or_Staff ID: ${studentId}<br>Database ID: ${generatedId}<br>ID Card: ${idCardDisplay}${description ? '<br>Description: ' + (description) : ''}</div>`;
         document.getElementById('adminForm').reset();
         
         // Refresh student list
@@ -629,6 +648,7 @@
           const programVal = r.program || r.Program || '';
           const certificateVal = r.certificate || r.Certificate || '';
           const issueDateVal = r.issueDate || r.IssueDate || null;
+          const descriptionVal = r.description || r.Description || '';
           const payload = { id, name, role, certificate: certificateVal, issueDate: issueDateVal, uploadedAt: serverTimestamp ? serverTimestamp() : new Date().toISOString() };
           // Map program -> office_position for staff entries
           if (role === 'staff') {
@@ -636,6 +656,7 @@
           } else {
             payload.program = programVal;
           }
+          if (descriptionVal) payload.description = descriptionVal;
           if (target === 'firestore'){
             await setDoc(doc(firestore, 'students', id), payload);
           } else {
@@ -697,7 +718,7 @@
         item.type = 'button';
         item.className = 'list-group-item list-group-item-action text-start';
         const programDisplay = (student.role === 'staff') ? (student.office_position || student.program || 'N/A') : (student.program || student.office_position || 'N/A');
-        item.innerHTML = `<strong>${student.name || 'N/A'}</strong><br><small class="text-muted">Student ID: ${student.studentId || 'N/A'} | Program/Position: ${programDisplay} | Role: ${student.role || 'student'}</small>`;
+        item.innerHTML = `<strong>${student.name || 'N/A'}</strong><br><small class="text-muted">Student_or_Staff ID: ${student.studentId || 'N/A'} | Program/Position: ${programDisplay} | Role: ${student.role || 'student'}</small>`;
         item.addEventListener('click', () => loadStudentToEdit(student));
         studentList.appendChild(item);
       });
@@ -731,6 +752,7 @@
       document.getElementById('editFullName').value = student.name || '';
       document.getElementById('editProgram').value = student.program || student.office_position || '';
       document.getElementById('editRole').value = student.role || 'student';
+      document.getElementById('editDescription').value = student.description || '';
       // adjust labels in edit panel based on role
       try{ updateProgramLabelsForRole(document.getElementById('editRole').value); }catch(e){}
       document.getElementById('editCertificate').value = student.certificate || '';
@@ -790,6 +812,7 @@
       const name = document.getElementById('editFullName').value.trim();
       const program = document.getElementById('editProgram').value.trim();
       const certificate = document.getElementById('editCertificate').value.trim();
+      const description = document.getElementById('editDescription') ? document.getElementById('editDescription').value.trim() : '';
       const issueDate = document.getElementById('editIssueDate').value || null;
       const role = document.getElementById('editRole') ? document.getElementById('editRole').value : 'student';
       const idCardFile = document.getElementById('editIdCardFile').files[0];
@@ -807,6 +830,7 @@
         const payload = { studentId, name, role, certificate, issueDate, uploadedAt: serverTimestamp() };
         if (role === 'staff') payload.office_position = program;
         else payload.program = program;
+        if (description) payload.description = description;
         
         // If a new file is selected, upload it
         if (idCardFile) {

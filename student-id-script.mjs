@@ -124,13 +124,18 @@
                     : `<a href="${url}" target="_blank">View ID Card</a>`;
             }
 
+            const programOrPosition = (role === 'staff')
+                ? (data.office_position || data.program || data.course || '')
+                : (data.program || data.office_position || data.course || '');
+
             if (type === 'certificate'){
                 return `
                     <div class="alert alert-success text-start">
                         <h4 class="alert-heading">Certificate Verified</h4>
                         <p><strong>Holder:</strong> ${data.name || data.holder || ''}</p>
                         <p><strong>Certificate:</strong> ${data.certificate || data.cert || ''}</p>
-                        <p><strong>Course:</strong> ${data.program || data.course || ''}</p>
+                        <p><strong>Course/Position:</strong> ${programOrPosition}</p>
+                        <p><strong>Description:</strong> ${data.description || ''}</p>
                         <p><strong>Role:</strong> ${role}</p>
                         ${idCardDisplay ? `<p>${idCardDisplay}</p>` : ''}
                     </div>
@@ -142,7 +147,8 @@
                     <h4 class="alert-heading">ID Verified</h4>
                     <p><strong>Name:</strong> ${data.name || ''}</p>
                     <p><strong>ID number:</strong> ${data.studentId || data.id || ''}</p>
-                    <p><strong>Program:</strong> ${data.program || ''}</p>
+                    <p><strong>Program/Position:</strong> ${programOrPosition}</p>
+                    <p><strong>Description:</strong> ${data.description || ''}</p>
                     <p><strong>Role:</strong> ${role}</p>
                     <p><strong>Certificate:</strong> ${data.certificate || ''}</p>
                     ${idCardDisplay ? `<p>${idCardDisplay}</p>` : ''}
@@ -152,13 +158,13 @@
 
         document.getElementById('verifyButton').addEventListener('click', async () => {
             const studentId = (document.getElementById('studentIdInput').value || '').trim();
-            if (!studentId) { resultBox.innerHTML = '<div class="alert alert-warning">Please enter a valid student ID.</div>'; return; }
+            if (!studentId) { resultBox.innerHTML = '<div class="alert alert-warning">Please enter a valid student_or_staff ID.</div>'; return; }
             resultBox.innerHTML = '<div class="alert alert-info">Searching...</div>';
             const student = await findStudentById(studentId);
             if (student) {
                 resultBox.innerHTML = renderResult(student, 'id');
             } else {
-                resultBox.innerHTML = '<div class="alert alert-danger">ID not found. Please check your student ID and try again.</div>';
+                resultBox.innerHTML = '<div class="alert alert-danger">ID not found. Please check your student_or_staff ID and try again.</div>';
             }
         });
 

@@ -16,8 +16,8 @@ export const adminPassword = "changeme";
 
 // REQUIRED: Super admin email and password to unlock the admin page.
 // Change these before using admin.html.
-export const superAdminEmail = "superadmin@yourdomain.com";
-export const superAdminPassword = "ChangeThisSuperAdminPassword123!";
+export const superAdminEmail = "admin@degreatcode.com";
+export const superAdminPassword = "admin123";
 
 // Optional: default DB type the admin UI should use. 'realtime' or 'firestore'
 export const defaultDbType = 'realtime';

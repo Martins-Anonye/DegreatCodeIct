@@ -1,78 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student ID Verification | DegreatCode ICT</title>
-    <meta name="description" content="Verify student IDs and professional status with DegreatCode ICT without registration.">
-        <link rel="icon" type="image/jpeg" sizes="122x80" href="assets/img/logo.jpg">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/student-id.css">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="assets/img/logo.jpg" width="44" height="44" class="me-2 rounded-circle" alt="DegreatCode ICT LTD logo">DegreatCode ICT LTD</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#studentNav" aria-controls="studentNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="studentNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="programming.html">Programming</a></li>
-                    <li class="nav-item"><a class="nav-link" href="student-id.html">Student ID</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <section class="section section-downloads">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h1>Student ID Verification</h1>
-                    <p class="text-muted">Enter your student ID below to verify registered status and confirm professionalism with DegreatCode ICT LTD.</p>
-                    <div class="note-box mb-4 p-4 rounded-4 bg-light text-dark border">
-                        <h3>How verification works</h3>
-                        <p>This page allows anyone to confirm that a student is registered with DegreatCode ICT LTD and review their program details. Use this tool to verify enrolment, program focus, and professionalism before hiring, collaborating, or inviting someone to training.</p>
-                        <ul>
-                            <li>Enter a registered student ID and click Verify.</li>
-                            <li>Successful verification shows the student name, program, and status.</li>
-                            <li>Unrecognized IDs should be checked with DegreatCode ICT LTD support.</li>
-                        </ul>
-                    </div>
-                    <div class="verification-container mt-4">
-                        <input id="studentIdInput" class="form-control form-control-lg" type="text" placeholder="Enter student ID" aria-label="Student ID">
-                        <button id="verifyButton" class="btn btn-primary btn-lg mt-3">Verify ID</button>
-                        <hr class="my-4">
-                        <h4>Certificate Verification</h4>
-                        <p class="text-muted">Enter a certificate number to confirm issuance and validity.</p>
-                        <input id="certificateInput" class="form-control form-control-lg" type="text" placeholder="Enter certificate number" aria-label="Certificate Number">
-                        <button id="verifyCertButton" class="btn btn-outline-primary btn-lg mt-3">Verify Certificate</button>
-                    </div>
-                    <div id="verificationResult" class="result-box mt-4"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer-section text-center">
-        <div class="container">
-            <div class="social-footer-icons d-flex justify-content-center gap-3 mb-3">
-              <a href="https://wa.me/2348132329272" target="_blank" title="WhatsApp"><img src="assets/social/whatsapp_large@1.5x.png" alt="WhatsApp" width="28" height="28"></a>
-              <a href="tel:+2348132329272" title="Call"><img src="assets/social/call@2x.png" alt="Phone" width="28" height="28"></a>
-              <a href="mailto:contact@degreatcode.com" title="Email"><img src="assets/social/email@2x.png" alt="Email" width="28" height="28"></a>
-              <a href="https://facebook.com/degreatcodeLTD" target="_blank" title="Facebook"><img src="assets/social/facebook_small@2x.png" alt="Facebook" width="28" height="28"></a>
-              <a href="https://youtube.com/degreatcodeLTD" target="_blank" title="YouTube"><img src="assets/social/youtube2_small@2x.png" alt="YouTube" width="28" height="28"></a>
-              <a href="https://blogger.com/degreatcodeLTD" target="_blank" title="Blog"><img src="assets/social/blogger_large@1.5x.png" alt="Blog" width="28" height="28"></a>
-            </div>
-            <p>&copy; <span id="year"></span> DegreatCode ICT. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module">
         document.getElementById('year').textContent = new Date().getFullYear();
         (function(){
             if (window.__dgc_nav_fab_loaded) return; window.__dgc_nav_fab_loaded = true;
@@ -247,6 +173,4 @@
                 resultBox.innerHTML = '<div class="alert alert-danger">Certificate not found. Please check the number and try again.</div>';
             }
         });
-    </script>
-</body>
-</html>
+    

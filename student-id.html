@@ -72,13 +72,18 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+    <script type="module">
         document.getElementById('year').textContent = new Date().getFullYear();
       (function(){
         if (window.__dgc_nav_fab_loaded) return; window.__dgc_nav_fab_loaded = true;
         var l=document.createElement('link'); l.rel='stylesheet'; l.href='assets/css/nav-fab.css'; document.head.appendChild(l);
         var s=document.createElement('script'); s.src='assets/js/nav-fab.js'; document.body.appendChild(s);
       })();
+
+      import { firebaseConfig } from './assets/js/firebase-config.js';
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+      import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+      import { getDatabase, ref as dbRef, get as dbGet } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
 
         const sampleStudents = [
             { id: 'DGC001', name: 'Amina Ibrahim', program: 'Android App Development' },
@@ -93,20 +98,96 @@
 
         const resultBox = document.getElementById('verificationResult');
 
-        document.getElementById('verifyButton').addEventListener('click', () => {
-            const studentId = document.getElementById('studentIdInput').value.trim().toUpperCase();
-            const student = sampleStudents.find(entry => entry.id === studentId);
-            if (!studentId) {
-                resultBox.innerHTML = '<div class="alert alert-warning">Please enter a valid student ID.</div>';
-                return;
+        // Initialize Firebase app
+        let app = null, firestore = null, rtdb = null;
+        try{
+          app = initializeApp(firebaseConfig);
+          firestore = getFirestore(app);
+          rtdb = getDatabase ? getDatabase(app) : null;
+        }catch(e){ console.warn('Firebase init failed', e); }
+
+        async function findStudentById(id){
+            if (!id) return null;
+            const norm = id.toString().toUpperCase();
+
+            // Firestore: fetch all and filter client-side (handles case variations)
+            if (firestore){
+                try{
+                    const snap = await getDocs(collection(firestore, 'students'));
+                    for(const d of snap.docs){
+                        const data = d.data();
+                        if (data && (data.studentId || data.id)){
+                            const sid = (data.studentId || data.id).toString().toUpperCase();
+                            if (sid === norm) return data;
+                        }
+                    }
+                }catch(err){ console.warn('Firestore lookup error', err); }
             }
+
+            // Realtime DB fallback
+            if (rtdb){
+                try{
+                    const snap = await dbGet(dbRef(rtdb, 'students'));
+                    if (snap && snap.exists && snap.exists()){
+                        const val = snap.val();
+                        for(const k of Object.keys(val||{})){
+                            const s = val[k];
+                            const sid = (s.studentId || s.id || '').toString().toUpperCase();
+                            if (sid === norm) return s;
+                        }
+                    }
+                }catch(err){ console.warn('RTDB lookup error', err); }
+            }
+
+            // Sample fallback
+            return sampleStudents.find(entry => entry.id === norm) || null;
+        }
+
+        async function findByCertificate(cert){
+            if (!cert) return null;
+            const norm = cert.toString().toUpperCase();
+
+            if (firestore){
+                try{
+                    const snap = await getDocs(collection(firestore, 'students'));
+                    for(const d of snap.docs){
+                        const data = d.data();
+                        if (data && data.certificate){
+                            if (data.certificate.toString().toUpperCase() === norm) return data;
+                        }
+                    }
+                }catch(err){ console.warn('Firestore cert lookup error', err); }
+            }
+
+            if (rtdb){
+                try{
+                    const snap = await dbGet(dbRef(rtdb, 'students'));
+                    if (snap && snap.exists && snap.exists()){
+                        const val = snap.val();
+                        for(const k of Object.keys(val||{})){
+                            const s = val[k];
+                            if ((s.certificate || '').toString().toUpperCase() === norm) return s;
+                        }
+                    }
+                }catch(err){ console.warn('RTDB cert lookup error', err); }
+            }
+
+            return sampleCertificates.find(c => c.cert === norm) || null;
+        }
+
+        document.getElementById('verifyButton').addEventListener('click', async () => {
+            const studentId = (document.getElementById('studentIdInput').value || '').trim().toUpperCase();
+            if (!studentId) { resultBox.innerHTML = '<div class="alert alert-warning">Please enter a valid student ID.</div>'; return; }
+            resultBox.innerHTML = '<div class="alert alert-info">Searching...</div>';
+            const student = await findStudentById(studentId);
             if (student) {
                 resultBox.innerHTML = `
                     <div class="alert alert-success text-start">
                         <h4 class="alert-heading">ID Verified</h4>
-                        <p><strong>Student:</strong> ${student.name}</p>
-                        <p><strong>ID number:</strong> ${student.id}</p>
-                        <p><strong>Program:</strong> ${student.program}</p>
+                        <p><strong>Student:</strong> ${student.name || student.fullName || ''}</p>
+                        <p><strong>ID number:</strong> ${student.studentId || student.id || ''}</p>
+                        <p><strong>Program:</strong> ${student.program || ''}</p>
+                        <p><strong>Certificate:</strong> ${student.certificate || ''}</p>
                     </div>
                 `;
             } else {
@@ -114,20 +195,18 @@
             }
         });
 
-        document.getElementById('verifyCertButton').addEventListener('click', () => {
-            const cert = document.getElementById('certificateInput').value.trim().toUpperCase();
-            if (!cert) {
-                resultBox.innerHTML = '<div class="alert alert-warning">Please enter a certificate number.</div>';
-                return;
-            }
-            const entry = sampleCertificates.find(c => c.cert === cert);
+        document.getElementById('verifyCertButton').addEventListener('click', async () => {
+            const cert = (document.getElementById('certificateInput').value || '').trim().toUpperCase();
+            if (!cert) { resultBox.innerHTML = '<div class="alert alert-warning">Please enter a certificate number.</div>'; return; }
+            resultBox.innerHTML = '<div class="alert alert-info">Searching...</div>';
+            const entry = await findByCertificate(cert);
             if (entry) {
                 resultBox.innerHTML = `
                     <div class="alert alert-success text-start">
                         <h4 class="alert-heading">Certificate Verified</h4>
-                        <p><strong>Holder:</strong> ${entry.holder}</p>
-                        <p><strong>Certificate:</strong> ${entry.cert}</p>
-                        <p><strong>Course:</strong> ${entry.course}</p>
+                        <p><strong>Holder:</strong> ${entry.name || entry.holder || ''}</p>
+                        <p><strong>Certificate:</strong> ${entry.certificate || entry.cert || ''}</p>
+                        <p><strong>Course:</strong> ${entry.program || entry.course || ''}</p>
                     </div>
                 `;
             } else {

@@ -389,7 +389,7 @@
   import { firebaseConfig, adminPassword as configAdminPassword, enableFirebaseAuth, allowFirebaseSignup, superAdminEmail, superAdminPassword } from './assets/js/firebase-config.js';
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
   import { getFirestore, doc, setDoc, serverTimestamp, getDoc, deleteDoc, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
-  import { getDatabase, ref as dbRef, set as dbSet, get as dbGet, remove, push, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+  import { getDatabase, ref as dbRef, set as dbSet, get as dbGet, remove, push, set, update as dbUpdate } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
   import { getAuth, signInWithEmailAndPassword, signOut as fbSignOut, onAuthStateChanged, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
 
   window.__DGCSUPERADMIN_EMAIL = superAdminEmail || '';
@@ -847,7 +847,8 @@
         if (target === 'firestore') {
           await setDoc(doc(firestore, 'students', docId), payload, { merge: true });
         } else {
-          await dbSet(dbRef(rtdb, `students/${docId}`), payload, { merge: false });
+          // Use update() for Realtime DB so we don't overwrite existing fields (e.g. idCardUrl)
+          await dbUpdate(dbRef(rtdb, `students/${docId}`), payload);
         }
         
         editStatus.innerHTML = '<span class="text-success">✓ Saved!</span>';

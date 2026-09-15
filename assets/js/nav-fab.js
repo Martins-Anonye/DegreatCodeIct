@@ -1,4 +1,9 @@
 (function(){
+  const path = window.location.pathname.toLowerCase();
+  if (path.endsWith('/admin.html') || path.endsWith('admin.html')) {
+    return;
+  }
+
   function createFab(){
     const container = document.createElement('div');
     container.className = 'nav-fab-container';
@@ -27,7 +32,6 @@
     container.appendChild(btnBack);
 
     // hide on index page (optional)
-    const path = window.location.pathname.toLowerCase();
     if (path.endsWith('/index.html') || path === '/' || path.endsWith('index.htm')){
       // still show home (but redundant), optionally hide both
       // we'll hide back button on home

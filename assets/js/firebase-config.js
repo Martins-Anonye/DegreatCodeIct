@@ -14,6 +14,11 @@ export const firebaseConfig = {
 // WARNING: This is client-side and not secure for production. Use proper auth for real deployments.
 export const adminPassword = "changeme";
 
+// Super-admin gate for this admin page.
+// Change these values before using the page in production.
+export const superAdminEmail = "admin@degreatcode.com";
+export const superAdminPassword = "admin123";
+
 // Optional: default DB type the admin UI should use. 'realtime' or 'firestore'
 export const defaultDbType = 'realtime';
 

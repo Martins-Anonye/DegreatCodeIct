@@ -96,7 +96,7 @@
       <input id="fullName" class="form-control" required>
     </div>
     <div class="col-12 col-md-6">
-      <label class="form-label">Program / Course</label>
+      <label id="programLabel" class="form-label">Program / Course</label>
       <input id="program" class="form-control">
     </div>
     <div class="col-12 col-md-6">
@@ -156,7 +156,7 @@
         <input id="editFullName" class="form-control" type="text">
       </div>
       <div class="col-md-6">
-        <label class="form-label">Program</label>
+        <label id="editProgramLabel" class="form-label">Program</label>
         <input id="editProgram" class="form-control" type="text">
       </div>
       <div class="col-md-6">
@@ -395,6 +395,34 @@
   const signOutBtn = document.getElementById('signOutBtn');
   const authEmail = document.getElementById('authEmail');
   const authPassword = document.getElementById('authPassword');
+  
+  // Program label toggles when role changes
+  const roleSelectEl = document.getElementById('roleSelect');
+  const programLabel = document.getElementById('programLabel');
+  const programInput = document.getElementById('program');
+  const editRoleEl = document.getElementById('editRole');
+  const editProgramLabel = document.getElementById('editProgramLabel');
+
+  function updateProgramLabelsForRole(role){
+    if (role === 'staff'){
+      if (programLabel) programLabel.textContent = 'Office Position';
+      if (editProgramLabel) editProgramLabel.textContent = 'Office Position';
+      if (programInput) programInput.placeholder = 'Enter office position';
+    } else {
+      if (programLabel) programLabel.textContent = 'Program / Course';
+      if (editProgramLabel) editProgramLabel.textContent = 'Program';
+      if (programInput) programInput.placeholder = 'Enter program or course';
+    }
+  }
+
+  if (roleSelectEl) {
+    roleSelectEl.addEventListener('change', (e)=> updateProgramLabelsForRole(e.target.value));
+    // initialize
+    updateProgramLabelsForRole(roleSelectEl.value);
+  }
+  if (editRoleEl) {
+    editRoleEl.addEventListener('change', (e)=> updateProgramLabelsForRole(e.target.value));
+  }
 
   if (!firebaseConfig || !firebaseConfig.projectId) {
     statusEl.innerHTML = '<span class="text-danger">Firebase config missing. Edit assets/js/firebase-config.js</span>';
@@ -467,7 +495,7 @@
       resultEl.innerHTML = '';
       const studentId = document.getElementById('studentId').value.trim();
       const name = document.getElementById('fullName').value.trim();
-      const program = document.getElementById('program').value.trim();
+      const programValue = document.getElementById('program').value.trim();
       const role = document.getElementById('roleSelect') ? document.getElementById('roleSelect').value : 'student';
       const certificate = document.getElementById('certificate').value.trim();
       const issueDate = document.getElementById('issueDate').value || null;
@@ -503,7 +531,10 @@
       }
       try {
         const target = dbSelect.value;
-        const payload = { studentId, name, program, role, certificate, issueDate, idCardUrl, idCardDropboxPath };
+        // if role is staff, store office_position instead of program
+        const payload = { studentId, name, role, certificate, issueDate, idCardUrl, idCardDropboxPath };
+        if (role === 'staff') payload.office_position = programValue;
+        else payload.program = programValue;
         let generatedId = null;
         
         if (target === 'firestore'){
@@ -593,7 +624,18 @@
         for (const r of records){
           const id = (r.id || r.ID || r.studentId || '').toString().trim();
           if (!id) continue;
-          const payload = { id, name: r.name || r.Name || '', program: r.program || r.Program || '', certificate: r.certificate || r.Certificate || '', issueDate: r.issueDate || r.IssueDate || null, uploadedAt: serverTimestamp ? serverTimestamp() : new Date().toISOString() };
+          const name = r.name || r.Name || '';
+          const role = (r.role || r.Role || '').toString().trim().toLowerCase() || 'student';
+          const programVal = r.program || r.Program || '';
+          const certificateVal = r.certificate || r.Certificate || '';
+          const issueDateVal = r.issueDate || r.IssueDate || null;
+          const payload = { id, name, role, certificate: certificateVal, issueDate: issueDateVal, uploadedAt: serverTimestamp ? serverTimestamp() : new Date().toISOString() };
+          // Map program -> office_position for staff entries
+          if (role === 'staff') {
+            payload.office_position = programVal;
+          } else {
+            payload.program = programVal;
+          }
           if (target === 'firestore'){
             await setDoc(doc(firestore, 'students', id), payload);
           } else {
@@ -654,7 +696,8 @@
         const item = document.createElement('button');
         item.type = 'button';
         item.className = 'list-group-item list-group-item-action text-start';
-        item.innerHTML = `<strong>${student.name || 'N/A'}</strong><br><small class="text-muted">Student ID: ${student.studentId || 'N/A'} | Program: ${student.program || 'N/A'} | Role: ${student.role || 'student'}</small>`;
+        const programDisplay = (student.role === 'staff') ? (student.office_position || student.program || 'N/A') : (student.program || student.office_position || 'N/A');
+        item.innerHTML = `<strong>${student.name || 'N/A'}</strong><br><small class="text-muted">Student ID: ${student.studentId || 'N/A'} | Program/Position: ${programDisplay} | Role: ${student.role || 'student'}</small>`;
         item.addEventListener('click', () => loadStudentToEdit(student));
         studentList.appendChild(item);
       });
@@ -686,8 +729,10 @@
       
       document.getElementById('editStudentId').value = student.studentId || 'N/A';
       document.getElementById('editFullName').value = student.name || '';
-      document.getElementById('editProgram').value = student.program || '';
+      document.getElementById('editProgram').value = student.program || student.office_position || '';
       document.getElementById('editRole').value = student.role || 'student';
+      // adjust labels in edit panel based on role
+      try{ updateProgramLabelsForRole(document.getElementById('editRole').value); }catch(e){}
       document.getElementById('editCertificate').value = student.certificate || '';
       document.getElementById('editIssueDate').value = student.issueDate || '';
       document.getElementById('editIdCardFile').value = '';
@@ -758,7 +803,10 @@
       
       try {
         const target = dbSelect.value;
-        const payload = { studentId, name, program, role, certificate, issueDate, uploadedAt: serverTimestamp() };
+        // set program or office_position depending on role
+        const payload = { studentId, name, role, certificate, issueDate, uploadedAt: serverTimestamp() };
+        if (role === 'staff') payload.office_position = program;
+        else payload.program = program;
         
         // If a new file is selected, upload it
         if (idCardFile) {

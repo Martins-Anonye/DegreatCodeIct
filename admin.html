@@ -253,10 +253,18 @@
     return false;
   }
 
-  const sessionUnlocked = sessionStorage.getItem('dgc_admin_unlocked') === 'true';
-  if (sessionUnlocked) {
-    unlockAdminPage();
-  } else {
+  function initializeSuperAdminGate() {
+    const sessionUnlocked = sessionStorage.getItem('dgc_admin_unlocked') === 'true';
+    if (sessionUnlocked) {
+      unlockAdminPage();
+      return;
+    }
+
+    if (!window.__DGCSUPERADMIN_EMAIL || !window.__DGCSUPERADMIN_PASSWORD) {
+      lockAdminPage('<span class="text-warning">Loading super admin config...</span>');
+      return;
+    }
+
     lockAdminPage('<span class="text-warning">Enter the super admin email and password to continue.</span>');
   }
 
@@ -271,6 +279,9 @@
       checkSuperAdminAccess();
     }
   });
+
+  window.__DGC_INIT_SUPER_ADMIN_GATE__ = initializeSuperAdminGate;
+  initializeSuperAdminGate();
 </script>
 
 <script type="module">
@@ -352,6 +363,9 @@
 
   window.__DGCSUPERADMIN_EMAIL = superAdminEmail || '';
   window.__DGCSUPERADMIN_PASSWORD = superAdminPassword || '';
+  if (window.__DGC_INIT_SUPER_ADMIN_GATE__) {
+    window.__DGC_INIT_SUPER_ADMIN_GATE__();
+  }
 
   const statusEl = document.getElementById('status');
   const resultEl = document.getElementById('result');

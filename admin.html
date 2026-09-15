@@ -11,109 +11,130 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><a class="navbar-brand" href="index.html">DegreatCode ICT LTD</a></div></nav>
 <main class="container py-4">
-  <h1>Admin — Upload Identity</h1>
-  <p class="text-muted">Paste your Firebase config into <strong>assets/js/firebase-config.js</strong> (see example in that file) before using this page.</p>
-
-  <div class="mb-3" style="max-width:720px;">
-    <label class="form-label">Admin password (fallback)</label>
-    <input id="adminPasswordInput" class="form-control" type="password" placeholder="Enter admin password">
-    <div class="form-text">This page uses a simple client-side password (configure in <strong>assets/js/firebase-config.js</strong>). If Firebase Auth is enabled, sign in below instead.</div>
-  </div>
-
-  <div id="authArea" class="mb-3" style="max-width:720px;">
-    <h5>Sign in (Firebase Auth)</h5>
-    <div class="row g-2">
-      <div class="col-md-5">
-        <input id="authEmail" class="form-control" placeholder="Admin email" type="email">
-      </div>
-      <div class="col-md-5">
-        <input id="authPassword" class="form-control" placeholder="Password" type="password">
-      </div>
-      <div class="col-md-2 d-flex gap-2">
-          <button id="signInBtn" class="btn btn-primary">Sign in</button>
-          <button id="signOutBtn" class="btn btn-outline-secondary" style="display:none;">Sign out</button>
-        </div>
-    </div>
-    <div class="form-text">If `enableFirebaseAuth` is true in <strong>assets/js/firebase-config.js</strong>, use Firebase sign-in.</div>
-  </div>
-  
-    <div id="signupArea" style="max-width:720px; display:none;" class="mb-3">
-      <h5>Create admin user</h5>
+  <div id="superAdminGate" class="card shadow-sm mb-4" style="max-width:720px;">
+    <div class="card-body">
+      <h3 class="card-title mb-3">Super Admin Access</h3>
+      <p class="text-muted mb-3">Enter the configured super admin email and password before using this admin page.</p>
       <div class="row g-2">
-        <div class="col-md-5"><input id="signupEmail" class="form-control" placeholder="email" type="email"></div>
-        <div class="col-md-5"><input id="signupPassword" class="form-control" placeholder="password" type="password"></div>
-        <div class="col-md-2 d-flex gap-2"><button id="signupBtn" class="btn btn-warning">Sign up</button></div>
+        <div class="col-md-6">
+          <input id="superAdminEmailInput" class="form-control" type="email" placeholder="Super admin email" autocomplete="username">
+        </div>
+        <div class="col-md-4">
+          <input id="superAdminPasswordInput" class="form-control" type="password" placeholder="Password" autocomplete="current-password">
+        </div>
+        <div class="col-md-2 d-grid">
+          <button id="unlockAdminBtn" class="btn btn-primary">Unlock</button>
+        </div>
       </div>
-      <div class="form-text">Only visible when `allowFirebaseSignup` is enabled in config. For production, create admin accounts from the Firebase Console instead.</div>
+      <div id="superAdminGateMessage" class="mt-2 text-danger" style="min-height:24px;"></div>
     </div>
-
-  <div class="mb-3 d-flex gap-2" style="max-width:720px;">
-    <label class="form-label w-100">Target Database</label>
-    <select id="dbSelect" class="form-select">
-      <option value="realtime">Realtime Database</option>
-      <option value="firestore">Firestore</option>
-    </select>
   </div>
 
-  <form id="adminForm" class="row g-3" style="max-width:720px;">
-        <div class="col-12 mb-2">
-          <button id="dropboxLoginBtn" type="button" class="btn btn-secondary">Sign in to Dropbox</button>
-          <button id="dropboxLogoutBtn" type="button" class="btn btn-outline-secondary" style="display:none;">Sign out from Dropbox</button>
-          <button id="dropboxResetBtn" type="button" class="btn btn-outline-danger">Reset Dropbox Login</button>
-          <span id="dropboxStatus" class="ms-2"></span>
+  <div id="adminContent" style="display:none;">
+    <h1>Admin — Upload Identity</h1>
+    <p class="text-muted">Paste your Firebase config into <strong>assets/js/firebase-config.js</strong> (see example in that file) before using this page.</p>
+
+    <div class="mb-3" style="max-width:720px;">
+      <label class="form-label">Admin password (fallback)</label>
+      <input id="adminPasswordInput" class="form-control" type="password" placeholder="Enter admin password">
+      <div class="form-text">This page uses a simple client-side password (configure in <strong>assets/js/firebase-config.js</strong>). If Firebase Auth is enabled, sign in below instead.</div>
+    </div>
+
+    <div id="authArea" class="mb-3" style="max-width:720px;">
+      <h5>Sign in (Firebase Auth)</h5>
+      <div class="row g-2">
+        <div class="col-md-5">
+          <input id="authEmail" class="form-control" placeholder="Admin email" type="email">
         </div>
-    <div class="col-12">
-      <label class="form-label">Student ID Card Image</label>
-      <input id="idCardDropbox" class="form-control mb-2" type="url" placeholder="Paste Dropbox share link (optional)">
-      <input id="idCardFile" class="form-control" type="file" accept="image/*">
-      <div class="form-text">Upload the ID card image to <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> and paste the share link, or select an image file to upload directly. If both are provided, the file will be used.</div>
-    </div>
-    <div class="col-12">
-      <label class="form-label">Student ID</label>
-      <input id="studentId" class="form-control" required>
-    </div>
-    <div class="col-12 col-md-6">
-      <label class="form-label">Full name</label>
-      <input id="fullName" class="form-control" required>
-    </div>
-    <div class="col-12 col-md-6">
-      <label class="form-label">Program / Course</label>
-      <input id="program" class="form-control">
-    </div>
-    <div class="col-12 col-md-6">
-      <label class="form-label">Certificate Number</label>
-      <input id="certificate" class="form-control">
-    </div>
-    <div class="col-12 col-md-6">
-      <label class="form-label">Issue Date</label>
-      <input id="issueDate" class="form-control" type="date">
-    </div>
-    <div class="col-12">
-      <button id="submitBtn" class="btn btn-primary">Upload Identity</button>
-      <span id="status" class="ms-3"></span>
-    </div>
-  </form>
-
-  <div id="result" class="mt-4"></div>
-
-  <hr>
-  <h2>Manage Students / Edit Uploads</h2>
-  <p class="text-muted">View and edit previously uploaded student identities.</p>
-  
-  <div class="mb-3" style="max-width:720px;">
-    <div class="row g-2 mb-3">
-      <div class="col-md-6">
-        <input id="searchInput" class="form-control" placeholder="Search by ID or name...">
+        <div class="col-md-5">
+          <input id="authPassword" class="form-control" placeholder="Password" type="password">
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+            <button id="signInBtn" class="btn btn-primary">Sign in</button>
+            <button id="signOutBtn" class="btn btn-outline-secondary" style="display:none;">Sign out</button>
+          </div>
       </div>
-      <div class="col-md-6">
-        <button id="refreshListBtn" class="btn btn-outline-secondary w-100">Refresh List</button>
-      </div>
+      <div class="form-text">If `enableFirebaseAuth` is true in <strong>assets/js/firebase-config.js</strong>, use Firebase sign-in.</div>
     </div>
     
-    <label class="form-label">Student List</label>
-    <div id="studentListContainer" style="max-height:300px; overflow-y:auto; border:1px solid #ddd; border-radius:4px; padding:8px;">
-      <div id="studentList" class="list-group">
-        <p class="text-muted">Loading...</p>
+      <div id="signupArea" style="max-width:720px; display:none;" class="mb-3">
+        <h5>Create admin user</h5>
+        <div class="row g-2">
+          <div class="col-md-5"><input id="signupEmail" class="form-control" placeholder="email" type="email"></div>
+          <div class="col-md-5"><input id="signupPassword" class="form-control" placeholder="password" type="password"></div>
+          <div class="col-md-2 d-flex gap-2"><button id="signupBtn" class="btn btn-warning">Sign up</button></div>
+        </div>
+        <div class="form-text">Only visible when `allowFirebaseSignup` is enabled in config. For production, create admin accounts from the Firebase Console instead.</div>
+      </div>
+
+    <div class="mb-3 d-flex gap-2" style="max-width:720px;">
+      <label class="form-label w-100">Target Database</label>
+      <select id="dbSelect" class="form-select">
+        <option value="realtime">Realtime Database</option>
+        <option value="firestore">Firestore</option>
+      </select>
+    </div>
+
+    <form id="adminForm" class="row g-3" style="max-width:720px;">
+          <div class="col-12 mb-2">
+            <button id="dropboxLoginBtn" type="button" class="btn btn-secondary">Sign in to Dropbox</button>
+            <button id="dropboxLogoutBtn" type="button" class="btn btn-outline-secondary" style="display:none;">Sign out from Dropbox</button>
+            <button id="dropboxResetBtn" type="button" class="btn btn-outline-danger">Reset Dropbox Login</button>
+            <span id="dropboxStatus" class="ms-2"></span>
+          </div>
+      <div class="col-12">
+        <label class="form-label">Student ID Card Image</label>
+        <input id="idCardDropbox" class="form-control mb-2" type="url" placeholder="Paste Dropbox share link (optional)">
+        <input id="idCardFile" class="form-control" type="file" accept="image/*">
+        <div class="form-text">Upload the ID card image to <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> and paste the share link, or select an image file to upload directly. If both are provided, the file will be used.</div>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Student ID</label>
+        <input id="studentId" class="form-control" required>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label">Full name</label>
+        <input id="fullName" class="form-control" required>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label">Program / Course</label>
+        <input id="program" class="form-control">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label">Certificate Number</label>
+        <input id="certificate" class="form-control">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label">Issue Date</label>
+        <input id="issueDate" class="form-control" type="date">
+      </div>
+      <div class="col-12">
+        <button id="submitBtn" class="btn btn-primary">Upload Identity</button>
+        <span id="status" class="ms-3"></span>
+      </div>
+    </form>
+
+    <div id="result" class="mt-4"></div>
+
+    <hr>
+    <h2>Manage Students / Edit Uploads</h2>
+    <p class="text-muted">View and edit previously uploaded student identities.</p>
+    
+    <div class="mb-3" style="max-width:720px;">
+      <div class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input id="searchInput" class="form-control" placeholder="Search by ID or name...">
+        </div>
+        <div class="col-md-6">
+          <button id="refreshListBtn" class="btn btn-outline-secondary w-100">Refresh List</button>
+        </div>
+      </div>
+      
+      <label class="form-label">Student List</label>
+      <div id="studentListContainer" style="max-height:300px; overflow-y:auto; border:1px solid #ddd; border-radius:4px; padding:8px;">
+        <div id="studentList" class="list-group">
+          <p class="text-muted">Loading...</p>
+        </div>
       </div>
     </div>
   </div>
@@ -259,11 +280,52 @@
       // Update status on page load
       updateDropboxStatus();
     import { uploadToDropbox, deleteFromDropbox } from './assets/js/dropbox-upload.js';
-  import { firebaseConfig, adminPassword as configAdminPassword, enableFirebaseAuth, allowFirebaseSignup } from './assets/js/firebase-config.js';
+  import { firebaseConfig, adminPassword as configAdminPassword, enableFirebaseAuth, allowFirebaseSignup, superAdminEmail, superAdminPassword } from './assets/js/firebase-config.js';
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
   import { getFirestore, doc, setDoc, serverTimestamp, getDoc, deleteDoc, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
   import { getDatabase, ref as dbRef, set as dbSet, get as dbGet, remove, push, set } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
   import { getAuth, signInWithEmailAndPassword, signOut as fbSignOut, onAuthStateChanged, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+
+  const adminContent = document.getElementById('adminContent');
+  const superAdminGate = document.getElementById('superAdminGate');
+  const superAdminEmailInput = document.getElementById('superAdminEmailInput');
+  const superAdminPasswordInput = document.getElementById('superAdminPasswordInput');
+  const unlockAdminBtn = document.getElementById('unlockAdminBtn');
+  const superAdminGateMessage = document.getElementById('superAdminGateMessage');
+
+  function showAdminContent() {
+    superAdminGate.style.display = 'none';
+    adminContent.style.display = 'block';
+    sessionStorage.setItem('dgc_super_admin_session', 'true');
+  }
+
+  function hideAdminContent() {
+    sessionStorage.removeItem('dgc_super_admin_session');
+    adminContent.style.display = 'none';
+    superAdminGate.style.display = 'block';
+    superAdminGateMessage.textContent = 'Access denied. Enter the correct super admin email and password.';
+  }
+
+  const validSession = sessionStorage.getItem('dgc_super_admin_session') === 'true';
+  if (validSession) {
+    showAdminContent();
+  }
+
+  unlockAdminBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = (superAdminEmailInput.value || '').trim().toLowerCase();
+    const password = superAdminPasswordInput.value || '';
+    const expectedEmail = (superAdminEmail || '').trim().toLowerCase();
+    const expectedPassword = superAdminPassword || '';
+
+    if (email === expectedEmail && password === expectedPassword) {
+      superAdminGateMessage.textContent = '';
+      showAdminContent();
+    } else {
+      superAdminGateMessage.textContent = 'Incorrect email or password.';
+      hideAdminContent();
+    }
+  });
 
   const statusEl = document.getElementById('status');
   const resultEl = document.getElementById('result');
